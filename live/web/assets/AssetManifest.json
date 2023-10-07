@@ -1,0 +1,62 @@
+{
+  "assets/fonts/Oswald/Oswald-Variable.ttf": [
+    "assets/fonts/Oswald/Oswald-Variable.ttf"
+  ],
+  "assets/fonts/Poppins/Poppins-Black.ttf": [
+    "assets/fonts/Poppins/Poppins-Black.ttf"
+  ],
+  "assets/fonts/Poppins/Poppins-Bold.ttf": [
+    "assets/fonts/Poppins/Poppins-Bold.ttf"
+  ],
+  "assets/fonts/Poppins/Poppins-ExtraBold.ttf": [
+    "assets/fonts/Poppins/Poppins-ExtraBold.ttf"
+  ],
+  "assets/fonts/Poppins/Poppins-ExtraLight.ttf": [
+    "assets/fonts/Poppins/Poppins-ExtraLight.ttf"
+  ],
+  "assets/fonts/Poppins/Poppins-Light.ttf": [
+    "assets/fonts/Poppins/Poppins-Light.ttf"
+  ],
+  "assets/fonts/Poppins/Poppins-Medium.ttf": [
+    "assets/fonts/Poppins/Poppins-Medium.ttf"
+  ],
+  "assets/fonts/Poppins/Poppins-Regular.ttf": [
+    "assets/fonts/Poppins/Poppins-Regular.ttf"
+  ],
+  "assets/fonts/Poppins/Poppins-SemiBold.ttf": [
+    "assets/fonts/Poppins/Poppins-SemiBold.ttf"
+  ],
+  "assets/fonts/Poppins/Poppins-Thin.ttf": [
+    "assets/fonts/Poppins/Poppins-Thin.ttf"
+  ],
+  "assets/images/cuckoo.png": [
+    "assets/images/cuckoo.png"
+  ],
+  "assets/images/drop.png": [
+    "assets/images/drop.png"
+  ],
+  "assets/images/my_pocket.png": [
+    "assets/images/my_pocket.png"
+  ],
+  "assets/images/phone_hand.png": [
+    "assets/images/phone_hand.png"
+  ],
+  "assets/images/salt.png": [
+    "assets/images/salt.png"
+  ],
+  "assets/images/store_loop.png": [
+    "assets/images/store_loop.png"
+  ],
+  "assets/svg/arrow_down.svg": [
+    "assets/svg/arrow_down.svg"
+  ],
+  "assets/svg/logo.svg": [
+    "assets/svg/logo.svg"
+  ],
+  "assets/svg/whats_app_logo.svg": [
+    "assets/svg/whats_app_logo.svg"
+  ],
+  "packages/cupertino_icons/assets/CupertinoIcons.ttf": [
+    "packages/cupertino_icons/assets/CupertinoIcons.ttf"
+  ]
+}

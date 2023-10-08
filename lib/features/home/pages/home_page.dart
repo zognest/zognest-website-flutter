@@ -1,16 +1,14 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
-import 'package:zognest_website/config/theme/text_theme.dart';
+import 'package:zognest_website/features/home/widgets/beyond_space.dart';
+import 'package:zognest_website/features/home/widgets/clients_list.dart';
+import 'package:zognest_website/features/home/widgets/zognest_video.dart';
 import 'package:zognest_website/resources/assets.dart';
-import 'package:zognest_website/resources/spacing.dart';
-import 'package:zognest_website/resources/strings.dart';
-import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
-import 'package:zognest_website/shared/widgets/circle_button.dart';
-import 'package:zognest_website/shared/widgets/gradient_container.dart';
-import 'package:zognest_website/shared/widgets/primary_button.dart';
+
+import '../../../shared/widgets/gradient_container.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,183 +42,66 @@ class _HomePageState extends State<HomePage> {
       extendBodyBehindAppBar: true,
       body: Stack(
         children: [
-          ListView(
+          SingleChildScrollView(
             controller: _controller,
-            children: const [
-              BeyondSpace(),
-              SizedBox(
-                height: 3000,
-                child: Placeholder(),
-              ),
-            ],
-          ),
-          PrimaryAppBar(scrollController: _controller),
-        ],
-      ),
-    );
-  }
-}
-
-class BeyondSpace extends StatelessWidget {
-  const BeyondSpace({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
-    return Stack(
-      children: [
-        const Stack(
-          children: [
-            GradientContainer(
-              color: Palette.primaryGradient,
-              alignment: Alignment(-0.55, 0),
-              overlap: true,
-              secondaryColor: Palette.secondaryGradient,
-            ),
-            GradientContainer(
-              color: Palette.secondaryGradient,
-              alignment: Alignment(0.8, 0),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            const SizedBox(height: Constants.pagesVerticalPadding),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.webHorizontalPadding),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: size.width * 0.5,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Stack(
                       children: [
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        SizedBox(
+                          height: _controller.hasClients
+                              ? _controller.position.maxScrollExtent * 0.4
+                              : size.height,
+                          child: const Stack(
                             children: [
-                              Text(Strings.beyond.toUpperCase(),
-                                  style: theme.textTheme.displayMedium),
-                              Text(
-                                Strings.space.toUpperCase(),
-                                style: theme.textTheme.displayMedium?.copyWith(
-                                  foreground: TextThemes.foreground,
-                                  height: 0.85,
-                                ),
+                              GradientContainer(
+                                alignment: Alignment(-0.6, -0.3),
+                                color: Palette.primaryGradient,
+                                secondaryColor: Palette.secondaryGradient,
                               ),
-                              Text(
-                                Strings.beyondSpaceBody,
-                                style: theme.textTheme.bodyLarge,
+                              GradientContainer(
+                                alignment: Alignment(0.6, -0.3),
+                                color: Palette.secondaryGradient,
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: Spacing.m20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PrimaryButton(
-                              title: Strings.bookOurServices.toUpperCase(),
-                              onTap: () {},
-                            ),
-                            const CircleButton(asset: Assets.downArrow),
-                          ],
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: _controller.hasClients
+                                ? _controller.position.maxScrollExtent * 0.2
+                                : 0,
+                          ),
+                          child: SvgPicture.asset(
+                            Assets.gridLines,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  Stack(
-                    children: [
-                      Image.asset(
-                        Assets.phoneHand,
-                        width: size.width * 0.3,
-                      ),
-                      Positioned(
-                        left: size.width * 0.0365,
-                        top: size.width * 0.0055,
-                        child: SizedBox(
-                          width: size.width * 0.1345,
-                          child: const BeyondSpaceCarousel(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const Divider(height: 1),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class BeyondSpaceCarousel extends StatefulWidget {
-  const BeyondSpaceCarousel({super.key});
-
-  @override
-  State<BeyondSpaceCarousel> createState() => _BeyondSpaceCarouselState();
-}
-
-class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
-  int currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(Spacing.l24),
-          child: CarouselSlider(
-            items: Data.beyondSpaceImages
-                .map((asset) => Image.asset(asset))
-                .toList(),
-            options: CarouselOptions(
-              viewportFraction: 1,
-              aspectRatio: 0.465,
-              autoPlay: true,
-              onPageChanged: (index, _) {
-                currentIndex = index;
-                setState(() {});
-              },
+                  ],
+                ),
+                const Column(
+                  children: [
+                    BeyondSpace(),
+                    SizedBox(height: Constants.sectionSpacing),
+                    ClientsList(),
+                    SizedBox(height: Constants.sectionSpacing),
+                    ZognestVideo(),
+                    SizedBox(
+                      height: 3000,
+                      child: Placeholder(),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-        ),
-        const SizedBox(height: Spacing.l48),
-        Container(
-          width: Spacing.xl72,
-          height: Spacing.s4,
-          decoration: ShapeDecoration(
-            color: Palette.white.withOpacity(0.2),
-            shape: const StadiumBorder(),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              Data.beyondSpaceImages.length,
-              (index) {
-                return AnimatedContainer(
-                  width: Spacing.xl72 / Data.beyondSpaceImages.length,
-                  height: Spacing.s4,
-                  curve: Curves.ease,
-                  decoration: ShapeDecoration(
-                    color: Palette.white
-                        .withOpacity(currentIndex == index ? 1 : 0),
-                    shape: const StadiumBorder(),
-                  ),
-                  duration: const Duration(milliseconds: 400),
-                );
-              },
-            ),
-          ),
-        ),
-      ],
+          PrimaryAppBar(scrollController: _controller),
+        ],
+      ),
     );
   }
 }

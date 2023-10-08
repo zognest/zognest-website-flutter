@@ -29,26 +29,14 @@
   "assets/fonts/Poppins/Poppins-Thin.ttf": [
     "assets/fonts/Poppins/Poppins-Thin.ttf"
   ],
-  "assets/images/cuckoo.png": [
-    "assets/images/cuckoo.png"
-  ],
-  "assets/images/drop.png": [
-    "assets/images/drop.png"
-  ],
-  "assets/images/my_pocket.png": [
-    "assets/images/my_pocket.png"
-  ],
   "assets/images/phone_hand.png": [
     "assets/images/phone_hand.png"
   ],
-  "assets/images/salt.png": [
-    "assets/images/salt.png"
-  ],
-  "assets/images/store_loop.png": [
-    "assets/images/store_loop.png"
-  ],
   "assets/svg/arrow_down.svg": [
     "assets/svg/arrow_down.svg"
+  ],
+  "assets/svg/grid_lines.svg": [
+    "assets/svg/grid_lines.svg"
   ],
   "assets/svg/logo.svg": [
     "assets/svg/logo.svg"
@@ -56,7 +44,43 @@
   "assets/svg/whats_app_logo.svg": [
     "assets/svg/whats_app_logo.svg"
   ],
+  "assets/temp/ajmera.png": [
+    "assets/temp/ajmera.png"
+  ],
+  "assets/temp/cuckoo.png": [
+    "assets/temp/cuckoo.png"
+  ],
+  "assets/temp/drop.png": [
+    "assets/temp/drop.png"
+  ],
+  "assets/temp/mahalaxmi.png": [
+    "assets/temp/mahalaxmi.png"
+  ],
+  "assets/temp/my_pocket.png": [
+    "assets/temp/my_pocket.png"
+  ],
+  "assets/temp/salt.png": [
+    "assets/temp/salt.png"
+  ],
+  "assets/temp/sjrc.png": [
+    "assets/temp/sjrc.png"
+  ],
+  "assets/temp/store_loop.png": [
+    "assets/temp/store_loop.png"
+  ],
+  "assets/temp/texas_chiro.png": [
+    "assets/temp/texas_chiro.png"
+  ],
+  "assets/temp/tooth.png": [
+    "assets/temp/tooth.png"
+  ],
+  "assets/temp/vais.png": [
+    "assets/temp/vais.png"
+  ],
   "packages/cupertino_icons/assets/CupertinoIcons.ttf": [
     "packages/cupertino_icons/assets/CupertinoIcons.ttf"
+  ],
+  "packages/youtube_player_iframe/assets/player.html": [
+    "packages/youtube_player_iframe/assets/player.html"
   ]
 }

@@ -63,7 +63,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
     );
     final curvedAnimation = CurvedAnimation(
       parent: _animationController,
-      curve: Curves.decelerate,
+      curve: Curves.ease,
     );
     _offsetAnimation = Tween<Offset>(
       begin: const Offset(0, 0),

@@ -4,4 +4,5 @@ class Constants {
   static const appBarHeight = 140.0;
   static const webHorizontalPadding = Spacing.l48;
   static const pagesVerticalPadding = Spacing.xl72 * 2;
+  static const sectionSpacing = 200.0;
 }

@@ -41,26 +41,35 @@ class ZognestDescription extends StatelessWidget {
                       children: [
                         AutoSizeText.rich(
                           TextSpan(
-                              text: Strings.helpingYourBusiness.toUpperCase(),
-                              style: theme.textTheme.displaySmall?.copyWith(
-                                fontVariations: TextThemes.fontVariation(7),
-                                height: 1.1,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: Strings.sky.toUpperCase(),
-                                  style: theme.textTheme.displaySmall?.copyWith(
-                                    fontVariations: TextThemes.fontVariation(7),
-                                    height: 1.1,
-                                    color: theme.primaryColor,
-                                  ),
+                            text: Strings.helpingYourBusiness.toUpperCase(),
+                            style: theme.textTheme.displaySmall?.copyWith(
+                              fontVariations: TextThemes.fontVariation(7),
+                              height: 1.1,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: Strings.to.toUpperCase(),
+                                style: theme.textTheme.displaySmall?.copyWith(
+                                  fontVariations: TextThemes.fontVariation(3),
                                 ),
-                              ]),
+                              ),
+                              TextSpan(
+                                text: Strings.exploreThe.toUpperCase(),
+                                style: theme.textTheme.displaySmall,
+                              ),
+                              TextSpan(
+                                text: Strings.sky.toUpperCase(),
+                                style: theme.textTheme.displaySmall?.copyWith(
+                                  color: theme.primaryColor,
+                                ),
+                              ),
+                            ],
+                          ),
                           textScaleFactor: TextThemes.textScale(context),
                         ),
                         AutoSizeText(
                           Strings.zognestDescription,
-                          style: theme.textTheme.bodyLarge,
+                          style: theme.textTheme.bodyMedium,
                         ),
                       ],
                     ),

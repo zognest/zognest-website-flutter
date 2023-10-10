@@ -81,7 +81,6 @@ class _ZognestVideoState extends State<ZognestVideo> {
                       return;
                     }
                   },
-                  // Todo: double check
                   onHover: (over) {
                     if (over && state == PlayerState.cued) {
                       _controller.playVideo();

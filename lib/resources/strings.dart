@@ -14,7 +14,9 @@ abstract final class Strings {
   static const bookOurServices = 'Book our services';
   static const beyondSpaceBody =
       'Freedom serves as the foundation on which we build excellent experiences.';
-  static const helpingYourBusiness = 'Helping your business\nexplore the\n';
+  static const helpingYourBusiness = 'Helping your business ';
+  static const exploreThe = 'Explore the\n';
+  static const to = 'To\n';
   static const sky = 'Sky.';
   static const zognestDescription =
       'Zognest is a Technology-based startup company that helps your business to explore the Sky With UI/UX designing, Prototyping, Designing, and developing mobile applications, websites, web applications, Branding, brainstorming, and Digital solutions.';

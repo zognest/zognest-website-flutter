@@ -38,22 +38,19 @@ class ZognestText extends StatelessWidget {
             children: [
               TextSpan(
                 text: Strings.zog,
-                style: theme.textTheme.labelLarge?.copyWith(
-                  color: theme.primaryColor,
-                  letterSpacing: 1.5,
-                ),
+                style: theme.textTheme.labelLarge
+                    ?.copyWith(color: theme.primaryColor),
               ),
               TextSpan(
                 text: Strings.nest,
-                style: theme.textTheme.labelLarge?.copyWith(letterSpacing: 1.5),
+                style: theme.textTheme.labelLarge,
               ),
             ],
           ),
         ),
         Text(
           Strings.solutions,
-          style:
-              theme.textTheme.labelSmall?.copyWith(letterSpacing: 2, height: 1),
+          style: theme.textTheme.labelMedium?.copyWith(height: 1),
         ),
       ],
     );

@@ -19,15 +19,14 @@ class BeyondSpace extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     return Column(
       children: [
-        const SizedBox(height: Constants.pagesVerticalPadding),
+        const SizedBox(height: Constants.appBarSpacing),
         Padding(
           padding: const EdgeInsets.symmetric(
               horizontal: Constants.webHorizontalPadding),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: size.width * 0.5,
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -36,13 +35,14 @@ class BeyondSpace extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(Strings.beyond.toUpperCase(),
-                              style: theme.textTheme.displayMedium),
+                          Text(
+                            Strings.beyond.toUpperCase(),
+                            style: theme.textTheme.displayMedium,
+                          ),
                           Text(
                             Strings.space.toUpperCase(),
                             style: theme.textTheme.displayMedium?.copyWith(
                               foreground: TextThemes.foreground,
-                              height: 0.85,
                             ),
                           ),
                           Text(
@@ -66,21 +66,24 @@ class BeyondSpace extends StatelessWidget {
                   ],
                 ),
               ),
-              Stack(
-                children: [
-                  Image.asset(
-                    Assets.phoneHand,
-                    width: size.width * 0.335,
-                  ),
-                  Positioned(
-                    left: size.width * 0.04,
-                    top: size.width * 0.0055,
-                    child: SizedBox(
-                      width: size.width * 0.151,
-                      child: const BeyondSpaceCarousel(),
+              Expanded(
+                child: Stack(
+                  alignment: Alignment.centerRight,
+                  children: [
+                    Image.asset(
+                      Assets.phoneHand,
+                      width: size.width * 0.335,
                     ),
-                  ),
-                ],
+                    Positioned(
+                      right: size.width * 0.144,
+                      top: size.width * 0.0055,
+                      child: SizedBox(
+                        width: size.width * 0.151,
+                        child: const BeyondSpaceCarousel(),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

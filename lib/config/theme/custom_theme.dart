@@ -13,7 +13,6 @@ class CustomTheme {
       scaffoldBackgroundColor: Palette.scaffoldBackground,
       dividerTheme: const DividerThemeData(space: 1),
       textTheme: TextThemes.textTheme(context).apply(
-        fontFamily: 'Oswald',
         bodyColor: Palette.white,
         displayColor: Palette.white,
       ),

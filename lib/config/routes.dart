@@ -10,10 +10,12 @@ abstract final class Routing {
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
+        name: HomePage.route,
         path: HomePage.route,
         builder: (_, __) => const HomePage(),
       ),
       GoRoute(
+        name: UndefinedPage.route,
         path: UndefinedPage.route,
         builder: (_, __) => const UndefinedPage(),
       ),

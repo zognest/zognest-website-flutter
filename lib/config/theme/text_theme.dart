@@ -21,48 +21,69 @@ abstract final class TextThemes {
   static TextTheme textTheme(BuildContext context) {
     final theme = Theme.of(context);
     return TextTheme(
-      // Display
+      // region Displays
+      /// For headlines
       displaySmall: theme.textTheme.displaySmall?.copyWith(
         fontSize: 120,
         height: 1,
-        fontVariations: fontVariation(3),
-      ),
-      displayMedium: theme.textTheme.displayMedium?.copyWith(
-        fontSize: 260,
-        height: 1,
+        fontFamily: 'Oswald',
         fontVariations: fontVariation(7),
       ),
+
+      /// All large displays except for ZOGNEST brand
+      displayMedium: theme.textTheme.displayMedium?.copyWith(
+        fontSize: 220,
+        height: 1,
+        fontFamily: 'Oswald',
+        fontVariations: fontVariation(7),
+      ),
+
+      /// ZOGNEST brand
       displayLarge: theme.textTheme.displayLarge?.copyWith(
         fontSize: 320,
         height: 1,
+        fontFamily: 'Oswald',
         fontVariations: fontVariation(7),
       ),
-      // Body
+      // endregion
+      // region Headlines
+      headlineSmall: theme.textTheme.headlineSmall?.copyWith(
+        fontFamily: 'Oswald',
+        fontVariations: TextThemes.fontVariation(3),
+        fontSize: 28,
+        height: 1,
+      ),
+      headlineMedium: theme.textTheme.headlineSmall?.copyWith(
+        fontFamily: 'Oswald',
+        fontVariations: TextThemes.fontVariation(7),
+        height: 1,
+        fontSize: 28,
+      ),
+      // endregion
+      // region Body
+      bodyMedium: theme.textTheme.bodyMedium?.copyWith(
+        fontSize: 18,
+        fontFamily: 'SF Pro Rounded',
+        fontWeight: FontWeight.w500,
+      ),
       bodyLarge: theme.textTheme.bodyLarge?.copyWith(
-        fontSize: 24,
-        height: 1,
-        fontFamily: 'Poppins',
-        fontWeight: FontWeight.w400,
+        fontSize: 20,
+        fontFamily: 'SF Pro Rounded',
+        fontWeight: FontWeight.w500,
       ),
-      // Label
-      labelSmall: theme.textTheme.labelSmall?.copyWith(
-        fontSize: 14,
-        height: 1,
-        fontFamily: 'Poppins',
-        fontWeight: FontWeight.w600,
-      ),
+      // endregion
+      // region Labels
       labelMedium: theme.textTheme.labelMedium?.copyWith(
         fontSize: 16,
-        height: 1,
-        fontFamily: 'Poppins',
+        fontFamily: 'SF Pro Rounded',
         fontWeight: FontWeight.w600,
       ),
       labelLarge: theme.textTheme.labelLarge?.copyWith(
         fontSize: 18,
-        height: 1,
-        fontFamily: 'Poppins',
-        fontWeight: FontWeight.w900,
+        fontFamily: 'SF Pro Rounded',
+        fontWeight: FontWeight.w700,
       ),
+      // endregion
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:go_router/go_router.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
+import 'package:zognest_website/features/home/pages/home_page.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
@@ -11,7 +13,7 @@ import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
 enum AppBarButtons {
   home(
-    route: '',
+    route: HomePage.route,
     title: Strings.home,
   ),
   ourServices(
@@ -93,6 +95,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final theme = Theme.of(context);
+    final route = GoRouterState.of(context);
     return SlideTransition(
       position: _offsetAnimation,
       child: Padding(
@@ -130,8 +133,10 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                             MaterialStateProperty.all(Palette.transparent),
                         child: Text(
                           button.title.toUpperCase(),
-                          style: theme.textTheme.labelLarge
-                              ?.copyWith(fontWeight: FontWeight.w600),
+                          style: route.name == button.route
+                              ? theme.textTheme.labelLarge
+                                  ?.copyWith(color: theme.primaryColor)
+                              : theme.textTheme.labelMedium,
                         ),
                       );
                     },

@@ -57,6 +57,39 @@
     ]
   },
   {
+    "family": "SF Pro Rounded",
+    "fonts": [
+      {
+        "weight": 100,
+        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Thin.otf"
+      },
+      {
+        "weight": 300,
+        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Light.otf"
+      },
+      {
+        "weight": 400,
+        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Regular.otf"
+      },
+      {
+        "weight": 500,
+        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Medium.otf"
+      },
+      {
+        "weight": 600,
+        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-SemiBold.otf"
+      },
+      {
+        "weight": 700,
+        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Bold.otf"
+      },
+      {
+        "weight": 900,
+        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Black.otf"
+      }
+    ]
+  },
+  {
     "family": "packages/cupertino_icons/CupertinoIcons",
     "fonts": [
       {

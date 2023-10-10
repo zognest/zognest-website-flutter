@@ -11,48 +11,7 @@
     "family": "Oswald",
     "fonts": [
       {
-        "asset": "assets/fonts/Oswald/Oswald-Variable.ttf"
-      }
-    ]
-  },
-  {
-    "family": "Poppins",
-    "fonts": [
-      {
-        "weight": 100,
-        "asset": "assets/fonts/Poppins/Poppins-Thin.ttf"
-      },
-      {
-        "weight": 200,
-        "asset": "assets/fonts/Poppins/Poppins-ExtraLight.ttf"
-      },
-      {
-        "weight": 300,
-        "asset": "assets/fonts/Poppins/Poppins-Light.ttf"
-      },
-      {
-        "weight": 400,
-        "asset": "assets/fonts/Poppins/Poppins-Regular.ttf"
-      },
-      {
-        "weight": 500,
-        "asset": "assets/fonts/Poppins/Poppins-Medium.ttf"
-      },
-      {
-        "weight": 600,
-        "asset": "assets/fonts/Poppins/Poppins-SemiBold.ttf"
-      },
-      {
-        "weight": 700,
-        "asset": "assets/fonts/Poppins/Poppins-Bold.ttf"
-      },
-      {
-        "weight": 800,
-        "asset": "assets/fonts/Poppins/Poppins-ExtraBold.ttf"
-      },
-      {
-        "weight": 900,
-        "asset": "assets/fonts/Poppins/Poppins-Black.ttf"
+        "asset": "fonts/Oswald/Oswald-Variable.ttf"
       }
     ]
   },
@@ -61,31 +20,31 @@
     "fonts": [
       {
         "weight": 100,
-        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Thin.otf"
+        "asset": "fonts/SFProRounded/SF-Pro-Rounded-Thin.otf"
       },
       {
         "weight": 300,
-        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Light.otf"
+        "asset": "fonts/SFProRounded/SF-Pro-Rounded-Light.otf"
       },
       {
         "weight": 400,
-        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Regular.otf"
+        "asset": "fonts/SFProRounded/SF-Pro-Rounded-Regular.otf"
       },
       {
         "weight": 500,
-        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Medium.otf"
+        "asset": "fonts/SFProRounded/SF-Pro-Rounded-Medium.otf"
       },
       {
         "weight": 600,
-        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-SemiBold.otf"
+        "asset": "fonts/SFProRounded/SF-Pro-Rounded-SemiBold.otf"
       },
       {
         "weight": 700,
-        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Bold.otf"
+        "asset": "fonts/SFProRounded/SF-Pro-Rounded-Bold.otf"
       },
       {
         "weight": 900,
-        "asset": "assets/fonts/SFProRounded/SF-Pro-Rounded-Black.otf"
+        "asset": "fonts/SFProRounded/SF-Pro-Rounded-Black.otf"
       }
     ]
   },

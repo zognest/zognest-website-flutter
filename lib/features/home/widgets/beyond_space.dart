@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -103,26 +102,49 @@ class BeyondSpaceCarousel extends StatefulWidget {
 
 class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
   int currentIndex = 0;
+  bool dragging = true;
+
+  void nextIndex() {
+    final nextIndex = currentIndex + 1;
+    setState(() {
+      currentIndex = nextIndex % Data.beyondSpaceImages.length;
+    });
+  }
+
+  void previousIndex() {
+    final previousIndex = currentIndex - 1;
+    setState(() {
+      currentIndex = previousIndex % Data.beyondSpaceImages.length;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(Spacing.l24),
-          child: CarouselSlider(
-            items: Data.beyondSpaceImages
-                .map((asset) => Image.asset(asset))
-                .toList(),
-            options: CarouselOptions(
-              viewportFraction: 1,
-              aspectRatio: 0.465,
-              autoPlay: true,
-              onPageChanged: (index, _) {
-                currentIndex = index;
-                setState(() {});
-              },
+        Container(
+          decoration: BoxDecoration(
+            color: Palette.black,
+            borderRadius: BorderRadius.circular(Spacing.l24),
+          ),
+          child: GestureDetector(
+            onTap: nextIndex,
+            onHorizontalDragUpdate: (drag) {
+              if (dragging) {
+                dragging = false;
+                if (drag.delta.dx > 0) nextIndex();
+                if (drag.delta.dx < 0) previousIndex();
+              }
+            },
+            onHorizontalDragCancel: () => dragging = true,
+            onHorizontalDragEnd: (_) => dragging = true,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 1000),
+              child: Image.asset(
+                Data.beyondSpaceImages[currentIndex],
+                key: ValueKey(currentIndex),
+              ),
             ),
           ),
         ),

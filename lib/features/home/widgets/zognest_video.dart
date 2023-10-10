@@ -26,7 +26,6 @@ class _ZognestVideoState extends State<ZognestVideo> {
         mute: false,
         showControls: false,
         showFullscreenButton: true,
-        strictRelatedVideos: true,
       ),
     )
       ..update(playbackQuality: 'HD')

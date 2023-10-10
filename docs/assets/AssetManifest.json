@@ -1,55 +1,4 @@
 {
-  "assets/fonts/Oswald/Oswald-Variable.ttf": [
-    "assets/fonts/Oswald/Oswald-Variable.ttf"
-  ],
-  "assets/fonts/Poppins/Poppins-Black.ttf": [
-    "assets/fonts/Poppins/Poppins-Black.ttf"
-  ],
-  "assets/fonts/Poppins/Poppins-Bold.ttf": [
-    "assets/fonts/Poppins/Poppins-Bold.ttf"
-  ],
-  "assets/fonts/Poppins/Poppins-ExtraBold.ttf": [
-    "assets/fonts/Poppins/Poppins-ExtraBold.ttf"
-  ],
-  "assets/fonts/Poppins/Poppins-ExtraLight.ttf": [
-    "assets/fonts/Poppins/Poppins-ExtraLight.ttf"
-  ],
-  "assets/fonts/Poppins/Poppins-Light.ttf": [
-    "assets/fonts/Poppins/Poppins-Light.ttf"
-  ],
-  "assets/fonts/Poppins/Poppins-Medium.ttf": [
-    "assets/fonts/Poppins/Poppins-Medium.ttf"
-  ],
-  "assets/fonts/Poppins/Poppins-Regular.ttf": [
-    "assets/fonts/Poppins/Poppins-Regular.ttf"
-  ],
-  "assets/fonts/Poppins/Poppins-SemiBold.ttf": [
-    "assets/fonts/Poppins/Poppins-SemiBold.ttf"
-  ],
-  "assets/fonts/Poppins/Poppins-Thin.ttf": [
-    "assets/fonts/Poppins/Poppins-Thin.ttf"
-  ],
-  "assets/fonts/SFProRounded/SF-Pro-Rounded-Black.otf": [
-    "assets/fonts/SFProRounded/SF-Pro-Rounded-Black.otf"
-  ],
-  "assets/fonts/SFProRounded/SF-Pro-Rounded-Bold.otf": [
-    "assets/fonts/SFProRounded/SF-Pro-Rounded-Bold.otf"
-  ],
-  "assets/fonts/SFProRounded/SF-Pro-Rounded-Light.otf": [
-    "assets/fonts/SFProRounded/SF-Pro-Rounded-Light.otf"
-  ],
-  "assets/fonts/SFProRounded/SF-Pro-Rounded-Medium.otf": [
-    "assets/fonts/SFProRounded/SF-Pro-Rounded-Medium.otf"
-  ],
-  "assets/fonts/SFProRounded/SF-Pro-Rounded-Regular.otf": [
-    "assets/fonts/SFProRounded/SF-Pro-Rounded-Regular.otf"
-  ],
-  "assets/fonts/SFProRounded/SF-Pro-Rounded-SemiBold.otf": [
-    "assets/fonts/SFProRounded/SF-Pro-Rounded-SemiBold.otf"
-  ],
-  "assets/fonts/SFProRounded/SF-Pro-Rounded-Thin.otf": [
-    "assets/fonts/SFProRounded/SF-Pro-Rounded-Thin.otf"
-  ],
   "assets/images/arrow_right.png": [
     "assets/images/arrow_right.png"
   ],
@@ -106,6 +55,30 @@
   ],
   "assets/temp/vais.png": [
     "assets/temp/vais.png"
+  ],
+  "fonts/Oswald/Oswald-Variable.ttf": [
+    "fonts/Oswald/Oswald-Variable.ttf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Black.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Black.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Bold.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Bold.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Light.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Light.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Medium.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Medium.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Regular.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Regular.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-SemiBold.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-SemiBold.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Thin.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Thin.otf"
   ],
   "packages/cupertino_icons/assets/CupertinoIcons.ttf": [
     "packages/cupertino_icons/assets/CupertinoIcons.ttf"

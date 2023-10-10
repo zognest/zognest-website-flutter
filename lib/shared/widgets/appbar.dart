@@ -17,19 +17,19 @@ enum AppBarButtons {
     title: Strings.home,
   ),
   ourServices(
-    route: '',
+    route: '-',
     title: Strings.ourServices,
   ),
   ourWork(
-    route: '',
+    route: '+',
     title: Strings.ourWork,
   ),
   ourSpace(
-    route: '',
+    route: '+_',
     title: Strings.ourSpace,
   ),
   aboutUs(
-    route: '',
+    route: '.',
     title: Strings.aboutUs,
   );
 
@@ -53,41 +53,44 @@ class PrimaryAppBar extends StatefulWidget {
 
 class _PrimaryAppBarState extends State<PrimaryAppBar>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _animationController;
-  late final Animation<Offset> _offsetAnimation;
+  late final AnimationController _appBarAnimationController;
+  late final Animation<Offset> _appBarOffsetAnimation;
+
+  String hoveredRoute = '/';
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
+    _appBarAnimationController = AnimationController(
       duration: const Duration(milliseconds: 400),
       vsync: this,
     );
     final curvedAnimation = CurvedAnimation(
-      parent: _animationController,
+      parent: _appBarAnimationController,
       curve: Curves.ease,
     );
-    _offsetAnimation = Tween<Offset>(
+    _appBarOffsetAnimation = Tween<Offset>(
       begin: const Offset(0, 0),
       end: const Offset(0, -1),
     ).animate(curvedAnimation);
+
     widget.scrollController.addListener(scrollListener);
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _appBarAnimationController.dispose();
     super.dispose();
   }
 
   void scrollListener() {
     if (widget.scrollController.position.userScrollDirection ==
         ScrollDirection.forward) {
-      _animationController.reverse();
+      _appBarAnimationController.reverse();
     }
     if (widget.scrollController.position.userScrollDirection ==
         ScrollDirection.reverse) {
-      _animationController.forward();
+      _appBarAnimationController.forward();
     }
   }
 
@@ -97,7 +100,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
     final theme = Theme.of(context);
     final route = GoRouterState.of(context);
     return SlideTransition(
-      position: _offsetAnimation,
+      position: _appBarOffsetAnimation,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Constants.webHorizontalPadding,
@@ -127,16 +130,31 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                   children: AppBarButtons.values.map(
                     (button) {
                       return InkWell(
-                        onHover: (hovered) {},
                         onTap: () {},
+                        onHover: (hovered) {
+                          if (hovered) {
+                            hoveredRoute = button.route;
+                            setState(() {});
+                            return;
+                          }
+                          hoveredRoute = '/';
+                          setState(() {});
+                        },
                         overlayColor:
                             MaterialStateProperty.all(Palette.transparent),
-                        child: Text(
-                          button.title.toUpperCase(),
-                          style: route.name == button.route
-                              ? theme.textTheme.labelLarge
-                                  ?.copyWith(color: theme.primaryColor)
-                              : theme.textTheme.labelMedium,
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 2000),
+                          child: Text(
+                            button.title.toUpperCase(),
+                            style: route.name == button.route
+                                ? theme.textTheme.labelLarge
+                                    ?.copyWith(color: theme.primaryColor)
+                                : theme.textTheme.labelMedium?.copyWith(
+                                    color: hoveredRoute == button.route
+                                        ? theme.primaryColor.withOpacity(0.7)
+                                        : null,
+                                  ),
+                          ),
                         ),
                       );
                     },

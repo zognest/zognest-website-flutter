@@ -39,6 +39,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final theme = Theme.of(context);
+    if (size.width < 1000) {
+      return Scaffold(
+        body: Center(
+          child: Text(
+            'Mobile/Tablet View\n(WIP)',
+            textAlign: TextAlign.center,
+            style: theme.textTheme.headlineSmall,
+          ),
+        ),
+      );
+    }
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(

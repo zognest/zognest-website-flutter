@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -101,8 +103,24 @@ class BeyondSpaceCarousel extends StatefulWidget {
 }
 
 class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
+  late final Timer timer;
   int currentIndex = 0;
   bool dragging = true;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(
+      const Duration(seconds: 5),
+      (_) => nextIndex(),
+    );
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
 
   void nextIndex() {
     final nextIndex = currentIndex + 1;
@@ -160,7 +178,7 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
               Data.beyondSpaceImages.length,
-              (index) {
+                  (index) {
                 return AnimatedContainer(
                   width: Spacing.xl72 / Data.beyondSpaceImages.length,
                   height: Spacing.s4,

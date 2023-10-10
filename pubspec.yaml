@@ -40,7 +40,6 @@ dependencies:
   go_router: ^11.1.2
   flutter_svg: ^2.0.7
   sliver_tools: ^0.2.12
-  carousel_slider: ^4.2.1
   youtube_player_iframe: ^4.0.4
   pointer_interceptor: ^0.9.3+6
   auto_size_text: ^3.0.0

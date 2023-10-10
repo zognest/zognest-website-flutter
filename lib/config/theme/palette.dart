@@ -18,4 +18,5 @@ abstract final class Palette {
   static const appBarBackground = Color(0xff121212);
   static const secondaryGradient = Color(0xffD71040);
   static const primaryGradient = primary;
+  static const frostedForegroundColor = Color(0xff0A0A0A);
 }

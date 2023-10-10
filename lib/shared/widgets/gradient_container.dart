@@ -8,7 +8,7 @@ class GradientContainer extends StatelessWidget {
     this.height,
     this.width,
     this.child,
-    this.radius = 0.6,
+    this.radius = 0.5,
     this.secondaryColor,
   });
 
@@ -22,7 +22,6 @@ class GradientContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     return Stack(
       children: [
         Container(

@@ -13,6 +13,9 @@ abstract final class Assets {
 
   // Images
   static const phoneHand = '${Paths.images}/phone_hand.png';
+  static const mercuries = '${Paths.images}/mercuries.png';
+  static const office = '${Paths.images}/office.png';
+  static const arrowRight = '${Paths.images}/arrow_right.png';
 
   // Temporary assets
   static const cuckoo = '${Paths.temp}/cuckoo.png';

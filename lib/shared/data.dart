@@ -1,3 +1,4 @@
+import 'package:zognest_website/features/home/models/offer.dart';
 import 'package:zognest_website/resources/assets.dart';
 
 class Data {
@@ -25,4 +26,13 @@ class Data {
   ];
 
   static const ytVideoUrl = 'hRFOa5CtXkY';
+
+  static List<Offer> offers = [
+    Offer(
+      highlight: 'Professional',
+      title: 'And dedicated team',
+      description:
+          'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
+    ),
+  ];
 }

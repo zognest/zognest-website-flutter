@@ -28,7 +28,9 @@ class _ZognestVideoState extends State<ZognestVideo> {
         showFullscreenButton: true,
         strictRelatedVideos: true,
       ),
-    )..listen(videoListener);
+    )
+      ..update(playbackQuality: 'HD')
+      ..listen(videoListener);
   }
 
   @override
@@ -37,31 +39,27 @@ class _ZognestVideoState extends State<ZognestVideo> {
     super.dispose();
   }
 
-  void videoListener(YoutubePlayerValue event) {
-    state = event.playerState;
-    print(state);
-  }
+  void videoListener(YoutubePlayerValue event) => state = event.playerState;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    const aspectRatio = 16 / 9;
     return Column(
       children: [
         const Divider(),
-        SizedBox(
-          height: size.height * 0.8,
+        Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: Constants.webHorizontalPadding),
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: Constants.webHorizontalPadding),
-                child: YoutubePlayerScaffold(
-                  controller: _controller,
-                  builder: (context, player) {
-                    return player;
-                  },
-                ),
+              YoutubePlayerScaffold(
+                controller: _controller,
+                aspectRatio: aspectRatio,
+                builder: (context, player) {
+                  return player;
+                },
               ),
               PointerInterceptor(
                 child: InkWell(
@@ -76,13 +74,20 @@ class _ZognestVideoState extends State<ZognestVideo> {
                       _controller.playVideo();
                       return;
                     }
+                    if (state == PlayerState.paused ||
+                        state == PlayerState.ended ||
+                        state == PlayerState.cued) {
+                      _controller.playVideo();
+                      return;
+                    }
                   },
+                  // Todo: double check
                   onHover: (over) {
                     if (over && state == PlayerState.cued) {
                       _controller.playVideo();
                     }
                   },
-                  child: const SizedBox.expand(),
+                  child: const AspectRatio(aspectRatio: aspectRatio),
                 ),
               ),
             ],

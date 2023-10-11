@@ -4,6 +4,8 @@ import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/home/widgets/beyond_space.dart';
 import 'package:zognest_website/features/home/widgets/clients_list.dart';
+import 'package:zognest_website/features/home/widgets/marquee_text.dart';
+import 'package:zognest_website/features/home/widgets/optimism_text.dart';
 import 'package:zognest_website/features/home/widgets/zognest_description.dart';
 import 'package:zognest_website/features/home/widgets/zognest_offers.dart';
 import 'package:zognest_website/features/home/widgets/zognest_video.dart';
@@ -40,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final theme = Theme.of(context);
-    if (size.width < 1000) {
+    /*if (size.width < 1000) {
       return Scaffold(
         body: Center(
           child: Text(
@@ -50,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       );
-    }
+    }*/
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -63,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     SizedBox(
                       height: _controller.hasClients
-                          ? _controller.position.maxScrollExtent * 0.42
+                          ? _controller.position.maxScrollExtent * 0.35
                           : size.height * 3,
                       child: Stack(
                         children: [
@@ -89,11 +91,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Align(
                       alignment: Alignment.topRight,
-                      child: Image.asset(
-                        Assets.mercuries,
-                        // width: size.width * 0.3,
-                      ),
+                      child: Image.asset(Assets.mercuries),
                     ),
+                    const SizedBox(height: Constants.optimismSectionHeight),
+                    SvgPicture.asset(Assets.gridLines),
                   ],
                 ),
                 const Foreground(),
@@ -123,6 +124,11 @@ class Foreground extends StatelessWidget {
         ZognestDescription(),
         SizedBox(height: Constants.sectionSpacing),
         ZognestOffers(),
+        SizedBox(height: Constants.sectionSpacing),
+        MarqueeText(),
+        SizedBox(height: Constants.sectionSpacing),
+        OptimismText(),
+        SizedBox(height: Constants.sectionSpacing),
         SizedBox(
           height: 3000,
           child: Placeholder(),

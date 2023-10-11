@@ -50,35 +50,38 @@ class _ClientsListState extends State<ClientsList>
         const Divider(),
         SizedBox(
           height: Spacing.xl72,
-          child: ListView.builder(
-            controller: _scrollController,
-            padding: const EdgeInsets.symmetric(vertical: Spacing.s8),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              final i = index % Data.clientsImageAssets.length;
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Spacing.l40),
-                child: InkWell(
-                  onTap: () {},
-                  onHover: (over) {
-                    if (over) {
-                      setState(() => hoveredIndex = i);
-                      _animationController.stop(canceled: false);
-                    }
-                    if (!over) {
-                      setState(() => hoveredIndex = -1);
-                      _animationController.repeat();
-                    }
-                  },
-                  overlayColor: MaterialStateProperty.all(Palette.transparent),
-                  child: Image.asset(
-                    Data.clientsImageAssets[i],
-                    color: hoveredIndex == i ? Palette.primary : null,
-                    colorBlendMode: BlendMode.srcIn,
+          child: Center(
+            child: ListView.builder(
+              controller: _scrollController,
+              padding: const EdgeInsets.symmetric(vertical: Spacing.s8),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final i = index % Data.clientsImageAssets.length;
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: Spacing.l40),
+                  child: InkWell(
+                    onTap: () {},
+                    onHover: (over) {
+                      if (over) {
+                        setState(() => hoveredIndex = i);
+                        _animationController.stop(canceled: false);
+                      }
+                      if (!over) {
+                        setState(() => hoveredIndex = -1);
+                        _animationController.repeat();
+                      }
+                    },
+                    overlayColor:
+                        MaterialStateProperty.all(Palette.transparent),
+                    child: Image.asset(
+                      Data.clientsImageAssets[i],
+                      color: hoveredIndex == i ? Palette.primary : null,
+                      colorBlendMode: BlendMode.srcIn,
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
         const Divider(),

@@ -16,6 +16,7 @@ abstract final class Assets {
   static const mercuries = '${Paths.images}/mercuries.png';
   static const office = '${Paths.images}/office.png';
   static const arrowRight = '${Paths.images}/arrow_right.png';
+  static const mercuryVenus = '${Paths.images}/mercury_venus.png';
 
   // Temporary assets
   static const cuckoo = '${Paths.temp}/cuckoo.png';

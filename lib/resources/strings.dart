@@ -36,4 +36,10 @@ abstract final class Strings {
   static const achievement = 'Achievement';
   static const nothingCanBeDone =
       'Nothing can be done\nwithout hope\nand confidence';
+  static const someCountThatMatters = 'Some count that matters';
+  static const appDevelopment = 'App Development';
+  static const webDevelopment = 'Website Development';
+  static const uiUxForCompanies = 'UI/UX For Companies';
+  static const happyCustomer = 'Happy Customer';
+  static const projectsCompleted = 'Projects Completed';
 }

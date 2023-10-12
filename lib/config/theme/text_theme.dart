@@ -53,11 +53,16 @@ abstract final class TextThemes {
         fontSize: 28,
         height: 1,
       ),
-      headlineMedium: theme.textTheme.headlineSmall?.copyWith(
+      headlineMedium: theme.textTheme.headlineMedium?.copyWith(
         fontFamily: 'Oswald',
         fontVariations: TextThemes.fontVariation(7),
         height: 1,
         fontSize: 28,
+      ),
+      headlineLarge: theme.textTheme.headlineLarge?.copyWith(
+        fontFamily: 'SF Pro Rounded',
+        fontWeight: FontWeight.w900,
+        fontSize: 80,
       ),
       // endregion
       // region Body

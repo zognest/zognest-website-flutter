@@ -8,4 +8,5 @@ class Constants {
   static const extraSectionSpacing = 300.0;
   static const zognestDescriptionSectionHeight = 700.0;
   static const optimismSectionHeight = 800.0;
+  static const countItemHeight = Spacing.xl60 * 2;
 }

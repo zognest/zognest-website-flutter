@@ -4,6 +4,7 @@ import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/home/widgets/beyond_space.dart';
 import 'package:zognest_website/features/home/widgets/clients_list.dart';
+import 'package:zognest_website/features/home/widgets/counters.dart';
 import 'package:zognest_website/features/home/widgets/marquee_text.dart';
 import 'package:zognest_website/features/home/widgets/optimism_text.dart';
 import 'package:zognest_website/features/home/widgets/zognest_description.dart';
@@ -129,6 +130,7 @@ class Foreground extends StatelessWidget {
         SizedBox(height: Constants.sectionSpacing),
         OptimismText(),
         SizedBox(height: Constants.sectionSpacing),
+        Counters(),
         SizedBox(
           height: 3000,
           child: Placeholder(),

@@ -43,6 +43,9 @@ dependencies:
   youtube_player_iframe: ^4.0.4
   pointer_interceptor: ^0.9.3+6
   auto_size_text: ^3.0.0
+  visibility_detector: ^0.4.0+2
+  countup:
+    path: ./packages/countup-0.1.4-local/
 
 
 

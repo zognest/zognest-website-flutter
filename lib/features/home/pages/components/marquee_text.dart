@@ -3,7 +3,7 @@ import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 
-import '../../../config/constants.dart';
+import '../../../../../config/constants.dart';
 
 class MarqueeText extends StatefulWidget {
   const MarqueeText({super.key});

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
-import 'package:zognest_website/features/home/widgets/beyond_space.dart';
-import 'package:zognest_website/features/home/widgets/clients_list.dart';
-import 'package:zognest_website/features/home/widgets/counters.dart';
-import 'package:zognest_website/features/home/widgets/marquee_text.dart';
-import 'package:zognest_website/features/home/widgets/optimism_text.dart';
-import 'package:zognest_website/features/home/widgets/zognest_description.dart';
-import 'package:zognest_website/features/home/widgets/zognest_offers.dart';
-import 'package:zognest_website/features/home/widgets/zognest_video.dart';
+import 'package:zognest_website/features/home/pages/components/beyond_space.dart';
+import 'package:zognest_website/features/home/pages/components/clients_list.dart';
+import 'package:zognest_website/features/home/pages/components/counters.dart';
+import 'package:zognest_website/features/home/pages/components/marquee_text.dart';
+import 'package:zognest_website/features/home/pages/components/optimism_text.dart';
+import 'package:zognest_website/features/home/pages/components/zognest_description.dart';
+import 'package:zognest_website/features/home/pages/components/zognest_offers.dart';
+import 'package:zognest_website/features/home/pages/components/zognest_services.dart';
+import 'package:zognest_website/features/home/pages/components/zognest_video.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 
@@ -42,7 +43,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    final theme = Theme.of(context);
     /*if (size.width < 1000) {
       return Scaffold(
         body: Center(
@@ -131,6 +131,8 @@ class Foreground extends StatelessWidget {
         OptimismText(),
         SizedBox(height: Constants.sectionSpacing),
         Counters(),
+        SizedBox(height: Constants.sectionSpacing),
+        ZognestServices(),
         SizedBox(
           height: 3000,
           child: Placeholder(),

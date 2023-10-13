@@ -57,10 +57,14 @@ class BeyondSpace extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        PrimaryButton(
-                          title: Strings.bookOurServices.toUpperCase(),
-                          onTap: () {},
+                        Expanded(
+                          child: PrimaryButton(
+                            title: Strings.bookOurServices.toUpperCase(),
+                            height: Spacing.xl60,
+                            onTap: () {},
+                          ),
                         ),
+                        const Spacer(flex: 2),
                         const CircleButton(asset: Assets.downArrow),
                       ],
                     ),

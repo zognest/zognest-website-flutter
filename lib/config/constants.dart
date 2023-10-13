@@ -9,4 +9,6 @@ class Constants {
   static const zognestDescriptionSectionHeight = 700.0;
   static const optimismSectionHeight = 800.0;
   static const countItemHeight = Spacing.xl60 * 2;
+  static const servicesCardWidth = 225.0;
+  static const servicesCardHeight = 350.0;
 }

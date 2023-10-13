@@ -42,4 +42,7 @@ abstract final class Strings {
   static const uiUxForCompanies = 'UI/UX For Companies';
   static const happyCustomer = 'Happy Customer';
   static const projectsCompleted = 'Projects Completed';
+  static const services = 'Services ';
+  static const more = 'More';
+  static const add = 'Add';
 }

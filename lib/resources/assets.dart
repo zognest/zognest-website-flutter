@@ -30,4 +30,11 @@ abstract final class Assets {
   static const texasChiro = '${Paths.temp}/texas_chiro.png';
   static const tooth = '${Paths.temp}/tooth.png';
   static const vais = '${Paths.temp}/vais.png';
+  static const photoshop = '${Paths.temp}/photoshop.png';
+  static const illustrator = '${Paths.temp}/illustrator.png';
+  static const zeplin = '${Paths.temp}/zeplin.png';
+  static const xd = '${Paths.temp}/xd.png';
+  static const figma = '${Paths.temp}/figma.png';
+  static const sketch = '${Paths.temp}/sketch.png';
+  static const serviceBackground = '${Paths.temp}/service_background.png';
 }

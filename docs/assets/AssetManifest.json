@@ -35,17 +35,32 @@
   "assets/temp/drop.png": [
     "assets/temp/drop.png"
   ],
+  "assets/temp/figma.png": [
+    "assets/temp/figma.png"
+  ],
+  "assets/temp/illustrator.png": [
+    "assets/temp/illustrator.png"
+  ],
   "assets/temp/mahalaxmi.png": [
     "assets/temp/mahalaxmi.png"
   ],
   "assets/temp/my_pocket.png": [
     "assets/temp/my_pocket.png"
   ],
+  "assets/temp/photoshop.png": [
+    "assets/temp/photoshop.png"
+  ],
   "assets/temp/salt.png": [
     "assets/temp/salt.png"
   ],
+  "assets/temp/service_background.png": [
+    "assets/temp/service_background.png"
+  ],
   "assets/temp/sjrc.png": [
     "assets/temp/sjrc.png"
+  ],
+  "assets/temp/sketch.png": [
+    "assets/temp/sketch.png"
   ],
   "assets/temp/store_loop.png": [
     "assets/temp/store_loop.png"
@@ -58,6 +73,12 @@
   ],
   "assets/temp/vais.png": [
     "assets/temp/vais.png"
+  ],
+  "assets/temp/xd.png": [
+    "assets/temp/xd.png"
+  ],
+  "assets/temp/zeplin.png": [
+    "assets/temp/zeplin.png"
   ],
   "fonts/Oswald/Oswald-Variable.ttf": [
     "fonts/Oswald/Oswald-Variable.ttf"

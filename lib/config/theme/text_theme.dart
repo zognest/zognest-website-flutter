@@ -78,6 +78,11 @@ abstract final class TextThemes {
       ),
       // endregion
       // region Labels
+      labelSmall: theme.textTheme.labelSmall?.copyWith(
+        fontSize: 8,
+        fontFamily: 'Oswald',
+        fontWeight: FontWeight.w700,
+      ),
       labelMedium: theme.textTheme.labelMedium?.copyWith(
         fontSize: 16,
         fontFamily: 'SF Pro Rounded',

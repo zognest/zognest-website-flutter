@@ -42,7 +42,6 @@ class _ZognestVideoState extends State<ZognestVideo> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     const aspectRatio = 16 / 9;
     return Column(
       children: [

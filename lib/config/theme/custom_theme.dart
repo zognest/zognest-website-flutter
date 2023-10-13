@@ -5,7 +5,6 @@ import 'palette.dart';
 
 class CustomTheme {
   static ThemeData darkTheme(BuildContext context) {
-    final theme = Theme.of(context);
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,

@@ -91,23 +91,6 @@ class _ZognestServicesState extends State<ZognestServices> {
               itemBuilder: (context, index) {
                 final i = index % Data.services.length;
                 final service = Data.services[i];
-                /*return SizedBox(
-                  width: itemWidth,
-                  height: Constants.servicesCardHeight,
-                  child: InkWell(
-                    onTap: () {},
-                    onHover: (over) async {
-                      print(over);
-                      await _flipController.toggleCard();
-                    },
-                    child: FlipCard(
-                      side: CardSide.FRONT,
-                      // flipOnTouch: false,
-                      front: FrontService(service: service),
-                      back: BackService(service: service),
-                    ),
-                  ),
-                );*/
                 return Container(
                   constraints: BoxConstraints.tight(
                       const Size(itemWidth, Constants.servicesCardHeight)),
@@ -143,26 +126,29 @@ class FrontService extends StatelessWidget {
           Assets.serviceBackground,
           width: double.infinity,
           height: double.infinity,
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Spacing.s8,
-            vertical: Spacing.s12,
+            horizontal: Spacing.l24,
+            vertical: Spacing.l32,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              const Spacer(),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       service.highlight.toUpperCase(),
-                      style: theme.textTheme.headlineSmall
-                          ?.copyWith(color: theme.primaryColor),
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                        color: theme.primaryColor,
+                        fontVariations: TextThemes.fontVariation(1),
+                      ),
                     ),
                     Text(
                       service.title.toUpperCase(),
@@ -170,14 +156,13 @@ class FrontService extends StatelessWidget {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.symmetric(vertical: Spacing.s12),
-                      child: SingleChildScrollView(
-                        child: Text(
-                          service.description,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 5,
-                          style: theme.textTheme.bodyMedium,
-                        ),
+                          const EdgeInsets.symmetric(vertical: Spacing.m20),
+                      child: Text(
+                        service.description,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 5,
+                        style:
+                            theme.textTheme.bodyMedium?.copyWith(height: 1.3),
                       ),
                     ),
                   ],
@@ -186,7 +171,11 @@ class FrontService extends StatelessWidget {
               PrimaryButton(
                 title: Strings.more.toUpperCase(),
                 filled: false,
-                width: Constants.servicesCardWidth * 0.3,
+                width: Constants.servicesCardWidth * 0.4,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Spacing.s12,
+                  vertical: Spacing.m20,
+                ),
                 onTap: () {},
               ),
             ],
@@ -211,12 +200,14 @@ class BackService extends StatelessWidget {
           Assets.serviceBackground,
           width: double.infinity,
           height: double.infinity,
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Spacing.s8,
-            vertical: Spacing.s12,
+          padding: const EdgeInsets.only(
+            left: Spacing.l24,
+            right: Spacing.l24,
+            top: Spacing.l48,
+            bottom: Spacing.l32,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,21 +225,22 @@ class BackService extends StatelessWidget {
                       service.title.toUpperCase(),
                       style: theme.textTheme.headlineMedium,
                     ),
+                    const SizedBox(height: Spacing.m20),
                     Expanded(
-                      child: Padding(
+                      child: SingleChildScrollView(
                         padding:
                             const EdgeInsets.symmetric(vertical: Spacing.s12),
-                        child: SingleChildScrollView(
-                          child: Wrap(
-                            runSpacing: Spacing.s8,
-                            spacing: Spacing.s12,
-                            children: service.technologies.map((tech) {
-                              return TechnologyContainer(
-                                image: tech.image,
-                                title: tech.name,
-                              );
-                            }).toList(),
-                          ),
+                        child: Wrap(
+                          runAlignment: WrapAlignment.spaceBetween,
+                          alignment: WrapAlignment.start,
+                          runSpacing: Spacing.s12,
+                          spacing: Spacing.s12,
+                          children: service.technologies.map((tech) {
+                            return TechnologyContainer(
+                              image: tech.image,
+                              title: tech.name,
+                            );
+                          }).toList(),
                         ),
                       ),
                     ),
@@ -257,7 +249,11 @@ class BackService extends StatelessWidget {
               ),
               PrimaryButton(
                 title: Strings.add.toUpperCase(),
-                width: Constants.servicesCardWidth * 0.3,
+                width: Constants.servicesCardWidth * 0.4,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Spacing.s12,
+                  vertical: Spacing.m20,
+                ),
                 onTap: () {},
               ),
             ],

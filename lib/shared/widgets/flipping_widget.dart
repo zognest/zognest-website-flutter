@@ -65,7 +65,7 @@ class _FlippingWidgetState extends State<FlippingWidget>
               final value =
                   isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
               return Transform(
-                transform: Matrix4.rotationY(value)..setEntry(3, 0, tilt),
+                transform: Matrix4.rotationY(value)..setEntry(3, 1, tilt),
                 alignment: Alignment.center,
                 child: widget,
               );

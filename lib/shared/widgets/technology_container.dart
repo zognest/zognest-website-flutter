@@ -15,27 +15,36 @@ class TechnologyContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(Spacing.m14),
-          decoration: BoxDecoration(
-            color: Palette.white,
-            borderRadius: BorderRadius.circular(Spacing.s12),
+    return SizedBox(
+      width: 60,
+      child: Column(
+        children: [
+          Container(
+            height: 60,
+            padding: const EdgeInsets.all(Spacing.s12),
+            decoration: BoxDecoration(
+              color: Palette.white,
+              borderRadius: BorderRadius.circular(Spacing.s12),
+            ),
+            alignment: Alignment.center,
+            child: Image.asset(
+              image,
+              fit: BoxFit.contain,
+            ),
           ),
-          child: Image.asset(
-            image,
-            fit: BoxFit.contain,
-            width: 25,
-            height: 25,
+          const SizedBox(height: Spacing.s8),
+          Text(
+            title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.labelSmall?.copyWith(
+              fontFamily: 'SF Pro Rounded',
+              letterSpacing: 0,
+              fontSize: 12,
+            ),
           ),
-        ),
-        const SizedBox(height: Spacing.s8),
-        Text(
-          title.toUpperCase(),
-          style: theme.textTheme.labelSmall,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

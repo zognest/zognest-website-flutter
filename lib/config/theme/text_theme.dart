@@ -57,7 +57,7 @@ abstract final class TextThemes {
         fontFamily: 'Oswald',
         fontVariations: TextThemes.fontVariation(7),
         height: 1,
-        fontSize: 28,
+        fontSize: 38,
       ),
       headlineLarge: theme.textTheme.headlineLarge?.copyWith(
         fontFamily: 'SF Pro Rounded',
@@ -66,6 +66,11 @@ abstract final class TextThemes {
       ),
       // endregion
       // region Body
+      bodySmall: theme.textTheme.bodySmall?.copyWith(
+        fontSize: 16,
+        fontFamily: 'SF Pro Rounded',
+        fontWeight: FontWeight.w500,
+      ),
       bodyMedium: theme.textTheme.bodyMedium?.copyWith(
         fontSize: 18,
         fontFamily: 'SF Pro Rounded',
@@ -81,7 +86,7 @@ abstract final class TextThemes {
       labelSmall: theme.textTheme.labelSmall?.copyWith(
         fontSize: 8,
         fontFamily: 'Oswald',
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w600,
       ),
       labelMedium: theme.textTheme.labelMedium?.copyWith(
         fontSize: 16,

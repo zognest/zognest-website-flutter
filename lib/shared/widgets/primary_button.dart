@@ -11,6 +11,7 @@ class PrimaryButton extends StatelessWidget {
     this.filled = true,
     this.trailing,
     this.height,
+    this.padding,
     this.width,
   });
 
@@ -19,6 +20,7 @@ class PrimaryButton extends StatelessWidget {
   final double? width;
   final bool filled;
   final Widget? trailing;
+  final EdgeInsets? padding;
   final Function() onTap;
 
   @override
@@ -36,10 +38,11 @@ class PrimaryButton extends StatelessWidget {
             BorderSide(color: filled ? theme.primaryColor : Palette.white),
           ),
           padding: MaterialStateProperty.all(
-            const EdgeInsets.symmetric(
-              horizontal: Spacing.s4,
-              vertical: Spacing.s12,
-            ),
+            padding ??
+                const EdgeInsets.symmetric(
+                  horizontal: Spacing.s4,
+                  vertical: Spacing.s12,
+                ),
           ),
         ),
         child: Row(

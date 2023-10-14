@@ -36,7 +36,7 @@ class _ZognestOffersState extends State<ZognestOffers> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
-    final itemWidth = size.width * 0.2;
+    const itemWidth = 440.0;
     return Column(
       children: [
         const Divider(),
@@ -67,7 +67,7 @@ class _ZognestOffersState extends State<ZognestOffers> {
           },
         ),
         SizedBox(
-          height: 300,
+          height: 338,
           child: ScrollConfiguration(
             behavior: ScrollConfiguration.of(context).copyWith(
               dragDevices: {
@@ -115,7 +115,8 @@ class OfferItem extends StatelessWidget {
     final theme = Theme.of(context);
     return FrostedContainer(
       width: width,
-      padding: const EdgeInsets.all(Spacing.l32),
+      padding: const EdgeInsets.symmetric(
+          horizontal: Spacing.l32, vertical: Spacing.l48),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -133,7 +134,7 @@ class OfferItem extends StatelessWidget {
             child: SingleChildScrollView(
               child: Text(
                 offer.description,
-                style: theme.textTheme.bodyMedium,
+                style: theme.textTheme.bodyMedium?.copyWith(height: 1.3),
               ),
             ),
           ),

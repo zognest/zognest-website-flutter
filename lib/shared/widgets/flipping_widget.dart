@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:zognest_website/config/theme/palette.dart';
 
 class FlippingWidget extends StatefulWidget {
   const FlippingWidget({
@@ -48,6 +49,7 @@ class _FlippingWidgetState extends State<FlippingWidget>
     return InkWell(
       onTap: () {},
       onHover: (_) => setState(() => _flip = !_flip),
+      overlayColor: MaterialStateProperty.all(Palette.transparent),
       child: AnimatedSwitcher(
         switchInCurve: Curves.easeInBack,
         switchOutCurve: Curves.easeInBack.flipped,
@@ -65,7 +67,7 @@ class _FlippingWidgetState extends State<FlippingWidget>
               final value =
                   isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
               return Transform(
-                transform: Matrix4.rotationY(value)..setEntry(3, 1, tilt),
+                transform: Matrix4.rotationY(value)..setEntry(3, 0, tilt),
                 alignment: Alignment.center,
                 child: widget,
               );

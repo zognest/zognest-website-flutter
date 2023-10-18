@@ -23,17 +23,47 @@
   "assets/svg/arrow_down.svg": [
     "assets/svg/arrow_down.svg"
   ],
+  "assets/svg/arrow_up.svg": [
+    "assets/svg/arrow_up.svg"
+  ],
+  "assets/svg/discord.svg": [
+    "assets/svg/discord.svg"
+  ],
+  "assets/svg/dribble.svg": [
+    "assets/svg/dribble.svg"
+  ],
+  "assets/svg/facebook.svg": [
+    "assets/svg/facebook.svg"
+  ],
+  "assets/svg/figma.svg": [
+    "assets/svg/figma.svg"
+  ],
   "assets/svg/grid_lines.svg": [
     "assets/svg/grid_lines.svg"
+  ],
+  "assets/svg/instagram.svg": [
+    "assets/svg/instagram.svg"
+  ],
+  "assets/svg/linkedin.svg": [
+    "assets/svg/linkedin.svg"
   ],
   "assets/svg/logo.svg": [
     "assets/svg/logo.svg"
   ],
-  "assets/svg/whats_app_logo.svg": [
-    "assets/svg/whats_app_logo.svg"
+  "assets/svg/pintrest.svg": [
+    "assets/svg/pintrest.svg"
+  ],
+  "assets/svg/whatsapp.svg": [
+    "assets/svg/whatsapp.svg"
+  ],
+  "assets/svg/youtube.svg": [
+    "assets/svg/youtube.svg"
   ],
   "assets/temp/ajmera.png": [
     "assets/temp/ajmera.png"
+  ],
+  "assets/temp/blog_image.png": [
+    "assets/temp/blog_image.png"
   ],
   "assets/temp/client_feedback_1.png": [
     "assets/temp/client_feedback_1.png"

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
-import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
@@ -29,7 +28,7 @@ class ScrollHeadline extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text.rich(
-            textScaleFactor: TextThemes.textScale(context),
+            // textScaleFactor: TextThemes.textScale(context),
             headline,
           ),
           InkWell(
@@ -40,13 +39,13 @@ class ScrollHeadline extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      textScaleFactor: TextThemes.textScale(context),
+                      // textScaleFactor: TextThemes.textScale(context),
                       Strings.scroll.toUpperCase(),
                       style:
                           theme.textTheme.displaySmall?.copyWith(fontSize: 54),
                     ),
                     Text(
-                      textScaleFactor: TextThemes.textScale(context),
+                      // textScaleFactor: TextThemes.textScale(context),
                       Strings.toExploreMore.toUpperCase(),
                       style: theme.textTheme.labelMedium?.copyWith(
                         color: theme.primaryColor,

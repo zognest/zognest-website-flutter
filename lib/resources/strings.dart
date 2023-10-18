@@ -50,4 +50,8 @@ abstract final class Strings {
   static const happy = 'happy';
   static const clients = 'clients...';
   static const view = 'view';
+  static const our = 'our';
+  static const blogs = 'blogs.';
+  static const zognestMail = 'info@zognest.com';
+  static const zognest = 'zognest';
 }

@@ -164,7 +164,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
               PrimaryButton(
                 onTap: () {},
                 title: Strings.getInTouch.toUpperCase(),
-                trailing: const CircleButton(asset: Assets.whatsAppLogo),
+                trailing: const CircleButton(asset: Assets.whatsapp),
               ),
             ],
           ),

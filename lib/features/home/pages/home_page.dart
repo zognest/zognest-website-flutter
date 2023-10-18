@@ -5,8 +5,10 @@ import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/home/pages/components/beyond_space.dart';
 import 'package:zognest_website/features/home/pages/components/clients_list.dart';
 import 'package:zognest_website/features/home/pages/components/counters.dart';
+import 'package:zognest_website/features/home/pages/components/home_footer.dart';
 import 'package:zognest_website/features/home/pages/components/marquee_text.dart';
 import 'package:zognest_website/features/home/pages/components/optimism_text.dart';
+import 'package:zognest_website/features/home/pages/components/zognest_blogs.dart';
 import 'package:zognest_website/features/home/pages/components/zognest_clients.dart';
 import 'package:zognest_website/features/home/pages/components/zognest_description.dart';
 import 'package:zognest_website/features/home/pages/components/zognest_mocks.dart';
@@ -141,10 +143,10 @@ class Foreground extends StatelessWidget {
         ZognestClients(),
         SizedBox(height: Constants.sectionSpacing),
         MarqueeText(),
-        SizedBox(
-          height: 3000,
-          child: Placeholder(),
-        ),
+        SizedBox(height: Constants.sectionSpacing),
+        ZognestBlogs(),
+        SizedBox(height: Constants.sectionSpacing),
+        HomeFooter(),
       ],
     );
   }

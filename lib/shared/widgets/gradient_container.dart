@@ -9,12 +9,14 @@ class GradientContainer extends StatelessWidget {
     this.width,
     this.child,
     this.radius = 0.5,
+    this.colorStartingOpacity = 0.5,
     this.secondaryColor,
   });
 
   final Color color;
   final Alignment? alignment;
   final double radius;
+  final double colorStartingOpacity;
   final double? height;
   final double? width;
   final Color? secondaryColor;
@@ -31,7 +33,10 @@ class GradientContainer extends StatelessWidget {
             gradient: RadialGradient(
               center: alignment ?? Alignment.center,
               radius: radius,
-              colors: [color.withOpacity(0.5), color.withOpacity(0)],
+              colors: [
+                color.withOpacity(colorStartingOpacity),
+                color.withOpacity(0),
+              ],
             ),
           ),
           child: child,

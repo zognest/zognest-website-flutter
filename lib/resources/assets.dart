@@ -7,9 +7,18 @@ abstract final class Paths {
 abstract final class Assets {
   // SVGs
   static const zognestLogo = '${Paths.svg}/logo.svg';
-  static const whatsAppLogo = '${Paths.svg}/whats_app_logo.svg';
+  static const whatsapp = '${Paths.svg}/whatsapp.svg';
   static const downArrow = '${Paths.svg}/arrow_down.svg';
+  static const upArrow = '${Paths.svg}/arrow_up.svg';
   static const gridLines = '${Paths.svg}/grid_lines.svg';
+  static const instagram = '${Paths.svg}/instagram.svg';
+  static const discord = '${Paths.svg}/discord.svg';
+  static const facebook = '${Paths.svg}/facebook.svg';
+  static const figma = '${Paths.svg}/figma.svg';
+  static const youtube = '${Paths.svg}/youtube.svg';
+  static const pintrest = '${Paths.svg}/pintrest.svg';
+  static const linkedin = '${Paths.svg}/linkedin.svg';
+  static const dribble = '${Paths.svg}/dribble.svg';
 
   // Images
   static const phoneHand = '${Paths.images}/phone_hand.png';
@@ -36,10 +45,11 @@ abstract final class Assets {
   static const illustrator = '${Paths.temp}/illustrator.png';
   static const zeplin = '${Paths.temp}/zeplin.png';
   static const xd = '${Paths.temp}/xd.png';
-  static const figma = '${Paths.temp}/figma.png';
+  static const figmaColoured = '${Paths.temp}/figma.png';
   static const sketch = '${Paths.temp}/sketch.png';
   static const serviceBackground = '${Paths.temp}/service_background.png';
   static const clientImage = '${Paths.temp}/client_image.png';
+  static const blog = '${Paths.temp}/blog_image.png';
   static const clientFeedbackBackgroundImage1 =
       '${Paths.temp}/client_feedback_1.png';
   static const clientFeedbackBackgroundImage2 =

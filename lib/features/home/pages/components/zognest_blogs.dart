@@ -1,26 +1,26 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
-import 'package:zognest_website/features/home/models/client_feedback.dart';
+import 'package:zognest_website/features/home/models/blog.dart';
 import 'package:zognest_website/features/home/widgets/scroll_headline.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
-import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 import '../../../../resources/spacing.dart';
 
-class ZognestClients extends StatefulWidget {
-  const ZognestClients({super.key});
+class ZognestBlogs extends StatefulWidget {
+  const ZognestBlogs({super.key});
 
   @override
-  State<ZognestClients> createState() => _ZognestClientsState();
+  State<ZognestBlogs> createState() => _ZognestBlogsState();
 }
 
-class _ZognestClientsState extends State<ZognestClients> {
+class _ZognestBlogsState extends State<ZognestBlogs> {
   late final ScrollController _controller;
   int currentIndex = 1;
 
@@ -47,12 +47,12 @@ class _ZognestClientsState extends State<ZognestClients> {
           headline: TextSpan(
             children: [
               TextSpan(
-                text: '${Strings.happy}\n'.toUpperCase(),
+                text: '${Strings.our}\n'.toUpperCase(),
                 style: theme.textTheme.displaySmall
                     ?.copyWith(foreground: TextThemes.foreground),
               ),
               TextSpan(
-                text: Strings.clients.toUpperCase(),
+                text: Strings.blogs.toUpperCase(),
                 style: theme.textTheme.displaySmall,
               ),
             ],
@@ -84,10 +84,10 @@ class _ZognestClientsState extends State<ZognestClients> {
               scrollDirection: Axis.horizontal,
               controller: _controller,
               itemBuilder: (context, index) {
-                final i = index % Data.clientFeedbacks.length;
-                final client = Data.clientFeedbacks[i];
-                return ClientItem(
-                  clientFeedback: client,
+                final i = index % Data.blogs.length;
+                final client = Data.blogs[i];
+                return BlogItem(
+                  blog: client,
                   width: itemWidth,
                 );
               },
@@ -103,21 +103,21 @@ class _ZognestClientsState extends State<ZognestClients> {
   }
 }
 
-class ClientItem extends StatefulWidget {
-  const ClientItem({
+class BlogItem extends StatefulWidget {
+  const BlogItem({
     super.key,
-    required this.clientFeedback,
+    required this.blog,
     required this.width,
   });
 
-  final ClientFeedback clientFeedback;
+  final Blog blog;
   final double width;
 
   @override
-  State<ClientItem> createState() => _ClientItemState();
+  State<BlogItem> createState() => _BlogItemState();
 }
 
-class _ClientItemState extends State<ClientItem> {
+class _BlogItemState extends State<BlogItem> {
   bool hovered = false;
 
   @override
@@ -137,79 +137,29 @@ class _ClientItemState extends State<ClientItem> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: Constants.clientsSectionHeight * 0.5,
-              child: Stack(
-                children: [
-                  Row(
-                    children: [
-                      GreyscaleFilter(
-                        isHovered: hovered,
-                        child: Image.asset(
-                            widget.clientFeedback.backgroundImages[0]),
-                      ),
-                      const SizedBox(width: Spacing.m16),
-                      GreyscaleFilter(
-                        isHovered: hovered,
-                        child: Image.asset(
-                            widget.clientFeedback.backgroundImages[1]),
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    left: 20,
-                    bottom: 0,
-                    child: GreyscaleFilter(
-                      isHovered: hovered,
-                      child: Image.asset(widget.clientFeedback.clientImage),
-                    ),
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                GreyscaleFilter(
+                  isHovered: hovered,
+                  child: Image.asset(widget.blog.image),
+                ),
+              ],
             ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.clientFeedback.name,
-                            style: theme.textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          Text(
-                            widget.clientFeedback.id,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: theme.primaryColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Spacer(),
-                      CircleAvatar(
-                        backgroundColor: Palette.white,
-                        child: Icon(
-                          Icons.play_arrow,
-                          color: theme.primaryColor,
-                        ),
-                      ),
-                      const SizedBox(width: Spacing.s12),
-                      PrimaryButton(
-                        title: Strings.view.toUpperCase(),
-                        filled: false,
-                        padding: const EdgeInsets.all(Spacing.s12),
-                        onTap: () {},
-                      ),
-                    ],
+                  Text(
+                    widget.blog.title,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   Text(
-                    widget.clientFeedback.description,
-                    style: theme.textTheme.bodyMedium,
+                    DateFormat('MMMM dd, yyyy').format(widget.blog.date),
+                    style: theme.textTheme.labelMedium
+                        ?.copyWith(color: theme.primaryColor),
                   ),
                 ],
               ),

@@ -5,6 +5,9 @@
   "assets/images/mercuries.png": [
     "assets/images/mercuries.png"
   ],
+  "assets/images/mercury.png": [
+    "assets/images/mercury.png"
+  ],
   "assets/images/mercury_venus.png": [
     "assets/images/mercury_venus.png"
   ],
@@ -13,6 +16,9 @@
   ],
   "assets/images/phone_hand.png": [
     "assets/images/phone_hand.png"
+  ],
+  "assets/images/screens.png": [
+    "assets/images/screens.png"
   ],
   "assets/svg/arrow_down.svg": [
     "assets/svg/arrow_down.svg"
@@ -28,6 +34,15 @@
   ],
   "assets/temp/ajmera.png": [
     "assets/temp/ajmera.png"
+  ],
+  "assets/temp/client_feedback_1.png": [
+    "assets/temp/client_feedback_1.png"
+  ],
+  "assets/temp/client_feedback_2.png": [
+    "assets/temp/client_feedback_2.png"
+  ],
+  "assets/temp/client_image.png": [
+    "assets/temp/client_image.png"
   ],
   "assets/temp/cuckoo.png": [
     "assets/temp/cuckoo.png"

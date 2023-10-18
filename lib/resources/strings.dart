@@ -45,4 +45,9 @@ abstract final class Strings {
   static const services = 'Services ';
   static const more = 'More';
   static const add = 'Add';
+  static const weGiveWingz = 'We Give\nWingz ';
+  static const yourBusiness = 'your\nbusiness';
+  static const happy = 'happy';
+  static const clients = 'clients...';
+  static const view = 'view';
 }

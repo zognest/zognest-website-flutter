@@ -1,0 +1,130 @@
+import 'package:flutter/material.dart';
+import 'package:visibility_detector/visibility_detector.dart';
+import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/theme/text_theme.dart';
+import 'package:zognest_website/resources/assets.dart';
+import 'package:zognest_website/resources/strings.dart';
+
+import '../../../../config/theme/palette.dart';
+
+class ZognestMocks extends StatefulWidget {
+  const ZognestMocks({super.key});
+
+  @override
+  State<ZognestMocks> createState() => _ZognestMocksState();
+}
+
+class _ZognestMocksState extends State<ZognestMocks>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _animationController;
+  late final Animation<Offset> _offsetAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    final curvedAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.ease,
+    );
+
+    _offsetAnimation = Tween<Offset>(
+      begin: const Offset(1, 0),
+      end: const Offset(-0.5, 0),
+    ).animate(curvedAnimation);
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
+    return VisibilityDetector(
+      key: ValueKey(runtimeType.toString()),
+      onVisibilityChanged: (info) {
+        if (info.visibleFraction >= 0.8) _animationController.forward();
+      },
+      child: SizedBox(
+        width: double.infinity,
+        height: Constants.mocksSectionHeight,
+        child: Stack(
+          alignment: Alignment.centerRight,
+          children: [
+            SlideTransition(
+              position: _offsetAnimation,
+              child: Image.asset(
+                Assets.screens,
+                width: size.width * 0.8,
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Divider(),
+                Text.rich(
+                  textAlign: TextAlign.right,
+                  textScaleFactor: TextThemes.textScale(context),
+                  textHeightBehavior: const TextHeightBehavior(
+                    applyHeightToFirstAscent: false,
+                    applyHeightToLastDescent: false,
+                  ),
+                  TextSpan(
+                    text: '\t${Strings.weGiveWingz.toUpperCase()}',
+                    style: theme.textTheme.displayMedium
+                        ?.copyWith(color: Palette.transparent),
+                    children: [
+                      TextSpan(
+                        text: Strings.to.toUpperCase(),
+                        style: theme.textTheme.displayMedium
+                            ?.copyWith(foreground: TextThemes.foreground),
+                      ),
+                      TextSpan(text: Strings.yourBusiness.toUpperCase()),
+                    ],
+                  ),
+                ),
+                const Divider(),
+              ],
+            ),
+            Image.asset(
+              Assets.mercury,
+              width: size.width * 0.27,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Constants.webHorizontalPadding),
+              child: Text.rich(
+                textAlign: TextAlign.right,
+                textScaleFactor: TextThemes.textScale(context),
+                textHeightBehavior: const TextHeightBehavior(
+                  applyHeightToFirstAscent: false,
+                  applyHeightToLastDescent: false,
+                ),
+                TextSpan(
+                  text: '\t${Strings.weGiveWingz.toUpperCase()}',
+                  style: theme.textTheme.displayMedium,
+                  children: [
+                    TextSpan(
+                      text: Strings.to.toUpperCase(),
+                      style: theme.textTheme.displayMedium
+                          ?.copyWith(foreground: TextThemes.foreground),
+                    ),
+                    TextSpan(text: Strings.yourBusiness.toUpperCase()),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

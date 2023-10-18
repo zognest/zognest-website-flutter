@@ -1,3 +1,4 @@
+import 'package:zognest_website/features/home/models/client_feedback.dart';
 import 'package:zognest_website/features/home/models/offer.dart';
 import 'package:zognest_website/resources/assets.dart';
 
@@ -34,7 +35,7 @@ class Data {
       highlight: 'Professional',
       title: 'And dedicated team',
       description:
-          'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
+      'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
     ),
   ];
 
@@ -43,7 +44,7 @@ class Data {
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
-          'Team is not enought to define us, we are family of different species of birds, each one of us have unique capabiliities.',
+      'Team is not enought to define us, we are family of different species of birds, each one of us have unique capabiliities.',
       technologies: [
         Technology(name: 'photoshop', image: Assets.photoshop),
         Technology(name: 'illustrator', image: Assets.illustrator),
@@ -51,6 +52,20 @@ class Data {
         Technology(name: 'figma', image: Assets.figma),
         Technology(name: 'xd', image: Assets.xd),
         Technology(name: 'sketch', image: Assets.sketch),
+      ],
+    ),
+  ];
+
+  static List<ClientFeedback> clientFeedbacks = [
+    ClientFeedback(
+      description:
+          'I am artist of the real world with creative ideas of the acients arts in benin, Nigeria',
+      clientImage: Assets.clientImage,
+      name: 'Bright Mba',
+      id: '@brightmac',
+      backgroundImages: [
+        Assets.clientFeedbackBackgroundImage1,
+        Assets.clientFeedbackBackgroundImage2,
       ],
     ),
   ];

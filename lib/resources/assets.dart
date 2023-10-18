@@ -17,6 +17,8 @@ abstract final class Assets {
   static const office = '${Paths.images}/office.png';
   static const arrowRight = '${Paths.images}/arrow_right.png';
   static const mercuryVenus = '${Paths.images}/mercury_venus.png';
+  static const mercury = '${Paths.images}/mercury.png';
+  static const screens = '${Paths.images}/screens.png';
 
   // Temporary assets
   static const cuckoo = '${Paths.temp}/cuckoo.png';
@@ -37,4 +39,9 @@ abstract final class Assets {
   static const figma = '${Paths.temp}/figma.png';
   static const sketch = '${Paths.temp}/sketch.png';
   static const serviceBackground = '${Paths.temp}/service_background.png';
+  static const clientImage = '${Paths.temp}/client_image.png';
+  static const clientFeedbackBackgroundImage1 =
+      '${Paths.temp}/client_feedback_1.png';
+  static const clientFeedbackBackgroundImage2 =
+      '${Paths.temp}/client_feedback_2.png';
 }

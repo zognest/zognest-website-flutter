@@ -11,4 +11,6 @@ class Constants {
   static const countItemHeight = Spacing.xl60 * 2;
   static const servicesCardWidth = 362.0;
   static const servicesCardHeight = 542.0;
+  static const mocksSectionHeight = 760.0;
+  static const clientsSectionHeight = 480.0;
 }

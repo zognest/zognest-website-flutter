@@ -7,7 +7,9 @@ import 'package:zognest_website/features/home/pages/components/clients_list.dart
 import 'package:zognest_website/features/home/pages/components/counters.dart';
 import 'package:zognest_website/features/home/pages/components/marquee_text.dart';
 import 'package:zognest_website/features/home/pages/components/optimism_text.dart';
+import 'package:zognest_website/features/home/pages/components/zognest_clients.dart';
 import 'package:zognest_website/features/home/pages/components/zognest_description.dart';
+import 'package:zognest_website/features/home/pages/components/zognest_mocks.dart';
 import 'package:zognest_website/features/home/pages/components/zognest_offers.dart';
 import 'package:zognest_website/features/home/pages/components/zognest_services.dart';
 import 'package:zognest_website/features/home/pages/components/zognest_video.dart';
@@ -66,8 +68,8 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     SizedBox(
                       height: _controller.hasClients
-                          ? _controller.position.maxScrollExtent * 0.35
-                          : size.height * 3,
+                          ? _controller.position.maxScrollExtent * 0.25
+                          : size.height * 2,
                       child: Stack(
                         children: [
                           const Stack(
@@ -133,6 +135,12 @@ class Foreground extends StatelessWidget {
         Counters(),
         SizedBox(height: Constants.sectionSpacing),
         ZognestServices(),
+        SizedBox(height: Constants.sectionSpacing),
+        ZognestMocks(),
+        SizedBox(height: Constants.sectionSpacing),
+        ZognestClients(),
+        SizedBox(height: Constants.sectionSpacing),
+        MarqueeText(),
         SizedBox(
           height: 3000,
           child: Placeholder(),

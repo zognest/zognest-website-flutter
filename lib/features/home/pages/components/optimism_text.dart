@@ -18,7 +18,7 @@ class OptimismText extends StatelessWidget {
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: Constants.webHorizontalPadding,
+              horizontal: Constants.pageHorizontalPadding,
             ),
             child: Stack(
               alignment: Alignment.center,

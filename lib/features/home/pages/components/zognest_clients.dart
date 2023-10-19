@@ -80,7 +80,7 @@ class _ZognestClientsState extends State<ZognestClients> {
             ),
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.webHorizontalPadding),
+                  horizontal: Constants.pageHorizontalPadding),
               scrollDirection: Axis.horizontal,
               controller: _controller,
               itemBuilder: (context, index) {

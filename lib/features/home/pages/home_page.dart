@@ -4,6 +4,7 @@ import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/home/pages/components/beyond_space.dart';
 import 'package:zognest_website/features/home/pages/components/clients_list.dart';
+import 'package:zognest_website/features/home/pages/components/contact_form.dart';
 import 'package:zognest_website/features/home/pages/components/counters.dart';
 import 'package:zognest_website/features/home/pages/components/home_footer.dart';
 import 'package:zognest_website/features/home/pages/components/marquee_text.dart';
@@ -47,17 +48,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    /*if (size.width < 1000) {
-      return Scaffold(
-        body: Center(
-          child: Text(
-            'Mobile/Tablet View\n(WIP)',
-            textAlign: TextAlign.center,
-            style: theme.textTheme.headlineSmall,
-          ),
-        ),
-      );
-    }*/
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -67,11 +57,12 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SizedBox(
                       height: _controller.hasClients
-                          ? _controller.position.maxScrollExtent * 0.25
-                          : size.height * 2,
+                          ? _controller.position.maxScrollExtent * 0.24
+                          : size.height * 4,
                       child: Stack(
                         children: [
                           const Stack(
@@ -94,15 +85,16 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Image.asset(Assets.mercuries),
-                    ),
-                    const SizedBox(height: Constants.optimismSectionHeight),
+                    Image.asset(Assets.mercuries),
+                    const SizedBox(
+                        height: Constants.backgroundDecorationSpacing),
+                    SvgPicture.asset(Assets.gridLines),
+                    const SizedBox(
+                        height: Constants.backgroundDecorationSpacing),
                     SvgPicture.asset(Assets.gridLines),
                   ],
                 ),
-                const Foreground(),
+                Foreground(controller: _controller),
               ],
             ),
           ),
@@ -114,39 +106,49 @@ class _HomePageState extends State<HomePage> {
 }
 
 class Foreground extends StatelessWidget {
-  const Foreground({super.key});
+  const Foreground({super.key, required this.controller});
+
+  final ScrollController controller;
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        BeyondSpace(),
-        SizedBox(height: Constants.sectionSpacing),
-        ClientsList(),
-        SizedBox(height: Constants.sectionSpacing),
-        ZognestVideo(),
-        SizedBox(height: Constants.sectionSpacing),
-        ZognestDescription(),
-        SizedBox(height: Constants.sectionSpacing),
-        ZognestOffers(),
-        SizedBox(height: Constants.sectionSpacing),
-        MarqueeText(),
-        SizedBox(height: Constants.sectionSpacing),
-        OptimismText(),
-        SizedBox(height: Constants.sectionSpacing),
-        Counters(),
-        SizedBox(height: Constants.sectionSpacing),
-        ZognestServices(),
-        SizedBox(height: Constants.sectionSpacing),
-        ZognestMocks(),
-        SizedBox(height: Constants.sectionSpacing),
-        ZognestClients(),
-        SizedBox(height: Constants.sectionSpacing),
-        MarqueeText(),
-        SizedBox(height: Constants.sectionSpacing),
-        ZognestBlogs(),
-        SizedBox(height: Constants.sectionSpacing),
-        HomeFooter(),
+        BeyondSpace(
+          onTabDown: () => controller.animateTo(
+            controller.position.maxScrollExtent,
+            duration: const Duration(milliseconds: Constants.scrollToDuration),
+            curve: Curves.ease,
+          ),
+        ),
+        const SizedBox(height: Constants.sectionSpacing),
+        const ClientsList(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const ZognestVideo(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const ZognestDescription(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const ZognestOffers(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const MarqueeText(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const OptimismText(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const Counters(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const ZognestServices(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const ZognestMocks(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const ZognestClients(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const MarqueeText(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const ZognestBlogs(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const ContactForm(),
+        const SizedBox(height: Constants.sectionSpacing),
+        const HomeFooter(),
       ],
     );
   }

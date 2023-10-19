@@ -10,15 +10,19 @@ class PrimaryButton extends StatelessWidget {
     required this.onTap,
     this.filled = true,
     this.trailing,
+    this.textStyle,
     this.height,
+    this.backgroundColor,
     this.padding,
     this.width,
   });
 
   final String title;
+  final TextStyle? textStyle;
   final double? height;
   final double? width;
   final bool filled;
+  final Color? backgroundColor;
   final Widget? trailing;
   final EdgeInsets? padding;
   final Function() onTap;
@@ -33,9 +37,16 @@ class PrimaryButton extends StatelessWidget {
         onPressed: onTap,
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
-              filled ? theme.primaryColor : Palette.transparent),
+            filled
+                ? backgroundColor ?? theme.primaryColor
+                : Palette.transparent,
+          ),
           side: MaterialStateProperty.all(
-            BorderSide(color: filled ? theme.primaryColor : Palette.white),
+            BorderSide(
+              color: filled
+                  ? backgroundColor ?? theme.primaryColor
+                  : Palette.white,
+            ),
           ),
           padding: MaterialStateProperty.all(
             padding ??
@@ -51,7 +62,7 @@ class PrimaryButton extends StatelessWidget {
               : MainAxisAlignment.center,
           children: [
             if (trailing != null) const SizedBox(width: Spacing.s8),
-            Text(title, style: theme.textTheme.labelMedium),
+            Text(title, style: textStyle ?? theme.textTheme.labelMedium),
             if (trailing != null) ...[
               const SizedBox(width: Spacing.s8),
               trailing!,

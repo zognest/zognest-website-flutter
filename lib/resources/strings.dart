@@ -54,4 +54,17 @@ abstract final class Strings {
   static const blogs = 'blogs.';
   static const zognestMail = 'info@zognest.com';
   static const zognest = 'zognest';
+  static const get = 'get ';
+  static const inText = 'in';
+  static const touch = 'touch';
+  static const contactDetails = 'Contact Details';
+  static const address =
+      '401, SNS Arista, nr. Prime Shopper, Vesu, Surat,\nGujarat 395007';
+  static const contactInfo = '+91 94296 30883\ninfo@zognest.com';
+  static const yourName = 'Your Name';
+  static const yourEmail = 'Your Email';
+  static const mobileNo = 'Mobile No.';
+  static const message = 'Message';
+  static const sendMessage = 'Send Message';
+  static const requestCall = 'Request a Call';
 }

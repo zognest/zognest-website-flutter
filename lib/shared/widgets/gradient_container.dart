@@ -10,11 +10,13 @@ class GradientContainer extends StatelessWidget {
     this.child,
     this.radius = 0.5,
     this.colorStartingOpacity = 0.5,
+    this.secondaryAlignment,
     this.secondaryColor,
   });
 
   final Color color;
   final Alignment? alignment;
+  final Alignment? secondaryAlignment;
   final double radius;
   final double colorStartingOpacity;
   final double? height;
@@ -44,7 +46,7 @@ class GradientContainer extends StatelessWidget {
         if (secondaryColor != null)
           GradientContainer(
             color: secondaryColor!,
-            alignment: alignment,
+            alignment: secondaryAlignment ?? alignment,
             radius: radius,
             height: height,
             width: width,

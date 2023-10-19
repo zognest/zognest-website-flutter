@@ -12,7 +12,9 @@ import 'package:zognest_website/shared/widgets/circle_button.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 class BeyondSpace extends StatelessWidget {
-  const BeyondSpace({super.key});
+  const BeyondSpace({super.key, required this.onTabDown});
+
+  final VoidCallback onTabDown;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,12 @@ class BeyondSpace extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     return Column(
       children: [
-        const SizedBox(height: Constants.appBarSpacing),
+        const SizedBox(height: Constants.appBarHeight),
         Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: Constants.webHorizontalPadding),
+              horizontal: Constants.pageHorizontalPadding),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Expanded(
                 child: Column(
@@ -65,7 +67,10 @@ class BeyondSpace extends StatelessWidget {
                           ),
                         ),
                         const Spacer(flex: 2),
-                        const CircleButton(asset: Assets.downArrow),
+                        CircleButton(
+                          asset: Assets.downArrow,
+                          onTap: onTabDown,
+                        ),
                       ],
                     ),
                   ],
@@ -80,10 +85,10 @@ class BeyondSpace extends StatelessWidget {
                       width: size.width * 0.335,
                     ),
                     Positioned(
-                      right: size.width * 0.144,
+                      right: size.width * 0.145,
                       top: size.width * 0.0055,
                       child: SizedBox(
-                        width: size.width * 0.151,
+                        width: size.width * 0.150,
                         child: const BeyondSpaceCarousel(),
                       ),
                     ),
@@ -115,7 +120,7 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
   void initState() {
     super.initState();
     timer = Timer.periodic(
-      const Duration(seconds: 5),
+      const Duration(seconds: Constants.beyondSpaceAppDuration),
       (_) => nextIndex(),
     );
   }
@@ -143,7 +148,7 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
           decoration: BoxDecoration(
@@ -155,14 +160,16 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
             onHorizontalDragUpdate: (drag) {
               if (dragging) {
                 dragging = false;
-                if (drag.delta.dx > 0) nextIndex();
-                if (drag.delta.dx < 0) previousIndex();
+                if (drag.delta.dx < 0) nextIndex();
+                if (drag.delta.dx > 0) previousIndex();
               }
             },
+            onHorizontalDragStart: (_) => dragging = true,
             onHorizontalDragCancel: () => dragging = true,
             onHorizontalDragEnd: (_) => dragging = true,
             child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 1000),
+              duration: const Duration(
+                  milliseconds: Constants.appMockAnimationDuration),
               child: Image.asset(
                 Data.beyondSpaceImages[currentIndex],
                 key: ValueKey(currentIndex),
@@ -192,7 +199,8 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
                         .withOpacity(currentIndex == index ? 1 : 0),
                     shape: const StadiumBorder(),
                   ),
-                  duration: const Duration(milliseconds: 400),
+                  duration: const Duration(
+                      milliseconds: Constants.appMockAnimationDuration),
                 );
               },
             ),

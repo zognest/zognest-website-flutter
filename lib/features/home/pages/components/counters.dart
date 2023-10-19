@@ -64,7 +64,7 @@ class Counters extends StatelessWidget {
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: Constants.webHorizontalPadding),
+                    horizontal: Constants.pageHorizontalPadding),
                 child: FittedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

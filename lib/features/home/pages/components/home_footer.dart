@@ -37,7 +37,7 @@ class HomeFooter extends StatelessWidget {
             const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: Constants.webHorizontalPadding,
+                horizontal: Constants.pageHorizontalPadding,
                 vertical: Spacing.xl64,
               ),
               child: Column(

@@ -103,7 +103,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
       position: _appBarOffsetAnimation,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: Constants.webHorizontalPadding,
+          horizontal: Constants.pageHorizontalPadding,
           vertical: Spacing.l32,
         ),
         child: Container(

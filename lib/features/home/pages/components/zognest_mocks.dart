@@ -100,7 +100,7 @@ class _ZognestMocksState extends State<ZognestMocks>
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.webHorizontalPadding),
+                  horizontal: Constants.pageHorizontalPadding),
               child: Text.rich(
                 textAlign: TextAlign.right,
                 textScaleFactor: TextThemes.textScale(context),

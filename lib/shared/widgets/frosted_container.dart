@@ -9,11 +9,12 @@ class FrostedContainer extends StatelessWidget {
     Key? key,
     required this.child,
     this.blurStrength = 24,
-    this.backgroundColor = Palette.frostedForegroundColor,
+    this.backgroundColor = Palette.cardBackgroundColor,
     this.borderRadius,
     this.width,
     this.padding,
     this.height,
+    this.decoration,
     this.borderRadiusGeometry,
   }) : super(key: key);
 
@@ -23,6 +24,7 @@ class FrostedContainer extends StatelessWidget {
   final double? height;
   final double? width;
   final double? borderRadius;
+  final Decoration? decoration;
   final Color? backgroundColor;
   final BorderRadiusGeometry? borderRadiusGeometry;
 
@@ -37,9 +39,10 @@ class FrostedContainer extends StatelessWidget {
           sigmaY: blurStrength,
         ),
         child: Container(
-          color: backgroundColor?.withOpacity(0.8),
+          color: decoration != null ? null : backgroundColor?.withOpacity(0.8),
           padding: padding,
           height: height,
+          decoration: decoration,
           width: width,
           child: child,
         ),

@@ -20,6 +20,7 @@ abstract final class Assets {
   static const linkedin = '${Paths.svg}/linkedin.svg';
   static const dribble = '${Paths.svg}/dribble.svg';
   static const impactLines = '${Paths.svg}/impact_lines.svg';
+  static const mail = '${Paths.svg}/mail.svg';
 
   // Images
   static const phoneHand = '${Paths.images}/phone_hand.png';

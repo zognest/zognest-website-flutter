@@ -202,7 +202,10 @@ class _ClientItemState extends State<ClientItem> {
                       PrimaryButton(
                         title: Strings.view.toUpperCase(),
                         filled: false,
-                        padding: const EdgeInsets.all(Spacing.s12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Spacing.m20,
+                          vertical: Spacing.m18,
+                        ),
                         onTap: () {},
                       ),
                     ],

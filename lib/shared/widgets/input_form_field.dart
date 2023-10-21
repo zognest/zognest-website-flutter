@@ -37,10 +37,14 @@ class InputFormField extends StatelessWidget {
           },
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(Spacing.l32),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(Spacing.s12),
+              borderSide: BorderSide(color: theme.primaryColor, width: 1.50),
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Spacing.s12),
               borderSide:
-                  const BorderSide(color: Color(0xffAEB2BA), width: 1.35),
+                  const BorderSide(color: Color(0xffAEB2BA), width: 1.50),
             ),
             fillColor: const Color(0xff121212),
             hintText: '$hint${required ? '*' : ''}',

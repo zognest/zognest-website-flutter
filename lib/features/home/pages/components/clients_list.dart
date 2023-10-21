@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/data.dart';
 
-class ClientsList extends StatefulWidget {
-  const ClientsList({super.key});
+class ClientsMarquee extends StatefulWidget {
+  const ClientsMarquee({super.key});
 
   @override
-  State<ClientsList> createState() => _ClientsListState();
+  State<ClientsMarquee> createState() => _ClientsMarqueeState();
 }
 
-class _ClientsListState extends State<ClientsList>
+class _ClientsMarqueeState extends State<ClientsMarquee>
     with SingleTickerProviderStateMixin {
   late final ScrollController _scrollController;
   late final AnimationController _animationController;
@@ -24,7 +25,7 @@ class _ClientsListState extends State<ClientsList>
     _scrollController = ScrollController();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(milliseconds: Constants.marqueeScrollDuration),
     )..addListener(animationListener);
     _animationController.forward();
   }
@@ -49,39 +50,36 @@ class _ClientsListState extends State<ClientsList>
       children: [
         const Divider(),
         SizedBox(
-          height: Spacing.xl72,
-          child: Center(
-            child: ListView.builder(
-              controller: _scrollController,
-              padding: const EdgeInsets.symmetric(vertical: Spacing.s8),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                final i = index % Data.clientsImageAssets.length;
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: Spacing.l40),
-                  child: InkWell(
-                    onTap: () {},
-                    onHover: (over) {
-                      if (over) {
-                        setState(() => hoveredIndex = i);
-                        _animationController.stop(canceled: false);
-                      }
-                      if (!over) {
-                        setState(() => hoveredIndex = -1);
-                        _animationController.repeat();
-                      }
-                    },
-                    overlayColor:
-                        MaterialStateProperty.all(Palette.transparent),
-                    child: Image.asset(
-                      Data.clientsImageAssets[i],
-                      color: hoveredIndex == i ? Palette.primary : null,
-                      colorBlendMode: BlendMode.srcIn,
-                    ),
+          height: Constants.clientsMarqueeHeight,
+          child: ListView.builder(
+            controller: _scrollController,
+            padding: const EdgeInsets.symmetric(vertical: Spacing.s8),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              final i = index % Data.clientsImageAssets.length;
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Spacing.l40),
+                child: InkWell(
+                  onTap: () {},
+                  onHover: (over) {
+                    if (over) {
+                      setState(() => hoveredIndex = i);
+                      _animationController.stop(canceled: false);
+                    }
+                    if (!over) {
+                      setState(() => hoveredIndex = -1);
+                      _animationController.repeat();
+                    }
+                  },
+                  overlayColor: MaterialStateProperty.all(Palette.transparent),
+                  child: Image.asset(
+                    Data.clientsImageAssets[i],
+                    color: hoveredIndex == i ? Palette.primary : null,
+                    colorBlendMode: BlendMode.srcIn,
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
         const Divider(),

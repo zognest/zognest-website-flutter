@@ -32,7 +32,7 @@ abstract final class TextThemes {
 
       /// All large displays except for ZOGNEST brand
       displayMedium: theme.textTheme.displayMedium?.copyWith(
-        fontSize: 220,
+        fontSize: 260,
         height: 1,
         fontFamily: 'Oswald',
         fontVariations: fontVariation(7),
@@ -69,16 +69,19 @@ abstract final class TextThemes {
       bodySmall: theme.textTheme.bodySmall?.copyWith(
         fontSize: 16,
         fontFamily: 'SF Pro Rounded',
+        color: Palette.bodyTextColor,
         fontWeight: FontWeight.w500,
       ),
       bodyMedium: theme.textTheme.bodyMedium?.copyWith(
-        fontSize: 18,
+        fontSize: 20,
         fontFamily: 'SF Pro Rounded',
+        color: Palette.bodyTextColor,
         fontWeight: FontWeight.w500,
       ),
       bodyLarge: theme.textTheme.bodyLarge?.copyWith(
-        fontSize: 20,
+        fontSize: 24,
         fontFamily: 'SF Pro Rounded',
+        color: Palette.bodyTextColor,
         fontWeight: FontWeight.w500,
       ),
       // endregion

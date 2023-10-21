@@ -1,13 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/offer.dart';
 import 'package:zognest_website/features/home/widgets/scroll_headline.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/data.dart';
-import 'package:zognest_website/shared/widgets/frosted_container.dart';
 
 class ZognestOffers extends StatefulWidget {
   const ZognestOffers({super.key});
@@ -35,8 +35,6 @@ class _ZognestOffersState extends State<ZognestOffers> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
-    const itemWidth = 440.0;
     return Column(
       children: [
         const Divider(),
@@ -59,7 +57,7 @@ class _ZognestOffersState extends State<ZognestOffers> {
               currentIndex = 0;
             }
             _controller.animateTo(
-              itemWidth * currentIndex,
+              Constants.zognestOffersItemWidth * currentIndex,
               duration: const Duration(milliseconds: 1000),
               curve: Curves.ease,
             );
@@ -67,7 +65,7 @@ class _ZognestOffersState extends State<ZognestOffers> {
           },
         ),
         SizedBox(
-          height: 338,
+          height: Constants.zognestOffersListHeight,
           child: ScrollConfiguration(
             behavior: ScrollConfiguration.of(context).copyWith(
               dragDevices: {
@@ -83,10 +81,7 @@ class _ZognestOffersState extends State<ZognestOffers> {
               itemBuilder: (context, index) {
                 final i = index % Data.offers.length;
                 final offer = Data.offers[i];
-                return OfferItem(
-                  offer: offer,
-                  width: itemWidth,
-                );
+                return OfferItem(offer: offer);
               },
               separatorBuilder: (context, index) =>
                   const SizedBox(width: Spacing.l24),
@@ -101,20 +96,16 @@ class _ZognestOffersState extends State<ZognestOffers> {
 }
 
 class OfferItem extends StatelessWidget {
-  const OfferItem({
-    super.key,
-    required this.offer,
-    required this.width,
-  });
+  const OfferItem({super.key, required this.offer});
 
   final Offer offer;
-  final double width;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return FrostedContainer(
-      width: width,
+    return Container(
+      width: Constants.zognestOffersItemWidth,
+      color: Palette.cardBackgroundColor,
       padding: const EdgeInsets.symmetric(
           horizontal: Spacing.l32, vertical: Spacing.l48),
       child: Column(
@@ -122,8 +113,10 @@ class OfferItem extends StatelessWidget {
         children: [
           Text(
             offer.highlight.toUpperCase(),
-            style: theme.textTheme.headlineSmall
-                ?.copyWith(color: theme.primaryColor),
+            style: theme.textTheme.headlineMedium?.copyWith(
+              color: theme.primaryColor,
+              fontVariations: TextThemes.fontVariation(3),
+            ),
           ),
           Text(
             offer.title.toUpperCase(),
@@ -134,7 +127,7 @@ class OfferItem extends StatelessWidget {
             child: SingleChildScrollView(
               child: Text(
                 offer.description,
-                style: theme.textTheme.bodyMedium?.copyWith(height: 1.3),
+                style: theme.textTheme.bodyMedium,
               ),
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -42,52 +43,49 @@ class _ZognestVideoState extends State<ZognestVideo> {
 
   @override
   Widget build(BuildContext context) {
-    const aspectRatio = 16 / 9;
     return Column(
       children: [
         const Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: Constants.pageHorizontalPadding),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              YoutubePlayerScaffold(
-                controller: _controller,
-                aspectRatio: aspectRatio,
-                builder: (context, player) {
-                  return player;
-                },
-              ),
-              PointerInterceptor(
-                child: InkWell(
-                  overlayColor: MaterialStateProperty.all(Palette.transparent),
-                  onTap: () {
-                    if (state == PlayerState.playing) {
-                      _controller.pauseVideo();
-                      return;
-                    }
-                    if (state == PlayerState.paused ||
-                        state == PlayerState.ended) {
-                      _controller.playVideo();
-                      return;
-                    }
-                    if (state == PlayerState.paused ||
-                        state == PlayerState.ended ||
-                        state == PlayerState.cued) {
-                      _controller.playVideo();
-                      return;
-                    }
-                  },
-                  onHover: (over) {
-                    if (over && state == PlayerState.cued) {
-                      _controller.playVideo();
-                    }
-                  },
-                  child: const AspectRatio(aspectRatio: aspectRatio),
+        VisibilityDetector(
+          key: ValueKey(runtimeType.toString()),
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction >= 2 && state == PlayerState.cued) {
+              _controller.playVideo();
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: Constants.pageHorizontalPadding),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                YoutubePlayerScaffold(
+                  controller: _controller,
+                  aspectRatio: Constants.videoAspectRatio,
+                  builder: (_, player) => player,
                 ),
-              ),
-            ],
+                PointerInterceptor(
+                  child: InkWell(
+                    overlayColor:
+                        MaterialStateProperty.all(Palette.transparent),
+                    onTap: () {
+                      if (state == PlayerState.playing) {
+                        _controller.pauseVideo();
+                        return;
+                      }
+                      if (state == PlayerState.paused ||
+                          state == PlayerState.ended ||
+                          state == PlayerState.cued) {
+                        _controller.playVideo();
+                      }
+                    },
+                    child: const AspectRatio(
+                      aspectRatio: Constants.videoAspectRatio,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         const Divider(),

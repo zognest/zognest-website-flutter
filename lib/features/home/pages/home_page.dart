@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     SizedBox(
                       height: _controller.hasClients
-                          ? _controller.position.maxScrollExtent * 0.24
+                          ? _controller.position.maxScrollExtent * 0.22
                           : size.height * 4,
                       child: Stack(
                         children: [
@@ -122,7 +122,7 @@ class Foreground extends StatelessWidget {
           ),
         ),
         const SizedBox(height: Constants.sectionSpacing),
-        const ClientsList(),
+        const ClientsMarquee(),
         const SizedBox(height: Constants.sectionSpacing),
         const ZognestVideo(),
         const SizedBox(height: Constants.sectionSpacing),

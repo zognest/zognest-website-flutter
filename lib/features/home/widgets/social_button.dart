@@ -27,10 +27,10 @@ class SocialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75,
-      width: 75,
+      height: 100,
+      width: 100,
       alignment: Alignment.center,
-      padding: const EdgeInsets.all(Spacing.l24),
+      padding: const EdgeInsets.all(Spacing.s12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Spacing.m20),
         border: Border.all(color: const Color(0xff43403A)),

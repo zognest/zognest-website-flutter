@@ -29,7 +29,7 @@ class Counters extends StatelessWidget {
                     shaderCallback: (bounds) {
                       return RadialGradient(
                         colors: [
-                          Palette.white.withOpacity(0.3),
+                          Palette.white.withOpacity(0.1),
                           theme.scaffoldBackgroundColor,
                         ],
                         radius: 5,

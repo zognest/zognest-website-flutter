@@ -73,12 +73,14 @@ class ContactForm extends StatelessWidget {
                           const SizedBox(height: Spacing.m20),
                           Text(
                             Strings.address,
-                            style: theme.textTheme.bodyLarge,
+                            style: theme.textTheme.bodyLarge
+                                ?.copyWith(fontSize: 24),
                           ),
                           const SizedBox(height: Spacing.m20),
                           Text(
                             Strings.contactInfo,
-                            style: theme.textTheme.bodyMedium,
+                            style: theme.textTheme.bodyMedium
+                                ?.copyWith(fontSize: 22),
                           ),
                         ],
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/widgets/social_button.dart';
@@ -61,12 +62,26 @@ class HomeFooter extends StatelessWidget {
                         Strings.zognest.toUpperCase(),
                         textScaleFactor: TextThemes.textScale(context),
                         style: theme.textTheme.displayLarge?.copyWith(
+                          letterSpacing: -10,
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.w900,
                         ),
                       ),
                       const SizedBox(width: Spacing.m20),
-                      const CircleButton(asset: Assets.upArrow),
+                      CircleButton(
+                        onTap: () {},
+                        child: Column(
+                          children: [
+                            SvgPicture.asset(Assets.downArrow),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: theme.primaryColor,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(width: Spacing.m20),

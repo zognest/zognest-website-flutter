@@ -1,6 +1,10 @@
 import 'dart:async';
 
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
@@ -20,14 +24,15 @@ class BeyondSpace extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
+    final screenWidth = html.window.screen!.width!;
     return Column(
       children: [
-        const SizedBox(height: Constants.appBarHeight),
+        const SizedBox(height: Constants.appBarHeight * 1.5),
         Padding(
           padding: const EdgeInsets.symmetric(
               horizontal: Constants.pageHorizontalPadding),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Column(
@@ -55,21 +60,36 @@ class BeyondSpace extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: Spacing.m20),
+                    const SizedBox(height: Spacing.l48),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: PrimaryButton(
                             title: Strings.bookOurServices.toUpperCase(),
-                            height: Spacing.xl60,
+                            textStyle: theme.textTheme.labelLarge,
+                            height: Spacing.xl72,
                             onTap: () {},
                           ),
                         ),
-                        const Spacer(flex: 2),
+                        const Spacer(),
                         CircleButton(
-                          asset: Assets.downArrow,
                           onTap: onTabDown,
+                          radius: Spacing.l32,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(Assets.downArrow),
+                              const SizedBox(height: Spacing.s8),
+                              Container(
+                                height: Constants.circleButtonRadius,
+                                decoration: BoxDecoration(
+                                  color: theme.primaryColor,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -82,13 +102,22 @@ class BeyondSpace extends StatelessWidget {
                   children: [
                     Image.asset(
                       Assets.phoneHand,
-                      width: size.width * 0.335,
+                      width: (size.width > screenWidth
+                              ? screenWidth
+                              : size.width) *
+                          0.35,
                     ),
                     Positioned(
-                      right: size.width * 0.145,
-                      top: size.width * 0.0055,
+                      right: (size.width > screenWidth
+                              ? screenWidth
+                              : size.width) *
+                          0.1505,
+                      top: size.width > screenWidth ? 10 : size.width * 0.005,
                       child: SizedBox(
-                        width: size.width * 0.150,
+                        width: (size.width > screenWidth
+                                ? screenWidth
+                                : size.width) *
+                            0.158,
                         child: const BeyondSpaceCarousel(),
                       ),
                     ),
@@ -153,7 +182,7 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
         Container(
           decoration: BoxDecoration(
             color: Palette.black,
-            borderRadius: BorderRadius.circular(Spacing.l24),
+            borderRadius: BorderRadius.circular(Spacing.l40),
           ),
           child: GestureDetector(
             onTap: nextIndex,

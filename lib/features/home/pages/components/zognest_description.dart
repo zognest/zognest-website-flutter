@@ -13,6 +13,7 @@ class ZognestDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
     return Column(
       children: [
         const Divider(),
@@ -22,14 +23,12 @@ class ZognestDescription extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 horizontal: Constants.pageHorizontalPadding),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Image.asset(
-                    Assets.office,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                Image.asset(
+                  Assets.office,
+                  height: double.infinity,
+                  width: size.width * 0.3,
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(width: Spacing.l40),
                 Expanded(
@@ -37,39 +36,38 @@ class ZognestDescription extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: Spacing.l40),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        AutoSizeText.rich(
-                          TextSpan(
-                            text: Strings.helpingYourBusiness.toUpperCase(),
-                            style: theme.textTheme.displaySmall?.copyWith(
-                              fontVariations: TextThemes.fontVariation(7),
-                              height: 1.1,
+                        Expanded(
+                          child: AutoSizeText.rich(
+                            stepGranularity: 4,
+                            maxLines: 5,
+                            TextSpan(
+                              text: Strings.helpingYourBusiness.toUpperCase(),
+                              style: theme.textTheme.displaySmall,
+                              children: [
+                                TextSpan(
+                                  text: Strings.to.toUpperCase(),
+                                  style: theme.textTheme.displaySmall?.copyWith(
+                                    fontVariations: TextThemes.fontVariation(3),
+                                  ),
+                                ),
+                                TextSpan(
+                                    text: Strings.exploreThe.toUpperCase()),
+                                TextSpan(
+                                  text: Strings.sky.toUpperCase(),
+                                  style: theme.textTheme.displaySmall?.copyWith(
+                                    color: theme.primaryColor,
+                                  ),
+                                ),
+                              ],
                             ),
-                            children: [
-                              TextSpan(
-                                text: Strings.to.toUpperCase(),
-                                style: theme.textTheme.displaySmall?.copyWith(
-                                  fontVariations: TextThemes.fontVariation(3),
-                                ),
-                              ),
-                              TextSpan(
-                                text: Strings.exploreThe.toUpperCase(),
-                                style: theme.textTheme.displaySmall,
-                              ),
-                              TextSpan(
-                                text: Strings.sky.toUpperCase(),
-                                style: theme.textTheme.displaySmall?.copyWith(
-                                  color: theme.primaryColor,
-                                ),
-                              ),
-                            ],
                           ),
-                          textScaleFactor: TextThemes.textScale(context),
                         ),
                         AutoSizeText(
+                          stepGranularity: 4,
                           Strings.zognestDescription,
-                          style: theme.textTheme.bodyMedium,
+                          style: theme.textTheme.bodyLarge,
                         ),
                       ],
                     ),

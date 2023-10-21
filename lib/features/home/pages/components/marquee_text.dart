@@ -27,7 +27,7 @@ class _MarqueeTextState extends State<MarqueeText>
     _scrollController = ScrollController();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 5),
+      duration: const Duration(milliseconds: Constants.marqueeScrollDuration),
     )..addListener(animationListener);
     _animationController.forward();
   }
@@ -88,10 +88,9 @@ class _MarqueeTextState extends State<MarqueeText>
       children: [
         const Divider(),
         SizedBox(
-          height: Constants.sectionSpacing,
+          height: Constants.marqueeHeight,
           child: ListView.builder(
             controller: _scrollController,
-            // padding: const EdgeInsets.symmetric(vertical: Spacing.s12),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               final i = index % marqueeText.length;

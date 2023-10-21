@@ -13,23 +13,21 @@ class OptimismText extends StatelessWidget {
     return Column(
       children: [
         const Divider(),
-        SizedBox(
-          height: Constants.optimismSectionHeight,
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: Constants.pageHorizontalPadding,
-            ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Constants.pageHorizontalPadding,
+          ),
+          child: SizedBox(
+            height: Constants.optimismSectionHeight,
+            width: double.infinity,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Image.asset(Assets.mercuryVenus),
-                Positioned(
-                  left: 0,
-                  top: 0,
+                Align(
+                  alignment: Alignment.topLeft,
                   child: Text.rich(
                     textAlign: TextAlign.start,
-                    textScaleFactor: TextThemes.textScale(context),
                     textHeightBehavior: const TextHeightBehavior(
                       applyHeightToFirstAscent: false,
                       applyHeightToLastDescent: false,
@@ -64,12 +62,10 @@ class OptimismText extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
+                Align(
+                  alignment: Alignment.bottomRight,
                   child: Text.rich(
                     textAlign: TextAlign.end,
-                    textScaleFactor: TextThemes.textScale(context),
                     textHeightBehavior: const TextHeightBehavior(
                       applyHeightToFirstAscent: false,
                       applyHeightToLastDescent: false,

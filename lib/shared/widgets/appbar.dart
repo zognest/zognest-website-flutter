@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -8,6 +9,7 @@ import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/circle_button.dart';
+import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
@@ -84,6 +86,9 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
   }
 
   void scrollListener() {
+    if (widget.scrollController.offset <= Constants.appBarHeight) {
+      _appBarAnimationController.reverse();
+    }
     if (widget.scrollController.position.userScrollDirection ==
         ScrollDirection.forward) {
       _appBarAnimationController.reverse();
@@ -96,78 +101,66 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     final theme = Theme.of(context);
     final route = GoRouterState.of(context);
     return SlideTransition(
       position: _appBarOffsetAnimation,
-      child: Padding(
+      child: FrostedContainer(
+        width: double.infinity,
+        height: Constants.appBarHeight,
         padding: const EdgeInsets.symmetric(
+          vertical: Spacing.s12,
           horizontal: Constants.pageHorizontalPadding,
-          vertical: Spacing.l32,
         ),
-        child: Container(
-          width: double.infinity,
-          height: Spacing.xl72,
-          padding: const EdgeInsets.all(Spacing.s12),
-          decoration: ShapeDecoration(
-            color: Palette.appBarBackground.withOpacity(0.6),
-            shape: StadiumBorder(
-              side: BorderSide(
-                color: Palette.white.withOpacity(0.2),
-                width: 2,
+        decoration: BoxDecoration(
+          color: Palette.appBarBackground.withOpacity(0.6),
+        ),
+        child: Row(
+          children: [
+            const ZognestLogo(),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: AppBarButtons.values.map(
+                  (button) {
+                    return InkWell(
+                      onTap: () {},
+                      onHover: (hovered) {
+                        if (hovered) {
+                          hoveredRoute = button.route;
+                          setState(() {});
+                          return;
+                        }
+                        hoveredRoute = '/';
+                        setState(() {});
+                      },
+                      overlayColor:
+                          MaterialStateProperty.all(Palette.transparent),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 2000),
+                        child: Text(
+                          button.title.toUpperCase(),
+                          style: route.name == button.route
+                              ? theme.textTheme.labelLarge
+                                  ?.copyWith(color: theme.primaryColor)
+                              : theme.textTheme.labelMedium?.copyWith(
+                                  color: hoveredRoute == button.route
+                                      ? theme.primaryColor.withOpacity(0.7)
+                                      : null,
+                                ),
+                        ),
+                      ),
+                    );
+                  },
+                ).toList(),
               ),
             ),
-          ),
-          child: Row(
-            children: [
-              const ZognestLogo(),
-              const Spacer(),
-              SizedBox(
-                width: size.width * 0.5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: AppBarButtons.values.map(
-                    (button) {
-                      return InkWell(
-                        onTap: () {},
-                        onHover: (hovered) {
-                          if (hovered) {
-                            hoveredRoute = button.route;
-                            setState(() {});
-                            return;
-                          }
-                          hoveredRoute = '/';
-                          setState(() {});
-                        },
-                        overlayColor:
-                            MaterialStateProperty.all(Palette.transparent),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 2000),
-                          child: Text(
-                            button.title.toUpperCase(),
-                            style: route.name == button.route
-                                ? theme.textTheme.labelLarge
-                                    ?.copyWith(color: theme.primaryColor)
-                                : theme.textTheme.labelMedium?.copyWith(
-                                    color: hoveredRoute == button.route
-                                        ? theme.primaryColor.withOpacity(0.7)
-                                        : null,
-                                  ),
-                          ),
-                        ),
-                      );
-                    },
-                  ).toList(),
-                ),
-              ),
-              PrimaryButton(
-                onTap: () {},
-                title: Strings.getInTouch.toUpperCase(),
-                trailing: const CircleButton(asset: Assets.whatsapp),
-              ),
-            ],
-          ),
+            PrimaryButton(
+              onTap: () {},
+              title: Strings.getInTouch.toUpperCase(),
+              trailing: CircleButton(child: SvgPicture.asset(Assets.mail)),
+            ),
+          ],
         ),
       ),
     );

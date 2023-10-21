@@ -14,6 +14,7 @@ class Counters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
     return Column(
       children: [
         const Divider(),
@@ -21,80 +22,79 @@ class Counters extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: Spacing.l40),
           child: Column(
             children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  ShaderMask(
-                    blendMode: BlendMode.srcIn,
-                    shaderCallback: (bounds) {
-                      return RadialGradient(
-                        colors: [
-                          Palette.white.withOpacity(0.1),
-                          theme.scaffoldBackgroundColor,
-                        ],
-                        radius: 5,
-                      ).createShader(
-                        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-                      );
-                    },
-                    child: FittedBox(
+              FittedBox(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    ShaderMask(
+                      blendMode: BlendMode.srcIn,
+                      shaderCallback: (bounds) {
+                        return RadialGradient(
+                          colors: [
+                            Palette.white.withOpacity(0.5),
+                            theme.scaffoldBackgroundColor,
+                          ],
+                          radius: 3.8,
+                        ).createShader(
+                          Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                        );
+                      },
                       child: Text(
                         Strings.someCountThatMatters.toUpperCase(),
                         maxLines: 1,
                         overflow: TextOverflow.visible,
-                        style: theme.textTheme.displaySmall?.copyWith(
+                        style: theme.textTheme.displayLarge?.copyWith(
                           foreground: TextThemes.foreground,
-                          letterSpacing: 10,
-                          wordSpacing: 25,
                           height: 0,
                         ),
                       ),
                     ),
-                  ),
-                  Text(
-                    Strings.someCountThatMatters.toUpperCase(),
-                    textScaleFactor: TextThemes.textScale(context),
-                    style: theme.textTheme.headlineLarge?.copyWith(
-                      color: theme.primaryColor,
-                      height: 0,
-                      fontFamily: 'Oswald',
+                    Text(
+                      Strings.someCountThatMatters.toUpperCase(),
+                      style: theme.textTheme.displaySmall?.copyWith(
+                        color: theme.primaryColor,
+                        height: 0,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: Constants.pageHorizontalPadding),
                 child: FittedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CountElement(
-                        count: 09,
-                        title: Strings.appDevelopment,
-                      ),
-                      RowDivider(),
-                      CountElement(
-                        count: 12,
-                        title: Strings.webDevelopment,
-                      ),
-                      RowDivider(),
-                      CountElement(
-                        count: 17,
-                        title: Strings.uiUxForCompanies,
-                      ),
-                      RowDivider(),
-                      CountElement(
-                        count: 36,
-                        title: Strings.happyCustomer,
-                      ),
-                      RowDivider(),
-                      CountElement(
-                        count: 36,
-                        title: Strings.projectsCompleted,
-                        hasPlus: false,
-                      ),
-                    ],
+                  child: SizedBox(
+                    height: Constants.countItemHeight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CountElement(
+                          count: 09,
+                          title: Strings.appDevelopment,
+                        ),
+                        RowDivider(),
+                        CountElement(
+                          count: 12,
+                          title: Strings.webDevelopment,
+                        ),
+                        RowDivider(),
+                        CountElement(
+                          count: 17,
+                          title: Strings.uiUxForCompanies,
+                        ),
+                        RowDivider(),
+                        CountElement(
+                          count: 36,
+                          title: Strings.happyCustomer,
+                        ),
+                        RowDivider(),
+                        CountElement(
+                          count: 36,
+                          title: Strings.projectsCompleted,
+                          hasPlus: false,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -132,7 +132,8 @@ class _CountElementState extends State<CountElement>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
+      duration:
+          const Duration(milliseconds: Constants.countersAnimationDuration),
     );
   }
 
@@ -145,12 +146,11 @@ class _CountElementState extends State<CountElement>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
-      height: Constants.countItemHeight,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          VisibilityDetector(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: VisibilityDetector(
             key: Key(widget.title),
             onVisibilityChanged: (info) {
               if (_controller.isCompleted) return;
@@ -165,7 +165,6 @@ class _CountElementState extends State<CountElement>
                   begin: 0,
                   end: widget.count.toDouble(),
                   separator: ',',
-                  textScaleFactor: TextThemes.textScale(context),
                   style: theme.textTheme.headlineLarge?.copyWith(
                     color: theme.primaryColor,
                     height: 1,
@@ -176,7 +175,6 @@ class _CountElementState extends State<CountElement>
                     alignment: Alignment.bottomCenter,
                     child: Text(
                       '+',
-                      textScaleFactor: TextThemes.textScale(context),
                       style: theme.textTheme.headlineLarge?.copyWith(
                         fontSize: 60,
                         color: theme.primaryColor,
@@ -187,14 +185,14 @@ class _CountElementState extends State<CountElement>
               ],
             ),
           ),
-          const SizedBox(height: Spacing.s12),
-          Text(
-            widget.title.toUpperCase(),
-            maxLines: 2,
-            style: theme.textTheme.labelLarge,
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(height: Spacing.s12),
+        Text(
+          widget.title.toUpperCase(),
+          maxLines: 2,
+          style: theme.textTheme.labelLarge,
+        ),
+      ],
     );
   }
 }

@@ -39,7 +39,6 @@ class _ZognestClientsState extends State<ZognestClients> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    const itemWidth = 440.0;
     return Column(
       children: [
         const Divider(),
@@ -62,7 +61,7 @@ class _ZognestClientsState extends State<ZognestClients> {
               currentIndex = 0;
             }
             _controller.animateTo(
-              itemWidth * currentIndex,
+              Constants.clientsItemWidth * currentIndex,
               duration: const Duration(milliseconds: 1000),
               curve: Curves.ease,
             );
@@ -85,11 +84,8 @@ class _ZognestClientsState extends State<ZognestClients> {
               controller: _controller,
               itemBuilder: (context, index) {
                 final i = index % Data.clientFeedbacks.length;
-                final client = Data.clientFeedbacks[i];
-                return ClientItem(
-                  clientFeedback: client,
-                  width: itemWidth,
-                );
+                final clientFeedback = Data.clientFeedbacks[i];
+                return ClientItem(clientFeedback: clientFeedback);
               },
               separatorBuilder: (context, index) =>
                   const SizedBox(width: Spacing.l24),
@@ -107,11 +103,9 @@ class ClientItem extends StatefulWidget {
   const ClientItem({
     super.key,
     required this.clientFeedback,
-    required this.width,
   });
 
   final ClientFeedback clientFeedback;
-  final double width;
 
   @override
   State<ClientItem> createState() => _ClientItemState();
@@ -124,7 +118,7 @@ class _ClientItemState extends State<ClientItem> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return FrostedContainer(
-      width: widget.width,
+      width: Constants.clientsItemWidth,
       height: Constants.clientsSectionHeight,
       padding: const EdgeInsets.symmetric(
           horizontal: Spacing.l32, vertical: Spacing.l24),
@@ -139,37 +133,28 @@ class _ClientItemState extends State<ClientItem> {
           children: [
             SizedBox(
               height: Constants.clientsSectionHeight * 0.5,
-              child: Stack(
-                children: [
-                  Row(
-                    children: [
-                      GreyscaleFilter(
-                        isHovered: hovered,
-                        child: Image.asset(
-                            widget.clientFeedback.backgroundImages[0]),
-                      ),
-                      const SizedBox(width: Spacing.m16),
-                      GreyscaleFilter(
-                        isHovered: hovered,
-                        child: Image.asset(
-                            widget.clientFeedback.backgroundImages[1]),
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    left: 20,
-                    bottom: 0,
-                    child: GreyscaleFilter(
-                      isHovered: hovered,
+              child: GreyscaleFilter(
+                isHovered: hovered,
+                child: Stack(
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(widget.clientFeedback.backgroundImages[0]),
+                        const SizedBox(width: Spacing.m16),
+                        Image.asset(widget.clientFeedback.backgroundImages[1]),
+                      ],
+                    ),
+                    Positioned(
+                      left: 20,
+                      bottom: 0,
                       child: Image.asset(widget.clientFeedback.clientImage),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
                     children: [
@@ -210,9 +195,15 @@ class _ClientItemState extends State<ClientItem> {
                       ),
                     ],
                   ),
-                  Text(
-                    widget.clientFeedback.description,
-                    style: theme.textTheme.bodyMedium,
+                  const Spacer(),
+                  Expanded(
+                    flex: 2,
+                    child: SingleChildScrollView(
+                      child: Text(
+                        widget.clientFeedback.description,
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -8,18 +8,26 @@ class ZognestLogo extends StatelessWidget {
   const ZognestLogo({
     super.key,
     this.iconOnly = false,
+    this.size,
   });
 
   final bool iconOnly;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset(Assets.zognestLogo),
-        const SizedBox(width: Spacing.s4),
-        if (!iconOnly) const ZognestText(),
+        SvgPicture.asset(
+          Assets.zognestLogo,
+          height: size,
+          width: size,
+        ),
+        if (!iconOnly) ...[
+          const SizedBox(width: Spacing.s4),
+          const ZognestText(),
+        ],
       ],
     );
   }

@@ -39,7 +39,6 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    const itemWidth = 440.0;
     return Column(
       children: [
         const Divider(),
@@ -62,7 +61,7 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
               currentIndex = 0;
             }
             _controller.animateTo(
-              itemWidth * currentIndex,
+              Constants.blogsItemWidth * currentIndex,
               duration: const Duration(milliseconds: 1000),
               curve: Curves.ease,
             );
@@ -70,7 +69,7 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
           },
         ),
         SizedBox(
-          height: Constants.clientsSectionHeight,
+          height: Constants.blogsSectionHeight,
           child: ScrollConfiguration(
             behavior: ScrollConfiguration.of(context).copyWith(
               dragDevices: {
@@ -86,10 +85,7 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
               itemBuilder: (context, index) {
                 final i = index % Data.blogs.length;
                 final client = Data.blogs[i];
-                return BlogItem(
-                  blog: client,
-                  width: itemWidth,
-                );
+                return BlogItem(blog: client);
               },
               separatorBuilder: (context, index) =>
                   const SizedBox(width: Spacing.l24),
@@ -107,11 +103,9 @@ class BlogItem extends StatefulWidget {
   const BlogItem({
     super.key,
     required this.blog,
-    required this.width,
   });
 
   final Blog blog;
-  final double width;
 
   @override
   State<BlogItem> createState() => _BlogItemState();
@@ -124,7 +118,7 @@ class _BlogItemState extends State<BlogItem> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return FrostedContainer(
-      width: widget.width,
+      width: Constants.blogsSectionHeight,
       height: Constants.clientsSectionHeight,
       padding: const EdgeInsets.symmetric(
           horizontal: Spacing.l32, vertical: Spacing.l24),
@@ -137,13 +131,9 @@ class _BlogItemState extends State<BlogItem> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              children: [
-                GreyscaleFilter(
-                  isHovered: hovered,
-                  child: Image.asset(widget.blog.image),
-                ),
-              ],
+            GreyscaleFilter(
+              isHovered: hovered,
+              child: Image.asset(widget.blog.image),
             ),
             Expanded(
               child: Column(

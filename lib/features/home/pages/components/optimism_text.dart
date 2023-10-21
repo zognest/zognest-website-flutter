@@ -10,73 +10,84 @@ class OptimismText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
     return Column(
       children: [
         const Divider(),
+        const SizedBox(height: Constants.componentVerticalPadding * 0.7),
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: Constants.pageHorizontalPadding,
           ),
           child: SizedBox(
             height: Constants.optimismSectionHeight,
-            width: double.infinity,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Image.asset(Assets.mercuryVenus),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Text.rich(
-                    textAlign: TextAlign.start,
-                    textHeightBehavior: const TextHeightBehavior(
-                      applyHeightToFirstAscent: false,
-                      applyHeightToLastDescent: false,
-                    ),
-                    TextSpan(
-                      text: '${Strings.optimism.toUpperCase()}\n',
-                      style: theme.textTheme.displayMedium,
-                      children: [
+                  child: Container(
+                    alignment: Alignment.topLeft,
+                    height: Constants.optimismSectionHeight,
+                    width: size.width * 0.5,
+                    child: FittedBox(
+                      child: Text.rich(
+                        textAlign: TextAlign.start,
+                        maxLines: 3,
                         TextSpan(
-                          text: '${Strings.isThe.toUpperCase()}\n',
-                          style: theme.textTheme.displayMedium
-                              ?.copyWith(foreground: TextThemes.foreground),
-                        ),
-                        TextSpan(
-                          text: Strings.faith.toUpperCase(),
+                          text: '${Strings.optimism.toUpperCase()}\n',
+                          style: theme.textTheme.displayMedium,
                           children: [
-                            WidgetSpan(
-                              alignment: PlaceholderAlignment.aboveBaseline,
-                              baseline: TextBaseline.alphabetic,
-                              child: Text(
-                                Strings.nothingCanBeDone.toUpperCase(),
-                                style: theme.textTheme.displaySmall?.copyWith(
-                                  color: theme.primaryColor,
-                                  fontSize: 36,
-                                  height: 0,
+                            TextSpan(
+                              text: '${Strings.isThe.toUpperCase()}\n',
+                              style: theme.textTheme.displayMedium
+                                  ?.copyWith(foreground: TextThemes.foreground),
+                            ),
+                            TextSpan(
+                              text: Strings.faith.toUpperCase(),
+                              children: [
+                                WidgetSpan(
+                                  baseline: TextBaseline.alphabetic,
+                                  alignment: PlaceholderAlignment.middle,
+                                  child: Text(
+                                    Strings.nothingCanBeDone.toUpperCase(),
+                                    style:
+                                        theme.textTheme.displayMedium?.copyWith(
+                                      color: theme.primaryColor,
+                                      fontSize: 36,
+                                      height: 0,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: Text.rich(
-                    textAlign: TextAlign.end,
-                    textHeightBehavior: const TextHeightBehavior(
-                      applyHeightToFirstAscent: false,
-                      applyHeightToLastDescent: false,
-                    ),
-                    TextSpan(
-                      text: '\t${Strings.that.toUpperCase()}\n',
-                      style: theme.textTheme.displayMedium,
-                      children: [
-                        TextSpan(text: '${Strings.leadsTo.toUpperCase()}\n'),
-                        TextSpan(text: Strings.achievement.toUpperCase()),
-                      ],
+                  child: Container(
+                    alignment: Alignment.bottomRight,
+                    height: Constants.optimismSectionHeight,
+                    width: size.width * 0.55,
+                    child: FittedBox(
+                      child: Text.rich(
+                        textAlign: TextAlign.end,
+                        maxLines: 3,
+                        TextSpan(
+                          text: '\t${Strings.that.toUpperCase()}\n',
+                          style: theme.textTheme.displayMedium,
+                          children: [
+                            TextSpan(
+                                text: '${Strings.leadsTo.toUpperCase()}\n'),
+                            TextSpan(text: Strings.achievement.toUpperCase()),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),

@@ -47,12 +47,12 @@ class Data {
       description:
           'Team is not enought to define us, we are family of different species of birds, each one of us have unique capabiliities.',
       technologies: [
-        Technology(name: 'photoshop', image: Assets.photoshop),
-        Technology(name: 'illustrator', image: Assets.illustrator),
-        Technology(name: 'zeplin', image: Assets.zeplin),
-        Technology(name: 'figma', image: Assets.figmaColoured),
-        Technology(name: 'xd', image: Assets.xd),
-        Technology(name: 'sketch', image: Assets.sketch),
+        Technology(name: 'Photoshop', image: Assets.photoshop),
+        Technology(name: 'Illustrator', image: Assets.illustrator),
+        Technology(name: 'Zeplin', image: Assets.zeplin),
+        Technology(name: 'Figma', image: Assets.figmaColoured),
+        Technology(name: 'XD', image: Assets.xd),
+        Technology(name: 'Sketch', image: Assets.sketch),
       ],
     ),
   ];

@@ -44,7 +44,6 @@ class _ZognestServicesState extends State<ZognestServices> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
-    const itemWidth = Constants.servicesCardWidth;
     return Column(
       children: [
         const Divider(),
@@ -67,7 +66,7 @@ class _ZognestServicesState extends State<ZognestServices> {
               currentIndex = 0;
             }
             _controller.animateTo(
-              itemWidth * currentIndex,
+              Constants.servicesCardWidth * currentIndex,
               duration: const Duration(milliseconds: 1000),
               curve: Curves.ease,
             );
@@ -93,7 +92,11 @@ class _ZognestServicesState extends State<ZognestServices> {
                 final service = Data.services[i];
                 return Container(
                   constraints: BoxConstraints.tight(
-                      const Size(itemWidth, Constants.servicesCardHeight)),
+                    const Size(
+                      Constants.servicesCardWidth,
+                      Constants.servicesCardHeight,
+                    ),
+                  ),
                   child: FlippingWidget(
                     front: FrontService(service: service),
                     back: BackService(service: service),
@@ -126,7 +129,7 @@ class FrontService extends StatelessWidget {
           Assets.serviceBackground,
           width: double.infinity,
           height: double.infinity,
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
@@ -135,10 +138,11 @@ class FrontService extends StatelessWidget {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
               Expanded(
+                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -154,15 +158,17 @@ class FrontService extends StatelessWidget {
                       service.title.toUpperCase(),
                       style: theme.textTheme.headlineMedium,
                     ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: Spacing.m20),
-                      child: Text(
-                        service.description,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 5,
-                        style:
-                            theme.textTheme.bodyMedium?.copyWith(height: 1.3),
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.symmetric(vertical: Spacing.m20),
+                        child: Text(
+                          service.description,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 5,
+                          style:
+                              theme.textTheme.bodyMedium?.copyWith(height: 1.3),
+                        ),
                       ),
                     ),
                   ],
@@ -203,11 +209,9 @@ class BackService extends StatelessWidget {
           fit: BoxFit.contain,
         ),
         Padding(
-          padding: const EdgeInsets.only(
-            left: Spacing.l24,
-            right: Spacing.l24,
-            top: Spacing.l48,
-            bottom: Spacing.l32,
+          padding: const EdgeInsets.symmetric(
+            horizontal: Spacing.l24,
+            vertical: Spacing.l32,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,10 +235,8 @@ class BackService extends StatelessWidget {
                         padding:
                             const EdgeInsets.symmetric(vertical: Spacing.s12),
                         child: Wrap(
-                          runAlignment: WrapAlignment.spaceBetween,
-                          alignment: WrapAlignment.start,
-                          runSpacing: Spacing.s12,
-                          spacing: Spacing.s12,
+                          runSpacing: Spacing.s8,
+                          spacing: Spacing.s8,
                           children: service.technologies.map((tech) {
                             return TechnologyContainer(
                               image: tech.image,

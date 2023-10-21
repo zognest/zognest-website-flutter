@@ -148,7 +148,13 @@ class Foreground extends StatelessWidget {
         const SizedBox(height: Constants.sectionSpacing),
         const ContactForm(),
         const SizedBox(height: Constants.sectionSpacing),
-        const HomeFooter(),
+        HomeFooter(
+          onTabUp: () => controller.animateTo(
+            controller.position.minScrollExtent,
+            duration: const Duration(milliseconds: Constants.scrollToDuration),
+            curve: Curves.ease,
+          ),
+        ),
       ],
     );
   }

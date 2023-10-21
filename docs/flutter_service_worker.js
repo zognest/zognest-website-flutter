@@ -22,7 +22,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "4eb8760cd8be17282d44d5733c6cdbbb
 "assets/assets/svg/impact_lines.svg": "1deb6b75ee75fdff64901be2c7cba571",
 "assets/assets/svg/instagram.svg": "dc2ca558d7244a54f806a5b67d875b9e",
 "assets/assets/svg/linkedin.svg": "e7ced194386f1a863e606e68e0ef6c12",
-"assets/assets/svg/logo.svg": "b45e0a4eb8cb44d7d1dec02aff0f85bf",
+"assets/assets/svg/logo.svg": "6b8780a6002e318aea4fdf1bdf83e7b9",
 "assets/assets/svg/mail.svg": "a71e7bf82473a8f46187ef85d4e96fc0",
 "assets/assets/svg/pintrest.svg": "ea4ae8c447a88707ffe24552c0030ec0",
 "assets/assets/svg/whatsapp.svg": "bb96dd8bc8cdb66409367ab23ceff80d",
@@ -76,9 +76,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "4eb8760cd8be17282d44d5733c6cdbbb
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "e8058765a451339067d6b1b10e9f5e8d",
-"/": "e8058765a451339067d6b1b10e9f5e8d",
-"main.dart.js": "ff5fe776d60e05101886434b8cc12e5e",
+"index.html": "b9eef2e476cc6d65057b57b1e359b61e",
+"/": "b9eef2e476cc6d65057b57b1e359b61e",
+"main.dart.js": "baee73262d67237f59ff373a43c573ae",
 "manifest.json": "6311effed2b766c79b409f7224328a24",
 "version.json": "c9a57fded59c1038f8ee06dc3f0160bc"};
 // The application shell files that are downloaded before a service worker can

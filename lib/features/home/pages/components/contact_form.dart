@@ -39,51 +39,59 @@ class ContactForm extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: Constants.pageHorizontalPadding,
-                    vertical: Spacing.xl72,
+                    vertical: Constants.componentVerticalPadding,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text.rich(
-                            textScaleFactor: TextThemes.textScale(context),
-                            TextSpan(
-                              text: Strings.get.toUpperCase(),
-                              style: theme.textTheme.displayMedium,
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: FittedBox(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                TextSpan(
-                                  text: '${Strings.inText.toUpperCase()}\n',
-                                  style: theme.textTheme.displayMedium
-                                      ?.copyWith(
-                                          foreground: TextThemes.foreground),
+                                Text.rich(
+                                  TextSpan(
+                                    text: Strings.get.toUpperCase(),
+                                    style: theme.textTheme.displayMedium,
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            '${Strings.inText.toUpperCase()}\n',
+                                        style: theme.textTheme.displayMedium
+                                            ?.copyWith(
+                                                foreground:
+                                                    TextThemes.foreground),
+                                      ),
+                                      TextSpan(
+                                          text: Strings.touch.toUpperCase()),
+                                    ],
+                                  ),
                                 ),
-                                TextSpan(text: Strings.touch.toUpperCase()),
+                                const SizedBox(height: Spacing.m20),
+                                Text(
+                                  Strings.contactDetails.toUpperCase(),
+                                  style: theme.textTheme.headlineMedium
+                                      ?.copyWith(color: theme.primaryColor),
+                                ),
+                                const SizedBox(height: Spacing.m20),
+                                Text(
+                                  Strings.address,
+                                  style: theme.textTheme.bodyLarge,
+                                ),
+                                const SizedBox(height: Spacing.m20),
+                                Text(
+                                  Strings.contactInfo,
+                                  style: theme.textTheme.bodyMedium,
+                                ),
                               ],
                             ),
                           ),
-                          const SizedBox(height: Spacing.m20),
-                          Text(
-                            Strings.contactDetails.toUpperCase(),
-                            style: theme.textTheme.headlineMedium
-                                ?.copyWith(color: theme.primaryColor),
-                          ),
-                          const SizedBox(height: Spacing.m20),
-                          Text(
-                            Strings.address,
-                            style: theme.textTheme.bodyLarge
-                                ?.copyWith(fontSize: 24),
-                          ),
-                          const SizedBox(height: Spacing.m20),
-                          Text(
-                            Strings.contactInfo,
-                            style: theme.textTheme.bodyMedium
-                                ?.copyWith(fontSize: 22),
-                          ),
-                        ],
+                        ),
                       ),
+                      const SizedBox(width: Spacing.l40),
                       SizedBox(
                         width: size.width * 0.4,
                         child: Column(

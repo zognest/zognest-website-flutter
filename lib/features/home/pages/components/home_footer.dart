@@ -11,7 +11,9 @@ import 'package:zognest_website/shared/widgets/gradient_container.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
 class HomeFooter extends StatelessWidget {
-  const HomeFooter({super.key});
+  const HomeFooter({super.key, required this.onTabUp});
+
+  final VoidCallback onTabUp;
 
   @override
   Widget build(BuildContext context) {
@@ -39,60 +41,76 @@ class HomeFooter extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: Constants.pageHorizontalPadding,
-                vertical: Spacing.xl64,
+                vertical: Spacing.l24,
               ),
-              child: Column(
-                children: [
-                  const ZognestLogo(iconOnly: true),
-                  const SizedBox(width: Spacing.m20),
-                  Text(
-                    Strings.zognestMail,
-                    textScaleFactor: TextThemes.textScale(context),
-                    style: theme.textTheme.headlineLarge?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 70,
-                      color: const Color(0xffAEB2BA),
+              child: SizedBox(
+                height: Constants.zognestFooterSectionHeight,
+                child: Column(
+                  children: [
+                    const Spacer(),
+                    const ZognestLogo(
+                      iconOnly: true,
+                      size: Constants.zognestFooterSectionHeight * 0.15,
                     ),
-                  ),
-                  const SizedBox(width: Spacing.m20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        Strings.zognest.toUpperCase(),
-                        textScaleFactor: TextThemes.textScale(context),
-                        style: theme.textTheme.displayLarge?.copyWith(
-                          letterSpacing: -10,
-                          fontFamily: 'SF Pro Rounded',
-                          fontWeight: FontWeight.w900,
-                        ),
+                    const SizedBox(width: Spacing.m20),
+                    Text(
+                      Strings.zognestMail,
+                      textScaleFactor: TextThemes.textScale(context),
+                      style: theme.textTheme.headlineLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 70,
+                        color: const Color(0xffAEB2BA),
                       ),
-                      const SizedBox(width: Spacing.m20),
-                      CircleButton(
-                        onTap: () {},
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(Assets.downArrow),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: theme.primaryColor,
-                                shape: BoxShape.circle,
+                    ),
+                    const Spacer(),
+                    const SizedBox(width: Spacing.m20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          Strings.zognest.toUpperCase(),
+                          textScaleFactor: TextThemes.textScale(context),
+                          style: theme.textTheme.displayLarge?.copyWith(
+                            letterSpacing: -10,
+                            fontFamily: 'SF Pro Rounded',
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        const SizedBox(width: Spacing.m20),
+                        CircleButton(
+                          onTap: onTabUp,
+                          radius: Spacing.l32,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: Constants.circleButtonRadius,
+                                decoration: BoxDecoration(
+                                  color: theme.primaryColor,
+                                  shape: BoxShape.circle,
+                                ),
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: Spacing.s8),
+                              SvgPicture.asset(Assets.upArrow),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: Spacing.m20),
-                  Wrap(
-                    spacing: Spacing.s12,
-                    runSpacing: Spacing.s12,
-                    children: SocialButtons.values
-                        .map((button) => SocialButton(button: button))
-                        .toList(),
-                  ),
-                ],
+                      ],
+                    ),
+                    const SizedBox(width: Spacing.m20),
+                    Wrap(
+                      spacing: Spacing.s12,
+                      runSpacing: Spacing.s12,
+                      children: SocialButtons.values
+                          .map((button) => SocialButton(button: button))
+                          .toList(),
+                    ),
+                    const Spacer(),
+                    const Text(Strings.copyRights),
+                    const SizedBox(height: Spacing.s12),
+                  ],
+                ),
               ),
             ),
           ],

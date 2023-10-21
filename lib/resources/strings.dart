@@ -67,4 +67,5 @@ abstract final class Strings {
   static const message = 'Message';
   static const sendMessage = 'Send Message';
   static const requestCall = 'Request a Call';
+  static const copyRights = ' © 2022-2023, Zognest Solutions Private Limited.';
 }

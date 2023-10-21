@@ -32,7 +32,7 @@ abstract final class TextThemes {
 
       /// All large displays except for ZOGNEST brand
       displayMedium: theme.textTheme.displayMedium?.copyWith(
-        fontSize: 260,
+        fontSize: 240,
         height: 1,
         fontFamily: 'Oswald',
         fontVariations: fontVariation(7),

@@ -56,18 +56,20 @@ class PrimaryButton extends StatelessWidget {
                 ),
           ),
         ),
-        child: Row(
-          mainAxisAlignment: trailing != null
-              ? MainAxisAlignment.spaceBetween
-              : MainAxisAlignment.center,
-          children: [
-            if (trailing != null) const SizedBox(width: Spacing.s8),
-            Text(title, style: textStyle ?? theme.textTheme.labelMedium),
-            if (trailing != null) ...[
-              const SizedBox(width: Spacing.s8),
-              trailing!,
+        child: FittedBox(
+          child: Row(
+            mainAxisAlignment: trailing != null
+                ? MainAxisAlignment.spaceBetween
+                : MainAxisAlignment.center,
+            children: [
+              if (trailing != null) const SizedBox(width: Spacing.s8),
+              Text(title, style: textStyle ?? theme.textTheme.labelMedium),
+              if (trailing != null) ...[
+                const SizedBox(width: Spacing.s8),
+                trailing!,
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

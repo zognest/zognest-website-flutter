@@ -19,23 +19,37 @@ enum SocialButtons {
   const SocialButtons(this.icon, this.url);
 }
 
-class SocialButton extends StatelessWidget {
+class SocialButton extends StatefulWidget {
   const SocialButton({super.key, required this.button});
 
   final SocialButtons button;
 
   @override
+  State<SocialButton> createState() => _SocialButtonState();
+}
+
+class _SocialButtonState extends State<SocialButton> {
+  bool hovering = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: 100,
-      alignment: Alignment.center,
-      padding: const EdgeInsets.all(Spacing.s12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Spacing.m20),
-        border: Border.all(color: const Color(0xff43403A)),
+    final theme = Theme.of(context);
+    return InkWell(
+      onTap: () {},
+      onHover: (_) => setState(() => hovering = !hovering),
+      overlayColor: MaterialStateProperty.all(Colors.transparent),
+      child: Container(
+        height: 100,
+        width: 100,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(Spacing.s12),
+        decoration: BoxDecoration(
+          color: hovering ? theme.primaryColor : null,
+          borderRadius: BorderRadius.circular(Spacing.m20),
+          border: Border.all(color: const Color(0xff43403A)),
+        ),
+        child: SvgPicture.asset(widget.button.icon),
       ),
-      child: SvgPicture.asset(button.icon),
     );
   }
 }

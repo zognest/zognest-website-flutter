@@ -1,6 +1,7 @@
 import 'package:zognest_website/features/home/models/blog.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
 import 'package:zognest_website/features/home/models/offer.dart';
+import 'package:zognest_website/features/our_services/models/purchasable_service.dart';
 import 'package:zognest_website/resources/assets.dart';
 
 import '../features/home/models/service.dart';
@@ -76,6 +77,63 @@ class Data {
       image: Assets.blog,
       title: '31 of the Best UX Design Blogs to Follow This Year',
       date: DateTime.now(),
+    ),
+  ];
+
+  static List<PurchasableService> purchasableServices = [
+    PurchasableService(
+      title: 'Mobile Development',
+      image: Assets.purchasableServicesImage,
+      description: 'iOS & Android',
+      id: 1,
+    ),
+    PurchasableService(
+      title: 'Mobile Development',
+      image: Assets.purchasableServicesImage,
+      description: 'iOS & Android',
+      id: 2,
+    ),
+    PurchasableService(
+      title: 'Mobile Development',
+      image: Assets.purchasableServicesImage,
+      description: 'iOS & Android',
+      id: 3,
+    ),
+    PurchasableService(
+      title: 'Mobile Development',
+      image: Assets.purchasableServicesImage,
+      description: 'iOS & Android',
+      id: 4,
+    ),
+    PurchasableService(
+      title: 'Mobile Development',
+      image: Assets.purchasableServicesImage,
+      description: 'iOS & Android',
+      id: 5,
+    ),
+    PurchasableService(
+      title: 'Mobile Development',
+      image: Assets.purchasableServicesImage,
+      description: 'iOS & Android',
+      id: 6,
+    ),
+    PurchasableService(
+      title: 'Mobile Development',
+      image: Assets.purchasableServicesImage,
+      description: 'iOS & Android',
+      id: 4,
+    ),
+    PurchasableService(
+      title: 'Mobile Development',
+      image: Assets.purchasableServicesImage,
+      description: 'iOS & Android',
+      id: 5,
+    ),
+    PurchasableService(
+      title: 'Mobile Development',
+      image: Assets.purchasableServicesImage,
+      description: 'iOS & Android',
+      id: 6,
     ),
   ];
 }

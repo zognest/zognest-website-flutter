@@ -31,31 +31,26 @@ class Constants {
 
   /// region [ZognestVideo]
   static const videoAspectRatio = 16 / 9;
-
   // endregion
 
   /// region [ZognestOffers]
   static const zognestOffersItemWidth = 440.0;
   static const zognestOffersListHeight = 340.0;
-
   // endregion
 
   /// region [Counters]
   static const countersAnimationDuration = 3000;
   static const countItemHeight = Spacing.xl60 * 2;
-
   // endregion
 
   /// region [ZognestServices]
   static const servicesCardWidth = 360.0;
   static const servicesCardHeight = 540.0;
-
   // endregion
 
   /// region [ZognestMocks]
   static const appMockAnimationDuration = 2000;
   static const mocksSectionHeight = 1000.0;
-
   // endregion
 
   /// region [ZognestClients]
@@ -69,6 +64,12 @@ class Constants {
   static const blogsSectionHeight = 480.0;
 
   // endregion
+
+  /// region [ServicesBrowser]
+  static const servicesBrowserItemHeight = 325.0;
+  static const servicesBrowserItemWidth = 550.0;
+
+  // endRegion
 
   // region Section Heights
   static const zognestDescriptionSectionHeight = 700.0;

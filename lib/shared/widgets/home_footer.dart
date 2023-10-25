@@ -10,8 +10,8 @@ import 'package:zognest_website/shared/widgets/circle_button.dart';
 import 'package:zognest_website/shared/widgets/gradient_container.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
-class HomeFooter extends StatelessWidget {
-  const HomeFooter({super.key, required this.onTabUp});
+class WebFooter extends StatelessWidget {
+  const WebFooter({super.key, required this.onTabUp});
 
   final VoidCallback onTabUp;
 

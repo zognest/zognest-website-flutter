@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/home/pages/home_page.dart';
+import 'package:zognest_website/features/our_services/pages/our_services_page.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
@@ -19,7 +20,7 @@ enum AppBarButtons {
     title: Strings.home,
   ),
   ourServices(
-    route: '-',
+    route: OurServicesPage.route,
     title: Strings.ourServices,
   ),
   ourWork(
@@ -124,7 +125,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                 children: AppBarButtons.values.map(
                   (button) {
                     return InkWell(
-                      onTap: () {},
+                      onTap: () => context.go(button.route),
                       onHover: (hovered) {
                         if (hovered) {
                           hoveredRoute = button.route;

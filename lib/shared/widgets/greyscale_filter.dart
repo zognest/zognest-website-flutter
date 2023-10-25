@@ -15,7 +15,7 @@ class GreyscaleFilter extends StatelessWidget {
     return ClipRect(
       child: ColorFiltered(
         colorFilter: isHovered
-            ? ColorFilter.mode(Colors.transparent, BlendMode.multiply)
+            ? const ColorFilter.mode(Colors.transparent, BlendMode.multiply)
             : const ColorFilter.matrix(<double>[
                 0.2126,
                 0.7152,

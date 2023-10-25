@@ -6,7 +6,6 @@ import 'package:zognest_website/features/home/pages/components/beyond_space.dart
 import 'package:zognest_website/features/home/pages/components/clients_list.dart';
 import 'package:zognest_website/features/home/pages/components/contact_form.dart';
 import 'package:zognest_website/features/home/pages/components/counters.dart';
-import 'package:zognest_website/features/home/pages/components/home_footer.dart';
 import 'package:zognest_website/features/home/pages/components/marquee_text.dart';
 import 'package:zognest_website/features/home/pages/components/optimism_text.dart';
 import 'package:zognest_website/features/home/pages/components/zognest_blogs.dart';
@@ -18,6 +17,7 @@ import 'package:zognest_website/features/home/pages/components/zognest_services.
 import 'package:zognest_website/features/home/pages/components/zognest_video.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
+import 'package:zognest_website/shared/widgets/home_footer.dart';
 
 import '../../../shared/widgets/gradient_container.dart';
 
@@ -148,7 +148,7 @@ class Foreground extends StatelessWidget {
         const SizedBox(height: Constants.sectionSpacing),
         const ContactForm(),
         const SizedBox(height: Constants.sectionSpacing),
-        HomeFooter(
+        WebFooter(
           onTabUp: () => controller.animateTo(
             controller.position.minScrollExtent,
             duration: const Duration(milliseconds: Constants.scrollToDuration),

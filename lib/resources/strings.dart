@@ -17,7 +17,8 @@ abstract final class Strings {
   static const helpingYourBusiness = 'Helping your business ';
   static const exploreThe = 'Explore the\n';
   static const to = 'To\n';
-  static const sky = 'Sky.';
+  static const empty = '';
+  static const sky = 'Sky';
   static const zognestDescription =
       'Zognest is a Technology-based startup company that helps your business to explore the Sky With UI/UX designing, Prototyping, Designing, and developing mobile applications, websites, web applications, Branding, brainstorming, and Digital solutions.';
   static const what = 'What ';
@@ -68,4 +69,8 @@ abstract final class Strings {
   static const sendMessage = 'Send Message';
   static const requestCall = 'Request a Call';
   static const copyRights = ' © 2022-2023, Zognest Solutions Private Limited.';
+  static const areYouWaitingFor = 'Are\nyou waiting\nfor, ';
+  static const create = 'Create\n';
+  static const orderNow = 'Order\nNow\nthe ';
+  static const waitingForYou = ' is\nWaiting\nfor you ';
 }

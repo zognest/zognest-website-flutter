@@ -11,6 +11,9 @@
   "assets/images/mercury_venus.png": [
     "assets/images/mercury_venus.png"
   ],
+  "assets/images/moon.png": [
+    "assets/images/moon.png"
+  ],
   "assets/images/office.png": [
     "assets/images/office.png"
   ],
@@ -19,6 +22,9 @@
   ],
   "assets/images/screens.png": [
     "assets/images/screens.png"
+  ],
+  "assets/images/small_mercury.png": [
+    "assets/images/small_mercury.png"
   ],
   "assets/svg/arrow_down.svg": [
     "assets/svg/arrow_down.svg"
@@ -100,6 +106,9 @@
   ],
   "assets/temp/photoshop.png": [
     "assets/temp/photoshop.png"
+  ],
+  "assets/temp/purchasable_service_image.png": [
+    "assets/temp/purchasable_service_image.png"
   ],
   "assets/temp/salt.png": [
     "assets/temp/salt.png"

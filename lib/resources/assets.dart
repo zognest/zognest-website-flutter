@@ -30,6 +30,8 @@ abstract final class Assets {
   static const mercuryVenus = '${Paths.images}/mercury_venus.png';
   static const mercury = '${Paths.images}/mercury.png';
   static const screens = '${Paths.images}/screens.png';
+  static const smallMercury = '${Paths.images}/small_mercury.png';
+  static const moon = '${Paths.images}/moon.png';
 
   // Temporary assets
   static const cuckoo = '${Paths.temp}/cuckoo.png';
@@ -56,4 +58,6 @@ abstract final class Assets {
       '${Paths.temp}/client_feedback_1.png';
   static const clientFeedbackBackgroundImage2 =
       '${Paths.temp}/client_feedback_2.png';
+  static const purchasableServicesImage =
+      '${Paths.temp}/purchasable_service_image.png';
 }

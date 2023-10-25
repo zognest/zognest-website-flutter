@@ -6,6 +6,7 @@ import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/home/pages/home_page.dart';
 import 'package:zognest_website/features/our_services/pages/our_services_page.dart';
+import 'package:zognest_website/features/our_work/pages/our_work_page.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
@@ -24,15 +25,15 @@ enum AppBarButtons {
     title: Strings.ourServices,
   ),
   ourWork(
-    route: '+',
+    route: OurWorkPage.route,
     title: Strings.ourWork,
   ),
   ourSpace(
-    route: '+_',
+    route: '_',
     title: Strings.ourSpace,
   ),
   aboutUs(
-    route: '.',
+    route: '__',
     title: Strings.aboutUs,
   );
 

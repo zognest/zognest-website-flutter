@@ -21,6 +21,7 @@ abstract final class Assets {
   static const dribble = '${Paths.svg}/dribble.svg';
   static const impactLines = '${Paths.svg}/impact_lines.svg';
   static const mail = '${Paths.svg}/mail.svg';
+  static const notFound = '${Paths.svg}/404.svg';
 
   // Images
   static const phoneHand = '${Paths.images}/phone_hand.png';
@@ -54,6 +55,7 @@ abstract final class Assets {
   static const serviceBackground = '${Paths.temp}/service_background.png';
   static const clientImage = '${Paths.temp}/client_image.png';
   static const blog = '${Paths.temp}/blog_image.png';
+  static const projectIcon = '${Paths.temp}/project_icon.png';
   static const clientFeedbackBackgroundImage1 =
       '${Paths.temp}/client_feedback_1.png';
   static const clientFeedbackBackgroundImage2 =

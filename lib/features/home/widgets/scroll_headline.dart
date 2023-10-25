@@ -27,10 +27,7 @@ class ScrollHeadline extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text.rich(
-            // textScaleFactor: TextThemes.textScale(context),
-            headline,
-          ),
+          Text.rich(headline),
           InkWell(
             onTap: onTapScroll,
             overlayColor: MaterialStateProperty.all(Palette.transparent),

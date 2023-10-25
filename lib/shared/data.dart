@@ -2,6 +2,7 @@ import 'package:zognest_website/features/home/models/blog.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
 import 'package:zognest_website/features/home/models/offer.dart';
 import 'package:zognest_website/features/our_services/models/purchasable_service.dart';
+import 'package:zognest_website/features/our_work/models/project.dart';
 import 'package:zognest_website/resources/assets.dart';
 
 import '../features/home/models/service.dart';
@@ -134,6 +135,17 @@ class Data {
       image: Assets.purchasableServicesImage,
       description: 'iOS & Android',
       id: 6,
+    ),
+  ];
+
+  static List<Project> projects = [
+    Project(
+      title: 'My Pocket',
+      brief: 'Card Manager',
+      image: Assets.purchasableServicesImage,
+      icon: Assets.projectIcon,
+      description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     ),
   ];
 }

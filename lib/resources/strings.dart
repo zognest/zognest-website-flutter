@@ -29,6 +29,7 @@ abstract final class Strings {
   static const weAreTheCre = 'We are the cre';
   static const eight = '8';
   static const tive = 'tive  -  ';
+  static const backHome = 'Back Home';
   static const optimism = 'Optimism';
   static const isThe = 'Is The';
   static const faith = 'Faith';
@@ -51,7 +52,7 @@ abstract final class Strings {
   static const happy = 'happy';
   static const clients = 'clients...';
   static const view = 'view';
-  static const our = 'our';
+  static const our = 'our ';
   static const blogs = 'blogs.';
   static const zognestMail = 'info@zognest.com';
   static const zognest = 'zognest';
@@ -73,4 +74,7 @@ abstract final class Strings {
   static const create = 'Create\n';
   static const orderNow = 'Order\nNow\nthe ';
   static const waitingForYou = ' is\nWaiting\nfor you ';
+  static const best = 'best\n';
+  static const projects = 'projects.';
+  static const visit = 'visit';
 }

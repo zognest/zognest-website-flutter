@@ -26,6 +26,9 @@
   "assets/images/small_mercury.png": [
     "assets/images/small_mercury.png"
   ],
+  "assets/svg/404.svg": [
+    "assets/svg/404.svg"
+  ],
   "assets/svg/arrow_down.svg": [
     "assets/svg/arrow_down.svg"
   ],
@@ -106,6 +109,9 @@
   ],
   "assets/temp/photoshop.png": [
     "assets/temp/photoshop.png"
+  ],
+  "assets/temp/project_icon.png": [
+    "assets/temp/project_icon.png"
   ],
   "assets/temp/purchasable_service_image.png": [
     "assets/temp/purchasable_service_image.png"

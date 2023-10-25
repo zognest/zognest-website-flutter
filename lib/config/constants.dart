@@ -65,6 +65,13 @@ class Constants {
 
   // endregion
 
+  /// region [ZognestProjects]
+  static const projectBaseWidth = 360.0;
+  static const projectExtendedWidth = 960.0;
+  static const projectHeight = 540.0;
+
+  // endregion
+
   /// region [ServicesBrowser]
   static const servicesBrowserItemHeight = 325.0;
   static const servicesBrowserItemWidth = 550.0;

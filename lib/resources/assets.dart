@@ -33,6 +33,8 @@ abstract final class Assets {
   static const screens = '${Paths.images}/screens.png';
   static const smallMercury = '${Paths.images}/small_mercury.png';
   static const moon = '${Paths.images}/moon.png';
+  static const venusMercury = '${Paths.images}/venus_mercury.png';
+  static const textGroup = '${Paths.images}/text_group.png';
 
   // Temporary assets
   static const cuckoo = '${Paths.temp}/cuckoo.png';

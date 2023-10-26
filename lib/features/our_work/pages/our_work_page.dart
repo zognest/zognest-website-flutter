@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/features/our_work/pages/components/our_work_text.dart';
 import 'package:zognest_website/features/our_work/pages/components/zognest_projects.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
@@ -40,11 +41,16 @@ class _OurWorkPageState extends State<OurWorkPage> {
             controller: _controller,
             child: Stack(
               children: [
-                SvgPicture.asset(Assets.gridLines),
+                Positioned(
+                  top: Constants.projectHeight,
+                  child: SvgPicture.asset(Assets.gridLines),
+                ),
                 Column(
                   children: [
                     const SizedBox(height: Constants.appBarHeight * 1.5),
                     const ZognestProjects(),
+                    const SizedBox(height: Constants.sectionSpacing),
+                    const OurWorkText(),
                     const SizedBox(height: Constants.sectionSpacing),
                     WebFooter(
                       onTabUp: () => _controller.animateTo(

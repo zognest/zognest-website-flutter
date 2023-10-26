@@ -77,4 +77,7 @@ abstract final class Strings {
   static const best = 'best\n';
   static const projects = 'projects.';
   static const visit = 'visit';
+  static const t = 't';
+  static const i = 'i';
+  static const heWayToDevelop = 'he way to\ndevelop\nself-confidence is ';
 }

@@ -1,4 +1,7 @@
 {
+  "assets/images/about_us_text.png": [
+    "assets/images/about_us_text.png"
+  ],
   "assets/images/arrow_right.png": [
     "assets/images/arrow_right.png"
   ],
@@ -17,11 +20,17 @@
   "assets/images/office.png": [
     "assets/images/office.png"
   ],
+  "assets/images/our_space_text.png": [
+    "assets/images/our_space_text.png"
+  ],
   "assets/images/phone_hand.png": [
     "assets/images/phone_hand.png"
   ],
   "assets/images/screens.png": [
     "assets/images/screens.png"
+  ],
+  "assets/images/short_arrow_left.png": [
+    "assets/images/short_arrow_left.png"
   ],
   "assets/images/small_mercury.png": [
     "assets/images/small_mercury.png"
@@ -31,6 +40,9 @@
   ],
   "assets/images/venus_mercury.png": [
     "assets/images/venus_mercury.png"
+  ],
+  "assets/images/zognest_team.png": [
+    "assets/images/zognest_team.png"
   ],
   "assets/svg/404.svg": [
     "assets/svg/404.svg"
@@ -100,6 +112,12 @@
   ],
   "assets/temp/drop.png": [
     "assets/temp/drop.png"
+  ],
+  "assets/temp/event_cover.png": [
+    "assets/temp/event_cover.png"
+  ],
+  "assets/temp/event_image.png": [
+    "assets/temp/event_image.png"
   ],
   "assets/temp/figma.png": [
     "assets/temp/figma.png"

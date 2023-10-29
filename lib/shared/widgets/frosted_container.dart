@@ -39,7 +39,7 @@ class FrostedContainer extends StatelessWidget {
           sigmaY: blurStrength,
         ),
         child: Container(
-          color: decoration != null ? null : backgroundColor?.withOpacity(0.8),
+          color: decoration != null ? null : backgroundColor,
           padding: padding,
           height: height,
           decoration: decoration,

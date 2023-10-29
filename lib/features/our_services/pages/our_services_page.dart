@@ -33,7 +33,6 @@ class _OurServicesPageState extends State<OurServicesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(

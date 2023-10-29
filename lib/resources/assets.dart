@@ -35,6 +35,10 @@ abstract final class Assets {
   static const moon = '${Paths.images}/moon.png';
   static const venusMercury = '${Paths.images}/venus_mercury.png';
   static const textGroup = '${Paths.images}/text_group.png';
+  static const ourSpaceText = '${Paths.images}/our_space_text.png';
+  static const shortArrowLeft = '${Paths.images}/short_arrow_left.png';
+  static const zognestTeam = '${Paths.images}/zognest_team.png';
+  static const aboutUsText = '${Paths.images}/about_us_text.png';
 
   // Temporary assets
   static const cuckoo = '${Paths.temp}/cuckoo.png';
@@ -64,4 +68,6 @@ abstract final class Assets {
       '${Paths.temp}/client_feedback_2.png';
   static const purchasableServicesImage =
       '${Paths.temp}/purchasable_service_image.png';
+  static const eventImage = '${Paths.temp}/event_image.png';
+  static const eventCover = '${Paths.temp}/event_cover.png';
 }

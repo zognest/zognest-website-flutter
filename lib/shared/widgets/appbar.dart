@@ -4,8 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
+import 'package:zognest_website/features/about_us/pages/about_us_page.dart';
 import 'package:zognest_website/features/home/pages/home_page.dart';
 import 'package:zognest_website/features/our_services/pages/our_services_page.dart';
+import 'package:zognest_website/features/our_space/pages/our_space_page.dart';
 import 'package:zognest_website/features/our_work/pages/our_work_page.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
@@ -29,11 +31,11 @@ enum AppBarButtons {
     title: Strings.ourWork,
   ),
   ourSpace(
-    route: '_',
+    route: OurSpacePage.route,
     title: Strings.ourSpace,
   ),
   aboutUs(
-    route: '__',
+    route: AboutUsPage.route,
     title: Strings.aboutUs,
   );
 

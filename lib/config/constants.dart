@@ -7,6 +7,7 @@ import 'package:zognest_website/features/home/pages/components/zognest_offers.da
 import 'package:zognest_website/features/home/pages/components/zognest_services.dart';
 import 'package:zognest_website/features/home/pages/components/zognest_video.dart';
 import 'package:zognest_website/features/home/pages/home_page.dart';
+import 'package:zognest_website/features/our_space/pages/components/zognest_events.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 
@@ -75,6 +76,14 @@ class Constants {
   /// region [ServicesBrowser]
   static const servicesBrowserItemHeight = 325.0;
   static const servicesBrowserItemWidth = 550.0;
+
+  // endRegion
+
+  /// region [ZognestEvents]
+  static const eventsTabHeight = 60.0;
+  static const eventsCardHeight = 500.0;
+  static const eventsCardWidth = 335.0;
+  static const eventsDialogHeight = 700.0;
 
   // endRegion
 

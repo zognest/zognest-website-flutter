@@ -80,4 +80,6 @@ abstract final class Strings {
   static const t = 't';
   static const i = 'i';
   static const heWayToDevelop = 'he way to\ndevelop\nself-confidence is ';
+  static const birds = 'Birds.';
+  static const linkedIn = 'LinkedIn';
 }

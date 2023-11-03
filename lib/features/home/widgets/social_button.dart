@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 
@@ -34,18 +35,19 @@ class _SocialButtonState extends State<SocialButton> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
     return InkWell(
       onTap: () {},
       onHover: (_) => setState(() => hovering = !hovering),
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       child: Container(
-        height: 100,
-        width: 100,
+        height: Responsive.isDesktop(context) ? 100 : 50,
+        width: Responsive.isDesktop(context) ? 100 : 50,
         alignment: Alignment.center,
         padding: const EdgeInsets.all(Spacing.s12),
         decoration: BoxDecoration(
           color: hovering ? theme.primaryColor : null,
-          borderRadius: BorderRadius.circular(Spacing.m20),
+          borderRadius: BorderRadius.circular(Spacing.m16),
           border: Border.all(color: const Color(0xff43403A)),
         ),
         child: SvgPicture.asset(widget.button.icon),

@@ -2,6 +2,7 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/about_us/models/staff.dart';
@@ -85,8 +86,11 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
               },
             ),
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.pageHorizontalPadding),
+              padding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context)
+                    ? Constants.webHorizontalPadding
+                    : Constants.mobileHorizontalPadding,
+              ),
               scrollDirection: Axis.horizontal,
               controller: _controller,
               itemBuilder: (context, index) {
@@ -94,8 +98,9 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                 final staff = Data.staff[i];
                 return Container(
                   constraints: BoxConstraints.tight(
-                    const Size(
-                      Constants.servicesCardWidth,
+                    Size(
+                      Constants.servicesCardWidth +
+                          (Responsive.isDesktop(context) ? 0 : 50),
                       Constants.servicesCardHeight,
                     ),
                   ),

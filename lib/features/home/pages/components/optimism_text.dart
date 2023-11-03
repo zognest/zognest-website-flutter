@@ -14,10 +14,10 @@ class OptimismText extends StatelessWidget {
     return Column(
       children: [
         const Divider(),
-        const SizedBox(height: Constants.componentVerticalPadding * 0.7),
+        const SizedBox(height: Constants.webVerticalPadding * 0.7),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Constants.pageHorizontalPadding,
+            horizontal: Constants.webHorizontalPadding,
           ),
           child: SizedBox(
             height: Constants.optimismSectionHeight,

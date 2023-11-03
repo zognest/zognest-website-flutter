@@ -78,7 +78,7 @@ class _ZognestMocksState extends State<ZognestMocks>
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.pageHorizontalPadding),
+                  horizontal: Constants.webHorizontalPadding),
               child: SizedBox(
                 width: size.width * 0.5,
                 child: Align(

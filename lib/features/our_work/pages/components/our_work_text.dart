@@ -12,7 +12,7 @@ class OurWorkText extends StatelessWidget {
         const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Constants.pageHorizontalPadding,
+            horizontal: Constants.webHorizontalPadding,
           ),
           child: Stack(
             alignment: Alignment.center,

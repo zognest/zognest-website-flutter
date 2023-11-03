@@ -13,10 +13,11 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 
 class Constants {
   /// Horizontal padding of any main component or the children inside it
-  static const pageHorizontalPadding = Spacing.l48 * 2;
+  static const webHorizontalPadding = Spacing.l48 * 2;
+  static const mobileHorizontalPadding = Spacing.l48;
 
   /// Vertical padding of any main component or the children inside it
-  static const componentVerticalPadding = Spacing.l40 * 2;
+  static const webVerticalPadding = Spacing.l40 * 2;
 
   /// The total height of the [PrimaryAppBar]
   static const appBarHeight = Spacing.xl72;

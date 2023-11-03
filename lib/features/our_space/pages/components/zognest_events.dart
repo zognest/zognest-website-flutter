@@ -28,7 +28,7 @@ class _ZognestEventsState extends State<ZognestEvents> {
         const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: Constants.pageHorizontalPadding),
+              horizontal: Constants.webHorizontalPadding),
           child: DefaultTabController(
             length: eventsYears.length,
             child: Column(

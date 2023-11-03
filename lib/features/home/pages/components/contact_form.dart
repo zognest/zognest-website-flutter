@@ -38,8 +38,8 @@ class ContactForm extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: Constants.pageHorizontalPadding,
-                    vertical: Constants.componentVerticalPadding,
+                    horizontal: Constants.webHorizontalPadding,
+                    vertical: Constants.webVerticalPadding,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

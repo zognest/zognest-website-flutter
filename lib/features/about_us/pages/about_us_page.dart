@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/features/about_us/pages/components/team_description.dart';
 import 'package:zognest_website/features/about_us/pages/components/zognest_staff.dart';
 import 'package:zognest_website/resources/assets.dart';
+import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/home_footer.dart';
 
@@ -44,17 +46,23 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 SvgPicture.asset(Assets.gridLines),
                 Column(
                   children: [
-                    const SizedBox(height: Constants.appBarHeight * 1.5),
+                    const SizedBox(height: Constants.appBarHeight),
                     const TeamDescription(),
                     const SizedBox(height: Constants.sectionSpacing),
                     const ZognestStaff(),
                     const SizedBox(height: Constants.sectionSpacing),
                     Image.asset(
-                      Assets.aboutUsText,
+                      Responsive.isDesktop(context)
+                          ? Assets.aboutUsText
+                          : Assets.mobileAboutUsText,
                       width: double.infinity,
                       fit: BoxFit.contain,
                     ),
-                    const SizedBox(height: Constants.sectionSpacing),
+                    SizedBox(
+                      height: Responsive.isDesktop(context)
+                          ? Constants.sectionSpacing
+                          : Spacing.s0,
+                    ),
                     WebFooter(
                       onTabUp: () => _controller.animateTo(
                         _controller.position.minScrollExtent,

@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/about_us/pages/about_us_page.dart';
 import 'package:zognest_website/features/home/pages/home_page.dart';
@@ -106,15 +107,18 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
     final route = GoRouterState.of(context);
     return SlideTransition(
       position: _appBarOffsetAnimation,
       child: FrostedContainer(
         width: double.infinity,
         height: Constants.appBarHeight,
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           vertical: Spacing.s12,
-          horizontal: Constants.pageHorizontalPadding,
+          horizontal: Responsive.isDesktop(context)
+              ? Constants.webHorizontalPadding
+              : Constants.mobileHorizontalPadding,
         ),
         decoration: BoxDecoration(
           color: Palette.appBarBackground.withOpacity(0.6),
@@ -122,48 +126,57 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
         child: Row(
           children: [
             const ZognestLogo(),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: AppBarButtons.values.map(
-                  (button) {
-                    return InkWell(
-                      onTap: () => context.go(button.route),
-                      onHover: (hovered) {
-                        if (hovered) {
-                          hoveredRoute = button.route;
-                          setState(() {});
-                          return;
-                        }
-                        hoveredRoute = '/';
-                        setState(() {});
-                      },
-                      overlayColor:
-                          MaterialStateProperty.all(Palette.transparent),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 2000),
-                        child: Text(
-                          button.title.toUpperCase(),
-                          style: route.name == button.route
-                              ? theme.textTheme.labelLarge
-                                  ?.copyWith(color: theme.primaryColor)
-                              : theme.textTheme.labelMedium?.copyWith(
-                                  color: hoveredRoute == button.route
-                                      ? theme.primaryColor.withOpacity(0.7)
-                                      : null,
-                                ),
+            if (Responsive.appBar(context)) ...[
+              const Spacer(),
+              SvgPicture.asset(Assets.drawer),
+            ] else ...[
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: AppBarButtons.values.map(
+                    (button) {
+                      return Padding(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: Spacing.m16),
+                        child: InkWell(
+                          onTap: () => context.go(button.route),
+                          onHover: (hovered) {
+                            if (hovered) {
+                              hoveredRoute = button.route;
+                              setState(() {});
+                              return;
+                            }
+                            hoveredRoute = '/';
+                            setState(() {});
+                          },
+                          overlayColor:
+                              MaterialStateProperty.all(Palette.transparent),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 2000),
+                            child: Text(
+                              button.title.toUpperCase(),
+                              style: route.name == button.route
+                                  ? theme.textTheme.labelLarge
+                                      ?.copyWith(color: theme.primaryColor)
+                                  : theme.textTheme.labelMedium?.copyWith(
+                                      color: hoveredRoute == button.route
+                                          ? theme.primaryColor.withOpacity(0.7)
+                                          : null,
+                                    ),
+                            ),
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ).toList(),
+                      );
+                    },
+                  ).toList(),
+                ),
               ),
-            ),
-            PrimaryButton(
-              onTap: () {},
-              title: Strings.getInTouch.toUpperCase(),
-              trailing: CircleButton(child: SvgPicture.asset(Assets.mail)),
-            ),
+              PrimaryButton(
+                onTap: () {},
+                title: Strings.getInTouch.toUpperCase(),
+                trailing: CircleButton(child: SvgPicture.asset(Assets.mail)),
+              ),
+            ],
           ],
         ),
       ),

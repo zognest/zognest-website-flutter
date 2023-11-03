@@ -21,7 +21,7 @@ class ZognestDescription extends StatelessWidget {
           height: Constants.zognestDescriptionSectionHeight,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: Constants.pageHorizontalPadding),
+                horizontal: Constants.webHorizontalPadding),
             child: Row(
               children: [
                 Image.asset(

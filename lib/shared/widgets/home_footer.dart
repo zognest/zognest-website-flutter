@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/widgets/social_button.dart';
 import 'package:zognest_website/resources/assets.dart';
@@ -24,93 +25,86 @@ class WebFooter extends StatelessWidget {
         GradientContainer(
           colorStartingOpacity: 0.2,
           color: theme.primaryColor,
-          alignment: const Alignment(-0.2, 1),
-          radius: 0.9,
-          height: 700,
-        ),
-        GradientContainer(
-          colorStartingOpacity: 0.2,
-          color: theme.primaryColor,
-          alignment: const Alignment(0.2, 1),
-          radius: 0.9,
-          height: 700,
+          alignment: Alignment.bottomCenter,
+          radius: 1,
+          height: Responsive.isDesktop(context) ? 700 : 400,
         ),
         Column(
           children: [
             const Divider(),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Constants.pageHorizontalPadding,
+              padding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context)
+                    ? Constants.webHorizontalPadding
+                    : Constants.mobileHorizontalPadding,
                 vertical: Spacing.l24,
               ),
-              child: SizedBox(
-                height: Constants.zognestFooterSectionHeight,
-                child: Column(
-                  children: [
-                    const Spacer(),
-                    const ZognestLogo(
-                      iconOnly: true,
-                      size: Constants.zognestFooterSectionHeight * 0.15,
-                    ),
-                    const SizedBox(width: Spacing.m20),
-                    Text(
+              child: Column(
+                children: [
+                  const ZognestLogo(
+                    iconOnly: true,
+                    size: Constants.zognestFooterSectionHeight * 0.15,
+                  ),
+                  const SizedBox(height: Spacing.s12),
+                  FittedBox(
+                    child: Text(
                       Strings.zognestMail,
-                      textScaleFactor: TextThemes.textScale(context),
                       style: theme.textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w700,
-                        fontSize: 70,
+                        fontSize: Responsive.isDesktop(context) ? 70 : 20,
                         color: const Color(0xffAEB2BA),
                       ),
                     ),
-                    const Spacer(),
-                    const SizedBox(width: Spacing.m20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
+                  ),
+                  const SizedBox(height: Spacing.l32),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Expanded(
+                        child: Text(
                           Strings.zognest.toUpperCase(),
+                          textAlign: TextAlign.center,
                           textScaleFactor: TextThemes.textScale(context),
                           style: theme.textTheme.displayLarge?.copyWith(
-                            letterSpacing: -10,
                             fontFamily: 'SF Pro Rounded',
                             fontWeight: FontWeight.w900,
                           ),
                         ),
-                        const SizedBox(width: Spacing.m20),
-                        CircleButton(
-                          onTap: onTabUp,
-                          radius: Spacing.l32,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: Constants.circleButtonRadius,
-                                decoration: BoxDecoration(
-                                  color: theme.primaryColor,
-                                  shape: BoxShape.circle,
-                                ),
+                      ),
+                      CircleButton(
+                        onTap: onTabUp,
+                        radius: Responsive.isDesktop(context)
+                            ? Spacing.l32
+                            : Spacing.l24,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: Constants.circleButtonRadius,
+                              decoration: BoxDecoration(
+                                color: theme.primaryColor,
+                                shape: BoxShape.circle,
                               ),
-                              const SizedBox(height: Spacing.s8),
-                              SvgPicture.asset(Assets.upArrow),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(height: Spacing.s8),
+                            SvgPicture.asset(Assets.upArrow),
+                          ],
                         ),
-                      ],
-                    ),
-                    const SizedBox(width: Spacing.m20),
-                    Wrap(
-                      spacing: Spacing.s12,
-                      runSpacing: Spacing.s12,
-                      children: SocialButtons.values
-                          .map((button) => SocialButton(button: button))
-                          .toList(),
-                    ),
-                    const Spacer(),
-                    const Text(Strings.copyRights),
-                    const SizedBox(height: Spacing.s12),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: Spacing.l32),
+                  Wrap(
+                    spacing: Spacing.s12,
+                    runSpacing: Spacing.s12,
+                    children: SocialButtons.values
+                        .map((button) => SocialButton(button: button))
+                        .toList(),
+                  ),
+                  const SizedBox(height: Spacing.l48),
+                  const FittedBox(child: Text(Strings.copyRights)),
+                ],
               ),
             ),
           ],

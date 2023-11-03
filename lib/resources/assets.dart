@@ -22,6 +22,7 @@ abstract final class Assets {
   static const impactLines = '${Paths.svg}/impact_lines.svg';
   static const mail = '${Paths.svg}/mail.svg';
   static const notFound = '${Paths.svg}/404.svg';
+  static const drawer = '${Paths.svg}/drawer.svg';
 
   // Images
   static const phoneHand = '${Paths.images}/phone_hand.png';
@@ -39,6 +40,7 @@ abstract final class Assets {
   static const shortArrowLeft = '${Paths.images}/short_arrow_left.png';
   static const zognestTeam = '${Paths.images}/zognest_team.png';
   static const aboutUsText = '${Paths.images}/about_us_text.png';
+  static const mobileAboutUsText = '${Paths.images}/mobile_about_us_text.png';
 
   // Temporary assets
   static const cuckoo = '${Paths.temp}/cuckoo.png';

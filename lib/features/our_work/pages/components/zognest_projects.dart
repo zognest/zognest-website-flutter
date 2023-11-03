@@ -41,7 +41,7 @@ class _ZognestProjectsState extends State<ZognestProjects> {
         const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Constants.pageHorizontalPadding,
+            horizontal: Constants.webHorizontalPadding,
             vertical: Spacing.l40,
           ),
           child: Row(
@@ -120,7 +120,7 @@ class _ZognestProjectsState extends State<ZognestProjects> {
             ),
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.pageHorizontalPadding),
+                  horizontal: Constants.webHorizontalPadding),
               scrollDirection: Axis.horizontal,
               controller: _controller,
               itemBuilder: (context, index) {

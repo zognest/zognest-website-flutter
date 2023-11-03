@@ -14,6 +14,9 @@
   "assets/images/mercury_venus.png": [
     "assets/images/mercury_venus.png"
   ],
+  "assets/images/mobile_about_us_text.png": [
+    "assets/images/mobile_about_us_text.png"
+  ],
   "assets/images/moon.png": [
     "assets/images/moon.png"
   ],
@@ -56,6 +59,9 @@
   "assets/svg/discord.svg": [
     "assets/svg/discord.svg"
   ],
+  "assets/svg/drawer.svg": [
+    "assets/svg/drawer.svg"
+  ],
   "assets/svg/dribble.svg": [
     "assets/svg/dribble.svg"
   ],
@@ -67,6 +73,9 @@
   ],
   "assets/svg/grid_lines.svg": [
     "assets/svg/grid_lines.svg"
+  ],
+  "assets/svg/hamburger.svg": [
+    "assets/svg/hamburger.svg"
   ],
   "assets/svg/impact_lines.svg": [
     "assets/svg/impact_lines.svg"

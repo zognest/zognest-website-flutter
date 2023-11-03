@@ -38,7 +38,7 @@ class CreateOrder extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  vertical: Constants.componentVerticalPadding,
+                  vertical: Constants.webVerticalPadding,
                 ),
                 child: SizedBox(
                   width: double.infinity,

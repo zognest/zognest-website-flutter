@@ -55,7 +55,7 @@ class _ZognestVideoState extends State<ZognestVideo> {
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: Constants.pageHorizontalPadding),
+                horizontal: Constants.webHorizontalPadding),
             child: Stack(
               alignment: Alignment.center,
               children: [

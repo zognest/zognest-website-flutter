@@ -1,5 +1,4 @@
 import 'dart:async';
-
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
@@ -30,7 +29,7 @@ class BeyondSpace extends StatelessWidget {
         const SizedBox(height: Constants.appBarHeight * 1.5),
         Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: Constants.pageHorizontalPadding),
+              horizontal: Constants.webHorizontalPadding),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

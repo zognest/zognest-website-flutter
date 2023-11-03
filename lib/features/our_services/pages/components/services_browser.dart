@@ -17,7 +17,7 @@ class ServicesBrowser extends StatelessWidget {
         const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: Constants.pageHorizontalPadding),
+              horizontal: Constants.webHorizontalPadding),
           child: Wrap(
             spacing: Spacing.l24,
             runSpacing: Spacing.l24,

@@ -28,9 +28,7 @@ class ScrollHeadline extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: Responsive.isMobile(context)
-            ? CrossAxisAlignment.center
-            : CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           FittedBox(child: Text.rich(headline)),
           if (!Responsive.isMobile(context)) ...[

@@ -129,12 +129,13 @@ class TeamDescriptionMobile extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
-              vertical: Spacing.l40, horizontal: Spacing.s12),
+              vertical: Spacing.l32, horizontal: Spacing.s12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FittedBox(
                 child: Text.rich(
+                  maxLines: 3,
                   TextSpan(
                     text: '${Strings.helpingYourBusiness.toUpperCase()}\n',
                     style: theme.textTheme.displaySmall,

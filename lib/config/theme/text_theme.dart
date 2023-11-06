@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 
 abstract final class TextThemes {
@@ -24,7 +25,7 @@ abstract final class TextThemes {
       // region Displays
       /// For headlines
       displaySmall: theme.textTheme.displaySmall?.copyWith(
-        fontSize: 120,
+        fontSize: Responsive.isDesktop(context) ? 120 : 64,
         height: 1,
         fontFamily: 'Oswald',
         fontVariations: fontVariation(7),
@@ -79,7 +80,7 @@ abstract final class TextThemes {
         fontWeight: FontWeight.w500,
       ),
       bodyLarge: theme.textTheme.bodyLarge?.copyWith(
-        fontSize: 24,
+        fontSize: Responsive.isDesktop(context) ? 24 : 16,
         fontFamily: 'SF Pro Rounded',
         color: Palette.bodyTextColor,
         fontWeight: FontWeight.w500,

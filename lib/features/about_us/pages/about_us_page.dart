@@ -7,7 +7,7 @@ import 'package:zognest_website/features/about_us/pages/components/zognest_staff
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
-import 'package:zognest_website/shared/widgets/home_footer.dart';
+import 'package:zognest_website/shared/widgets/footer.dart';
 
 class AboutUsPage extends StatefulWidget {
   const AboutUsPage({super.key});
@@ -35,6 +35,9 @@ class _AboutUsPageState extends State<AboutUsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double sectionSpacing = Responsive.isDesktop(context)
+        ? Constants.webSectionSpacing
+        : Constants.mobileSectionSpacing;
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -48,22 +51,23 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   children: [
                     const SizedBox(height: Constants.appBarHeight),
                     const TeamDescription(),
-                    const SizedBox(height: Constants.sectionSpacing),
+                    SizedBox(height: sectionSpacing),
                     const ZognestStaff(),
-                    const SizedBox(height: Constants.sectionSpacing),
+                    SizedBox(height: sectionSpacing),
                     Image.asset(
                       Responsive.isDesktop(context)
                           ? Assets.aboutUsText
                           : Assets.mobileAboutUsText,
                       width: double.infinity,
+                      alignment: Alignment.bottomCenter,
                       fit: BoxFit.contain,
                     ),
                     SizedBox(
                       height: Responsive.isDesktop(context)
-                          ? Constants.sectionSpacing
+                          ? Constants.webSectionSpacing
                           : Spacing.s0,
                     ),
-                    WebFooter(
+                    Footer(
                       onTabUp: () => _controller.animateTo(
                         _controller.position.minScrollExtent,
                         duration: const Duration(

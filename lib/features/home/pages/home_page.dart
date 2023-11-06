@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/home/pages/components/beyond_space.dart';
 import 'package:zognest_website/features/home/pages/components/clients_list.dart';
@@ -17,7 +18,7 @@ import 'package:zognest_website/features/home/pages/components/zognest_services.
 import 'package:zognest_website/features/home/pages/components/zognest_video.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
-import 'package:zognest_website/shared/widgets/home_footer.dart';
+import 'package:zognest_website/shared/widgets/footer.dart';
 
 import '../../../shared/widgets/gradient_container.dart';
 
@@ -121,34 +122,90 @@ class Foreground extends StatelessWidget {
             curve: Curves.ease,
           ),
         ),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const ClientsMarquee(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const ZognestVideo(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const ZognestDescription(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const ZognestOffers(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const MarqueeText(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const OptimismText(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const Counters(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const ZognestServices(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const ZognestMocks(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const ZognestClients(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const MarqueeText(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const ZognestBlogs(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
         const ContactForm(),
-        const SizedBox(height: Constants.sectionSpacing),
-        WebFooter(
+        SizedBox(
+          height: Responsive.isDesktop(context)
+              ? Constants.webSectionSpacing
+              : Constants.mobileSectionSpacing,
+        ),
+        Footer(
           onTabUp: () => controller.animateTo(
             controller.position.minScrollExtent,
             duration: const Duration(milliseconds: Constants.scrollToDuration),

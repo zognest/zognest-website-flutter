@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/features/our_work/pages/components/our_work_text.dart';
 import 'package:zognest_website/features/our_work/pages/components/zognest_projects.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
-import 'package:zognest_website/shared/widgets/home_footer.dart';
+import 'package:zognest_website/shared/widgets/footer.dart';
 
 class OurWorkPage extends StatefulWidget {
   const OurWorkPage({super.key});
@@ -49,10 +50,18 @@ class _OurWorkPageState extends State<OurWorkPage> {
                   children: [
                     const SizedBox(height: Constants.appBarHeight * 1.5),
                     const ZognestProjects(),
-                    const SizedBox(height: Constants.sectionSpacing),
+                    SizedBox(
+                      height: Responsive.isDesktop(context)
+                          ? Constants.webSectionSpacing
+                          : Constants.mobileSectionSpacing,
+                    ),
                     const OurWorkText(),
-                    const SizedBox(height: Constants.sectionSpacing),
-                    WebFooter(
+                    SizedBox(
+                      height: Responsive.isDesktop(context)
+                          ? Constants.webSectionSpacing
+                          : Constants.mobileSectionSpacing,
+                    ),
+                    Footer(
                       onTabUp: () => _controller.animateTo(
                         _controller.position.minScrollExtent,
                         duration: const Duration(

@@ -14,7 +14,7 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 class Constants {
   /// Horizontal padding of any main component or the children inside it
   static const webHorizontalPadding = Spacing.l48 * 2;
-  static const mobileHorizontalPadding = Spacing.l48;
+  static const mobileHorizontalPadding = Spacing.m20;
 
   /// Vertical padding of any main component or the children inside it
   static const webVerticalPadding = Spacing.l40 * 2;
@@ -23,7 +23,8 @@ class Constants {
   static const appBarHeight = Spacing.xl72;
 
   /// The spacing between each [Foreground] component
-  static const sectionSpacing = 150.0;
+  static const webSectionSpacing = 150.0;
+  static const mobileSectionSpacing = 30.0;
 
   /// The height of [MarqueeText] component
   static const marqueeHeight = 150.0;
@@ -33,6 +34,7 @@ class Constants {
 
   /// region [ZognestVideo]
   static const videoAspectRatio = 16 / 9;
+
   // endregion
 
   /// region [ZognestOffers]

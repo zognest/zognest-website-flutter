@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/our_space/models/event.dart';
 import 'package:zognest_website/features/our_space/widgets/event_card.dart';
@@ -27,8 +28,12 @@ class _ZognestEventsState extends State<ZognestEvents> {
       children: [
         const Divider(),
         Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: Constants.webHorizontalPadding),
+          padding: EdgeInsets.symmetric(
+            vertical: Responsive.isDesktop(context) ? Spacing.s0 : Spacing.s12,
+            horizontal: Responsive.isDesktop(context)
+                ? Constants.webHorizontalPadding
+                : Constants.mobileHorizontalPadding,
+          ),
           child: DefaultTabController(
             length: eventsYears.length,
             child: Column(

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/features/our_services/pages/components/create_order.dart';
 import 'package:zognest_website/features/our_services/pages/components/services_browser.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
-import 'package:zognest_website/shared/widgets/home_footer.dart';
+import 'package:zognest_website/shared/widgets/footer.dart';
 
 class OurServicesPage extends StatefulWidget {
   const OurServicesPage({super.key});
@@ -45,11 +46,19 @@ class _OurServicesPageState extends State<OurServicesPage> {
                 Column(
                   children: [
                     const SizedBox(height: Constants.appBarHeight * 1.5),
-                    const SizedBox(height: Constants.sectionSpacing),
+                    SizedBox(
+                      height: Responsive.isDesktop(context)
+                          ? Constants.webSectionSpacing
+                          : Constants.mobileSectionSpacing,
+                    ),
                     const ServicesBrowser(),
-                    const SizedBox(height: Constants.sectionSpacing),
+                    SizedBox(
+                      height: Responsive.isDesktop(context)
+                          ? Constants.webSectionSpacing
+                          : Constants.mobileSectionSpacing,
+                    ),
                     const CreateOrder(),
-                    WebFooter(
+                    Footer(
                       onTabUp: () => _controller.animateTo(
                         _controller.position.minScrollExtent,
                         duration: const Duration(

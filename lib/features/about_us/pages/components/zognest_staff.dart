@@ -58,10 +58,7 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                 style: theme.textTheme.displaySmall
                     ?.copyWith(foreground: TextThemes.foreground),
               ),
-              TextSpan(
-                text: Strings.birds.toUpperCase(),
-                style: theme.textTheme.displaySmall,
-              ),
+              TextSpan(text: Strings.birds.toUpperCase()),
             ],
           ),
           onTapScroll: () {
@@ -99,7 +96,7 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                 return Container(
                   constraints: BoxConstraints.tight(
                     Size(
-                      Constants.servicesCardWidth +
+                      Constants.servicesCardWidth -
                           (Responsive.isDesktop(context) ? 0 : 50),
                       Constants.servicesCardHeight,
                     ),

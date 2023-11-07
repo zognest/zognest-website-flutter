@@ -7,6 +7,7 @@ import 'package:zognest_website/features/about_us/pages/components/zognest_staff
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
+import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
 class AboutUsPage extends StatefulWidget {
@@ -40,6 +41,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
         : Constants.mobileSectionSpacing;
     return Scaffold(
       extendBodyBehindAppBar: true,
+      drawer: const PrimaryDrawer(),
       body: Stack(
         children: [
           SingleChildScrollView(

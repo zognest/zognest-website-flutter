@@ -177,7 +177,8 @@ class FrontCard extends StatelessWidget {
                               maxLines: 2,
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 height: 1.3,
-                                fontSize: 18,
+                                fontSize:
+                                    Responsive.isDesktop(context) ? 20 : 16,
                               ),
                             ),
                           ),
@@ -219,7 +220,7 @@ class BackCard extends StatelessWidget {
           Assets.serviceBackground,
           width: double.infinity,
           height: double.infinity,
-          fit: BoxFit.contain,
+          fit: BoxFit.cover,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
@@ -252,7 +253,7 @@ class BackCard extends StatelessWidget {
                           staff.description,
                           style: theme.textTheme.bodyMedium?.copyWith(
                             height: 1.3,
-                            fontSize: 18,
+                            fontSize: Responsive.isDesktop(context) ? 24 : 16,
                           ),
                         ),
                       ),

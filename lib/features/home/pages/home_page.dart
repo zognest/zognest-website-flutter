@@ -18,6 +18,7 @@ import 'package:zognest_website/features/home/pages/components/zognest_services.
 import 'package:zognest_website/features/home/pages/components/zognest_video.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
+import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
 import '../../../shared/widgets/gradient_container.dart';
@@ -51,6 +52,7 @@ class _HomePageState extends State<HomePage> {
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
+      drawer: const PrimaryDrawer(),
       body: Stack(
         children: [
           SingleChildScrollView(

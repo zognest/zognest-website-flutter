@@ -6,6 +6,7 @@ import 'package:zognest_website/features/our_work/pages/components/our_work_text
 import 'package:zognest_website/features/our_work/pages/components/zognest_projects.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
+import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
 class OurWorkPage extends StatefulWidget {
@@ -36,6 +37,7 @@ class _OurWorkPageState extends State<OurWorkPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      drawer: const PrimaryDrawer(),
       body: Stack(
         children: [
           SingleChildScrollView(

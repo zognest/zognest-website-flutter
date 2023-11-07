@@ -19,7 +19,11 @@ class Footer extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return SizedBox(
-      height: Responsive.isDesktop(context) ? 900 : 400,
+      height: Responsive.isDesktop(context)
+          ? 900
+          : Responsive.isTablet(context)
+              ? 700
+              : 400,
       child: Stack(
         children: [
           GradientContainer(
@@ -69,6 +73,7 @@ class Footer extends StatelessWidget {
                       vertical: Spacing.l24,
                     ),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const ZognestLogo(
                           iconOnly: true,
@@ -85,56 +90,53 @@ class Footer extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: Spacing.l32),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            textBaseline: TextBaseline.alphabetic,
-                            children: [
-                              Expanded(
-                                child: FittedBox(
-                                  child: Text(
-                                    Strings.zognest.toUpperCase(),
-                                    textAlign: TextAlign.center,
-                                    style:
-                                        theme.textTheme.displayLarge?.copyWith(
-                                      fontFamily: 'SF Pro Rounded',
-                                      fontWeight: FontWeight.w900,
-                                      letterSpacing: -15,
-                                    ),
+                        const SizedBox(height: Spacing.l24),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Expanded(
+                              child: FittedBox(
+                                child: Text(
+                                  Strings.zognest.toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: theme.textTheme.displayLarge?.copyWith(
+                                    fontFamily: 'SF Pro Rounded',
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: -15,
                                   ),
                                 ),
                               ),
-                              if (Responsive.isDesktop(context))
-                                CircleButton(
-                                  onTap: onTabUp,
-                                  radius: Responsive.isDesktop(context)
-                                      ? Spacing.l32
-                                      : Spacing.m16,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        height: Constants.circleButtonRadius,
-                                        decoration: BoxDecoration(
-                                          color: theme.primaryColor,
-                                          shape: BoxShape.circle,
-                                        ),
+                            ),
+                            if (Responsive.isDesktop(context))
+                              CircleButton(
+                                onTap: onTabUp,
+                                radius: Responsive.isDesktop(context)
+                                    ? Spacing.l32
+                                    : Spacing.m16,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: Constants.circleButtonRadius,
+                                      decoration: BoxDecoration(
+                                        color: theme.primaryColor,
+                                        shape: BoxShape.circle,
                                       ),
-                                      const SizedBox(height: Spacing.s4),
-                                      SvgPicture.asset(
-                                        Assets.upArrow,
-                                        height: Responsive.isDesktop(context)
-                                            ? Spacing.m20
-                                            : Spacing.s12,
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                    const SizedBox(height: Spacing.s4),
+                                    SvgPicture.asset(
+                                      Assets.upArrow,
+                                      height: Responsive.isDesktop(context)
+                                          ? Spacing.m20
+                                          : Spacing.s12,
+                                    ),
+                                  ],
                                 ),
-                            ],
-                          ),
+                              ),
+                          ],
                         ),
-                        const SizedBox(height: Spacing.l32),
+                        const SizedBox(height: Spacing.l24),
                         FittedBox(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

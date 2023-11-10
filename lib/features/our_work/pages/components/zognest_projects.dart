@@ -1,10 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
+import 'package:zognest_website/features/home/widgets/scroll_headline.dart';
 import 'package:zognest_website/features/our_work/models/project.dart';
-import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/data.dart';
@@ -39,75 +40,35 @@ class _ZognestProjectsState extends State<ZognestProjects> {
     return Column(
       children: [
         const Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Constants.webHorizontalPadding,
-            vertical: Spacing.l40,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+        ScrollHeadline(
+          headline: TextSpan(
             children: [
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: Strings.our.toUpperCase(),
-                      style: theme.textTheme.displaySmall,
-                    ),
-                    TextSpan(
-                      text: Strings.best.toUpperCase(),
-                      style: theme.textTheme.displaySmall
-                          ?.copyWith(foreground: TextThemes.foreground),
-                    ),
-                    TextSpan(
-                      text: Strings.projects.toUpperCase(),
-                      style: theme.textTheme.displaySmall,
-                    ),
-                  ],
-                ),
+              TextSpan(
+                text: Strings.our.toUpperCase(),
+                style: theme.textTheme.displaySmall,
               ),
-              InkWell(
-                onTap: () {
-                  if (_controller.offset ==
-                      _controller.position.maxScrollExtent) {
-                    currentIndex = 0;
-                  }
-                  _controller.animateTo(
-                    Constants.projectBaseWidth * currentIndex,
-                    duration: const Duration(milliseconds: 1000),
-                    curve: Curves.ease,
-                  );
-                  currentIndex++;
-                },
-                overlayColor: MaterialStateProperty.all(Palette.transparent),
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          // textScaleFactor: TextThemes.textScale(context),
-                          Strings.scroll.toUpperCase(),
-                          style: theme.textTheme.displaySmall
-                              ?.copyWith(fontSize: 54),
-                        ),
-                        Text(
-                          '${Data.projects.length} Projects'.toUpperCase(),
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            color: theme.primaryColor,
-                            letterSpacing: 1.5,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(width: Spacing.l24),
-                    Image.asset(Assets.arrowRight),
-                  ],
-                ),
+              TextSpan(
+                text: Strings.best.toUpperCase(),
+                style: theme.textTheme.displaySmall
+                    ?.copyWith(foreground: TextThemes.foreground),
+              ),
+              TextSpan(
+                text: Strings.projects.toUpperCase(),
+                style: theme.textTheme.displaySmall,
               ),
             ],
           ),
+          onTapScroll: () {
+            if (_controller.offset == _controller.position.maxScrollExtent) {
+              currentIndex = 0;
+            }
+            _controller.animateTo(
+              Constants.servicesCardWidth * currentIndex,
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.ease,
+            );
+            currentIndex++;
+          },
         ),
         SizedBox(
           height: Constants.projectHeight,
@@ -119,8 +80,11 @@ class _ZognestProjectsState extends State<ZognestProjects> {
               },
             ),
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.webHorizontalPadding),
+              padding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context)
+                    ? Constants.webHorizontalPadding
+                    : Constants.mobileHorizontalPadding,
+              ),
               scrollDirection: Axis.horizontal,
               controller: _controller,
               itemBuilder: (context, index) {
@@ -158,7 +122,10 @@ class _ProjectItemState extends State<ProjectItem> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 1000),
       curve: Curves.fastOutSlowIn,
-      width: over ? Constants.projectExtendedWidth : Constants.projectBaseWidth,
+      width: over
+          ? Constants.projectExtendedWidth
+          : Constants.projectBaseWidth -
+              (Responsive.isDesktop(context) ? 0 : 50),
       height: Constants.projectHeight,
       child: InkWell(
         onTap: () {},

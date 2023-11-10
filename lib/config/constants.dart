@@ -83,7 +83,8 @@ class Constants {
   // endRegion
 
   /// region [ZognestEvents]
-  static const eventsTabHeight = 60.0;
+  static const eventsDesktopTabHeight = 60.0;
+  static const eventsMobileTabHeight = Spacing.l40;
   static const eventsCardHeight = 500.0;
   static const eventsCardWidth = 335.0;
   static const eventsDialogHeight = 700.0;

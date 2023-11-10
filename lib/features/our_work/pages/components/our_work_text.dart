@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/assets.dart';
 
 class OurWorkText extends StatelessWidget {
@@ -11,8 +12,10 @@ class OurWorkText extends StatelessWidget {
       children: [
         const Divider(),
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Constants.webHorizontalPadding,
+          padding: EdgeInsets.symmetric(
+            horizontal: Responsive.isDesktop(context)
+                ? Constants.webHorizontalPadding
+                : Constants.mobileHorizontalPadding,
           ),
           child: Stack(
             alignment: Alignment.center,

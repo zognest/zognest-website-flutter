@@ -52,14 +52,17 @@ class _ZognestEventsState extends State<ZognestEvents> {
                       ?.copyWith(fontWeight: FontWeight.w600),
                   labelColor: Palette.white,
                   labelStyle: theme.textTheme.labelLarge,
-                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorSize: TabBarIndicatorSize.tab,
                   splashFactory: NoSplash.splashFactory,
                   overlayColor: MaterialStateProperty.all(Palette.transparent),
                   physics: const BouncingScrollPhysics(),
                   tabs: eventsYears.map((year) {
                     return Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: Spacing.l48),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Responsive.isDesktop(context)
+                            ? Spacing.l48
+                            : Spacing.l24,
+                      ),
                       decoration: ShapeDecoration(
                         shape: StadiumBorder(
                           side: BorderSide(
@@ -71,12 +74,14 @@ class _ZognestEventsState extends State<ZognestEvents> {
                       ),
                       child: Tab(
                         text: '$year',
-                        height: Constants.eventsTabHeight,
+                        height: Responsive.isDesktop(context)
+                            ? Constants.eventsDesktopTabHeight
+                            : Constants.eventsMobileTabHeight,
                       ),
                     );
                   }).toList(),
                 ),
-                const SizedBox(height: Spacing.xl72),
+                const SizedBox(height: Spacing.l40),
                 SizedBox(
                   height: Constants.eventsCardHeight,
                   child: TabBarView(

@@ -190,9 +190,11 @@ class FrontCard extends StatelessWidget {
                     title: Strings.more.toUpperCase(),
                     filled: false,
                     width: Constants.servicesCardWidth * 0.4,
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: Spacing.s12,
-                      vertical: Spacing.m20,
+                      vertical: Responsive.isDesktop(context)
+                          ? Spacing.m20
+                          : Spacing.s12,
                     ),
                     onTap: () {},
                   ),
@@ -282,9 +284,10 @@ class BackCard extends StatelessWidget {
               PrimaryButton(
                 title: Strings.linkedIn.toUpperCase(),
                 width: Constants.servicesCardWidth * 0.4,
-                padding: const EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: Spacing.s12,
-                  vertical: Spacing.m20,
+                  vertical:
+                      Responsive.isDesktop(context) ? Spacing.m20 : Spacing.s12,
                 ),
                 onTap: () {},
               ),

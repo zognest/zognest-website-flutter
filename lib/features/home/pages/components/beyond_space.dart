@@ -5,6 +5,7 @@ import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/assets.dart';
@@ -235,6 +236,75 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class BeyondSpaceMobile extends StatelessWidget {
+  const BeyondSpaceMobile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.isDesktop(context)
+            ? Constants.webHorizontalPadding
+            : Constants.mobileHorizontalPadding,
+        vertical: Constants.appBarHeight * 1.5,
+      ),
+      child: Column(
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                Assets.phoneHand,
+                width: double.infinity,
+              ),
+              Positioned(
+                left: size.width * 0.11,
+                top: Spacing.s4,
+                child: SizedBox(
+                  width: size.width * 0.4,
+                  child: const BeyondSpaceCarousel(),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: Spacing.s12),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  Strings.beyond.toUpperCase(),
+                  style: theme.textTheme.displayMedium,
+                ),
+                Text(
+                  Strings.space.toUpperCase(),
+                  style: theme.textTheme.displayMedium?.copyWith(
+                    foreground: TextThemes.foreground,
+                  ),
+                ),
+                Text(
+                  Strings.beyondSpaceBody,
+                  style: theme.textTheme.bodyLarge,
+                ),
+              ],
+            ),
+          ),
+          PrimaryButton(
+            title: Strings.bookOurServices.toUpperCase(),
+            textStyle: theme.textTheme.labelLarge,
+            height: Spacing.xl72,
+            width: double.infinity,
+            onTap: () {},
+          ),
+        ],
+      ),
     );
   }
 }

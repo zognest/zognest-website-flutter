@@ -51,7 +51,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 SvgPicture.asset(Assets.gridLines),
                 Column(
                   children: [
-                    const SizedBox(height: Constants.appBarHeight),
+                    const SizedBox(height: Constants.appBarHeight * 1.5),
                     const TeamDescription(),
                     SizedBox(height: sectionSpacing),
                     const ZognestStaff(),

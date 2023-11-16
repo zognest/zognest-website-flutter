@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/our_services/models/purchasable_service.dart';
 import 'package:zognest_website/resources/spacing.dart';
@@ -16,14 +17,20 @@ class ServicesBrowser extends StatelessWidget {
       children: [
         const Divider(),
         Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: Constants.webHorizontalPadding),
+          padding: EdgeInsets.symmetric(
+            horizontal: Responsive.isDesktop(context)
+                ? Constants.webHorizontalPadding
+                : Constants.mobileHorizontalPadding,
+          ),
           child: Wrap(
+            runSpacing:
+                Responsive.isDesktop(context) ? Spacing.l24 : Spacing.s12,
             spacing: Spacing.l24,
-            runSpacing: Spacing.l24,
             children: Data.purchasableServices.map((service) {
               return SizedBox(
-                height: Constants.servicesBrowserItemHeight,
+                height: Responsive.isDesktop(context)
+                    ? Constants.servicesBrowserItemHeight
+                    : Constants.mobileServicesBrowserItemHeight,
                 width: Constants.servicesBrowserItemWidth,
                 child: ServiceItem(service: service),
               );
@@ -48,30 +55,34 @@ class ServiceItem extends StatelessWidget {
       color: Palette.cardBackgroundColor,
       child: Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(Spacing.l32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  service.title,
-                  style: theme.textTheme.bodyLarge
-                      ?.copyWith(fontWeight: FontWeight.w900),
-                ),
-                const SizedBox(height: Spacing.s8),
-                Text(
-                  service.description,
-                  style: theme.textTheme.bodySmall,
-                ),
-                const Spacer(),
-                PrimaryButton(
-                  title: Strings.add,
-                  textStyle: theme.textTheme.labelLarge,
-                  width: Constants.servicesBrowserItemWidth * 0.2,
-                  padding: const EdgeInsets.symmetric(vertical: Spacing.m20),
-                  onTap: () {},
-                ),
-              ],
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(Spacing.l32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    service.title,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w900,
+                      color: theme.primaryColor,
+                    ),
+                  ),
+                  const SizedBox(height: Spacing.s8),
+                  Text(
+                    service.description,
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  const Spacer(),
+                  PrimaryButton(
+                    title: Strings.add,
+                    textStyle: theme.textTheme.labelLarge,
+                    width: Constants.servicesBrowserItemWidth * 0.2,
+                    padding: const EdgeInsets.symmetric(vertical: Spacing.m20),
+                    onTap: () {},
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(

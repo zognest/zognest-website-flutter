@@ -117,13 +117,14 @@ class Foreground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BeyondSpace(
+        /*BeyondSpace(
           onTabDown: () => controller.animateTo(
             controller.position.maxScrollExtent,
             duration: const Duration(milliseconds: Constants.scrollToDuration),
             curve: Curves.ease,
           ),
-        ),
+        ),*/
+        const BeyondSpaceMobile(),
         SizedBox(
           height: Responsive.isDesktop(context)
               ? Constants.webSectionSpacing

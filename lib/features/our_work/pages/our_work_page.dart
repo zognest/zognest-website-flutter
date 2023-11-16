@@ -50,7 +50,7 @@ class _OurWorkPageState extends State<OurWorkPage> {
                 ),
                 Column(
                   children: [
-                    const SizedBox(height: Constants.appBarHeight),
+                    const SizedBox(height: Constants.appBarHeight * 1.5),
                     const ZognestProjects(),
                     SizedBox(
                       height: Responsive.isDesktop(context)

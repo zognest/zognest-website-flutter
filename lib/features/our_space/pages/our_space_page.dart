@@ -49,7 +49,7 @@ class _OurSpacePageState extends State<OurSpacePage> {
                 controller: _controller,
                 shrinkWrap: true,
                 children: [
-                  const SizedBox(height: Constants.appBarHeight),
+                  const SizedBox(height: Constants.appBarHeight * 1.5),
                   ZognestEvents(events: Data.events),
                   SizedBox(
                     height: Responsive.isDesktop(context)

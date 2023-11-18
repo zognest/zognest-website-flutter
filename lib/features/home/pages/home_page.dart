@@ -115,16 +115,23 @@ class Foreground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(Theme.of(context).platform.name);
+    final platform = Theme.of(context).platform;
     return Column(
       children: [
-        /*BeyondSpace(
-          onTabDown: () => controller.animateTo(
-            controller.position.maxScrollExtent,
-            duration: const Duration(milliseconds: Constants.scrollToDuration),
-            curve: Curves.ease,
-          ),
-        ),*/
-        const BeyondSpaceMobile(),
+        /*(platform == TargetPlatform.windows ||
+                platform == TargetPlatform.macOS ||
+                platform == TargetPlatform.linux)*/
+        Responsive.isDesktop(context)
+            ? BeyondSpace(
+                onTabDown: () => controller.animateTo(
+                  controller.position.maxScrollExtent,
+                  duration:
+                      const Duration(milliseconds: Constants.scrollToDuration),
+                  curve: Curves.ease,
+                ),
+              )
+            : const BeyondSpaceMobile(),
         SizedBox(
           height: Responsive.isDesktop(context)
               ? Constants.webSectionSpacing

@@ -182,7 +182,9 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
         Container(
           decoration: BoxDecoration(
             color: Palette.black,
-            borderRadius: BorderRadius.circular(Spacing.l40),
+            borderRadius: BorderRadius.circular(
+              Responsive.isDesktop(context) ? Spacing.l40 : Spacing.m20,
+            ),
           ),
           child: GestureDetector(
             onTap: nextIndex,
@@ -261,13 +263,14 @@ class BeyondSpaceMobile extends StatelessWidget {
             children: [
               Image.asset(
                 Assets.phoneHand,
-                width: double.infinity,
+                width: size.width * 0.85,
+                fit: BoxFit.cover,
               ),
               Positioned(
-                left: size.width * 0.11,
-                top: Spacing.s4,
+                left: size.width * 0.1,
+                top: 5,
                 child: SizedBox(
-                  width: size.width * 0.4,
+                  width: size.width * 0.384,
                   child: const BeyondSpaceCarousel(),
                 ),
               ),
@@ -289,13 +292,15 @@ class BeyondSpaceMobile extends StatelessWidget {
                     foreground: TextThemes.foreground,
                   ),
                 ),
-                Text(
-                  Strings.beyondSpaceBody,
-                  style: theme.textTheme.bodyLarge,
-                ),
               ],
             ),
           ),
+          const SizedBox(height: Spacing.m20),
+          Text(
+            Strings.beyondSpaceBody,
+            style: theme.textTheme.bodyLarge,
+          ),
+          const SizedBox(height: Spacing.m20),
           PrimaryButton(
             title: Strings.bookOurServices.toUpperCase(),
             textStyle: theme.textTheme.labelLarge,

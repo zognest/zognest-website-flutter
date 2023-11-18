@@ -128,6 +128,8 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
             const ZognestLogo(),
             if (Responsive.appBar(context)) ...[
               const Spacer(),
+              Text(Responsive.deviceType(context)),
+              const Spacer(),
               GestureDetector(
                 onTap: () {
                   Scaffold.of(context).openDrawer();

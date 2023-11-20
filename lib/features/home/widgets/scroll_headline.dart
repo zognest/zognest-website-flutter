@@ -14,7 +14,7 @@ class ScrollHeadline extends StatelessWidget {
   });
 
   final TextSpan headline;
-  final VoidCallback onTapScroll;
+  final VoidCallback? onTapScroll;
 
   @override
   Widget build(BuildContext context) {
@@ -31,45 +31,47 @@ class ScrollHeadline extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           FittedBox(child: Text.rich(headline)),
-          if (!Responsive.isMobile(context)) ...[
-            InkWell(
-              onTap: onTapScroll,
-              overlayColor: MaterialStateProperty.all(Palette.transparent),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        // textScaleFactor: TextThemes.textScale(context),
-                        Strings.scroll.toUpperCase(),
-                        style: theme.textTheme.displaySmall
-                            ?.copyWith(fontSize: 54),
-                      ),
-                      Text(
-                        // textScaleFactor: TextThemes.textScale(context),
-                        Strings.toExploreMore.toUpperCase(),
-                        style: theme.textTheme.labelMedium?.copyWith(
-                          color: theme.primaryColor,
-                          letterSpacing: 1.5,
+          if (onTapScroll != null) ...[
+            if (!Responsive.isMobile(context)) ...[
+              InkWell(
+                onTap: onTapScroll,
+                overlayColor: MaterialStateProperty.all(Palette.transparent),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          // textScaleFactor: TextThemes.textScale(context),
+                          Strings.scroll.toUpperCase(),
+                          style: theme.textTheme.displaySmall
+                              ?.copyWith(fontSize: 54),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: Spacing.l24),
-                  Image.asset(
-                    Assets.arrowRight,
-                    fit: BoxFit.cover,
-                  ),
-                ],
+                        Text(
+                          // textScaleFactor: TextThemes.textScale(context),
+                          Strings.toExploreMore.toUpperCase(),
+                          style: theme.textTheme.labelMedium?.copyWith(
+                            color: theme.primaryColor,
+                            letterSpacing: 1.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: Spacing.l24),
+                    Image.asset(
+                      Assets.arrowRight,
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ] else
-            InkWell(
-              onTap: onTapScroll,
-              overlayColor: MaterialStateProperty.all(Palette.transparent),
-              child: Image.asset(Assets.arrowRight),
-            ),
+            ] else
+              InkWell(
+                onTap: onTapScroll,
+                overlayColor: MaterialStateProperty.all(Palette.transparent),
+                child: Image.asset(Assets.arrowRight),
+              ),
+          ]
         ],
       ),
     );

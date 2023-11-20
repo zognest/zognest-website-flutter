@@ -100,6 +100,7 @@ class Constants {
   static const backgroundDecorationSpacing = 1000.0;
   static const beyondSpaceAppDuration = 5;
   static const clientsMarqueeHeight = Spacing.xl72;
+  static const mobileClientsMarqueeHeight = Spacing.l48;
 
   // endregion
 

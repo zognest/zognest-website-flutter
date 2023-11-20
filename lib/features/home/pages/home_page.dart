@@ -135,7 +135,7 @@ class Foreground extends StatelessWidget {
         SizedBox(
           height: Responsive.isDesktop(context)
               ? Constants.webSectionSpacing
-              : Constants.mobileSectionSpacing,
+              : Constants.mobileSectionSpacing * 0,
         ),
         const ClientsMarquee(),
         SizedBox(
@@ -149,13 +149,17 @@ class Foreground extends StatelessWidget {
               ? Constants.webSectionSpacing
               : Constants.mobileSectionSpacing,
         ),
-        const ZognestDescription(),
+        Responsive.isDesktop(context)
+            ? const ZognestDescription()
+            : const ZognestDescriptionMobile(),
         SizedBox(
           height: Responsive.isDesktop(context)
               ? Constants.webSectionSpacing
               : Constants.mobileSectionSpacing,
         ),
-        const ZognestOffers(),
+        Responsive.isDesktop(context)
+            ? const ZognestOffers()
+            : const ZognestOffersMobile(),
         SizedBox(
           height: Responsive.isDesktop(context)
               ? Constants.webSectionSpacing

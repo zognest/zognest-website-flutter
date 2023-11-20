@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/data.dart';
@@ -50,7 +51,9 @@ class _ClientsMarqueeState extends State<ClientsMarquee>
       children: [
         const Divider(),
         SizedBox(
-          height: Constants.clientsMarqueeHeight,
+          height: Responsive.isDesktop(context)
+              ? Constants.clientsMarqueeHeight
+              : Constants.mobileClientsMarqueeHeight,
           child: ListView.builder(
             controller: _scrollController,
             padding: const EdgeInsets.symmetric(vertical: Spacing.s8),

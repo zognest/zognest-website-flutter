@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
@@ -8,6 +9,8 @@ import 'package:zognest_website/features/home/widgets/scroll_headline.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/data.dart';
+
+import '../../../../config/responsive.dart';
 
 class ZognestOffers extends StatefulWidget {
   const ZognestOffers({super.key});
@@ -95,17 +98,71 @@ class _ZognestOffersState extends State<ZognestOffers> {
   }
 }
 
+class ZognestOffersMobile extends StatelessWidget {
+  const ZognestOffersMobile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      children: [
+        const Divider(),
+        ScrollHeadline(
+          headline: TextSpan(
+            text: Strings.what.toUpperCase(),
+            style: theme.textTheme.displaySmall,
+            children: [
+              TextSpan(
+                text: '${Strings.we}\n'.toUpperCase(),
+                style: theme.textTheme.displaySmall?.copyWith(
+                  foreground: TextThemes.foreground,
+                ),
+              ),
+              TextSpan(text: Strings.offer.toUpperCase()),
+            ],
+          ),
+          onTapScroll: null,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Constants.mobileHorizontalPadding,
+          ),
+          child: Column(
+            children: Data.offers
+                .mapIndexed(
+                  (index, offer) => Padding(
+                    padding: const EdgeInsets.only(bottom: Spacing.s12),
+                    child: OfferItem(offer: offer, colored: index == 0),
+                  ),
+                )
+                .toList(),
+          ),
+        ),
+        const Divider(),
+      ],
+    );
+  }
+}
+
 class OfferItem extends StatelessWidget {
-  const OfferItem({super.key, required this.offer});
+  const OfferItem({
+    super.key,
+    required this.offer,
+    this.colored = false,
+  });
 
   final Offer offer;
+  final bool colored;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      width: Constants.zognestOffersItemWidth,
-      color: Palette.cardBackgroundColor,
+      width: Responsive.isMobile(context)
+          ? Constants.zognestOffersItemWidth
+          : double.infinity,
+      height: Constants.zognestOffersListHeight,
+      color: colored ? theme.primaryColor : Palette.cardBackgroundColor,
       padding: const EdgeInsets.symmetric(
           horizontal: Spacing.l32, vertical: Spacing.l48),
       child: Column(
@@ -114,20 +171,24 @@ class OfferItem extends StatelessWidget {
           Text(
             offer.highlight.toUpperCase(),
             style: theme.textTheme.headlineMedium?.copyWith(
-              color: theme.primaryColor,
+              color: colored ? Colors.black : theme.primaryColor,
               fontVariations: TextThemes.fontVariation(3),
             ),
           ),
           Text(
             offer.title.toUpperCase(),
-            style: theme.textTheme.headlineMedium,
+            style: theme.textTheme.headlineMedium?.copyWith(
+              color: colored ? Colors.black : null,
+            ),
           ),
           const SizedBox(height: Spacing.s12),
           Expanded(
             child: SingleChildScrollView(
               child: Text(
                 offer.description,
-                style: theme.textTheme.bodyMedium,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: colored ? Colors.black : null,
+                ),
               ),
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/shared/data.dart';
 
@@ -54,8 +55,11 @@ class _ZognestVideoState extends State<ZognestVideo> {
             }
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: Constants.webHorizontalPadding),
+            padding: EdgeInsets.symmetric(
+              horizontal: Responsive.isDesktop(context)
+                  ? Constants.webHorizontalPadding
+                  : Constants.mobileHorizontalPadding,
+            ),
             child: Stack(
               alignment: Alignment.center,
               children: [

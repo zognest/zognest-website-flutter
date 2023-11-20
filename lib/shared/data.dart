@@ -40,7 +40,37 @@ class Data {
       highlight: 'Professional',
       title: 'And dedicated team',
       description:
-      'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
+          'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
+    ),
+    Offer(
+      highlight: 'Professional',
+      title: 'And dedicated team',
+      description:
+          'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
+    ),
+    Offer(
+      highlight: 'Professional',
+      title: 'And dedicated team',
+      description:
+          'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
+    ),
+    Offer(
+      highlight: 'Professional',
+      title: 'And dedicated team',
+      description:
+          'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
+    ),
+    Offer(
+      highlight: 'Professional',
+      title: 'And dedicated team',
+      description:
+          'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
+    ),
+    Offer(
+      highlight: 'Professional',
+      title: 'And dedicated team',
+      description:
+          'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
     ),
   ];
 

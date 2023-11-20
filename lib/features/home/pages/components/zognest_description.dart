@@ -82,3 +82,63 @@ class ZognestDescription extends StatelessWidget {
     );
   }
 }
+
+class ZognestDescriptionMobile extends StatelessWidget {
+  const ZognestDescriptionMobile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      children: [
+        AspectRatio(
+          aspectRatio: 1,
+          child: Image.asset(
+            Assets.office,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: Spacing.l32,
+            horizontal: Spacing.s12,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FittedBox(
+                child: Text.rich(
+                  maxLines: 3,
+                  TextSpan(
+                    text: '${Strings.helpingYourBusiness.toUpperCase()}\n',
+                    style: theme.textTheme.displaySmall,
+                    children: [
+                      TextSpan(
+                        text: Strings.to.toUpperCase(),
+                        style: theme.textTheme.displaySmall?.copyWith(
+                          fontVariations: TextThemes.fontVariation(3),
+                        ),
+                      ),
+                      TextSpan(text: Strings.exploreThe.toUpperCase()),
+                      TextSpan(
+                        text: Strings.sky.toUpperCase(),
+                        style: theme.textTheme.displaySmall?.copyWith(
+                          color: theme.primaryColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: Spacing.l32),
+              Text(
+                Strings.zognestDescription,
+                style: theme.textTheme.bodyLarge,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

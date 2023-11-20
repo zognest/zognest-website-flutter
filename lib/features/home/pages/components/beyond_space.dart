@@ -183,7 +183,7 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
           decoration: BoxDecoration(
             color: Palette.black,
             borderRadius: BorderRadius.circular(
-              Responsive.isDesktop(context) ? Spacing.l40 : Spacing.m20,
+              Responsive.isMobile(context) ? Spacing.m20 : Spacing.l40,
             ),
           ),
           child: GestureDetector(

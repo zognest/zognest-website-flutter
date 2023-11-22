@@ -158,7 +158,7 @@ class OfferItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      width: Responsive.isMobile(context)
+      width: !Responsive.isMobile(context)
           ? Constants.zognestOffersItemWidth
           : double.infinity,
       height: Constants.zognestOffersListHeight,

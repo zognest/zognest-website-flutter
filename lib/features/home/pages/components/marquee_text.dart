@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
-import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 
 import '../../../../../config/constants.dart';
+import '../../../../config/responsive.dart';
 
 class MarqueeText extends StatefulWidget {
   const MarqueeText({super.key});
@@ -88,7 +88,7 @@ class _MarqueeTextState extends State<MarqueeText>
       children: [
         const Divider(),
         SizedBox(
-          height: Constants.marqueeHeight,
+          height: Responsive.isDesktop(context) ? Constants.marqueeHeight : 100,
           child: ListView.builder(
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
@@ -97,7 +97,7 @@ class _MarqueeTextState extends State<MarqueeText>
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: Spacing.m20),
+                  // const SizedBox(height: Spacing.m20),
                   marqueeText[i],
                 ],
               );

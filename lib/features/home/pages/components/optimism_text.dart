@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/assets.dart';
+import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 
 class OptimismText extends StatelessWidget {
@@ -14,17 +16,21 @@ class OptimismText extends StatelessWidget {
     return Column(
       children: [
         const Divider(),
-        const SizedBox(height: Constants.webVerticalPadding * 0.7),
+        // const SizedBox(height: Constants.webVerticalPadding * 0.7),
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Constants.webHorizontalPadding,
+          padding: EdgeInsets.symmetric(
+            horizontal: Responsive.isDesktop(context)
+                ? Constants.webHorizontalPadding
+                : Constants.mobileHorizontalPadding,
           ),
           child: SizedBox(
-            height: Constants.optimismSectionHeight,
+            height: Responsive.isDesktop(context)
+                ? Constants.optimismSectionHeight
+                : 200,
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Image.asset(Assets.mercuryVenus),
+                Image.asset(Assets.mercuryVenus, fit: BoxFit.cover),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
@@ -50,14 +56,19 @@ class OptimismText extends StatelessWidget {
                                 WidgetSpan(
                                   baseline: TextBaseline.alphabetic,
                                   alignment: PlaceholderAlignment.middle,
-                                  child: Text(
-                                    Strings.nothingCanBeDone.toUpperCase(),
-                                    style:
-                                        theme.textTheme.displayMedium?.copyWith(
-                                      color: theme.primaryColor,
-                                      fontSize: 36,
-                                      height: 0,
-                                    ),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        Strings.nothingCanBeDone.toUpperCase(),
+                                        style: theme.textTheme.displayMedium
+                                            ?.copyWith(
+                                          color: theme.primaryColor,
+                                          fontSize: 36,
+                                          height: 0,
+                                        ),
+                                      ),
+                                      const SizedBox(height: Spacing.l32),
+                                    ],
                                   ),
                                 ),
                               ],

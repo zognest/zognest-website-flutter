@@ -1,7 +1,7 @@
 abstract final class Paths {
-  static const svg = '/svg';
-  static const images = '/images';
-  static const temp = '/temp';
+  static const svg = 'assets/svg';
+  static const images = 'assets/images';
+  static const temp = 'assets/temp';
 }
 
 abstract final class Assets {

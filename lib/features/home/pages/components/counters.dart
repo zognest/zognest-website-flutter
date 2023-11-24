@@ -2,6 +2,7 @@ import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/spacing.dart';
@@ -14,18 +15,19 @@ class Counters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
     return Column(
       children: [
         const Divider(),
         Padding(
-          padding: const EdgeInsets.only(bottom: Spacing.l40),
+          padding: EdgeInsets.only(bottom: size.width * 0.025),
           child: Column(
             children: [
-              FittedBox(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    ShaderMask(
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  FittedBox(
+                    child: ShaderMask(
                       blendMode: BlendMode.srcIn,
                       shaderCallback: (bounds) {
                         return RadialGradient(
@@ -48,53 +50,71 @@ class Counters extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(
-                      Strings.someCountThatMatters.toUpperCase(),
-                      style: theme.textTheme.displaySmall?.copyWith(
-                        color: theme.primaryColor,
-                        height: 0,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Responsive.isDesktop(context)
+                          ? Constants.webHorizontalPadding
+                          : Constants.mobileHorizontalPadding,
+                    ),
+                    child: FittedBox(
+                      child: Text(
+                        Strings.someCountThatMatters.toUpperCase(),
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          color: theme.primaryColor,
+                          fontSize: Responsive.isDesktop(context) ? 42 : 18,
+                          height: 0,
+                        ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: Constants.webHorizontalPadding),
-                child: FittedBox(
-                  child: SizedBox(
-                    height: Constants.countItemHeight,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CountElement(
-                          count: 09,
-                          title: Strings.appDevelopment,
-                        ),
-                        RowDivider(),
-                        CountElement(
-                          count: 12,
-                          title: Strings.webDevelopment,
-                        ),
-                        RowDivider(),
-                        CountElement(
-                          count: 17,
-                          title: Strings.uiUxForCompanies,
-                        ),
-                        RowDivider(),
-                        CountElement(
-                          count: 36,
-                          title: Strings.happyCustomer,
-                        ),
-                        RowDivider(),
-                        CountElement(
+                  horizontal: Responsive.isDesktop(context)
+                      ? Constants.webHorizontalPadding
+                      : Constants.mobileHorizontalPadding,
+                ),
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  children: [
+                    const CountElement(
+                      count: 09,
+                      title: Strings.appDevelopment,
+                    ),
+                    const RowDivider(),
+                    const CountElement(
+                      count: 12,
+                      title: Strings.webDevelopment,
+                    ),
+                    if (Responsive.isDesktop(context)) const RowDivider(),
+                    const CountElement(
+                      count: 17,
+                      title: Strings.uiUxForCompanies,
+                    ),
+                    const RowDivider(),
+                    const CountElement(
+                      count: 36,
+                      title: Strings.happyCustomer,
+                    ),
+                    if (Responsive.isDesktop(context)) const RowDivider(),
+                    if (Responsive.isMobile(context))
+                      const Align(
+                        alignment: Alignment.center,
+                        child: CountElement(
                           count: 36,
                           title: Strings.projectsCompleted,
                           hasPlus: false,
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
+                    if (!Responsive.isMobile(context))
+                      const CountElement(
+                        count: 36,
+                        title: Strings.projectsCompleted,
+                        hasPlus: false,
+                      ),
+                  ],
                 ),
               ),
             ],
@@ -145,53 +165,63 @@ class _CountElementState extends State<CountElement>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: VisibilityDetector(
-            key: Key(widget.title),
-            onVisibilityChanged: (info) {
-              if (_controller.isCompleted) return;
-              if (info.visibleFraction == 1) _controller.forward();
-            },
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              textBaseline: TextBaseline.alphabetic,
-              children: [
-                Countup(
-                  animationController: _controller,
-                  begin: 0,
-                  end: widget.count.toDouble(),
-                  separator: ',',
-                  style: theme.textTheme.headlineLarge?.copyWith(
-                    color: theme.primaryColor,
-                    height: 1,
-                  ),
-                ),
-                if (widget.hasPlus)
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      '+',
-                      style: theme.textTheme.headlineLarge?.copyWith(
-                        fontSize: 60,
-                        color: theme.primaryColor,
-                        height: 1,
-                      ),
+    return SizedBox(
+      height: Responsive.isDesktop(context)
+          ? Constants.webCountItemHeight
+          : Constants.mobileCountItemHeight,
+      width: Responsive.isDesktop(context) ? 220 : 160,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: VisibilityDetector(
+              key: Key(widget.title),
+              onVisibilityChanged: (info) {
+                if (_controller.isCompleted) return;
+                if (info.visibleFraction == 1) _controller.forward();
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Countup(
+                    animationController: _controller,
+                    begin: 0,
+                    end: widget.count.toDouble(),
+                    separator: ',',
+                    style: theme.textTheme.headlineLarge?.copyWith(
+                      color: theme.primaryColor,
+                      fontSize: Responsive.isMobile(context) ? 40 : null,
+                      height: 1,
                     ),
                   ),
-              ],
+                  if (widget.hasPlus)
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        '+',
+                        style: theme.textTheme.headlineLarge?.copyWith(
+                          fontSize: Responsive.isMobile(context) ? 20 : 60,
+                          color: theme.primaryColor,
+                          height: 1,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: Spacing.s12),
-        Text(
-          widget.title.toUpperCase(),
-          maxLines: 2,
-          style: theme.textTheme.labelLarge,
-        ),
-      ],
+          const SizedBox(height: Spacing.s12),
+          Text(
+            widget.title.toUpperCase(),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            style: theme.textTheme.labelLarge
+                ?.copyWith(fontSize: Responsive.isDesktop(context) ? null : 12),
+          ),
+        ],
+      ),
     );
   }
 }

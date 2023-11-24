@@ -40,16 +40,20 @@ class Constants {
   /// region [ZognestOffers]
   static const zognestOffersItemWidth = 440.0;
   static const zognestOffersListHeight = 340.0;
+
   // endregion
 
   /// region [Counters]
   static const countersAnimationDuration = 3000;
-  static const countItemHeight = Spacing.xl60 * 2;
+  static const webCountItemHeight = Spacing.xl60 * 2;
+  static const mobileCountItemHeight = Spacing.xl60 * 1.25;
+
   // endregion
 
   /// region [ZognestServices]
   static const servicesCardWidth = 360.0;
   static const servicesCardHeight = 540.0;
+
   // endregion
 
   /// region [ZognestMocks]

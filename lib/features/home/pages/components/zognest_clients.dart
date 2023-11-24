@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
@@ -78,8 +79,11 @@ class _ZognestClientsState extends State<ZognestClients> {
               },
             ),
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.webHorizontalPadding),
+              padding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context)
+                    ? Constants.webHorizontalPadding
+                    : Constants.mobileHorizontalPadding,
+              ),
               scrollDirection: Axis.horizontal,
               controller: _controller,
               itemBuilder: (context, index) {
@@ -118,7 +122,8 @@ class _ClientItemState extends State<ClientItem> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return FrostedContainer(
-      width: Constants.clientsItemWidth,
+      width: Constants.clientsItemWidth -
+          (Responsive.isDesktop(context) ? 0 : 100),
       height: Constants.clientsSectionHeight,
       padding: const EdgeInsets.symmetric(
           horizontal: Spacing.l32, vertical: Spacing.l24),
@@ -139,9 +144,21 @@ class _ClientItemState extends State<ClientItem> {
                   children: [
                     Row(
                       children: [
-                        Image.asset(widget.clientFeedback.backgroundImages[0]),
+                        Expanded(
+                          child: Image.asset(
+                            widget.clientFeedback.backgroundImages[0],
+                            // height: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         const SizedBox(width: Spacing.m16),
-                        Image.asset(widget.clientFeedback.backgroundImages[1]),
+                        Expanded(
+                          child: Image.asset(
+                            widget.clientFeedback.backgroundImages[1],
+                            height: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ],
                     ),
                     Positioned(

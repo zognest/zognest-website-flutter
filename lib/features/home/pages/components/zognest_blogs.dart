@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/blog.dart';
@@ -78,8 +79,11 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
               },
             ),
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.webHorizontalPadding),
+              padding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context)
+                    ? Constants.webHorizontalPadding
+                    : Constants.mobileHorizontalPadding,
+              ),
               scrollDirection: Axis.horizontal,
               controller: _controller,
               itemBuilder: (context, index) {
@@ -118,8 +122,9 @@ class _BlogItemState extends State<BlogItem> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return FrostedContainer(
-      width: Constants.blogsSectionHeight,
-      height: Constants.clientsSectionHeight,
+      width:
+          Constants.blogsItemWidth - (Responsive.isDesktop(context) ? 0 : 100),
+      height: Constants.blogsSectionHeight,
       padding: const EdgeInsets.symmetric(
           horizontal: Spacing.l32, vertical: Spacing.l24),
       child: InkWell(
@@ -133,7 +138,7 @@ class _BlogItemState extends State<BlogItem> {
           children: [
             GreyscaleFilter(
               isHovered: hovered,
-              child: Image.asset(widget.blog.image),
+              child: Image.asset(widget.blog.image, fit: BoxFit.cover),
             ),
             Expanded(
               child: Column(

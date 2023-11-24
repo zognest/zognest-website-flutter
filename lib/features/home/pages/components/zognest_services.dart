@@ -1,7 +1,10 @@
+// ignore: depend_on_referenced_packages
+import 'package:collection/collection.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/service.dart';
 import 'package:zognest_website/features/home/widgets/scroll_headline.dart';
@@ -60,54 +63,77 @@ class _ZognestServicesState extends State<ZognestServices> {
               TextSpan(text: Strings.offer.toUpperCase()),
             ],
           ),
-          onTapScroll: () {
-            if (_controller.offset == _controller.position.maxScrollExtent) {
-              currentIndex = 0;
-            }
-            _controller.animateTo(
-              Constants.servicesCardWidth * currentIndex,
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.ease,
-            );
-            currentIndex++;
-          },
+          onTapScroll: Responsive.isDesktop(context)
+              ? () {
+                  if (_controller.offset ==
+                      _controller.position.maxScrollExtent) {
+                    currentIndex = 0;
+                  }
+                  _controller.animateTo(
+                    Constants.servicesCardWidth * currentIndex,
+                    duration: const Duration(milliseconds: 1000),
+                    curve: Curves.ease,
+                  );
+                  currentIndex++;
+                }
+              : null,
         ),
-        SizedBox(
-          height: Constants.servicesCardHeight,
-          child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context).copyWith(
-              dragDevices: {
-                PointerDeviceKind.touch,
-                PointerDeviceKind.mouse,
-              },
-            ),
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.webHorizontalPadding),
-              scrollDirection: Axis.horizontal,
-              controller: _controller,
-              itemBuilder: (context, index) {
-                final i = index % Data.services.length;
-                final service = Data.services[i];
-                return Container(
-                  constraints: BoxConstraints.tight(
-                    const Size(
-                      Constants.servicesCardWidth,
-                      Constants.servicesCardHeight,
-                    ),
+        !Responsive.isMobile(context)
+            ? SizedBox(
+                height: Constants.servicesCardHeight,
+                child: ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(context).copyWith(
+                    dragDevices: {
+                      PointerDeviceKind.touch,
+                      PointerDeviceKind.mouse,
+                    },
                   ),
-                  child: FlippingWidget(
-                    front: FrontService(service: service),
-                    back: BackService(service: service),
+                  child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Constants.webHorizontalPadding),
+                    scrollDirection: Axis.horizontal,
+                    controller: _controller,
+                    itemBuilder: (context, index) {
+                      final i = index % Data.services.length;
+                      final service = Data.services[i];
+                      return Container(
+                        constraints: BoxConstraints.tight(
+                          const Size(
+                            Constants.servicesCardWidth,
+                            Constants.servicesCardHeight,
+                          ),
+                        ),
+                        child: FlippingWidget(
+                          front: FrontService(service: service),
+                          back: BackService(service: service),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: Spacing.l24),
+                    itemCount: 10,
                   ),
-                );
-              },
-              separatorBuilder: (context, index) =>
-                  const SizedBox(width: Spacing.l24),
-              itemCount: 10,
-            ),
-          ),
-        ),
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Constants.mobileHorizontalPadding,
+                ),
+                child: Column(
+                  children: Data.services
+                      .mapIndexed(
+                        (index, service) => Padding(
+                          padding: const EdgeInsets.only(bottom: Spacing.s12),
+                          child: SizedBox(
+                            height: Constants.servicesCardHeight,
+                            width: double.infinity,
+                            child: FrontService(service: service),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
         const Divider(),
       ],
     );
@@ -160,13 +186,13 @@ class FrontService extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding:
-                            const EdgeInsets.symmetric(vertical: Spacing.m20),
+                        const EdgeInsets.symmetric(vertical: Spacing.m20),
                         child: Text(
                           service.description,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 5,
                           style:
-                              theme.textTheme.bodyMedium?.copyWith(height: 1.3),
+                          theme.textTheme.bodyMedium?.copyWith(height: 1.3),
                         ),
                       ),
                     ),
@@ -232,7 +258,7 @@ class BackService extends StatelessWidget {
                     Expanded(
                       child: SingleChildScrollView(
                         padding:
-                            const EdgeInsets.symmetric(vertical: Spacing.s12),
+                        const EdgeInsets.symmetric(vertical: Spacing.s12),
                         child: Wrap(
                           runSpacing: Spacing.s8,
                           spacing: Spacing.s8,

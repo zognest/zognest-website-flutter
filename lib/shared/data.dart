@@ -8,6 +8,7 @@ import 'package:zognest_website/features/our_work/models/project.dart';
 import 'package:zognest_website/resources/assets.dart';
 
 import '../features/home/models/service.dart';
+import 'models/technology.dart';
 
 class Data {
   static const beyondSpaceImages = [

@@ -97,7 +97,12 @@ class Constants {
   // endRegion
 
   // region Section Heights
-  static const zognestDescriptionSectionHeight = 700.0;
+  /// Web list item height
+  static const webListItemHeight = 500.0;
+  static const webListItemWidth = 335.0;
+
+  /// [ImageText]
+  static const imageTextHeight = 700.0;
   static const zognestFooterSectionHeight = 800.0;
   static const optimismSectionHeight = 800.0;
   static const contactUsSectionHeight = 850.0;

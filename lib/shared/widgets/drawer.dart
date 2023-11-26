@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
@@ -11,32 +12,49 @@ class PrimaryDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final route = GoRouterState.of(context);
     final theme = Theme.of(context);
-    return Drawer(
-      child: Column(
-        children: AppBarButtons.values.map(
-          (button) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: Spacing.m16,
-                horizontal: Spacing.s8,
-              ),
-              child: InkWell(
-                onTap: () => context.go(button.route),
-                overlayColor: MaterialStateProperty.all(Palette.transparent),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 2000),
-                  child: Text(
-                    button.title.toUpperCase(),
-                    style: route.name == button.route
-                        ? theme.textTheme.labelLarge
-                            ?.copyWith(color: theme.primaryColor)
-                        : theme.textTheme.labelMedium,
-                  ),
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ColoredBox(
+        color: Palette.cardBackgroundColor,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: Spacing.s12,
+                  horizontal: Constants.mobileHorizontalPadding,
                 ),
-              ),
-            );
-          },
-        ).toList(),
+                child: MobileAppBar()),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: AppBarButtons.values.map(
+                (button) {
+                  return InkWell(
+                    onTap: () => context.go(button.route),
+                    overlayColor:
+                        MaterialStateProperty.all(Palette.transparent),
+                    child: Container(
+                      color: route.name == button.route
+                          ? theme.primaryColor
+                          : Palette.transparent,
+                      padding:
+                          const EdgeInsets.symmetric(vertical: Spacing.l32),
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: Text(
+                        button.title.toUpperCase(),
+                        style: route.name == button.route
+                            ? theme.textTheme.labelLarge
+                                ?.copyWith(color: Palette.black)
+                            : theme.textTheme.labelMedium,
+                      ),
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:zognest_website/features/home/models/service.dart';
+import 'package:zognest_website/shared/models/technology.dart';
 
 class Staff {
   final String name;

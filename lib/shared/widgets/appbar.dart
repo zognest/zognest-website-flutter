@@ -107,7 +107,6 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
     final route = GoRouterState.of(context);
     return SlideTransition(
       position: _appBarOffsetAnimation,
@@ -123,70 +122,86 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
         decoration: BoxDecoration(
           color: Palette.appBarBackground.withOpacity(0.6),
         ),
-        child: Row(
-          children: [
-            const ZognestLogo(),
-            if (Responsive.appBar(context)) ...[
-              const Spacer(),
-              Text(Responsive.deviceType(context)),
-              const Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                child: SvgPicture.asset(Assets.drawer),
-              ),
-            ] else ...[
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: AppBarButtons.values.map(
-                    (button) {
-                      return Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: Spacing.m16),
-                        child: InkWell(
-                          onTap: () => context.go(button.route),
-                          onHover: (hovered) {
-                            if (hovered) {
-                              hoveredRoute = button.route;
-                              setState(() {});
-                              return;
-                            }
-                            hoveredRoute = '/';
-                            setState(() {});
-                          },
-                          overlayColor:
-                              MaterialStateProperty.all(Palette.transparent),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 2000),
-                            child: Text(
-                              button.title.toUpperCase(),
-                              style: route.name == button.route
-                                  ? theme.textTheme.labelLarge
-                                      ?.copyWith(color: theme.primaryColor)
-                                  : theme.textTheme.labelMedium?.copyWith(
-                                      color: hoveredRoute == button.route
-                                          ? theme.primaryColor.withOpacity(0.7)
-                                          : null,
-                                    ),
+        child: Responsive.appBar(context)
+            ? const MobileAppBar()
+            : Row(
+                children: [
+                  const ZognestLogo(),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: AppBarButtons.values.map(
+                        (button) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: Spacing.m16),
+                            child: InkWell(
+                              onTap: () => context.go(button.route),
+                              onHover: (hovered) {
+                                if (hovered) {
+                                  hoveredRoute = button.route;
+                                  setState(() {});
+                                  return;
+                                }
+                                hoveredRoute = '/';
+                                setState(() {});
+                              },
+                              overlayColor: MaterialStateProperty.all(
+                                  Palette.transparent),
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 2000),
+                                child: Text(
+                                  button.title.toUpperCase(),
+                                  style: route.name == button.route
+                                      ? theme.textTheme.labelLarge
+                                          ?.copyWith(color: theme.primaryColor)
+                                      : theme.textTheme.labelMedium?.copyWith(
+                                          color: hoveredRoute == button.route
+                                              ? theme.primaryColor
+                                                  .withOpacity(0.7)
+                                              : null,
+                                        ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      );
-                    },
-                  ).toList(),
-                ),
+                          );
+                        },
+                      ).toList(),
+                    ),
+                  ),
+                  PrimaryButton(
+                    onTap: () {},
+                    title: Strings.getInTouch.toUpperCase(),
+                    trailing:
+                        CircleButton(child: SvgPicture.asset(Assets.mail)),
+                  ),
+                ],
               ),
-              PrimaryButton(
-                onTap: () {},
-                title: Strings.getInTouch.toUpperCase(),
-                trailing: CircleButton(child: SvgPicture.asset(Assets.mail)),
-              ),
-            ],
-          ],
-        ),
       ),
+    );
+  }
+}
+
+class MobileAppBar extends StatelessWidget {
+  const MobileAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const ZognestLogo(),
+        const Spacer(),
+        InkWell(
+          onTap: () {
+            if (Scaffold.of(context).isDrawerOpen) {
+              Scaffold.of(context).closeDrawer();
+              return;
+            }
+            Scaffold.of(context).openDrawer();
+          },
+          child: SvgPicture.asset(Assets.drawer),
+        ),
+      ],
     );
   }
 }

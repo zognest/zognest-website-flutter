@@ -26,7 +26,7 @@ class _ZognestEventsState extends State<ZognestEvents> {
         widget.events.map((event) => event.date.year).toSet().toList();
     return Column(
       children: [
-        const Divider(),
+        if (Responsive.isDesktop(context)) const Divider(),
         Padding(
           padding: EdgeInsets.symmetric(
             vertical: Responsive.isDesktop(context) ? Spacing.s0 : Spacing.s12,

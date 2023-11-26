@@ -18,7 +18,7 @@ class ZognestDescription extends StatelessWidget {
       children: [
         const Divider(),
         FrostedContainer(
-          height: Constants.zognestDescriptionSectionHeight,
+          height: Constants.imageTextHeight,
           child: Padding(
             padding: const EdgeInsets.symmetric(
                 horizontal: Constants.webHorizontalPadding),

@@ -10,8 +10,11 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/gradient_container.dart';
 
-class TeamDescription extends StatelessWidget {
-  const TeamDescription({super.key});
+class ImageText extends StatelessWidget {
+  const ImageText({super.key, this.hasGradient = false, required this.image});
+
+  final bool hasGradient;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -24,30 +27,29 @@ class TeamDescription extends StatelessWidget {
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  const GradientContainer(
-                    color: Colors.deepPurple,
-                    height: Constants.zognestDescriptionSectionHeight,
-                    alignment: Alignment(0.3, 0),
-                    width: double.infinity,
-                    radius: 1,
-                  ),
+                  if (hasGradient)
+                    const GradientContainer(
+                      color: Colors.deepPurple,
+                      height: Constants.imageTextHeight,
+                      alignment: Alignment(0.5, 0),
+                      radius: 0.8,
+                    ),
                   FrostedContainer(
-                    height: Constants.zognestDescriptionSectionHeight,
-                    blurStrength: 8,
+                    height: Constants.imageTextHeight,
+                    blurStrength: 4,
                     backgroundColor:
                         Palette.cardBackgroundColor.withOpacity(0.1),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: Constants.webHorizontalPadding),
+                        horizontal: Constants.webHorizontalPadding,
+                      ),
                       child: Row(
                         children: [
-                          Expanded(
-                            child: Image.asset(
-                              Assets.zognestTeam,
-                              height: double.infinity,
-                              width: size.width * 0.3,
-                              fit: BoxFit.cover,
-                            ),
+                          Image.asset(
+                            Assets.zognestTeam,
+                            height: double.infinity,
+                            width: size.width * 0.4,
+                            fit: BoxFit.cover,
                           ),
                           const SizedBox(width: Spacing.l40),
                           Expanded(
@@ -55,14 +57,11 @@ class TeamDescription extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   vertical: Spacing.l40),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Expanded(
                                     child: AutoSizeText.rich(
                                       stepGranularity: 4,
-                                      maxLines: 5,
+                                      maxLines: 4,
                                       TextSpan(
                                         text: Strings.helpingYourBusiness
                                             .toUpperCase(),
@@ -90,8 +89,7 @@ class TeamDescription extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  AutoSizeText(
-                                    stepGranularity: 4,
+                                  Text(
                                     Strings.zognestDescription,
                                     style: theme.textTheme.bodyLarge,
                                   ),
@@ -108,12 +106,12 @@ class TeamDescription extends StatelessWidget {
               const Divider(),
             ],
           )
-        : const TeamDescriptionMobile();
+        : const ImageTextMobile();
   }
 }
 
-class TeamDescriptionMobile extends StatelessWidget {
-  const TeamDescriptionMobile({super.key});
+class ImageTextMobile extends StatelessWidget {
+  const ImageTextMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -129,35 +127,34 @@ class TeamDescriptionMobile extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
-              vertical: Spacing.l32, horizontal: Spacing.s12),
+            vertical: Spacing.l32,
+            horizontal: Constants.mobileHorizontalPadding,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FittedBox(
-                child: Text.rich(
-                  maxLines: 3,
-                  TextSpan(
-                    text: '${Strings.helpingYourBusiness.toUpperCase()}\n',
-                    style: theme.textTheme.displaySmall,
-                    children: [
-                      TextSpan(
-                        text: Strings.to.toUpperCase(),
-                        style: theme.textTheme.displaySmall?.copyWith(
-                          fontVariations: TextThemes.fontVariation(3),
-                        ),
+              Text.rich(
+                TextSpan(
+                  text: '${Strings.helpingYourBusiness.toUpperCase()}\n',
+                  style: theme.textTheme.displaySmall,
+                  children: [
+                    TextSpan(
+                      text: Strings.to.toUpperCase(),
+                      style: theme.textTheme.displaySmall?.copyWith(
+                        fontVariations: TextThemes.fontVariation(3),
                       ),
-                      TextSpan(text: Strings.exploreThe.toUpperCase()),
-                      TextSpan(
-                        text: Strings.sky.toUpperCase(),
-                        style: theme.textTheme.displaySmall?.copyWith(
-                          color: theme.primaryColor,
-                        ),
+                    ),
+                    TextSpan(text: Strings.exploreThe.toUpperCase()),
+                    TextSpan(
+                      text: Strings.sky.toUpperCase(),
+                      style: theme.textTheme.displaySmall?.copyWith(
+                        color: theme.primaryColor,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: Spacing.l32),
+              const SizedBox(height: Constants.mobileSectionSpacing),
               Text(
                 Strings.zognestDescription,
                 style: theme.textTheme.bodyLarge,

@@ -1,3 +1,5 @@
+import 'package:zognest_website/shared/models/technology.dart';
+
 class Service {
   final String highlight;
   final String title;
@@ -9,15 +11,5 @@ class Service {
     required this.title,
     required this.description,
     required this.technologies,
-  });
-}
-
-class Technology {
-  final String name;
-  final String image;
-
-  Technology({
-    required this.name,
-    required this.image,
   });
 }

@@ -191,6 +191,8 @@ class MobileAppBar extends StatelessWidget {
       children: [
         const ZognestLogo(),
         const Spacer(),
+        Text(Responsive.deviceType(context)),
+        const Spacer(),
         InkWell(
           onTap: () {
             if (Scaffold.of(context).isDrawerOpen) {

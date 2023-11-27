@@ -30,15 +30,15 @@ class ScrollHeadline extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          FittedBox(child: Text.rich(headline)),
+          Text.rich(headline),
           if (onTapScroll != null) ...[
-            if (!Responsive.isMobile(context)) ...[
-              InkWell(
-                onTap: onTapScroll,
-                overlayColor: MaterialStateProperty.all(Palette.transparent),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
+            InkWell(
+              onTap: onTapScroll,
+              overlayColor: MaterialStateProperty.all(Palette.transparent),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (!Responsive.isMobile(context)) ...[
                     Column(
                       children: [
                         Text(
@@ -58,20 +58,12 @@ class ScrollHeadline extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(width: Spacing.l24),
-                    Image.asset(
-                      Assets.arrowRight,
-                      fit: BoxFit.cover,
-                    ),
                   ],
-                ),
+                  Image.asset(Assets.arrowRight, fit: BoxFit.cover),
+                ],
               ),
-            ] else
-              InkWell(
-                onTap: onTapScroll,
-                overlayColor: MaterialStateProperty.all(Palette.transparent),
-                child: Image.asset(Assets.arrowRight),
-              ),
-          ]
+            ),
+          ],
         ],
       ),
     );

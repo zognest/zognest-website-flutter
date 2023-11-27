@@ -24,25 +24,6 @@ class FlippingWidget extends StatefulWidget {
 class _FlippingWidgetState extends State<FlippingWidget>
     with SingleTickerProviderStateMixin {
   bool _flip = false;
-  late final AnimationController _animationController;
-  late final Animation<double> rotateAnim;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: widget.animationDuration ?? const Duration(milliseconds: 600),
-    );
-
-    rotateAnim = Tween(begin: pi, end: 0.0).animate(_animationController);
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +35,8 @@ class _FlippingWidgetState extends State<FlippingWidget>
         switchInCurve: Curves.easeInBack,
         switchOutCurve: Curves.easeInBack.flipped,
         duration: widget.animationDuration ?? const Duration(milliseconds: 700),
+        reverseDuration:
+            widget.animationDuration ?? const Duration(milliseconds: 700),
         layoutBuilder: (widget, list) => Stack(children: [widget!, ...list]),
         transitionBuilder: (widget, animation) {
           final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'config/routes.dart';
@@ -17,6 +18,12 @@ class MyApp extends StatelessWidget {
       title: 'Zognest',
       theme: CustomTheme.darkTheme(context),
       routerConfig: Routing.router,
+      scrollBehavior: ScrollConfiguration.of(context).copyWith(
+        dragDevices: {
+          PointerDeviceKind.touch,
+          PointerDeviceKind.mouse,
+        },
+      ),
     );
   }
 }

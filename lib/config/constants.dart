@@ -13,8 +13,20 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 
 class Constants {
   /// Horizontal padding of any main component or the children inside it
-  static const webHorizontalPadding = Spacing.l48 * 2;
+  static const webHorizontalPadding = Spacing.xl72;
   static const mobileHorizontalPadding = Spacing.m20;
+
+  // region Horizontal Lists
+  static const listHeight = 500.0;
+  static const listCardWidth = 335.0;
+
+  // endregion
+
+  // region List Buttons
+  static const listButtonHorizontalPadding = Spacing.m16;
+  static const listButtonVerticalPadding = Spacing.m16;
+
+  // endregion
 
   /// Vertical padding of any main component or the children inside it
   static const webVerticalPadding = Spacing.l40 * 2;

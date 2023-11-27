@@ -1,5 +1,4 @@
 import 'package:flip_card/flip_card_controller.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -74,43 +73,29 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
           },
         ),
         SizedBox(
-          height: Constants.servicesCardHeight,
-          child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context).copyWith(
-              dragDevices: {
-                PointerDeviceKind.touch,
-                PointerDeviceKind.mouse,
-              },
+          height: Constants.listHeight,
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(
+              horizontal: Responsive.isDesktop(context)
+                  ? Constants.webHorizontalPadding
+                  : Constants.mobileHorizontalPadding,
             ),
-            child: ListView.separated(
-              padding: EdgeInsets.symmetric(
-                horizontal: Responsive.isDesktop(context)
-                    ? Constants.webHorizontalPadding
-                    : Constants.mobileHorizontalPadding,
-              ),
-              scrollDirection: Axis.horizontal,
-              controller: _controller,
-              itemBuilder: (context, index) {
-                final i = index % Data.staff.length;
-                final staff = Data.staff[i];
-                return Container(
-                  constraints: BoxConstraints.tight(
-                    Size(
-                      Constants.servicesCardWidth -
-                          (Responsive.isDesktop(context) ? 0 : 50),
-                      Constants.servicesCardHeight,
-                    ),
-                  ),
-                  child: FlippingWidget(
-                    front: FrontCard(staff: staff),
-                    back: BackCard(staff: staff),
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) =>
-                  const SizedBox(width: Spacing.l24),
-              itemCount: 10,
-            ),
+            scrollDirection: Axis.horizontal,
+            controller: _controller,
+            itemBuilder: (context, index) {
+              final i = index % Data.staff.length;
+              final staff = Data.staff[i];
+              return SizedBox(
+                width: Constants.listCardWidth,
+                child: FlippingWidget(
+                  front: FrontCard(staff: staff),
+                  back: BackCard(staff: staff),
+                ),
+              );
+            },
+            separatorBuilder: (context, index) =>
+                const SizedBox(width: Spacing.l24),
+            itemCount: 10,
           ),
         ),
         const Divider(),
@@ -127,83 +112,77 @@ class FrontCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
-      height: Constants.servicesCardHeight,
-      child: Column(
-        children: [
-          Expanded(
-            child: Image.asset(
-              Assets.zognestTeam,
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
-            ),
+    return Column(
+      children: [
+        Expanded(
+          child: Image.asset(
+            Assets.zognestTeam,
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
           ),
-          Expanded(
-            child: Container(
-              color: Palette.cardBackgroundColor,
-              padding: const EdgeInsets.symmetric(
-                horizontal: Spacing.l24,
-                vertical: Spacing.l32,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          staff.name.toUpperCase(),
-                          style: theme.textTheme.headlineLarge?.copyWith(
-                            fontSize: 32,
-                          ),
+        ),
+        Expanded(
+          child: Container(
+            color: Palette.cardBackgroundColor,
+            padding: const EdgeInsets.symmetric(
+              horizontal: Spacing.l24,
+              vertical: Spacing.l32,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        staff.name.toUpperCase(),
+                        style: theme.textTheme.headlineLarge?.copyWith(
+                          fontSize: 32,
                         ),
-                        Text(
-                          staff.position.toUpperCase(),
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            color: theme.primaryColor,
-                            fontWeight: FontWeight.w700,
-                          ),
+                      ),
+                      Text(
+                        staff.position.toUpperCase(),
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: theme.primaryColor,
+                          fontWeight: FontWeight.w700,
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: Spacing.m20),
-                            child: Text(
-                              staff.description,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                height: 1.3,
-                                fontSize:
-                                    Responsive.isDesktop(context) ? 20 : 16,
-                              ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: Spacing.m20,
+                          ),
+                          child: Text(
+                            staff.description,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              fontSize: Responsive.isDesktop(context) ? 20 : 16,
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  PrimaryButton(
-                    title: Strings.more.toUpperCase(),
-                    filled: false,
-                    width: Constants.servicesCardWidth * 0.4,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Spacing.s12,
-                      vertical: Responsive.isDesktop(context)
-                          ? Spacing.m20
-                          : Spacing.s12,
-                    ),
-                    onTap: () {},
+                ),
+                PrimaryButton(
+                  title: Strings.more.toUpperCase(),
+                  filled: false,
+                  width: Constants.listCardWidth * 0.4,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Constants.listButtonHorizontalPadding,
+                    vertical: Constants.listButtonVerticalPadding,
                   ),
-                ],
-              ),
+                  onTap: () {},
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -254,7 +233,6 @@ class BackCard extends StatelessWidget {
                         child: Text(
                           staff.description,
                           style: theme.textTheme.bodyMedium?.copyWith(
-                            height: 1.3,
                             fontSize: Responsive.isDesktop(context) ? 24 : 16,
                           ),
                         ),
@@ -283,11 +261,10 @@ class BackCard extends StatelessWidget {
               ),
               PrimaryButton(
                 title: Strings.linkedIn.toUpperCase(),
-                width: Constants.servicesCardWidth * 0.4,
-                padding: EdgeInsets.symmetric(
-                  horizontal: Spacing.s12,
-                  vertical:
-                      Responsive.isDesktop(context) ? Spacing.m20 : Spacing.s12,
+                width: Constants.listCardWidth * 0.4,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Constants.listButtonHorizontalPadding,
+                  vertical: Constants.listButtonVerticalPadding,
                 ),
                 onTap: () {},
               ),

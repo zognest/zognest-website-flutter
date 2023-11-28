@@ -133,25 +133,27 @@ class ImageTextMobile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text.rich(
-                TextSpan(
-                  text: '${Strings.helpingYourBusiness.toUpperCase()}\n',
-                  style: theme.textTheme.displaySmall,
-                  children: [
-                    TextSpan(
-                      text: Strings.to.toUpperCase(),
-                      style: theme.textTheme.displaySmall?.copyWith(
-                        fontVariations: TextThemes.fontVariation(3),
+              FittedBox(
+                child: Text.rich(
+                  TextSpan(
+                    text: '${Strings.helpingYourBusiness.toUpperCase()}\n',
+                    style: theme.textTheme.displaySmall,
+                    children: [
+                      TextSpan(
+                        text: Strings.to.toUpperCase(),
+                        style: theme.textTheme.displaySmall?.copyWith(
+                          fontVariations: TextThemes.fontVariation(3),
+                        ),
                       ),
-                    ),
-                    TextSpan(text: Strings.exploreThe.toUpperCase()),
-                    TextSpan(
-                      text: Strings.sky.toUpperCase(),
-                      style: theme.textTheme.displaySmall?.copyWith(
-                        color: theme.primaryColor,
+                      TextSpan(text: Strings.exploreThe.toUpperCase()),
+                      TextSpan(
+                        text: Strings.sky.toUpperCase(),
+                        style: theme.textTheme.displaySmall?.copyWith(
+                          color: theme.primaryColor,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: Constants.mobileSectionSpacing),

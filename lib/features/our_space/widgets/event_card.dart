@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -29,17 +28,7 @@ class _EventCardState extends State<EventCard> {
           showDialog(
             context: context,
             barrierDismissible: true,
-            builder: (context) {
-              return ScrollConfiguration(
-                behavior: ScrollConfiguration.of(context).copyWith(
-                  dragDevices: {
-                    PointerDeviceKind.touch,
-                    PointerDeviceKind.mouse,
-                  },
-                ),
-                child: GalleryDialog(event: widget.event),
-              );
-            },
+            builder: (context) => GalleryDialog(event: widget.event),
           );
         },
         onHover: (over) => setState(() => this.over = over),

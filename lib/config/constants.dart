@@ -7,7 +7,6 @@ import 'package:zognest_website/features/home/pages/components/zognest_offers.da
 import 'package:zognest_website/features/home/pages/components/zognest_services.dart';
 import 'package:zognest_website/features/home/pages/components/zognest_video.dart';
 import 'package:zognest_website/features/home/pages/home_page.dart';
-import 'package:zognest_website/features/our_space/pages/components/zognest_events.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 
@@ -19,6 +18,7 @@ class Constants {
   // region Horizontal Lists
   static const listHeight = 500.0;
   static const listCardWidth = 335.0;
+  static const listCardSeparatorWidth = Spacing.m20;
 
   // endregion
 
@@ -30,6 +30,7 @@ class Constants {
 
   /// Vertical padding of any main component or the children inside it
   static const webVerticalPadding = Spacing.l40 * 2;
+  static const mobileVerticalPadding = Spacing.m20;
 
   /// The total height of the [PrimaryAppBar]
   static const appBarHeight = Spacing.xl72;

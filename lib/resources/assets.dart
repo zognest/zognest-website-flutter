@@ -6,7 +6,6 @@ abstract final class Paths {
 
 abstract final class Assets {
   // SVGs
-  static const zognestLogo = '${Paths.svg}/logo.svg';
   static const whatsapp = '${Paths.svg}/whatsapp.svg';
   static const downArrow = '${Paths.svg}/arrow_down.svg';
   static const upArrow = '${Paths.svg}/arrow_up.svg';
@@ -26,6 +25,7 @@ abstract final class Assets {
 
   // Images
   static const phoneHand = '${Paths.images}/phone_hand.png';
+  static const zognestLogo = '${Paths.images}/logo.png';
   static const mercuries = '${Paths.images}/mercuries.png';
   static const office = '${Paths.images}/office.png';
   static const arrowRight = '${Paths.images}/arrow_right.png';

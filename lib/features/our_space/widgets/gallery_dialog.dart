@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/our_space/models/event.dart';
@@ -19,10 +20,14 @@ class GalleryDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
     return SizedBox(
-      height: Constants.eventsDialogHeight,
+      height: double.infinity,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Spacing.xl72),
+        padding: const EdgeInsets.symmetric(
+          vertical: Spacing.xl72,
+          horizontal: Spacing.xl72,
+        ),
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -50,19 +55,29 @@ class GalleryDialog extends StatelessWidget {
             SizedBox(
               height: Constants.eventsDialogHeight,
               child: Padding(
-                padding: const EdgeInsets.all(Spacing.xl72),
-                child: Row(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          DateFormat('MMMM').format(event.date).toUpperCase(),
-                          style: theme.textTheme.displaySmall,
-                        ),
-                        Text(
-                          '${event.date.year} ${event.title.toUpperCase()}',
+                padding: EdgeInsets.symmetric(
+                  horizontal: Responsive.isDesktop(context)
+                      ? Constants.webHorizontalPadding
+                      : Constants.mobileHorizontalPadding,
+                  vertical: Responsive.isDesktop(context)
+                      ? Constants.webVerticalPadding
+                      : Constants.mobileVerticalPadding,
+                ),
+                child: Responsive.isDesktop(context)
+                    ? Row(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                DateFormat('MMMM')
+                                    .format(event.date)
+                                    .toUpperCase(),
+                                style: theme.textTheme.displaySmall,
+                              ),
+                              Text(
+                                '${event.date.year} ${event.title.toUpperCase()}',
                           style: theme.textTheme.headlineSmall?.copyWith(
                             color: theme.primaryColor,
                             fontVariations: TextThemes.fontVariation(6),
@@ -103,18 +118,84 @@ class GalleryDialog extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(width: Spacing.l24),
-                            InkWell(
-                              overlayColor: MaterialStateProperty.all(
-                                  Palette.transparent),
-                              onTap: () => _controller.nextPage(),
-                              child: Image.asset(Assets.arrowRight),
+                                  InkWell(
+                                    overlayColor: MaterialStateProperty.all(
+                                        Palette.transparent),
+                                    onTap: () => _controller.nextPage(),
+                                    child: Image.asset(Assets.arrowRight),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                DateFormat('MMMM')
+                                    .format(event.date)
+                                    .toUpperCase(),
+                                style: theme.textTheme.displaySmall,
+                              ),
+                              Text(
+                                '${event.date.year} ${event.title.toUpperCase()}',
+                                style: theme.textTheme.headlineSmall?.copyWith(
+                                  color: theme.primaryColor,
+                                  fontVariations: TextThemes.fontVariation(6),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          Material(
+                            color: Palette.transparent,
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  overlayColor: MaterialStateProperty.all(
+                                      Palette.transparent),
+                                  onTap: () => _controller.previousPage(),
+                                  child: Image.asset(Assets.shortArrowLeft),
+                                ),
+                                const SizedBox(width: Spacing.s12),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      Strings.scroll.toUpperCase(),
+                                      style: theme.textTheme.displaySmall
+                                          ?.copyWith(fontSize: 54),
+                                    ),
+                                    Text(
+                                      '${event.images.length} Images'
+                                          .toUpperCase(),
+                                      style:
+                                          theme.textTheme.labelMedium?.copyWith(
+                                        color: theme.primaryColor,
+                                        letterSpacing: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(width: Spacing.l24),
+                                InkWell(
+                                  overlayColor: MaterialStateProperty.all(
+                                      Palette.transparent),
+                                  onTap: () => _controller.nextPage(),
+                                  child: Image.asset(Assets.arrowRight),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
               ),
             ),
           ],

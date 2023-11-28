@@ -93,8 +93,10 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                 ),
               );
             },
-            separatorBuilder: (context, index) =>
-                const SizedBox(width: Spacing.l24),
+            separatorBuilder: (context, index) => SizedBox(
+              width: Constants.listCardSeparatorWidth *
+                  (Responsive.isDesktop(context) ? 1 : 0.5),
+            ),
             itemCount: 10,
           ),
         ),
@@ -159,9 +161,7 @@ class FrontCard extends StatelessWidget {
                             staff.description,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              fontSize: Responsive.isDesktop(context) ? 20 : 16,
-                            ),
+                            style: theme.textTheme.bodyLarge,
                           ),
                         ),
                       ),
@@ -232,9 +232,7 @@ class BackCard extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Text(
                           staff.description,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontSize: Responsive.isDesktop(context) ? 24 : 16,
-                          ),
+                          style: theme.textTheme.bodyLarge,
                         ),
                       ),
                     ),

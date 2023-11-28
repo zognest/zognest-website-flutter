@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
@@ -20,7 +19,7 @@ class ZognestLogo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset(
+        Image.asset(
           Assets.zognestLogo,
           height: Responsive.isDesktop(context) ? size : 50,
           width: Responsive.isDesktop(context) ? size : 40,

@@ -3,11 +3,12 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "e6bc9f8afaf2853c01a560f321c47693",
-"assets/AssetManifest.bin.json": "e71d99c3e1e1c7166e57850508815845",
-"assets/AssetManifest.json": "bf64c07064534e0884ef2a8413448e93",
+const RESOURCES = {"assets/AssetManifest.bin": "9e890a99c4d8963b84ada0faa8f21389",
+"assets/AssetManifest.bin.json": "f20100fed296cf762c1d39d81bdb8f2d",
+"assets/AssetManifest.json": "6f1eeabade9b362d56250d015a09fad1",
 "assets/assets/images/about_us_text.png": "d72282daa629bd1aea81d1838c4e7c79",
 "assets/assets/images/arrow_right.png": "3a9fb519ad16f50d9e33db417dc94086",
+"assets/assets/images/logo.png": "0482e4310f3697228e0586386fc14324",
 "assets/assets/images/mercuries.png": "f3188735fec96ab2b4687f93b6627a37",
 "assets/assets/images/mercury.png": "e937ebdfca3243279aeb4389526d17aa",
 "assets/assets/images/mercury_venus.png": "f18b9b57aa42c5cf6b06fa832e04654a",
@@ -94,9 +95,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "e6bc9f8afaf2853c01a560f321c47693
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "077ec1e79b6e4f5bb435f1e83ec844b9",
-"/": "077ec1e79b6e4f5bb435f1e83ec844b9",
-"main.dart.js": "3f7f0a93be45593c7fa7e4e7f09f4660",
+"index.html": "e72c282e54428634b099ecac9e985538",
+"/": "e72c282e54428634b099ecac9e985538",
+"main.dart.js": "a5fa922cf52a2c1942aa8f94526e3551",
 "manifest.json": "6311effed2b766c79b409f7224328a24",
 "version.json": "c9a57fded59c1038f8ee06dc3f0160bc"};
 // The application shell files that are downloaded before a service worker can

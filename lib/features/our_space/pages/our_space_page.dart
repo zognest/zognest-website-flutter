@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
-import 'package:zognest_website/features/our_space/pages/components/zognest_events.dart';
+import 'package:zognest_website/features/our_space/widgets/zognest_events.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
@@ -24,7 +24,7 @@ class _OurSpacePageState extends State<OurSpacePage> {
   @override
   void initState() {
     super.initState();
-    _controller = ScrollController()..addListener(scrollListener);
+    _controller = ScrollController();
   }
 
   @override
@@ -32,8 +32,6 @@ class _OurSpacePageState extends State<OurSpacePage> {
     _controller.dispose();
     super.dispose();
   }
-
-  void scrollListener() {}
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +45,6 @@ class _OurSpacePageState extends State<OurSpacePage> {
               SvgPicture.asset(Assets.gridLines),
               ListView(
                 controller: _controller,
-                shrinkWrap: true,
                 children: [
                   const SizedBox(height: Constants.appBarHeight * 1.5),
                   ZognestEvents(events: Data.events),

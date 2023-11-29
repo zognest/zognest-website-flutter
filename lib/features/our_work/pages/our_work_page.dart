@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
-import 'package:zognest_website/features/our_work/pages/components/our_work_text.dart';
-import 'package:zognest_website/features/our_work/pages/components/zognest_projects.dart';
+import 'package:zognest_website/features/our_work/widgets/our_work_text.dart';
+import 'package:zognest_website/features/our_work/widgets/zognest_projects.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
@@ -50,7 +50,10 @@ class _OurWorkPageState extends State<OurWorkPage> {
                 ),
                 Column(
                   children: [
-                    const SizedBox(height: Constants.appBarHeight * 1.5),
+                    SizedBox(
+                      height: Constants.appBarHeight *
+                          (Responsive.isDesktop(context) ? 1.5 : 1),
+                    ),
                     const ZognestProjects(),
                     SizedBox(
                       height: Responsive.isDesktop(context)

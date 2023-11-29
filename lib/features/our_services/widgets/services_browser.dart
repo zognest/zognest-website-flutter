@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -15,7 +16,7 @@ class ServicesBrowser extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Divider(),
+        if (Responsive.isDesktop(context)) const Divider(),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: Responsive.isDesktop(context)
@@ -23,9 +24,8 @@ class ServicesBrowser extends StatelessWidget {
                 : Constants.mobileHorizontalPadding,
           ),
           child: Wrap(
-            runSpacing:
-                Responsive.isDesktop(context) ? Spacing.l24 : Spacing.s12,
-            spacing: Spacing.l24,
+            runSpacing: Constants.listCardSeparatorWidth,
+            spacing: Constants.listCardSeparatorWidth,
             children: Data.purchasableServices.map((service) {
               return SizedBox(
                 height: Responsive.isDesktop(context)
@@ -57,20 +57,24 @@ class ServiceItem extends StatelessWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(Spacing.l32),
+              padding: const EdgeInsets.all(Spacing.m20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  AutoSizeText(
                     service.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w900,
                       color: theme.primaryColor,
                     ),
                   ),
                   const SizedBox(height: Spacing.s8),
-                  Text(
+                  AutoSizeText(
                     service.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall,
                   ),
                   const Spacer(),
@@ -78,7 +82,10 @@ class ServiceItem extends StatelessWidget {
                     title: Strings.add,
                     textStyle: theme.textTheme.labelLarge,
                     width: Constants.servicesBrowserItemWidth * 0.2,
-                    padding: const EdgeInsets.symmetric(vertical: Spacing.m20),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: Constants.listButtonVerticalPadding,
+                      horizontal: Constants.listButtonHorizontalPadding,
+                    ),
                     onTap: () {},
                   ),
                 ],

@@ -1,3 +1,6 @@
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:js' as js;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -5,15 +8,15 @@ import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 
 enum SocialButtons {
-  discord(Assets.discord, ''),
-  dribble(Assets.dribble, ''),
-  facebook(Assets.facebook, ''),
-  figma(Assets.figma, ''),
-  instagram(Assets.instagram, ''),
-  linkedin(Assets.linkedin, ''),
-  pintrest(Assets.pintrest, ''),
-  whatsapp(Assets.whatsapp, ''),
-  youtube(Assets.youtube, '');
+  discord(Assets.discord, 'https://discord.com/invite/d67h3B2a'),
+  dribble(Assets.dribble, 'https://dribbble.com/zognest'),
+  facebook(Assets.facebook, 'https://www.facebook.com/zognest/'),
+  figma(Assets.figma, 'https://www.figma.com/@zognest'),
+  instagram(Assets.instagram, 'https://www.instagram.com/zognest/'),
+  linkedin(Assets.linkedin, 'https://www.linkedin.com/company/83480728/'),
+  pintrest(Assets.pintrest, 'https://pin.it/5TNhVve'),
+  whatsapp(Assets.whatsapp, 'https://chat.whatsapp.com/CM2zNeZqZ7MEEreQXP8cMO'),
+  youtube(Assets.youtube, 'https://www.youtube.com/@zognest');
 
   final String icon, url;
 
@@ -35,9 +38,10 @@ class _SocialButtonState extends State<SocialButton> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        js.context.callMethod('open', [widget.button.url]);
+      },
       onHover: (_) => setState(() => hovering = !hovering),
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       child: Container(

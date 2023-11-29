@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -39,7 +38,7 @@ class _ZognestProjectsState extends State<ZognestProjects> {
     final theme = Theme.of(context);
     return Column(
       children: [
-        const Divider(),
+        if (Responsive.isDesktop(context)) const Divider(),
         ScrollHeadline(
           headline: TextSpan(
             children: [
@@ -71,31 +70,23 @@ class _ZognestProjectsState extends State<ZognestProjects> {
           },
         ),
         SizedBox(
-          height: Constants.projectHeight,
-          child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context).copyWith(
-              dragDevices: {
-                PointerDeviceKind.touch,
-                PointerDeviceKind.mouse,
-              },
+          height: Constants.listHeight,
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(
+              horizontal: Responsive.isDesktop(context)
+                  ? Constants.webHorizontalPadding
+                  : Constants.mobileHorizontalPadding,
             ),
-            child: ListView.separated(
-              padding: EdgeInsets.symmetric(
-                horizontal: Responsive.isDesktop(context)
-                    ? Constants.webHorizontalPadding
-                    : Constants.mobileHorizontalPadding,
-              ),
-              scrollDirection: Axis.horizontal,
-              controller: _controller,
-              itemBuilder: (context, index) {
-                final i = index % Data.projects.length;
-                final project = Data.projects[i];
-                return ProjectItem(project: project);
-              },
-              separatorBuilder: (context, index) =>
-                  const SizedBox(width: Spacing.l24),
-              itemCount: 10,
-            ),
+            scrollDirection: Axis.horizontal,
+            controller: _controller,
+            itemBuilder: (context, index) {
+              final i = index % Data.projects.length;
+              final project = Data.projects[i];
+              return ProjectItem(project: project);
+            },
+            separatorBuilder: (context, index) =>
+                const SizedBox(width: Constants.listCardSeparatorWidth),
+            itemCount: 10,
           ),
         ),
         const Divider(),
@@ -122,10 +113,7 @@ class _ProjectItemState extends State<ProjectItem> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 1000),
       curve: Curves.fastOutSlowIn,
-      width: over
-          ? Constants.projectExtendedWidth
-          : Constants.projectBaseWidth -
-              (Responsive.isDesktop(context) ? 0 : 50),
+      width: Constants.listCardWidth * (over ? 2 : 1),
       height: Constants.projectHeight,
       child: InkWell(
         onTap: () {},
@@ -160,49 +148,47 @@ class _ProjectItemState extends State<ProjectItem> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const Spacer(flex: 2),
+                  Image.asset(widget.project.icon),
+                  const SizedBox(height: Spacing.l32),
                   Row(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(widget.project.icon),
-                          const SizedBox(height: Spacing.l32),
-                          Text(
-                            widget.project.title,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.labelLarge
-                                ?.copyWith(fontSize: 32),
-                          ),
-                          const SizedBox(height: Spacing.s4),
-                          Text(
-                            widget.project.brief,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.labelMedium
-                                ?.copyWith(color: theme.primaryColor),
-                          ),
-                        ],
+                      Expanded(
+                        child: Text(
+                          widget.project.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.labelLarge
+                              ?.copyWith(fontSize: 32),
+                        ),
                       ),
-                      const Spacer(),
                       if (over)
                         PrimaryButton(
                           title: Strings.visit.toUpperCase(),
-                          width: 100,
+                          width: Constants.listCardWidth * 0.3,
                           padding: const EdgeInsets.symmetric(
-                            horizontal: Spacing.s12,
-                            vertical: Spacing.m20,
+                            horizontal: Constants.listButtonHorizontalPadding,
+                            vertical: Constants.listButtonVerticalPadding,
                           ),
                           onTap: () {},
                         ),
                     ],
                   ),
+                  const SizedBox(height: Spacing.s4),
+                  Text(
+                    widget.project.brief,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.labelMedium
+                        ?.copyWith(color: theme.primaryColor),
+                  ),
                   const SizedBox(height: Spacing.m16),
                   Expanded(
+                    flex: over ? 5 : 1,
                     child: Text(
                       widget.project.description,
-                      maxLines: over ? null : 3,
+                      maxLines: over ? null : 2,
                       overflow: over ? null : TextOverflow.ellipsis,
+                      style: theme.textTheme.bodyLarge,
                     ),
                   ),
                   if (!over) ...[
@@ -210,10 +196,10 @@ class _ProjectItemState extends State<ProjectItem> {
                     PrimaryButton(
                       title: Strings.more.toUpperCase(),
                       filled: false,
-                      width: 100,
+                      width: Constants.listCardWidth * 0.3,
                       padding: const EdgeInsets.symmetric(
-                        horizontal: Spacing.s12,
-                        vertical: Spacing.m20,
+                        horizontal: Constants.listButtonHorizontalPadding,
+                        vertical: Constants.listButtonVerticalPadding,
                       ),
                       onTap: () {},
                     ),

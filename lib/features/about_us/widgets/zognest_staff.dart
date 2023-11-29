@@ -171,7 +171,7 @@ class FrontCard extends StatelessWidget {
                 PrimaryButton(
                   title: Strings.more.toUpperCase(),
                   filled: false,
-                  width: Constants.listCardWidth * 0.4,
+                  width: Constants.listCardWidth * 0.3,
                   padding: const EdgeInsets.symmetric(
                     horizontal: Constants.listButtonHorizontalPadding,
                     vertical: Constants.listButtonVerticalPadding,
@@ -259,7 +259,7 @@ class BackCard extends StatelessWidget {
               ),
               PrimaryButton(
                 title: Strings.linkedIn.toUpperCase(),
-                width: Constants.listCardWidth * 0.4,
+                width: Constants.listCardWidth * 0.3,
                 padding: const EdgeInsets.symmetric(
                   horizontal: Constants.listButtonHorizontalPadding,
                   vertical: Constants.listButtonVerticalPadding,

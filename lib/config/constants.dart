@@ -1,11 +1,8 @@
-import 'package:zognest_website/features/home/pages/components/counters.dart';
-import 'package:zognest_website/features/home/pages/components/marquee_text.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_blogs.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_clients.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_mocks.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_offers.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_services.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_video.dart';
+import 'package:zognest_website/features/home/widgets/marquee_text.dart';
+import 'package:zognest_website/features/home/widgets/zognest_clients.dart';
+import 'package:zognest_website/features/home/widgets/zognest_mocks.dart';
+import 'package:zognest_website/features/home/widgets/zognest_services.dart';
+import 'package:zognest_website/features/home/widgets/zognest_video.dart';
 import 'package:zognest_website/features/home/pages/home_page.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';

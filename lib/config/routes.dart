@@ -10,7 +10,7 @@ abstract final class Routing {
   Routing._();
 
   static final router = GoRouter(
-    initialLocation: OurWorkPage.route,
+    initialLocation: HomePage.route,
     debugLogDiagnostics: true,
     errorBuilder: (_, __) => const UndefinedPage(onlyBody: true),
     routes: [

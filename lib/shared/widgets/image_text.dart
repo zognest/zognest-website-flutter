@@ -46,7 +46,7 @@ class ImageText extends StatelessWidget {
                       child: Row(
                         children: [
                           Image.asset(
-                            Assets.zognestTeam,
+                            image,
                             height: double.infinity,
                             width: size.width * 0.4,
                             fit: BoxFit.cover,

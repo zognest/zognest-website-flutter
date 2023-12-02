@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
-import 'package:zognest_website/features/home/widgets/social_button.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/circle_button.dart';
 import 'package:zognest_website/shared/widgets/gradient_container.dart';
+import 'package:zognest_website/shared/widgets/social_button.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
 class Footer extends StatelessWidget {

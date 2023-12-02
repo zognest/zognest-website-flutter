@@ -5,14 +5,14 @@ import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
-import 'package:zognest_website/features/home/widgets/scroll_headline.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
+import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 
-import '../../../../resources/spacing.dart';
+import '../../../resources/spacing.dart';
 
 class ZognestClients extends StatefulWidget {
   const ZognestClients({super.key});
@@ -70,31 +70,23 @@ class _ZognestClientsState extends State<ZognestClients> {
           },
         ),
         SizedBox(
-          height: Constants.clientsSectionHeight,
-          child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context).copyWith(
-              dragDevices: {
-                PointerDeviceKind.touch,
-                PointerDeviceKind.mouse,
-              },
+          height: Constants.listHeight,
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(
+              horizontal: Responsive.isDesktop(context)
+                  ? Constants.webHorizontalPadding
+                  : Constants.mobileHorizontalPadding,
             ),
-            child: ListView.separated(
-              padding: EdgeInsets.symmetric(
-                horizontal: Responsive.isDesktop(context)
-                    ? Constants.webHorizontalPadding
-                    : Constants.mobileHorizontalPadding,
-              ),
-              scrollDirection: Axis.horizontal,
-              controller: _controller,
-              itemBuilder: (context, index) {
-                final i = index % Data.clientFeedbacks.length;
-                final clientFeedback = Data.clientFeedbacks[i];
-                return ClientItem(clientFeedback: clientFeedback);
-              },
-              separatorBuilder: (context, index) =>
-                  const SizedBox(width: Spacing.l24),
-              itemCount: 10,
-            ),
+            scrollDirection: Axis.horizontal,
+            controller: _controller,
+            itemBuilder: (context, index) {
+              final i = index % Data.clientFeedbacks.length;
+              final clientFeedback = Data.clientFeedbacks[i];
+              return ClientItem(clientFeedback: clientFeedback);
+            },
+            separatorBuilder: (context, index) =>
+                const SizedBox(width: Constants.listCardSeparatorWidth),
+            itemCount: 10,
           ),
         ),
         const Divider(),
@@ -122,9 +114,8 @@ class _ClientItemState extends State<ClientItem> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return FrostedContainer(
-      width: Constants.clientsItemWidth -
-          (Responsive.isDesktop(context) ? 0 : 100),
-      height: Constants.clientsSectionHeight,
+      width: Constants.listCardWidth,
+      height: double.infinity,
       padding: const EdgeInsets.symmetric(
           horizontal: Spacing.l32, vertical: Spacing.l24),
       child: InkWell(
@@ -137,7 +128,7 @@ class _ClientItemState extends State<ClientItem> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: Constants.clientsSectionHeight * 0.5,
+              height: Constants.listHeight * 0.5,
               child: GreyscaleFilter(
                 isHovered: hovered,
                 child: Stack(

@@ -3,12 +3,12 @@ import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
-import 'package:zognest_website/features/home/widgets/scroll_headline.dart';
 import 'package:zognest_website/features/our_work/models/project.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
+import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 
 class ZognestProjects extends StatefulWidget {
   const ZognestProjects({super.key});

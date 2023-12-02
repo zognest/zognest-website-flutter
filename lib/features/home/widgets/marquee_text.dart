@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/strings.dart';
 
-import '../../../../../config/constants.dart';
-import '../../../../config/responsive.dart';
+import '../../../../config/constants.dart';
+import '../../../config/responsive.dart';
 
 class MarqueeText extends StatefulWidget {
   const MarqueeText({super.key});

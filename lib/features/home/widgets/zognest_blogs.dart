@@ -6,11 +6,11 @@ import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/blog.dart';
-import 'package:zognest_website/features/home/widgets/scroll_headline.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
+import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 
 import '../../../../resources/spacing.dart';
 
@@ -70,31 +70,23 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
           },
         ),
         SizedBox(
-          height: Constants.blogsSectionHeight,
-          child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context).copyWith(
-              dragDevices: {
-                PointerDeviceKind.touch,
-                PointerDeviceKind.mouse,
-              },
+          height: Constants.listHeight,
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(
+              horizontal: Responsive.isDesktop(context)
+                  ? Constants.webHorizontalPadding
+                  : Constants.mobileHorizontalPadding,
             ),
-            child: ListView.separated(
-              padding: EdgeInsets.symmetric(
-                horizontal: Responsive.isDesktop(context)
-                    ? Constants.webHorizontalPadding
-                    : Constants.mobileHorizontalPadding,
-              ),
-              scrollDirection: Axis.horizontal,
-              controller: _controller,
-              itemBuilder: (context, index) {
-                final i = index % Data.blogs.length;
-                final client = Data.blogs[i];
-                return BlogItem(blog: client);
-              },
-              separatorBuilder: (context, index) =>
-                  const SizedBox(width: Spacing.l24),
-              itemCount: 10,
-            ),
+            scrollDirection: Axis.horizontal,
+            controller: _controller,
+            itemBuilder: (context, index) {
+              final i = index % Data.blogs.length;
+              final client = Data.blogs[i];
+              return BlogItem(blog: client);
+            },
+            separatorBuilder: (context, index) =>
+                const SizedBox(width: Constants.listCardSeparatorWidth),
+            itemCount: 10,
           ),
         ),
         const Divider(),
@@ -123,8 +115,7 @@ class _BlogItemState extends State<BlogItem> {
     final theme = Theme.of(context);
     return FrostedContainer(
       width:
-          Constants.blogsItemWidth - (Responsive.isDesktop(context) ? 0 : 100),
-      height: Constants.blogsSectionHeight,
+          Constants.listCardWidth,
       padding: const EdgeInsets.symmetric(
           horizontal: Spacing.l32, vertical: Spacing.l24),
       child: InkWell(

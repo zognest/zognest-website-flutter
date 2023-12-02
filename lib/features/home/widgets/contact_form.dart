@@ -9,7 +9,7 @@ import 'package:zognest_website/shared/widgets/gradient_container.dart';
 import 'package:zognest_website/shared/widgets/input_form_field.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
-import '../../../../config/theme/text_theme.dart';
+import '../../../config/theme/text_theme.dart';
 
 class ContactForm extends StatelessWidget {
   const ContactForm({super.key});

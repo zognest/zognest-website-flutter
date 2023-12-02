@@ -3,22 +3,22 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
-import 'package:zognest_website/features/home/pages/components/beyond_space.dart';
-import 'package:zognest_website/features/home/pages/components/clients_list.dart';
-import 'package:zognest_website/features/home/pages/components/counters.dart';
-import 'package:zognest_website/features/home/pages/components/marquee_text.dart';
-import 'package:zognest_website/features/home/pages/components/optimism_text.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_blogs.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_clients.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_description.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_mocks.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_offers.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_services.dart';
-import 'package:zognest_website/features/home/pages/components/zognest_video.dart';
+import 'package:zognest_website/features/home/widgets/beyond_space.dart';
+import 'package:zognest_website/features/home/widgets/clients_list.dart';
+import 'package:zognest_website/features/home/widgets/counters.dart';
+import 'package:zognest_website/features/home/widgets/marquee_text.dart';
+import 'package:zognest_website/features/home/widgets/optimism_text.dart';
+import 'package:zognest_website/features/home/widgets/zognest_blogs.dart';
+import 'package:zognest_website/features/home/widgets/zognest_clients.dart';
+import 'package:zognest_website/features/home/widgets/zognest_mocks.dart';
+import 'package:zognest_website/features/home/widgets/zognest_offers.dart';
+import 'package:zognest_website/features/home/widgets/zognest_services.dart';
+import 'package:zognest_website/features/home/widgets/zognest_video.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
+import 'package:zognest_website/shared/widgets/image_text.dart';
 
 import '../../../shared/widgets/gradient_container.dart';
 
@@ -114,13 +114,8 @@ class Foreground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(Theme.of(context).platform.name);
-    final platform = Theme.of(context).platform;
     return Column(
       children: [
-        /*(platform == TargetPlatform.windows ||
-                platform == TargetPlatform.macOS ||
-                platform == TargetPlatform.linux)*/
         Responsive.isDesktop(context)
             ? BeyondSpace(
                 onTabDown: () => controller.animateTo(
@@ -148,9 +143,7 @@ class Foreground extends StatelessWidget {
               ? Constants.webSectionSpacing
               : Constants.mobileSectionSpacing,
         ),
-        Responsive.isDesktop(context)
-            ? const ZognestDescription()
-            : const ZognestDescriptionMobile(),
+        const ImageText(image: Assets.office),
         SizedBox(
           height: Responsive.isDesktop(context)
               ? Constants.webSectionSpacing

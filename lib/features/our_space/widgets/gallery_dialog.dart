@@ -20,7 +20,6 @@ class GalleryDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
     return SizedBox(
       height: double.infinity,
       child: Padding(

@@ -220,7 +220,7 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
               Data.beyondSpaceImages.length,
-                  (index) {
+              (index) {
                 return AnimatedContainer(
                   width: Spacing.xl72 / Data.beyondSpaceImages.length,
                   height: Spacing.s4,

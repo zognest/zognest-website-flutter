@@ -150,6 +150,9 @@ class _CountupAnimatedText extends AnimatedWidget {
         locale: locale,
         softWrap: softWrap,
         overflow: overflow,
+        // This is ignored because countup is an external package that was
+        // modified for this project
+        // ignore: deprecated_member_use
         textScaleFactor: textScaleFactor,
         maxLines: maxLines,
         semanticsLabel: semanticsLabel,

@@ -37,37 +37,37 @@ class Data {
   static const ytVideoUrl = 'hRFOa5CtXkY';
 
   static List<Offer> offers = [
-    Offer(
+    const Offer(
       highlight: 'Professional',
       title: 'And dedicated team',
       description:
           'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
     ),
-    Offer(
+    const Offer(
       highlight: 'Professional',
       title: 'And dedicated team',
       description:
           'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
     ),
-    Offer(
+    const Offer(
       highlight: 'Professional',
       title: 'And dedicated team',
       description:
           'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
     ),
-    Offer(
+    const Offer(
       highlight: 'Professional',
       title: 'And dedicated team',
       description:
           'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
     ),
-    Offer(
+    const Offer(
       highlight: 'Professional',
       title: 'And dedicated team',
       description:
           'Our professionals work with love, and passion for every detail, creating this community of satisfied customers. The combination of a proactive approach and the above technical skills allows us to cooperate/work with leading companies in multiple regions.',
     ),
-    Offer(
+    const Offer(
       highlight: 'Professional',
       title: 'And dedicated team',
       description:
@@ -80,7 +80,7 @@ class Data {
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
-          'Team is not enought to define us, we are family of different species of birds, each one of us have unique capabiliities.',
+          'Team is not enough to define us, we are family of different species of birds, each one of us have unique capabilities.',
       technologies: [
         Technology(name: 'Photoshop', image: Assets.photoshop),
         Technology(name: 'Illustrator', image: Assets.illustrator),
@@ -94,7 +94,7 @@ class Data {
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
-          'Team is not enought to define us, we are family of different species of birds, each one of us have unique capabiliities.',
+          'Team is not enough to define us, we are family of different species of birds, each one of us have unique capabilities.',
       technologies: [
         Technology(name: 'Photoshop', image: Assets.photoshop),
         Technology(name: 'Illustrator', image: Assets.illustrator),
@@ -108,7 +108,7 @@ class Data {
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
-          'Team is not enought to define us, we are family of different species of birds, each one of us have unique capabiliities.',
+          'Team is not enough to define us, we are family of different species of birds, each one of us have unique capabilities.',
       technologies: [
         Technology(name: 'Photoshop', image: Assets.photoshop),
         Technology(name: 'Illustrator', image: Assets.illustrator),
@@ -122,7 +122,7 @@ class Data {
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
-          'Team is not enought to define us, we are family of different species of birds, each one of us have unique capabiliities.',
+          'Team is not enough to define us, we are family of different species of birds, each one of us have unique capabilities.',
       technologies: [
         Technology(name: 'Photoshop', image: Assets.photoshop),
         Technology(name: 'Illustrator', image: Assets.illustrator),
@@ -136,7 +136,7 @@ class Data {
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
-          'Team is not enought to define us, we are family of different species of birds, each one of us have unique capabiliities.',
+          'Team is not  to define us, we are family of different species of birds, each one of us have unique capabilities.',
       technologies: [
         Technology(name: 'Photoshop', image: Assets.photoshop),
         Technology(name: 'Illustrator', image: Assets.illustrator),
@@ -149,9 +149,9 @@ class Data {
   ];
 
   static List<ClientFeedback> clientFeedbacks = [
-    ClientFeedback(
+    const ClientFeedback(
       description:
-      'I am artist of the real world with creative ideas of the acients arts in benin, Nigeria',
+      'I am artist of the real world with creative ideas of the ancient arts in benin, Nigeria',
       clientImage: Assets.clientImage,
       name: 'Bright Mba',
       id: '@brightmac',
@@ -171,55 +171,55 @@ class Data {
   ];
 
   static List<PurchasableService> purchasableServices = [
-    PurchasableService(
+    const PurchasableService(
       title: 'Mobile Development',
       image: Assets.purchasableServicesImage,
       description: 'iOS & Android',
       id: 1,
     ),
-    PurchasableService(
+    const PurchasableService(
       title: 'Mobile Development',
       image: Assets.purchasableServicesImage,
       description: 'iOS & Android',
       id: 2,
     ),
-    PurchasableService(
+    const PurchasableService(
       title: 'Mobile Development',
       image: Assets.purchasableServicesImage,
       description: 'iOS & Android',
       id: 3,
     ),
-    PurchasableService(
+    const PurchasableService(
       title: 'Mobile Development',
       image: Assets.purchasableServicesImage,
       description: 'iOS & Android',
       id: 4,
     ),
-    PurchasableService(
+    const PurchasableService(
       title: 'Mobile Development',
       image: Assets.purchasableServicesImage,
       description: 'iOS & Android',
       id: 5,
     ),
-    PurchasableService(
+    const PurchasableService(
       title: 'Mobile Development',
       image: Assets.purchasableServicesImage,
       description: 'iOS & Android',
       id: 6,
     ),
-    PurchasableService(
+    const PurchasableService(
       title: 'Mobile Development',
       image: Assets.purchasableServicesImage,
       description: 'iOS & Android',
       id: 4,
     ),
-    PurchasableService(
+    const PurchasableService(
       title: 'Mobile Development',
       image: Assets.purchasableServicesImage,
       description: 'iOS & Android',
       id: 5,
     ),
-    PurchasableService(
+    const PurchasableService(
       title: 'Mobile Development',
       image: Assets.purchasableServicesImage,
       description: 'iOS & Android',
@@ -228,13 +228,13 @@ class Data {
   ];
 
   static List<Project> projects = [
-    Project(
+    const Project(
       title: 'My Pocket',
       brief: 'Card Manager',
       image: Assets.purchasableServicesImage,
       icon: Assets.projectIcon,
       description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularized in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     ),
   ];
 

@@ -109,9 +109,7 @@ class _HomePageState extends State<HomePage> {
 
 class Foreground extends StatelessWidget {
   const Foreground({super.key, required this.controller});
-
   final ScrollController controller;
-
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -68,21 +68,20 @@ class _ZognestVideoState extends State<ZognestVideo> {
                   aspectRatio: Constants.videoAspectRatio,
                   builder: (_, player) => player,
                 ),
-                PointerInterceptor(
-                  child: InkWell(
-                    overlayColor:
-                        MaterialStateProperty.all(Palette.transparent),
-                    onTap: () {
-                      if (state == PlayerState.playing) {
-                        _controller.pauseVideo();
-                        return;
-                      }
-                      if (state == PlayerState.paused ||
-                          state == PlayerState.ended ||
-                          state == PlayerState.cued) {
-                        _controller.playVideo();
-                      }
-                    },
+                InkWell(
+                  overlayColor: MaterialStateProperty.all(Palette.transparent),
+                  onTap: () {
+                    if (state == PlayerState.playing) {
+                      _controller.pauseVideo();
+                      return;
+                    }
+                    if (state == PlayerState.paused ||
+                        state == PlayerState.ended ||
+                        state == PlayerState.cued) {
+                      _controller.playVideo();
+                    }
+                  },
+                  child: PointerInterceptor(
                     child: const AspectRatio(
                       aspectRatio: Constants.videoAspectRatio,
                     ),

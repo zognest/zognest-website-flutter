@@ -1,14 +1,7 @@
-import 'dart:async';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:zognest_website/config/constants.dart';
-import 'package:zognest_website/config/responsive.dart';
-import 'package:zognest_website/config/theme/palette.dart';
-import 'package:zognest_website/config/theme/text_theme.dart';
-import 'package:zognest_website/resources/assets.dart';
+import 'package:zognest_website/config/constantsrt 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/data.dart';
@@ -23,11 +16,8 @@ class BeyondSpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
-    final screenWidth = html.window.screen!.width!;
     return Column(
       children: [
-        const SizedBox(height: Constants.appBarHeight * 1.5),
         Padding(
           padding: const EdgeInsets.symmetric(
               horizontal: Constants.webHorizontalPadding),
@@ -96,33 +86,8 @@ class BeyondSpace extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                child: Stack(
-                  alignment: Alignment.centerRight,
-                  children: [
-                    Image.asset(
-                      Assets.phoneHand,
-                      width: (size.width > screenWidth
-                              ? screenWidth
-                              : size.width) *
-                          0.35,
-                    ),
-                    Positioned(
-                      right: (size.width > screenWidth
-                              ? screenWidth
-                              : size.width) *
-                          0.1505,
-                      top: size.width > screenWidth ? 10 : size.width * 0.005,
-                      child: SizedBox(
-                        width: (size.width > screenWidth
-                                ? screenWidth
-                                : size.width) *
-                            0.158,
-                        child: const BeyondSpaceCarousel(),
-                      ),
-                    ),
-                  ],
-                ),
+              const Expanded(
+                child: BeyondSpaceCarousel(),
               ),
             ],
           ),
@@ -141,100 +106,59 @@ class BeyondSpaceCarousel extends StatefulWidget {
 }
 
 class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
-  late final Timer timer;
   int currentIndex = 0;
-  bool dragging = true;
-
-  @override
-  void initState() {
-    super.initState();
-    timer = Timer.periodic(
-      const Duration(seconds: Constants.beyondSpaceAppDuration),
-      (_) => nextIndex(),
-    );
-  }
-
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
-
-  void nextIndex() {
-    final nextIndex = currentIndex + 1;
-    setState(() {
-      currentIndex = nextIndex % Data.beyondSpaceImages.length;
-    });
-  }
-
-  void previousIndex() {
-    final previousIndex = currentIndex - 1;
-    setState(() {
-      currentIndex = previousIndex % Data.beyondSpaceImages.length;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Palette.black,
-            borderRadius: BorderRadius.circular(
-              Responsive.isMobile(context) ? Spacing.m20 : Spacing.l40,
-            ),
-          ),
-          child: GestureDetector(
-            onTap: nextIndex,
-            onHorizontalDragUpdate: (drag) {
-              if (dragging) {
-                dragging = false;
-                if (drag.delta.dx < 0) nextIndex();
-                if (drag.delta.dx > 0) previousIndex();
-              }
-            },
-            onHorizontalDragStart: (_) => dragging = true,
-            onHorizontalDragCancel: () => dragging = true,
-            onHorizontalDragEnd: (_) => dragging = true,
-            child: AnimatedSwitcher(
-              duration: const Duration(
-                  milliseconds: Constants.appMockAnimationDuration),
-              child: Image.asset(
-                Data.beyondSpaceImages[currentIndex],
-                key: ValueKey(currentIndex),
-              ),
-            ),
+        CarouselSlider(
+          items: Data.beyondSpaceImages.map((image) {
+            return Image.asset(image);
+          }).toList(),
+          options: CarouselOptions(
+            // aspectRatio: 1,
+            viewportFraction: 0.25,
+            enlargeCenterPage: true,
+            enlargeFactor: 0.5,
+            autoPlayInterval:
+                const Duration(seconds: Constants.beyondSpaceAppDuration),
+            autoPlay: true,
+            onPageChanged: (index, _) => setState(() => currentIndex = index),
           ),
         ),
         const SizedBox(height: Spacing.l48),
-        Container(
+        SizedBox(
           width: Spacing.xl72,
           height: Spacing.s4,
-          decoration: ShapeDecoration(
-            color: Palette.white.withOpacity(0.2),
-            shape: const StadiumBorder(),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              Data.beyondSpaceImages.length,
-              (index) {
-                return AnimatedContainer(
+          child: Stack(
+            alignment: Alignment.centerLeft,
+            children: [
+              Container(
+                width: Spacing.xl72,
+                height: Spacing.s4,
+                decoration: ShapeDecoration(
+                  color: Palette.white.withOpacity(0.2),
+                  shape: const StadiumBorder(),
+                ),
+              ),
+              AnimatedPadding(
+                duration: const Duration(milliseconds: 800),
+                curve: Curves.ease,
+                padding: EdgeInsets.only(
+                  left: (currentIndex + 1) *
+                      (Spacing.xl72 / Data.beyondSpaceImages.length),
+                ),
+                child: Container(
                   width: Spacing.xl72 / Data.beyondSpaceImages.length,
                   height: Spacing.s4,
-                  curve: Curves.ease,
-                  decoration: ShapeDecoration(
-                    color: Palette.white
-                        .withOpacity(currentIndex == index ? 1 : 0),
-                    shape: const StadiumBorder(),
+                  decoration: const ShapeDecoration(
+                    color: Palette.white,
+                    shape: StadiumBorder(),
                   ),
-                  duration: const Duration(
-                      milliseconds: Constants.appMockAnimationDuration),
-                );
-              },
-            ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -248,34 +172,13 @@ class BeyondSpaceMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: Responsive.isDesktop(context)
-            ? Constants.webHorizontalPadding
-            : Constants.mobileHorizontalPadding,
-        vertical: Constants.appBarHeight * 1.5,
+      padding: const EdgeInsets.symmetric(
+        horizontal: Constants.mobileHorizontalPadding,
       ),
       child: Column(
         children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Image.asset(
-                Assets.phoneHand,
-                width: size.width * 0.85,
-                fit: BoxFit.cover,
-              ),
-              Positioned(
-                left: size.width * 0.1,
-                top: 5,
-                child: SizedBox(
-                  width: size.width * 0.384,
-                  child: const BeyondSpaceCarousel(),
-                ),
-              ),
-            ],
-          ),
+          const BeyondSpaceCarousel(),
           const SizedBox(height: Spacing.s12),
           FittedBox(
             fit: BoxFit.scaleDown,

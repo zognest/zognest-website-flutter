@@ -24,7 +24,7 @@ abstract final class Assets {
   static const drawer = '${Paths.svg}/drawer.svg';
 
   // Images
-  static const phoneHand = '${Paths.images}/phone_hand.png';
+  static const phoneMockup = '${Paths.images}/phone_mockup.png';
   static const zognestLogo = '${Paths.images}/logo.png';
   static const mercuries = '${Paths.images}/mercuries.png';
   static const office = '${Paths.images}/office.png';

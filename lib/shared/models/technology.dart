@@ -1,11 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class Technology {
+import 'package:equatable/equatable.dart';
+
+class Technology extends Equatable {
   final String name;
   final String image;
 
-  Technology({
+  const Technology({
     required this.name,
     required this.image,
   });
@@ -43,12 +45,5 @@ class Technology {
   String toString() => 'Technology(name: $name, image: $image)';
 
   @override
-  bool operator ==(covariant Technology other) {
-    if (identical(this, other)) return true;
-
-    return other.name == name && other.image == image;
-  }
-
-  @override
-  int get hashCode => name.hashCode ^ image.hashCode;
+  List<Object> get props => [name, image];
 }

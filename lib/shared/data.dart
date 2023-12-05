@@ -76,7 +76,7 @@ class Data {
   ];
 
   static List<Service> services = [
-    Service(
+    const Service(
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
@@ -90,7 +90,7 @@ class Data {
         Technology(name: 'Sketch', image: Assets.sketch),
       ],
     ),
-    Service(
+    const Service(
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
@@ -104,7 +104,7 @@ class Data {
         Technology(name: 'Sketch', image: Assets.sketch),
       ],
     ),
-    Service(
+    const Service(
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
@@ -118,7 +118,7 @@ class Data {
         Technology(name: 'Sketch', image: Assets.sketch),
       ],
     ),
-    Service(
+    const Service(
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
@@ -132,7 +132,7 @@ class Data {
         Technology(name: 'Sketch', image: Assets.sketch),
       ],
     ),
-    Service(
+    const Service(
       highlight: 'Our',
       title: 'Dedicate Team',
       description:
@@ -314,7 +314,7 @@ class Data {
   ];
 
   static List<Staff> staff = [
-    Staff(
+    const Staff(
       name: 'Dodo',
       position: 'Co-Founder / CTO',
       description:

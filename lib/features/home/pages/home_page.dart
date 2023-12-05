@@ -114,6 +114,7 @@ class Foreground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: Constants.appBarHeight * 1.5),
         Responsive.isDesktop(context)
             ? BeyondSpace(
                 onTabDown: () => controller.animateTo(

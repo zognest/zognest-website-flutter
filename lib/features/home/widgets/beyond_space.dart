@@ -1,7 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:zognest_website/config/constantsrt 'package:zognest_website/resources/assets.dart';
+import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/theme/palette.dart';
+import 'package:zognest_website/config/theme/text_theme.dart';
+import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/data.dart';

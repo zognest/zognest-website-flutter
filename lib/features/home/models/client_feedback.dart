@@ -46,10 +46,10 @@ class ClientFeedback extends Equatable {
 
   factory ClientFeedback.fromMap(Map<String, dynamic> map) {
     return ClientFeedback(
-      clientImage: map['clientImage'],
+      clientImage: map['client_image'],
       name: map['name'],
       id: map['id'],
-      backgroundImages: List<String>.from(map['backgroundImages']),
+      backgroundImages: List<String>.from(map['background_images']),
       description: map['description'],
     );
   }

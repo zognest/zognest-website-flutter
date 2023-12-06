@@ -8,6 +8,7 @@ class Project extends Equatable {
   final String brief;
   final String description;
   final String image;
+  final String splash;
   final String icon;
 
   const Project({
@@ -15,6 +16,7 @@ class Project extends Equatable {
     required this.brief,
     required this.description,
     required this.image,
+    required this.splash,
     required this.icon,
   });
 
@@ -23,6 +25,7 @@ class Project extends Equatable {
     String? brief,
     String? description,
     String? image,
+    String? splash,
     String? icon,
   }) {
     return Project(
@@ -30,6 +33,7 @@ class Project extends Equatable {
       brief: brief ?? this.brief,
       description: description ?? this.description,
       image: image ?? this.image,
+      splash: splash ?? this.splash,
       icon: icon ?? this.icon,
     );
   }
@@ -40,6 +44,7 @@ class Project extends Equatable {
       'brief': brief,
       'description': description,
       'image': image,
+      'splash': splash,
       'icon': icon,
     };
   }
@@ -50,13 +55,15 @@ class Project extends Equatable {
       brief: map['brief'] as String,
       description: map['description'] as String,
       image: map['image'] as String,
+      splash: map['splash'] as String,
       icon: map['icon'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Project.fromJson(String source) => Project.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Project.fromJson(String source) =>
+      Project.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;
@@ -68,6 +75,7 @@ class Project extends Equatable {
       brief,
       description,
       image,
+      splash,
       icon,
     ];
   }

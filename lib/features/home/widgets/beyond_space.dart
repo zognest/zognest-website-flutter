@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/assets.dart';
@@ -90,6 +91,7 @@ class BeyondSpace extends StatelessWidget {
                 ),
               ),
               const Expanded(
+                flex: 2,
                 child: BeyondSpaceCarousel(),
               ),
             ],
@@ -117,10 +119,39 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
       children: [
         CarouselSlider(
           items: Data.beyondSpaceImages.map((image) {
-            return Image.asset(image);
+            return Container(
+              padding: EdgeInsets.symmetric(
+                vertical:
+                    Responsive.isDesktop(context) ? Spacing.l32 : Spacing.m16,
+                horizontal: Responsive.isDesktop(context) ? Spacing.s2 : 0,
+              ),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(Assets.phoneMockup),
+                ),
+              ),
+              child: Image.asset(
+                image,
+                width: double.infinity,
+              ),
+            );
+            /* return Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(
+                  Assets.phoneMockup,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+                Image.asset(
+                  image,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+              ],
+            ); */
           }).toList(),
           options: CarouselOptions(
-            // aspectRatio: 1,
             viewportFraction: 0.25,
             enlargeCenterPage: true,
             enlargeFactor: 0.5,
@@ -149,7 +180,7 @@ class _BeyondSpaceCarouselState extends State<BeyondSpaceCarousel> {
                 duration: const Duration(milliseconds: 800),
                 curve: Curves.ease,
                 padding: EdgeInsets.only(
-                  left: (currentIndex + 1) *
+                  left: currentIndex *
                       (Spacing.xl72 / Data.beyondSpaceImages.length),
                 ),
                 child: Container(

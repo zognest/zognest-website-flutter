@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Event extends Equatable {
@@ -45,9 +46,9 @@ class Event extends Equatable {
   factory Event.fromMap(Map<String, dynamic> map) {
     return Event(
       title: map['title'],
-      date: DateTime.fromMillisecondsSinceEpoch(map['date']),
+      date: (map['date'] as Timestamp).toDate(),
       images: List<String>.from(map['images']),
-      coverImage: map['coverImage'],
+      coverImage: map['cover_image'],
     );
   }
 

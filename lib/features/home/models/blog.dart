@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Blog extends Equatable {
@@ -38,7 +39,7 @@ class Blog extends Equatable {
     return Blog(
       image: map['image'] as String,
       title: map['title'] as String,
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      date: (map['date'] as Timestamp).toDate(),
     );
   }
 

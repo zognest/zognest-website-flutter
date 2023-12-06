@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Zognest',
-      theme: CustomTheme.darkTheme(context),
       routerConfig: Routing.router,
+      themeMode: ThemeMode.dark,
+      darkTheme: CustomTheme.darkTheme(context),
       scrollBehavior: ScrollConfiguration.of(context).copyWith(
         physics: const BouncingScrollPhysics(),
         dragDevices: PointerDeviceKind.values.toSet(),

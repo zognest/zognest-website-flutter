@@ -10,7 +10,7 @@ class FirestoreServices {
 
   static Future<List<Blog>> getBlogs() async {
     final blogsJson =
-        await firestore.collection(FirestorePaths.blogs.path).get();
+        await firestore.collection(FirebasePaths.blogs.firestorePath).get();
 
     final blogs =
         blogsJson.docs.map((blogDoc) => Blog.fromMap(blogDoc.data())).toList();
@@ -19,8 +19,9 @@ class FirestoreServices {
   }
 
   static Future<List<ClientFeedback>> getClientFeedbacks() async {
-    final clientFeedbacksJson =
-        await firestore.collection(FirestorePaths.clientFeedbacks.path).get();
+    final clientFeedbacksJson = await firestore
+        .collection(FirebasePaths.clientFeedbacks.firestorePath)
+        .get();
 
     final clientFeedbacks = clientFeedbacksJson.docs
         .map((feedbackDoc) => ClientFeedback.fromMap(feedbackDoc.data()))
@@ -31,7 +32,7 @@ class FirestoreServices {
 
   static Future<List<Event>> getEvents() async {
     final eventsJson =
-        await firestore.collection(FirestorePaths.events.path).get();
+        await firestore.collection(FirebasePaths.events.firestorePath).get();
 
     final events = eventsJson.docs
         .map((eventDoc) => Event.fromMap(eventDoc.data()))
@@ -42,7 +43,7 @@ class FirestoreServices {
 
   static Future<List<Offer>> getOffers() async {
     final offersJson =
-        await firestore.collection(FirestorePaths.offers.path).get();
+        await firestore.collection(FirebasePaths.offers.firestorePath).get();
 
     final offers = offersJson.docs
         .map((offerDoc) => Offer.fromMap(offerDoc.data()))

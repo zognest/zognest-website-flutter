@@ -53,7 +53,6 @@ class _ZognestEventsState extends State<ZognestEvents> {
                 indicatorSize: TabBarIndicatorSize.tab,
                 splashFactory: NoSplash.splashFactory,
                 overlayColor: MaterialStateProperty.all(Palette.transparent),
-                physics: const NeverScrollableScrollPhysics(),
                 tabs: eventsYears.map((year) {
                   return Container(
                     padding: EdgeInsets.symmetric(

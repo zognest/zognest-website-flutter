@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       theme: CustomTheme.darkTheme(context),
       routerConfig: Routing.router,
       scrollBehavior: ScrollConfiguration.of(context).copyWith(
+        physics: const BouncingScrollPhysics(),
         dragDevices: {
           PointerDeviceKind.touch,
           PointerDeviceKind.mouse,

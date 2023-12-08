@@ -2,8 +2,6 @@ import 'package:zognest_website/features/home/widgets/marquee_text.dart';
 import 'package:zognest_website/features/home/widgets/zognest_clients.dart';
 import 'package:zognest_website/features/home/widgets/zognest_mocks.dart';
 import 'package:zognest_website/features/home/widgets/zognest_services.dart';
-import 'package:zognest_website/features/home/widgets/zognest_video.dart';
-import 'package:zognest_website/features/home/pages/home_page.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 
@@ -32,9 +30,8 @@ class Constants {
   /// The total height of the [PrimaryAppBar]
   static const appBarHeight = Spacing.xl72;
 
-  /// The spacing between each [Foreground] component
-  static const webSectionSpacing = 150.0;
-  static const mobileSectionSpacing = 30.0;
+  /// The spacing between each component
+  static const sectionSpacing = 75.0;
 
   /// The height of [MarqueeText] component
   static const marqueeHeight = 150.0;
@@ -55,8 +52,8 @@ class Constants {
 
   /// region [Counters]
   static const countersAnimationDuration = 3000;
-  static const webCountItemHeight = Spacing.xl60 * 2;
-  static const mobileCountItemHeight = Spacing.xl60 * 1.25;
+  static const webCountItemHeight = 120.0;
+  static const mobileCountItemHeight = 72.0;
 
   // endregion
 
@@ -99,7 +96,7 @@ class Constants {
 
   /// region [ZognestEvents]
   static const eventsDesktopTabHeight = 60.0;
-  static const eventsMobileTabHeight = Spacing.l40;
+  static const eventsMobileTabHeight = 40.0;
   static const eventsCardHeight = 500.0;
   static const eventsCardWidth = 335.0;
   static const eventsDialogHeight = 700.0;
@@ -118,13 +115,12 @@ class Constants {
   static const contactUsSectionHeight = 850.0;
   static const backgroundDecorationSpacing = 1000.0;
   static const beyondSpaceAppDuration = 5;
-  static const clientsMarqueeHeight = Spacing.xl72;
-  static const mobileClientsMarqueeHeight = Spacing.l48;
+  static const clientsMarqueeHeight = 72.0;
+  static const mobileClientsMarqueeHeight = 48.0;
 
   // endregion
 
   // region Durations
   static const scrollToDuration = 1000;
-  static const marqueeScrollDuration = 3000;
 // endregion
 }

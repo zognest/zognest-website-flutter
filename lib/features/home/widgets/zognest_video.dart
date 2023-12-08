@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
+import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
-import 'package:zognest_website/config/theme/palette.dart';
-import 'package:zognest_website/shared/data.dart';
 
 class ZognestVideo extends StatefulWidget {
   const ZognestVideo({super.key});
@@ -15,32 +12,23 @@ class ZognestVideo extends StatefulWidget {
 }
 
 class _ZognestVideoState extends State<ZognestVideo> {
-  late final YoutubePlayerController _controller;
-  PlayerState state = PlayerState.unknown;
+  late final VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = YoutubePlayerController.fromVideoId(
-      videoId: Data.ytVideoUrl,
-      autoPlay: false,
-      params: const YoutubePlayerParams(
-        mute: false,
-        showControls: false,
-        showFullscreenButton: true,
+    _controller = VideoPlayerController.networkUrl(
+      Uri.parse(
+        'https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/videos%2Fmarketing%2Ftest_video.mp4?alt=media&token=27ee09f9-9aa6-42b4-8c9f-ead614b96bf5',
       ),
-    )
-      ..update(playbackQuality: 'HD')
-      ..listen(videoListener);
+    )..initialize().then((_) => setState(() {}));
   }
 
   @override
   void dispose() {
-    _controller.close();
+    _controller.dispose();
     super.dispose();
   }
-
-  void videoListener(YoutubePlayerValue event) => state = event.playerState;
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +38,8 @@ class _ZognestVideoState extends State<ZognestVideo> {
         VisibilityDetector(
           key: ValueKey(runtimeType.toString()),
           onVisibilityChanged: (info) {
-            if (info.visibleFraction >= 2 && state == PlayerState.cued) {
-              _controller.playVideo();
+            if (info.visibleFraction >= 2) {
+              // play
             }
           },
           child: Padding(
@@ -60,35 +48,35 @@ class _ZognestVideoState extends State<ZognestVideo> {
                   ? Constants.webHorizontalPadding
                   : Constants.mobileHorizontalPadding,
             ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                YoutubePlayerScaffold(
-                  controller: _controller,
-                  aspectRatio: Constants.videoAspectRatio,
-                  builder: (_, player) => player,
-                ),
-                InkWell(
-                  overlayColor: MaterialStateProperty.all(Palette.transparent),
-                  onTap: () {
-                    if (state == PlayerState.playing) {
-                      _controller.pauseVideo();
-                      return;
-                    }
-                    if (state == PlayerState.paused ||
-                        state == PlayerState.ended ||
-                        state == PlayerState.cued) {
-                      _controller.playVideo();
-                    }
-                  },
-                  child: PointerInterceptor(
-                    child: const AspectRatio(
-                      aspectRatio: Constants.videoAspectRatio,
+            child: _controller.value.isInitialized
+                ? AspectRatio(
+                    aspectRatio: Constants.videoAspectRatio,
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        VideoPlayer(_controller),
+                        IconButton(
+                          onPressed: () {
+                            _controller.value.isPlaying
+                                ? _controller.pause()
+                                : _controller.play();
+                          },
+                          icon: const Icon(
+                            Icons.play_circle,
+                            color: Colors.red,
+                          ),
+                        ),
+                        VideoProgressIndicator(
+                          _controller,
+                          allowScrubbing: false,
+                          colors: VideoProgressColors(
+                            playedColor: Theme.of(context).primaryColor,
+                          ),
+                        )
+                      ],
                     ),
-                  ),
-                ),
-              ],
-            ),
+                  )
+                : const SizedBox.shrink(),
           ),
         ),
         const Divider(),

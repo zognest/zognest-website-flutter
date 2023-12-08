@@ -51,4 +51,16 @@ class FirestoreServices {
 
     return offers;
   }
+
+  static Future<String> getVideoUrl() async {
+    final urlDoc = await firestore
+        .collection(FirebasePaths.videos.firestorePath)
+        .doc('main')
+        .get();
+
+    final url = urlDoc.data()?['url'] as String;
+
+    print(url);
+    return url;
+  }
 }

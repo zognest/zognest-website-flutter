@@ -19,24 +19,35 @@ class _MarqueeTextState extends State<MarqueeText>
 
   double offset = 0.0;
 
-  late final List<Widget> marqueeText;
-
   @override
   initState() {
     super.initState();
     _scrollController = ScrollController();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: Constants.marqueeScrollDuration),
+      duration: const Duration(milliseconds: 3000),
     )..addListener(animationListener);
     _animationController.forward();
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void dispose() {
+    _scrollController.dispose();
+    _animationController.removeListener(animationListener);
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void animationListener() {
+    if (_animationController.isCompleted) _animationController.repeat();
+    offset += 1.0;
+    _scrollController.jumpTo(offset);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    marqueeText = [
+    final marqueeText = [
       Text(
         Strings.weAreTheCre.toUpperCase(),
         style: theme.textTheme.displaySmall?.copyWith(
@@ -66,24 +77,6 @@ class _MarqueeTextState extends State<MarqueeText>
         ),
       ),
     ];
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    _animationController.removeListener(animationListener);
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  void animationListener() {
-    if (_animationController.isCompleted) _animationController.repeat();
-    offset += 1.0;
-    _scrollController.jumpTo(offset);
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Column(
       children: [
         const Divider(),
@@ -94,13 +87,7 @@ class _MarqueeTextState extends State<MarqueeText>
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               final i = index % marqueeText.length;
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // const SizedBox(height: Spacing.m20),
-                  marqueeText[i],
-                ],
-              );
+              return marqueeText[i];
             },
           ),
         ),

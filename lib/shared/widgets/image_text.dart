@@ -156,7 +156,7 @@ class ImageTextMobile extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: Constants.mobileSectionSpacing),
+              const SizedBox(height: Constants.sectionSpacing),
               Text(
                 Strings.zognestDescription,
                 style: theme.textTheme.bodyLarge,

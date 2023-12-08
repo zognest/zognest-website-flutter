@@ -88,7 +88,7 @@ class _ZognestOffersState extends State<ZognestOffers> {
                 return OfferItem(offer: offer);
               },
               separatorBuilder: (context, index) =>
-              const SizedBox(width: Spacing.l24),
+                  const SizedBox(width: Spacing.l24),
               itemCount: 10,
             ),
           ),
@@ -132,10 +132,10 @@ class ZognestOffersMobile extends StatelessWidget {
             children: Data.offers
                 .mapIndexed(
                   (index, offer) => Padding(
-                padding: const EdgeInsets.only(bottom: Spacing.s12),
-                child: OfferItem(offer: offer, colored: index == 0),
-              ),
-            )
+                    padding: const EdgeInsets.only(bottom: Spacing.s12),
+                    child: OfferItem(offer: offer, colored: index == 0),
+                  ),
+                )
                 .toList(),
           ),
         ),

@@ -55,11 +55,7 @@ class _OurWorkPageState extends State<OurWorkPage> {
                           (Responsive.isDesktop(context) ? 1.5 : 1),
                     ),
                     const ZognestProjects(),
-                    SizedBox(
-                      height: Responsive.isDesktop(context)
-                          ? Constants.webSectionSpacing
-                          : Constants.mobileSectionSpacing,
-                    ),
+                    const SizedBox(height: Constants.sectionSpacing),
                     const OurWorkText(),
                     Footer(
                       onTabUp: () => _controller.animateTo(

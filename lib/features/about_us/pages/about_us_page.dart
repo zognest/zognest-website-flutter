@@ -36,9 +36,6 @@ class _AboutUsPageState extends State<AboutUsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final double sectionSpacing = Responsive.isDesktop(context)
-        ? Constants.webSectionSpacing
-        : Constants.mobileSectionSpacing;
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawer: const PrimaryDrawer(),
@@ -56,9 +53,9 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       image: Assets.zognestTeam,
                       hasGradient: true,
                     ),
-                    SizedBox(height: sectionSpacing),
+                    const SizedBox(height: Constants.sectionSpacing),
                     const ZognestStaff(),
-                    SizedBox(height: sectionSpacing),
+                    const SizedBox(height: Constants.sectionSpacing),
                     Image.asset(
                       Responsive.isDesktop(context)
                           ? Assets.aboutUsText
@@ -69,7 +66,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                     ),
                     SizedBox(
                       height: Responsive.isDesktop(context)
-                          ? Constants.webSectionSpacing
+                          ? Constants.sectionSpacing
                           : Spacing.s0,
                     ),
                     Footer(

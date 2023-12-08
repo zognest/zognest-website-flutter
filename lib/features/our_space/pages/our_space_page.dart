@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
-import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/features/our_space/widgets/zognest_events.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/data.dart';
@@ -48,17 +47,9 @@ class _OurSpacePageState extends State<OurSpacePage> {
                 children: [
                   const SizedBox(height: Constants.appBarHeight * 1.5),
                   ZognestEvents(events: Data.events),
-                  SizedBox(
-                    height: Responsive.isDesktop(context)
-                        ? Constants.webSectionSpacing
-                        : Constants.mobileSectionSpacing,
-                  ),
+                  const SizedBox(height: Constants.sectionSpacing),
                   Image.asset(Assets.ourSpaceText),
-                  SizedBox(
-                    height: Responsive.isDesktop(context)
-                        ? Constants.webSectionSpacing
-                        : Constants.mobileSectionSpacing,
-                  ),
+                  const SizedBox(height: Constants.sectionSpacing),
                   Footer(
                     onTabUp: () => _controller.animateTo(
                       _controller.position.minScrollExtent,

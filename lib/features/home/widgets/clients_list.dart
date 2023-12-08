@@ -26,7 +26,7 @@ class _ClientsMarqueeState extends State<ClientsMarquee>
     _scrollController = ScrollController();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: Constants.marqueeScrollDuration),
+      duration: const Duration(milliseconds: 3000),
     )..addListener(animationListener);
     _animationController.forward();
   }
@@ -61,7 +61,7 @@ class _ClientsMarqueeState extends State<ClientsMarquee>
             itemBuilder: (context, index) {
               final i = index % Data.clientsImageAssets.length;
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Spacing.l40),
+                padding: const EdgeInsets.symmetric(horizontal: Spacing.l24),
                 child: InkWell(
                   onTap: () {},
                   onHover: (over) {
@@ -78,7 +78,6 @@ class _ClientsMarqueeState extends State<ClientsMarquee>
                   child: Image.asset(
                     Data.clientsImageAssets[i],
                     color: hoveredIndex == i ? Palette.primary : null,
-                    colorBlendMode: BlendMode.srcIn,
                   ),
                 ),
               );

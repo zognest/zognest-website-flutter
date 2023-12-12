@@ -7,9 +7,9 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 class UndefinedPage extends StatelessWidget {
   const UndefinedPage({
-    Key? key,
+    super.key,
     this.onlyBody = false,
-  }) : super(key: key);
+  });
 
   static const route = '/undefined-route';
 

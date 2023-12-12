@@ -6,7 +6,7 @@ import '../../config/theme/palette.dart';
 
 class FrostedContainer extends StatelessWidget {
   const FrostedContainer({
-    Key? key,
+    super.key,
     required this.child,
     this.blurStrength = 24,
     this.backgroundColor = Palette.cardBackgroundColor,
@@ -16,7 +16,7 @@ class FrostedContainer extends StatelessWidget {
     this.height,
     this.decoration,
     this.borderRadiusGeometry,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final double blurStrength;

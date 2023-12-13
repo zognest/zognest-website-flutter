@@ -64,25 +64,20 @@ class Constants {
   // endregion
 
   /// region [ZognestMocks]
-  static const appMockAnimationDuration = 2000;
   static const mocksSectionHeight = 1000.0;
   // endregion
 
   /// region [ZognestClients]
   static const clientsItemWidth = 440.0;
-  static const clientsSectionHeight = 480.0;
 
   // endregion
 
   /// region [ZognestBlogs]
   static const blogsItemWidth = 440.0;
-  static const blogsSectionHeight = 480.0;
 
   // endregion
 
   /// region [ZognestProjects]
-  static const projectBaseWidth = 360.0;
-  static const projectExtendedWidth = 960.0;
   static const projectHeight = 540.0;
 
   // endregion
@@ -97,23 +92,18 @@ class Constants {
   /// region [ZognestEvents]
   static const eventsDesktopTabHeight = 60.0;
   static const eventsMobileTabHeight = 40.0;
-  static const eventsCardHeight = 500.0;
-  static const eventsCardWidth = 335.0;
   static const eventsDialogHeight = 700.0;
 
   // endRegion
 
   // region Section Heights
   /// Web list item height
-  static const webListItemHeight = 500.0;
-  static const webListItemWidth = 335.0;
-
   /// [ImageText]
   static const imageTextHeight = 700.0;
   static const zognestFooterSectionHeight = 800.0;
   static const optimismSectionHeight = 800.0;
   static const contactUsSectionHeight = 850.0;
-  static const backgroundDecorationSpacing = 1000.0;
+  static const bgDecorationSpacing = 1000.0;
   static const beyondSpaceAppDuration = 5;
   static const clientsMarqueeHeight = 72.0;
   static const mobileClientsMarqueeHeight = 48.0;

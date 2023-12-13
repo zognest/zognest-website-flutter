@@ -46,7 +46,7 @@ enum AppBarButtons {
   const AppBarButtons({required this.route, required this.title});
 }
 
-class PrimaryAppBar extends StatefulWidget {
+class PrimaryAppBar extends StatefulWidget implements PreferredSizeWidget {
   const PrimaryAppBar({
     super.key,
     required this.scrollController,
@@ -56,6 +56,9 @@ class PrimaryAppBar extends StatefulWidget {
 
   @override
   State<PrimaryAppBar> createState() => _PrimaryAppBarState();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(Constants.appBarHeight);
 }
 
 class _PrimaryAppBarState extends State<PrimaryAppBar>
@@ -91,13 +94,13 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
   }
 
   void scrollListener() {
-    if (widget.scrollController.offset <= Constants.appBarHeight) {
+    if (widget.scrollController.offset <= Constants.appBarHeight ||
+        widget.scrollController.position.userScrollDirection ==
+            ScrollDirection.forward) {
       _appBarAnimationController.reverse();
+      return;
     }
-    if (widget.scrollController.position.userScrollDirection ==
-        ScrollDirection.forward) {
-      _appBarAnimationController.reverse();
-    }
+
     if (widget.scrollController.position.userScrollDirection ==
         ScrollDirection.reverse) {
       _appBarAnimationController.forward();

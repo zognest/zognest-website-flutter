@@ -1,6 +1,3 @@
-// ignore: depend_on_referenced_packages
-import 'package:collection/collection.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -70,27 +67,19 @@ class _ZognestOffersState extends State<ZognestOffers> {
         ),
         SizedBox(
           height: Constants.zognestOffersListHeight,
-          child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context).copyWith(
-              dragDevices: {
-                PointerDeviceKind.touch,
-                PointerDeviceKind.mouse,
-              },
-            ),
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.webHorizontalPadding),
-              scrollDirection: Axis.horizontal,
-              controller: _controller,
-              itemBuilder: (context, index) {
-                final i = index % Data.offers.length;
-                final offer = Data.offers[i];
-                return OfferItem(offer: offer);
-              },
-              separatorBuilder: (context, index) =>
-                  const SizedBox(width: Spacing.l24),
-              itemCount: 10,
-            ),
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(
+                horizontal: Constants.webHorizontalPadding),
+            scrollDirection: Axis.horizontal,
+            controller: _controller,
+            itemBuilder: (context, index) {
+              final i = index % Data.offers.length;
+              final offer = Data.offers[i];
+              return OfferItem(offer: offer);
+            },
+            separatorBuilder: (context, index) =>
+                const SizedBox(width: Spacing.l24),
+            itemCount: 10,
           ),
         ),
         const Divider(),
@@ -124,20 +113,18 @@ class ZognestOffersMobile extends StatelessWidget {
           ),
           onTapScroll: null,
         ),
-        Padding(
+        ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          addAutomaticKeepAlives: false,
           padding: const EdgeInsets.symmetric(
             horizontal: Constants.mobileHorizontalPadding,
           ),
-          child: Column(
-            children: Data.offers
-                .mapIndexed(
-                  (index, offer) => Padding(
-                    padding: const EdgeInsets.only(bottom: Spacing.s12),
-                    child: OfferItem(offer: offer, colored: index == 0),
-                  ),
-                )
-                .toList(),
-          ),
+          shrinkWrap: true,
+          itemBuilder: (_, index) {
+            return OfferItem(offer: Data.offers[index], colored: index == 0);
+          },
+          separatorBuilder: (_, __) => const SizedBox(height: Spacing.s12),
+          itemCount: Data.offers.length,
         ),
         const Divider(),
       ],
@@ -165,7 +152,9 @@ class OfferItem extends StatelessWidget {
       height: Constants.zognestOffersListHeight,
       color: colored ? theme.primaryColor : Palette.cardBackgroundColor,
       padding: const EdgeInsets.symmetric(
-          horizontal: Spacing.l32, vertical: Spacing.l48),
+        horizontal: Spacing.l32,
+        vertical: Spacing.l48,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

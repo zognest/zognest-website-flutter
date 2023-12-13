@@ -24,7 +24,7 @@ class ScrollHeadline extends StatelessWidget {
         horizontal: Responsive.isDesktop(context)
             ? Constants.webHorizontalPadding
             : Constants.mobileHorizontalPadding,
-        vertical: Spacing.l40,
+        vertical: Responsive.isDesktop(context) ? Spacing.l40 : Spacing.m16,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

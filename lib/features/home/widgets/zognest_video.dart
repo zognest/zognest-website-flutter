@@ -39,7 +39,7 @@ class _ZognestVideoState extends State<ZognestVideo> {
           key: ValueKey(runtimeType.toString()),
           onVisibilityChanged: (info) {
             if (info.visibleFraction >= 2) {
-              // play
+              if (_controller.value.isInitialized) _controller.play();
             }
           },
           child: Padding(

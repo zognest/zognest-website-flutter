@@ -91,9 +91,7 @@ class BeyondSpace extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Expanded(
-                    child: BeyondSpaceCarousel(),
-                  ),
+                  const Expanded(child: BeyondSpaceCarousel()),
                 ],
               ),
               const SizedBox(height: Spacing.l24),

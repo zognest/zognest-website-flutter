@@ -68,11 +68,10 @@ class _ClientsMarqueeState extends State<ClientsMarquee>
                     if (over) {
                       setState(() => hoveredIndex = i);
                       _animationController.stop(canceled: false);
+                      return;
                     }
-                    if (!over) {
-                      setState(() => hoveredIndex = -1);
-                      _animationController.repeat();
-                    }
+                    setState(() => hoveredIndex = -1);
+                    _animationController.repeat();
                   },
                   overlayColor: MaterialStateProperty.all(Palette.transparent),
                   child: Image.asset(

@@ -47,47 +47,43 @@ class _MarqueeTextState extends State<MarqueeText>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final marqueeText = [
-      Text(
-        Strings.weAreTheCre.toUpperCase(),
-        style: theme.textTheme.displaySmall?.copyWith(
-          foreground: TextThemes.foreground,
-          letterSpacing: 3,
-        ),
-      ),
-      Stack(
-        children: [
-          Text(
-            Strings.eight.toUpperCase(),
-            style: theme.textTheme.displaySmall
-                ?.copyWith(color: theme.primaryColor),
-          ),
-          Text(
-            Strings.eight.toUpperCase(),
-            style: theme.textTheme.displaySmall
-                ?.copyWith(foreground: TextThemes.foreground),
-          ),
-        ],
-      ),
-      Text(
-        Strings.tive.toUpperCase(),
-        style: theme.textTheme.displaySmall?.copyWith(
-          foreground: TextThemes.foreground,
-          letterSpacing: 3,
-        ),
-      ),
-    ];
     return Column(
       children: [
         const Divider(),
         SizedBox(
-          height: Responsive.isDesktop(context) ? Constants.marqueeHeight : 100,
+          height: Constants.marqueeHeight *
+              (Responsive.isDesktop(context) ? 1 : 0.5),
           child: ListView.builder(
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              final i = index % marqueeText.length;
-              return marqueeText[i];
+              return RichText(
+                text: TextSpan(
+                    text: Strings.weAreTheCre.toUpperCase(),
+                    style: theme.textTheme.displaySmall?.copyWith(
+                      foreground: TextThemes.foreground,
+                    ),
+                    children: [
+                      WidgetSpan(
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          children: [
+                            Text(
+                              Strings.eight.toUpperCase(),
+                              style: theme.textTheme.displaySmall
+                                  ?.copyWith(color: theme.primaryColor),
+                            ),
+                            Text(
+                              Strings.eight.toUpperCase(),
+                              style: theme.textTheme.displaySmall
+                                  ?.copyWith(foreground: TextThemes.foreground),
+                            ),
+                          ],
+                        ),
+                      ),
+                      TextSpan(text: Strings.tive.toUpperCase()),
+                    ]),
+              );
             },
           ),
         ),

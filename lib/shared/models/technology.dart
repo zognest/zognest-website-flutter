@@ -23,7 +23,7 @@ class Technology extends Equatable {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'name': name,
       'image': image,
     };

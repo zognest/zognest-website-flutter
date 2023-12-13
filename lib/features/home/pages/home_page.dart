@@ -5,13 +5,19 @@ import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/home/widgets/beyond_space.dart';
 import 'package:zognest_website/features/home/widgets/clients_list.dart';
+import 'package:zognest_website/features/home/widgets/counters.dart';
 import 'package:zognest_website/features/home/widgets/marquee_text.dart';
 import 'package:zognest_website/features/home/widgets/optimism_text.dart';
+import 'package:zognest_website/features/home/widgets/zognest_blogs.dart';
+import 'package:zognest_website/features/home/widgets/zognest_clients.dart';
+import 'package:zognest_website/features/home/widgets/zognest_mocks.dart';
 import 'package:zognest_website/features/home/widgets/zognest_offers.dart';
+import 'package:zognest_website/features/home/widgets/zognest_services.dart';
 import 'package:zognest_website/features/home/widgets/zognest_video.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
+import 'package:zognest_website/shared/widgets/footer.dart';
 import 'package:zognest_website/shared/widgets/image_text.dart';
 
 import '../../../shared/widgets/gradient_container.dart';
@@ -42,80 +48,94 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
+      appBar: PrimaryAppBar(scrollController: _controller),
       drawer: const PrimaryDrawer(),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            controller: _controller,
-            child: Stack(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: _controller.hasClients
-                          ? _controller.position.maxScrollExtent * 0.22
-                          : size.height * 4,
-                      child: Stack(
-                        children: [
-                          const Stack(
-                            children: [
-                              GradientContainer(
-                                alignment: Alignment(-0.6, -0.7),
-                                color: Palette.primaryGradient,
-                                secondaryColor: Palette.secondaryGradient,
-                              ),
-                              GradientContainer(
-                                alignment: Alignment(0.6, -0.7),
-                                color: Palette.secondaryGradient,
-                              ),
-                            ],
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            child: SvgPicture.asset(Assets.gridLines),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Image.asset(Assets.mercuries),
-                    const SizedBox(
-                        height: Constants.backgroundDecorationSpacing),
-                    SvgPicture.asset(Assets.gridLines),
-                    const SizedBox(
-                        height: Constants.backgroundDecorationSpacing),
-                    SvgPicture.asset(Assets.gridLines),
-                  ],
-                ),
-                Foreground(controller: _controller),
-              ],
+      body: SingleChildScrollView(
+        controller: _controller,
+        child: Stack(
+          children: [
+            const Background(),
+            Foreground(
+              onTabDown: () {
+                _controller.animateTo(
+                  _controller.position.maxScrollExtent,
+                  duration:
+                      const Duration(milliseconds: Constants.scrollToDuration),
+                  curve: Curves.ease,
+                );
+              },
+              onTabUp: () {
+                _controller.animateTo(
+                  _controller.position.minScrollExtent,
+                  duration:
+                      const Duration(milliseconds: Constants.scrollToDuration),
+                  curve: Curves.ease,
+                );
+              },
             ),
-          ),
-          PrimaryAppBar(scrollController: _controller),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
+class Background extends StatelessWidget {
+  const Background({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        SvgPicture.asset(Assets.gridLines),
+        Column(
+          children: [
+            const SizedBox(
+              height: Constants.bgDecorationSpacing,
+              child: Stack(
+                children: [
+                  GradientContainer(
+                    alignment: Alignment(-0.4, 0),
+                    color: Palette.primaryGradient,
+                    colorStartingOpacity: 0.3,
+                    radius: 0.5,
+                    secondaryColor: Palette.secondaryGradient,
+                    secondaryAlignment: Alignment(-0.6, -0.2),
+                  ),
+                  GradientContainer(
+                    alignment: Alignment(0.6, 0),
+                    color: Palette.secondaryGradient,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: Constants.bgDecorationSpacing),
+            Image.asset(Assets.mercuries),
+            const SizedBox(height: Constants.bgDecorationSpacing),
+            SvgPicture.asset(Assets.gridLines),
+            const SizedBox(height: Constants.bgDecorationSpacing),
+            SvgPicture.asset(Assets.gridLines),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
 class Foreground extends StatelessWidget {
-  const Foreground({super.key, required this.controller});
-  final ScrollController controller;
+  const Foreground({super.key, required this.onTabDown, required this.onTabUp});
+
+  final VoidCallback onTabDown;
+  final VoidCallback onTabUp;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: Constants.appBarHeight * 1.5),
-        BeyondSpace(
-          onTabDown: () => controller.animateTo(
-            controller.position.maxScrollExtent,
-            duration: const Duration(milliseconds: Constants.scrollToDuration),
-            curve: Curves.ease,
-          ),
-        ),
+        BeyondSpace(onTabDown: onTabDown),
         const SizedBox(height: Constants.sectionSpacing),
         const ClientsMarquee(),
         const SizedBox(height: Constants.sectionSpacing),
@@ -131,7 +151,7 @@ class Foreground extends StatelessWidget {
         const SizedBox(height: Constants.sectionSpacing),
         const OptimismText(),
         const SizedBox(height: Constants.sectionSpacing),
-        /*const Counters(),
+        const Counters(),
         const SizedBox(height: Constants.sectionSpacing),
         const ZognestServices(),
         const SizedBox(height: Constants.sectionSpacing),
@@ -145,13 +165,7 @@ class Foreground extends StatelessWidget {
         const SizedBox(height: Constants.sectionSpacing),
         // const ContactForm(),
         const SizedBox(height: Constants.sectionSpacing),
-        Footer(
-          onTabUp: () => controller.animateTo(
-            controller.position.minScrollExtent,
-            duration: const Duration(milliseconds: Constants.scrollToDuration),
-            curve: Curves.ease,
-          ),
-        ),*/
+        Footer(onTabUp: onTabUp),
       ],
     );
   }

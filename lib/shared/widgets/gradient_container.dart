@@ -7,7 +7,6 @@ class GradientContainer extends StatelessWidget {
     this.alignment,
     this.height,
     this.width,
-    this.child,
     this.radius = 0.5,
     this.colorStartingOpacity = 0.5,
     this.secondaryAlignment,
@@ -22,7 +21,6 @@ class GradientContainer extends StatelessWidget {
   final double? height;
   final double? width;
   final Color? secondaryColor;
-  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +39,12 @@ class GradientContainer extends StatelessWidget {
               ],
             ),
           ),
-          child: child,
         ),
         if (secondaryColor != null)
           GradientContainer(
             color: secondaryColor!,
             alignment: secondaryAlignment ?? alignment,
+            colorStartingOpacity: colorStartingOpacity,
             radius: radius,
             height: height,
             width: width,

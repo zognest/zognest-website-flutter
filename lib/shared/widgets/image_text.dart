@@ -4,7 +4,6 @@ import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
-import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
@@ -45,11 +44,12 @@ class ImageText extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Image.asset(
-                            image,
-                            height: double.infinity,
-                            width: size.width * 0.4,
-                            fit: BoxFit.cover,
+                          Expanded(
+                            child: Image.asset(
+                              image,
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           const SizedBox(width: Spacing.l40),
                           Expanded(
@@ -60,8 +60,8 @@ class ImageText extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: AutoSizeText.rich(
-                                      stepGranularity: 4,
-                                      maxLines: 4,
+                                      stepGranularity: 1,
+                                      maxLines: 5,
                                       TextSpan(
                                         text: Strings.helpingYourBusiness
                                             .toUpperCase(),
@@ -106,12 +106,14 @@ class ImageText extends StatelessWidget {
               const Divider(),
             ],
           )
-        : const ImageTextMobile();
+        : ImageTextMobile(image: image);
   }
 }
 
 class ImageTextMobile extends StatelessWidget {
-  const ImageTextMobile({super.key});
+  const ImageTextMobile({super.key, required this.image});
+
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +123,7 @@ class ImageTextMobile extends StatelessWidget {
         AspectRatio(
           aspectRatio: 1,
           child: Image.asset(
-            Assets.zognestTeam,
+            image,
             fit: BoxFit.cover,
           ),
         ),

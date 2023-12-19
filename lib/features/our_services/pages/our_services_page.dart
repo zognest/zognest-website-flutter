@@ -35,37 +35,33 @@ class _OurServicesPageState extends State<OurServicesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      appBar: PrimaryAppBar(scrollController: _controller),
       drawer: const PrimaryDrawer(),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            controller: _controller,
-            child: Stack(
+      body: SingleChildScrollView(
+        controller: _controller,
+        child: Stack(
+          children: [
+            SvgPicture.asset(Assets.gridLines),
+            Column(
               children: [
-                SvgPicture.asset(Assets.gridLines),
-                Column(
-                  children: [
-                    const SizedBox(height: Constants.appBarHeight * 1.5),
-                    const ServicesBrowser(),
-                    const SizedBox(height: Constants.sectionSpacing),
-                    // const CreateOrder(),
-                    const Divider(),
-                    Image.asset(Assets.ourServicesText),
-                    Footer(
-                      onTabUp: () => _controller.animateTo(
-                        _controller.position.minScrollExtent,
-                        duration: const Duration(
-                            milliseconds: Constants.scrollToDuration),
-                        curve: Curves.ease,
-                      ),
-                    ),
-                  ],
+                const SizedBox(height: Constants.appBarHeight * 1.5),
+                const ServicesBrowser(),
+                const SizedBox(height: Constants.sectionSpacing),
+                // const CreateOrder(),
+                const Divider(),
+                Image.asset(Assets.ourServicesText),
+                Footer(
+                  onTabUp: () => _controller.animateTo(
+                    _controller.position.minScrollExtent,
+                    duration: const Duration(
+                        milliseconds: Constants.scrollToDuration),
+                    curve: Curves.ease,
+                  ),
                 ),
               ],
             ),
-          ),
-          PrimaryAppBar(scrollController: _controller),
-        ],
+          ],
+        ),
       ),
     );
   }

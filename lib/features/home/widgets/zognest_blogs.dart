@@ -126,9 +126,12 @@ class _BlogItemState extends State<BlogItem> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GreyscaleFilter(
-              isHovered: hovered,
-              child: Image.asset(widget.blog.image, fit: BoxFit.cover),
+            Expanded(
+              flex: 2,
+              child: GreyscaleFilter(
+                isHovered: hovered,
+                child: Image.asset(widget.blog.image, fit: BoxFit.cover),
+              ),
             ),
             Expanded(
               child: Column(

@@ -65,8 +65,8 @@ class _MarqueeTextState extends State<MarqueeText>
                     ),
                     children: [
                       WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
                         child: Stack(
-                          alignment: Alignment.topCenter,
                           children: [
                             Text(
                               Strings.eight.toUpperCase(),

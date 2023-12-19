@@ -1,4 +1,3 @@
-import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -23,21 +22,17 @@ class ZognestStaff extends StatefulWidget {
 
 class _ZognestServicesStaff extends State<ZognestStaff> {
   late final ScrollController _controller;
-  late final FlipCardController _flipController;
   int currentIndex = 1;
 
   @override
   void initState() {
     super.initState();
     _controller = ScrollController();
-    _flipController = FlipCardController();
   }
 
   @override
   void dispose() {
     _controller.dispose();
-    _flipController.state?.dispose();
-    _flipController.controller?.dispose();
     super.dispose();
   }
 

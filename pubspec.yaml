@@ -38,7 +38,6 @@ dependencies:
   equatable: ^2.0.5
   firebase_core: ^2.24.0
   firebase_storage: ^11.5.3
-  flip_card: ^0.7.0
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.7

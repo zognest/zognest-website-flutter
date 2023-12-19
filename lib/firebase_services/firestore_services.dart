@@ -57,7 +57,6 @@ class FirestoreServices {
 
     final url = urlDoc.data()?['url'] as String;
 
-    print(url);
     return url;
   }
 }

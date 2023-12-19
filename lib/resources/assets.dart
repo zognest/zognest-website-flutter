@@ -25,6 +25,7 @@ abstract final class Assets {
 
   // Images
   static const phoneMockup = '${Paths.images}/phone_mockup.png';
+  static const impactLinesPng = '${Paths.images}/impact_lines.png';
   static const zognestLogo = '${Paths.images}/logo.png';
   static const mercuries = '${Paths.images}/mercuries.png';
   static const office = '${Paths.images}/office.png';

@@ -36,33 +36,29 @@ class _OurSpacePageState extends State<OurSpacePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      appBar: PrimaryAppBar(scrollController: _controller),
       drawer: const PrimaryDrawer(),
       body: Stack(
         children: [
-          Stack(
+          SvgPicture.asset(Assets.gridLines),
+          ListView(
+            controller: _controller,
             children: [
-              SvgPicture.asset(Assets.gridLines),
-              ListView(
-                controller: _controller,
-                children: [
-                  const SizedBox(height: Constants.appBarHeight * 1.5),
-                  ZognestEvents(events: Data.events),
-                  const SizedBox(height: Constants.sectionSpacing),
-                  Image.asset(Assets.ourSpaceText),
-                  const SizedBox(height: Constants.sectionSpacing),
-                  Footer(
-                    onTabUp: () => _controller.animateTo(
-                      _controller.position.minScrollExtent,
-                      duration: const Duration(
-                          milliseconds: Constants.scrollToDuration),
-                      curve: Curves.ease,
-                    ),
-                  ),
-                ],
+              const SizedBox(height: Constants.appBarHeight * 1.5),
+              ZognestEvents(events: Data.events),
+              const SizedBox(height: Constants.sectionSpacing),
+              Image.asset(Assets.ourSpaceText),
+              const SizedBox(height: Constants.sectionSpacing),
+              Footer(
+                onTabUp: () => _controller.animateTo(
+                  _controller.position.minScrollExtent,
+                  duration:
+                      const Duration(milliseconds: Constants.scrollToDuration),
+                  curve: Curves.ease,
+                ),
               ),
             ],
           ),
-          PrimaryAppBar(scrollController: _controller),
         ],
       ),
     );

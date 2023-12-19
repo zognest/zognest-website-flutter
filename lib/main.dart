@@ -18,7 +18,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final call = ref.read(appControllerProvider);
+    ref.read(appControllerProvider);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Zognest',

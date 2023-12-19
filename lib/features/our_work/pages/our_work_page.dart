@@ -37,41 +37,37 @@ class _OurWorkPageState extends State<OurWorkPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      appBar: PrimaryAppBar(scrollController: _controller),
       drawer: const PrimaryDrawer(),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            controller: _controller,
-            child: Stack(
+      body: SingleChildScrollView(
+        controller: _controller,
+        child: Stack(
+          children: [
+            Positioned(
+              top: Constants.projectHeight,
+              child: SvgPicture.asset(Assets.gridLines),
+            ),
+            Column(
               children: [
-                Positioned(
-                  top: Constants.projectHeight,
-                  child: SvgPicture.asset(Assets.gridLines),
+                SizedBox(
+                  height: Constants.appBarHeight *
+                      (Responsive.isDesktop(context) ? 1.5 : 1),
                 ),
-                Column(
-                  children: [
-                    SizedBox(
-                      height: Constants.appBarHeight *
-                          (Responsive.isDesktop(context) ? 1.5 : 1),
-                    ),
-                    const ZognestProjects(),
-                    const SizedBox(height: Constants.sectionSpacing),
-                    const OurWorkText(),
-                    Footer(
-                      onTabUp: () => _controller.animateTo(
-                        _controller.position.minScrollExtent,
-                        duration: const Duration(
-                            milliseconds: Constants.scrollToDuration),
-                        curve: Curves.ease,
-                      ),
-                    ),
-                  ],
+                const ZognestProjects(),
+                const SizedBox(height: Constants.sectionSpacing),
+                const OurWorkText(),
+                Footer(
+                  onTabUp: () => _controller.animateTo(
+                    _controller.position.minScrollExtent,
+                    duration: const Duration(
+                        milliseconds: Constants.scrollToDuration),
+                    curve: Curves.ease,
+                  ),
                 ),
               ],
             ),
-          ),
-          PrimaryAppBar(scrollController: _controller),
-        ],
+          ],
+        ),
       ),
     );
   }

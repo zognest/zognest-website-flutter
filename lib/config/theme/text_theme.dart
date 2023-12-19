@@ -16,7 +16,7 @@ abstract final class TextThemes {
 
   static double textScale(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    return size.width * 0.0004;
+    return size.width * 0.001;
   }
 
   static TextTheme textTheme(BuildContext context) {

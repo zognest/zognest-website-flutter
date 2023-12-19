@@ -52,11 +52,11 @@ class CountupState extends State<Countup> with TickerProviderStateMixin {
   double? _latestBegin;
   double? _latestEnd;
 
-  @override
+  /*@override
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
+  }*/
 
   @override
   void initState() {

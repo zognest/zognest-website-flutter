@@ -8,15 +8,15 @@ import 'package:zognest_website/riverpod/state.dart';
 import 'package:zognest_website/shared/utils.dart';
 
 final appControllerProvider = StateNotifierProvider<AppController, AppState>(
-  (ref) {
+      (ref) {
     return AppController(
       const AppState(
         loaded: false,
-        blogs: AsyncValue.data([]),
-        clientFeedbacks: AsyncValue.data([]),
-        events: AsyncValue.data([]),
-        offers: AsyncValue.data([]),
-        videoUrl: AsyncValue.loading(),
+        blogs: AsyncData([]),
+        clientFeedbacks: AsyncData([]),
+        events: AsyncData([]),
+        offers: AsyncData([]),
+        videoUrl: AsyncLoading(),
       ),
     );
   },
@@ -46,7 +46,7 @@ class AppController extends StateNotifier<AppState> {
 
     state = state.copyWith(blogs: AsyncData(blogs));
 
-    Utils.log(message: 'Loaded Blogs => ${state.blogs.value?.length}');
+    Utils.log(message: 'Loaded Blogs => ${state.blogs.value}');
   }
 
   Future<void> getClientFeedbacks() async {
@@ -55,13 +55,13 @@ class AppController extends StateNotifier<AppState> {
     state = state.copyWith(clientFeedbacks: const AsyncLoading());
 
     final List<ClientFeedback> clientFeedbacks =
-        await FirestoreServices.getClientFeedbacks();
+    await FirestoreServices.getClientFeedbacks();
 
     state = state.copyWith(clientFeedbacks: AsyncData(clientFeedbacks));
 
     Utils.log(
       message:
-          'Loaded Client Feedbacks => ${state.clientFeedbacks.value?.length}',
+      'Loaded Client Feedbacks => ${state.clientFeedbacks.value?.length}',
     );
   }
 

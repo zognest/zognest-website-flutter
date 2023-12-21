@@ -17,6 +17,13 @@ class AppState extends Equatable {
     required this.videoUrl,
   });
 
+  /*
+  * AsyncValue
+  * AsyncData('link') = AsyncValue.data()
+  * AsyncLoading()
+  * AsyncError(error)
+  * */
+
   final bool loaded;
   final AsyncValue<List<Blog>> blogs;
   final AsyncValue<List<ClientFeedback>> clientFeedbacks;
@@ -44,12 +51,5 @@ class AppState extends Equatable {
 
   @override
   List<Object?> get props =>
-      [
-        loaded,
-        blogs,
-        clientFeedbacks,
-        events,
-        offers,
-        videoUrl,
-      ];
+      [loaded, blogs, clientFeedbacks, events, offers, videoUrl];
 }

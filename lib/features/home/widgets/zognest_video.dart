@@ -63,32 +63,32 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
             ),
             child: _controller.value.isInitialized
                 ? AspectRatio(
-              aspectRatio: Constants.videoAspectRatio,
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  VideoPlayer(_controller),
-                  IconButton(
-                    onPressed: () {
-                      _controller.value.isPlaying
-                          ? _controller.pause()
-                          : _controller.play();
-                    },
-                    icon: const Icon(
-                      Icons.play_circle,
-                      color: Colors.red,
-                    ),
-                  ),
-                  VideoProgressIndicator(
-                    _controller,
-                    allowScrubbing: false,
-                    colors: VideoProgressColors(
-                      playedColor: Theme.of(context).primaryColor,
+                    aspectRatio: Constants.videoAspectRatio,
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        VideoPlayer(_controller),
+                        IconButton(
+                          onPressed: () {
+                            _controller.value.isPlaying
+                                ? _controller.pause()
+                                : _controller.play();
+                          },
+                          icon: const Icon(
+                            Icons.play_circle,
+                            color: Colors.red,
+                          ),
+                        ),
+                        VideoProgressIndicator(
+                          _controller,
+                          allowScrubbing: false,
+                          colors: VideoProgressColors(
+                            playedColor: Theme.of(context).primaryColor,
+                          ),
+                        )
+                      ],
                     ),
                   )
-                ],
-              ),
-            )
                 : const SizedBox.shrink(),
           ),
         ),

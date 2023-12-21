@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
 import 'package:zognest_website/resources/strings.dart';
-import 'package:zognest_website/shared/data.dart';
+import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
@@ -13,14 +14,14 @@ import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 
 import '../../../resources/spacing.dart';
 
-class ZognestClients extends StatefulWidget {
+class ZognestClients extends ConsumerStatefulWidget {
   const ZognestClients({super.key});
 
   @override
-  State<ZognestClients> createState() => _ZognestClientsState();
+  ConsumerState<ZognestClients> createState() => _ZognestClientsState();
 }
 
-class _ZognestClientsState extends State<ZognestClients> {
+class _ZognestClientsState extends ConsumerState<ZognestClients> {
   late final ScrollController _controller;
   int currentIndex = 1;
 
@@ -39,57 +40,63 @@ class _ZognestClientsState extends State<ZognestClients> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      children: [
-        const Divider(),
-        ScrollHeadline(
-          headline: TextSpan(
-            children: [
-              TextSpan(
-                text: '${Strings.happy}\n'.toUpperCase(),
-                style: theme.textTheme.displaySmall
-                    ?.copyWith(foreground: TextThemes.foreground),
+    final clientFeedbacks = ref.watch(appControllerProvider).clientFeedbacks;
+    return clientFeedbacks.when(
+      data: (clientFeedbacks) {
+        return Column(
+          children: [
+            const Divider(),
+            ScrollHeadline(
+              headline: TextSpan(
+                children: [
+                  TextSpan(
+                    text: '${Strings.happy}\n'.toUpperCase(),
+                    style: theme.textTheme.displaySmall
+                        ?.copyWith(foreground: TextThemes.foreground),
+                  ),
+                  TextSpan(
+                    text: Strings.clients.toUpperCase(),
+                    style: theme.textTheme.displaySmall,
+                  ),
+                ],
               ),
-              TextSpan(
-                text: Strings.clients.toUpperCase(),
-                style: theme.textTheme.displaySmall,
-              ),
-            ],
-          ),
-          onTapScroll: () {
-            if (_controller.offset == _controller.position.maxScrollExtent) {
-              currentIndex = 0;
-            }
-            _controller.animateTo(
-              Constants.clientsItemWidth * currentIndex,
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.ease,
-            );
-            currentIndex++;
-          },
-        ),
-        SizedBox(
-          height: Constants.listHeight,
-          child: ListView.separated(
-            padding: EdgeInsets.symmetric(
-              horizontal: Responsive.isDesktop(context)
-                  ? Constants.webHorizontalPadding
-                  : Constants.mobileHorizontalPadding,
+              onTapScroll: () {
+                if (_controller.offset ==
+                    _controller.position.maxScrollExtent) {
+                  currentIndex = 0;
+                }
+                _controller.animateTo(
+                  Constants.clientsItemWidth * currentIndex,
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.ease,
+                );
+                currentIndex++;
+              },
             ),
-            scrollDirection: Axis.horizontal,
-            controller: _controller,
-            itemBuilder: (context, index) {
-              final i = index % Data.clientFeedbacks.length;
-              final clientFeedback = Data.clientFeedbacks[i];
-              return ClientItem(clientFeedback: clientFeedback);
-            },
-            separatorBuilder: (context, index) =>
-                const SizedBox(width: Constants.listCardSeparatorWidth),
-            itemCount: 10,
-          ),
-        ),
-        const Divider(),
-      ],
+            SizedBox(
+              height: Constants.listHeight,
+              child: ListView.separated(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Responsive.isDesktop(context)
+                      ? Constants.webHorizontalPadding
+                      : Constants.mobileHorizontalPadding,
+                ),
+                scrollDirection: Axis.horizontal,
+                controller: _controller,
+                itemBuilder: (context, index) {
+                  return ClientItem(clientFeedback: clientFeedbacks[index]);
+                },
+                separatorBuilder: (context, index) =>
+                    const SizedBox(width: Constants.listCardSeparatorWidth),
+                itemCount: clientFeedbacks.length,
+              ),
+            ),
+            const Divider(),
+          ],
+        );
+      },
+      error: (_, __) => const Text('Error'),
+      loading: () => CircularProgressIndicator(color: theme.primaryColor),
     );
   }
 }
@@ -135,7 +142,7 @@ class _ClientItemState extends State<ClientItem> {
                     Row(
                       children: [
                         Expanded(
-                          child: Image.asset(
+                          child: Image.network(
                             widget.clientFeedback.backgroundImages[0],
                             // height: double.infinity,
                             fit: BoxFit.cover,
@@ -143,7 +150,7 @@ class _ClientItemState extends State<ClientItem> {
                         ),
                         const SizedBox(width: Spacing.m16),
                         Expanded(
-                          child: Image.asset(
+                          child: Image.network(
                             widget.clientFeedback.backgroundImages[1],
                             height: double.infinity,
                             fit: BoxFit.cover,
@@ -154,7 +161,7 @@ class _ClientItemState extends State<ClientItem> {
                     Positioned(
                       left: 20,
                       bottom: 0,
-                      child: Image.asset(widget.clientFeedback.clientImage),
+                      child: Image.network(widget.clientFeedback.clientImage),
                     ),
                   ],
                 ),

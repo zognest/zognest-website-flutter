@@ -93,7 +93,7 @@ class ServiceItem extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Image.asset(
+            child: Image.network(
               service.image,
               height: double.infinity,
               fit: BoxFit.cover,

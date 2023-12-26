@@ -36,7 +36,7 @@ class _EventCardState extends State<EventCard> {
         child: Column(
           children: [
             Expanded(
-              child: Image.asset(
+              child: Image.network(
                 widget.event.coverImage,
                 height: double.infinity,
                 width: double.infinity,

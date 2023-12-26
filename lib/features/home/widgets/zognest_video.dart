@@ -51,7 +51,7 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
         VisibilityDetector(
           key: ValueKey(runtimeType.toString()),
           onVisibilityChanged: (info) {
-            if (info.visibleFraction >= 2) {
+            if (info.visibleFraction >= 3) {
               if (_controller.value.isInitialized) _controller.play();
             }
           },

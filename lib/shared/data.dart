@@ -328,7 +328,7 @@ class Data {
         Technology(name: 'Figma', image: Assets.figmaColoured),
         Technology(name: 'XD', image: Assets.xd),
         Technology(name: 'Sketch', image: Assets.sketch),
-      ],
+      ], backgroundImage: '',
     ),
   ];
 }

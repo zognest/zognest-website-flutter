@@ -30,6 +30,7 @@ class ScrollHeadline extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          //todo what is ...[
           Text.rich(headline),
           if (onTapScroll != null) ...[
             InkWell(

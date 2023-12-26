@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -6,18 +7,19 @@ import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/our_work/models/project.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
+import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 
-class ZognestProjects extends StatefulWidget {
+class ZognestProjects extends ConsumerStatefulWidget {
   const ZognestProjects({super.key});
 
   @override
-  State<ZognestProjects> createState() => _ZognestProjectsState();
+  ConsumerState<ZognestProjects> createState() => _ZognestProjectsState();
 }
 
-class _ZognestProjectsState extends State<ZognestProjects> {
+class _ZognestProjectsState extends ConsumerState<ZognestProjects> {
   late final ScrollController _controller;
   int currentIndex = 1;
 
@@ -35,8 +37,10 @@ class _ZognestProjectsState extends State<ZognestProjects> {
 
   @override
   Widget build(BuildContext context) {
+    final project= ref.watch(appControllerProvider).project;
     final theme = Theme.of(context);
-    return Column(
+    return project.when(data:(project){
+      return Column(
       children: [
         if (Responsive.isDesktop(context)) const Divider(),
         ScrollHeadline(
@@ -80,20 +84,25 @@ class _ZognestProjectsState extends State<ZognestProjects> {
             scrollDirection: Axis.horizontal,
             controller: _controller,
             itemBuilder: (context, index) {
-              final i = index % Data.projects.length;
-              final project = Data.projects[i];
-              return ProjectItem(project: project);
+             /* final i = index % Data.projects.length;
+              final project = Data.projects[i];*/
+              return ProjectItem(project: project[index]);
             },
             separatorBuilder: (context, index) =>
                 const SizedBox(width: Constants.listCardSeparatorWidth),
-            itemCount: 10,
+            itemCount: project.length,
           ),
         ),
         const Divider(),
       ],
     );
+    } ,
+      error:(_ ,__)=>const Text('error'),
+      loading: ()=>CircularProgressIndicator(color:theme.primaryColor),
+    );
   }
 }
+
 
 class ProjectItem extends StatefulWidget {
   const ProjectItem({super.key, required this.project});
@@ -134,7 +143,8 @@ class _ProjectItemState extends State<ProjectItem> {
                   Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                 );
               },
-              child: Image.asset(
+              //todo i convert child from image.assets to image.network
+              child: Image.network(
                 widget.project.image,
                 width: double.infinity,
                 height: double.infinity,
@@ -148,7 +158,8 @@ class _ProjectItemState extends State<ProjectItem> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const Spacer(flex: 2),
-                  Image.asset(widget.project.icon),
+                  //todo i convert child from image.assets to image.network
+                  Image.network(widget.project.icon),
                   const SizedBox(height: Spacing.l32),
                   Row(
                     children: [

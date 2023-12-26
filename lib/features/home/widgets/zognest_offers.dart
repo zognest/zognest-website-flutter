@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/offer.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
+import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
-
 import '../../../../config/responsive.dart';
 
-class ZognestOffers extends StatefulWidget {
+class ZognestOffers extends ConsumerStatefulWidget {
   const ZognestOffers({super.key});
 
   @override
-  State<ZognestOffers> createState() => _ZognestOffersState();
+  ConsumerState<ZognestOffers> createState() => _ZognestOffersState();
 }
 
-class _ZognestOffersState extends State<ZognestOffers> {
+class _ZognestOffersState extends ConsumerState<ZognestOffers> {
   late final ScrollController _controller;
   int currentIndex = 1;
 
@@ -35,59 +36,65 @@ class _ZognestOffersState extends State<ZognestOffers> {
 
   @override
   Widget build(BuildContext context) {
+    final offers=ref.watch(appControllerProvider).offers;
     final theme = Theme.of(context);
-    return Column(
-      children: [
-        const Divider(),
-        ScrollHeadline(
-          headline: TextSpan(
-            text: Strings.what.toUpperCase(),
-            style: theme.textTheme.displaySmall,
-            children: [
-              TextSpan(
-                text: '${Strings.we}\n'.toUpperCase(),
-                style: theme.textTheme.displaySmall?.copyWith(
-                  foreground: TextThemes.foreground,
+    return offers.when(data:(offers){
+      return  Column(
+        children: [
+          const Divider(),
+          ScrollHeadline(
+            headline: TextSpan(
+              text: Strings.what.toUpperCase(),
+              style: theme.textTheme.displaySmall,
+              children: [
+                TextSpan(
+                  text: '${Strings.we}\n'.toUpperCase(),
+                  style: theme.textTheme.displaySmall?.copyWith(
+                    foreground: TextThemes.foreground,
+                  ),
                 ),
-              ),
-              TextSpan(text: Strings.offer.toUpperCase()),
-            ],
-          ),
-          onTapScroll: () {
-            if (_controller.offset == _controller.position.maxScrollExtent) {
-              currentIndex = 0;
-            }
-            _controller.animateTo(
-              Constants.zognestOffersItemWidth * currentIndex,
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.ease,
-            );
-            currentIndex++;
-          },
-        ),
-        SizedBox(
-          height: Constants.zognestOffersListHeight,
-          child: ListView.separated(
-            padding: const EdgeInsets.symmetric(
-                horizontal: Constants.webHorizontalPadding),
-            scrollDirection: Axis.horizontal,
-            controller: _controller,
-            itemBuilder: (context, index) {
-              final i = index % Data.offers.length;
-              final offer = Data.offers[i];
-              return OfferItem(offer: offer);
+                TextSpan(text: Strings.offer.toUpperCase()),
+              ],
+            ),
+            onTapScroll: () {
+              if (_controller.offset == _controller.position.maxScrollExtent) {
+                currentIndex = 0;
+              }
+              _controller.animateTo(
+                Constants.zognestOffersItemWidth * currentIndex,
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.ease,
+              );
+              currentIndex++;
             },
-            separatorBuilder: (context, index) =>
-                const SizedBox(width: Spacing.l24),
-            itemCount: 10,
           ),
-        ),
-        const Divider(),
-      ],
+          SizedBox(
+            height: Constants.zognestOffersListHeight,
+            child: ListView.separated(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Constants.webHorizontalPadding),
+              scrollDirection: Axis.horizontal,
+              controller: _controller,
+              itemBuilder: (context, index) {
+               /* final i = index % Data.offers.length;
+                final offer = Data.offers[i];*/
+                return OfferItem(offer: offers[index]);
+              },
+              separatorBuilder: (context, index) =>
+              const SizedBox(width: Spacing.l24),
+              itemCount:offers.length,
+            ),
+          ),
+          const Divider(),
+        ],
+      );
+    },
+      error:(_ ,__)=>const Text('error'),
+      loading: ()=>CircularProgressIndicator(color:theme.primaryColor),
     );
   }
 }
-
+/// todo no edit
 class ZognestOffersMobile extends StatelessWidget {
   const ZognestOffersMobile({super.key});
 

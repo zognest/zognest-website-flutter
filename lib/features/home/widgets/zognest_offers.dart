@@ -9,6 +9,7 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
+
 import '../../../../config/responsive.dart';
 
 class ZognestOffers extends ConsumerStatefulWidget {
@@ -36,65 +37,65 @@ class _ZognestOffersState extends ConsumerState<ZognestOffers> {
 
   @override
   Widget build(BuildContext context) {
-    final offers=ref.watch(appControllerProvider).offers;
+    final offers = ref.watch(appControllerProvider).offers;
     final theme = Theme.of(context);
-    return offers.when(data:(offers){
-      return  Column(
-        children: [
-          const Divider(),
-          ScrollHeadline(
-            headline: TextSpan(
-              text: Strings.what.toUpperCase(),
-              style: theme.textTheme.displaySmall,
-              children: [
-                TextSpan(
-                  text: '${Strings.we}\n'.toUpperCase(),
-                  style: theme.textTheme.displaySmall?.copyWith(
-                    foreground: TextThemes.foreground,
+    return offers.when(
+      data: (offers) {
+        return Column(
+          children: [
+            const Divider(),
+            ScrollHeadline(
+              headline: TextSpan(
+                text: Strings.what.toUpperCase(),
+                style: theme.textTheme.displaySmall,
+                children: [
+                  TextSpan(
+                    text: '${Strings.we}\n'.toUpperCase(),
+                    style: theme.textTheme.displaySmall?.copyWith(
+                      foreground: TextThemes.foreground,
+                    ),
                   ),
-                ),
-                TextSpan(text: Strings.offer.toUpperCase()),
-              ],
-            ),
-            onTapScroll: () {
-              if (_controller.offset == _controller.position.maxScrollExtent) {
-                currentIndex = 0;
-              }
-              _controller.animateTo(
-                Constants.zognestOffersItemWidth * currentIndex,
-                duration: const Duration(milliseconds: 1000),
-                curve: Curves.ease,
-              );
-              currentIndex++;
-            },
-          ),
-          SizedBox(
-            height: Constants.zognestOffersListHeight,
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.webHorizontalPadding),
-              scrollDirection: Axis.horizontal,
-              controller: _controller,
-              itemBuilder: (context, index) {
-               /* final i = index % Data.offers.length;
-                final offer = Data.offers[i];*/
-                return OfferItem(offer: offers[index]);
+                  TextSpan(text: Strings.offer.toUpperCase()),
+                ],
+              ),
+              onTapScroll: () {
+                if (_controller.offset ==
+                    _controller.position.maxScrollExtent) {
+                  currentIndex = 0;
+                }
+                _controller.animateTo(
+                  Constants.zognestOffersItemWidth * currentIndex,
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.ease,
+                );
+                currentIndex++;
               },
-              separatorBuilder: (context, index) =>
-              const SizedBox(width: Spacing.l24),
-              itemCount:offers.length,
             ),
-          ),
-          const Divider(),
-        ],
-      );
-    },
-      error:(_ ,__)=>const Text('error'),
-      loading: ()=>CircularProgressIndicator(color:theme.primaryColor),
+            SizedBox(
+              height: Constants.zognestOffersListHeight,
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: Constants.webHorizontalPadding),
+                scrollDirection: Axis.horizontal,
+                controller: _controller,
+                itemBuilder: (context, index) {
+                  return OfferItem(offer: offers[index]);
+                },
+                separatorBuilder: (context, index) =>
+                    const SizedBox(width: Spacing.l24),
+                itemCount: offers.length,
+              ),
+            ),
+            const Divider(),
+          ],
+        );
+      },
+      error: (_, __) => const Text('error'),
+      loading: () => CircularProgressIndicator(color: theme.primaryColor),
     );
   }
 }
-/// todo no edit
+
 class ZognestOffersMobile extends StatelessWidget {
   const ZognestOffersMobile({super.key});
 

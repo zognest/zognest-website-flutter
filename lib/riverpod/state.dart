@@ -11,17 +11,16 @@ import 'package:zognest_website/features/our_work/models/project.dart';
 
 @immutable
 class AppState extends Equatable {
-  const AppState({
-    required this.loaded,
-    required this.blogs,
-    required this.clientFeedbacks,
-    required this.events,
-    required this.offers,
-    required this.videoUrl,
-    required this.project,
-    required this.purchasableService,
-    required this.services
-  });
+  const AppState(
+      {required this.loaded,
+      required this.blogs,
+      required this.clientFeedbacks,
+      required this.events,
+      required this.offers,
+      required this.videoUrl,
+      required this.projects,
+      required this.purchasableServices,
+      required this.services});
 
   final bool loaded;
   final AsyncValue<List<Blog>> blogs;
@@ -29,9 +28,9 @@ class AppState extends Equatable {
   final AsyncValue<List<Event>> events;
   final AsyncValue<List<Offer>> offers;
   final AsyncValue<String> videoUrl;
-  final AsyncValue<List<Project>> project;
-  final AsyncValue<List<PurchasableService>> purchasableService;
-  final AsyncValue <List<Service>> services;
+  final AsyncValue<List<Project>> projects;
+  final AsyncValue<List<PurchasableService>> purchasableServices;
+  final AsyncValue<List<Service>> services;
 
   AppState copyWith({
     bool? loaded,
@@ -40,32 +39,34 @@ class AppState extends Equatable {
     AsyncValue<List<Event>>? events,
     AsyncValue<List<Offer>>? offers,
     AsyncValue<String>? videoUrl,
-    AsyncValue<List<Project>>? project,
-    AsyncValue<List<PurchasableService>>? purchasableService,
+    AsyncValue<List<Project>>? projects,
+    AsyncValue<List<PurchasableService>>? purchasableServices,
     AsyncValue<List<Service>>? services,
   }) {
     return AppState(
-        loaded: loaded ?? this.loaded,
-        blogs: blogs ?? this.blogs,
-        clientFeedbacks: clientFeedbacks ?? this.clientFeedbacks,
-        events: events ?? this.events,
-        offers: offers ?? this.offers,
-        videoUrl: videoUrl ?? this.videoUrl,
-        project: project ?? this.project,
-        services:services?? this.services,
-        purchasableService: purchasableService ?? this.purchasableService);
+      loaded: loaded ?? this.loaded,
+      blogs: blogs ?? this.blogs,
+      clientFeedbacks: clientFeedbacks ?? this.clientFeedbacks,
+      events: events ?? this.events,
+      offers: offers ?? this.offers,
+      videoUrl: videoUrl ?? this.videoUrl,
+      projects: projects ?? this.projects,
+      services: services ?? this.services,
+      purchasableServices: purchasableServices ?? this.purchasableServices,
+    );
   }
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props =>
+      [
         loaded,
         blogs,
         clientFeedbacks,
         events,
         offers,
         videoUrl,
-        project,
-        purchasableService,
+        projects,
+        purchasableServices,
         services
       ];
 }

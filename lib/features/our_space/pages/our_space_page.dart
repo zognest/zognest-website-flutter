@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/features/our_space/widgets/zognest_events.dart';
 import 'package:zognest_website/resources/assets.dart';
-import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
@@ -45,7 +44,7 @@ class _OurSpacePageState extends State<OurSpacePage> {
             controller: _controller,
             children: [
               const SizedBox(height: Constants.appBarHeight * 1.5),
-              ZognestEvents(events: Data.events),
+              const ZognestEvents(),
               const SizedBox(height: Constants.sectionSpacing),
               Image.asset(Assets.ourSpaceText),
               const SizedBox(height: Constants.sectionSpacing),

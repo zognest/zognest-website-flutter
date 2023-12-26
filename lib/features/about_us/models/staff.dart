@@ -72,7 +72,7 @@ class Staff extends Equatable {
 
   @override
   String toString() {
-    return 'Staff(name: $name, position: $position, description: $description, url: $url, technologies: $technologies, backgroundImage:$backgroundImage)';
+    return 'Staff(name: $name, position: $position, description: $description, url: $url, technologies: $technologies, backgroundImage: $backgroundImage)';
   }
 
   @override

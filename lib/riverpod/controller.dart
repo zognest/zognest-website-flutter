@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/features/home/models/blog.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
@@ -16,16 +14,16 @@ import '../features/our_work/models/project.dart';
 final appControllerProvider = StateNotifierProvider<AppController, AppState>(
   (ref) {
     return AppController(
-       const AppState(
+      const AppState(
         loaded: false,
         blogs: AsyncData([]),
         clientFeedbacks: AsyncData([]),
         events: AsyncData([]),
         offers: AsyncData([]),
         videoUrl: AsyncLoading(),
-        project: AsyncData([]),
-        purchasableService: AsyncData([]),
-         services: AsyncData([]),
+        projects: AsyncData([]),
+        purchasableServices: AsyncData([]),
+        services: AsyncData([]),
       ),
     );
   },
@@ -43,7 +41,9 @@ class AppController extends StateNotifier<AppState> {
       getEvents(),
       getOffers(),
       getVideoUrl(),
-      getProject(),
+      getProjects(),
+      getServices(),
+      getPurchasableServices(),
     ]);
   }
 
@@ -111,44 +111,42 @@ class AppController extends StateNotifier<AppState> {
     Utils.log(message: 'Loaded Video => ${state.videoUrl.value}');
   }
 
-  //point 1  in 2
-  Future<void> getProject() async {
-    if (state.project.asData?.value.isNotEmpty ?? false) return;
+  Future<void> getProjects() async {
+    if (state.projects.asData?.value.isNotEmpty ?? false) return;
 
-    state = state.copyWith(project: const AsyncLoading());
+    state = state.copyWith(projects: const AsyncLoading());
 
-    final List<Project> project = await FirestoreServices.getProject();
+    final List<Project> projects = await FirestoreServices.getProjects();
 
-    state = state.copyWith(project: AsyncData(project));
+    state = state.copyWith(projects: AsyncData(projects));
 
-    Utils.log(message: 'Loaded Project => ${state.project.value}');
+    Utils.log(message: 'Loaded Project => ${state.projects.value?.length}');
   }
 
-  //point 2 in 2
-  Future<void> getPurchasableService() async {
-    if (state.purchasableService.asData?.value.isNotEmpty ?? false) return;
+  Future<void> getPurchasableServices() async {
+    if (state.purchasableServices.asData?.value.isNotEmpty ?? false) return;
 
-    state = state.copyWith(purchasableService: const AsyncLoading());
+    state = state.copyWith(purchasableServices: const AsyncLoading());
 
-    final List<PurchasableService> purchasableService =
-        await FirestoreServices.getPurchasableService();
+    final List<PurchasableService> purchasableServices =
+        await FirestoreServices.getPurchasableServices();
 
-    state =state.copyWith(purchasableService: AsyncData(purchasableService));
+    state = state.copyWith(purchasableServices: AsyncData(purchasableServices));
 
-    Utils.log(message: 'purchasableService => ${state.purchasableService.value}');
+    Utils.log(
+        message:
+            'purchasableServices => ${state.purchasableServices.value?.length}');
   }
 
-  //point 3 in 2
-Future<void> getService()async{
-    if(state.services.asData?.value.isNotEmpty ?? false)return;
+  Future<void> getServices() async {
+    if (state.services.asData?.value.isNotEmpty ?? false) return;
 
-    state=state.copyWith(services: const AsyncLoading());
+    state = state.copyWith(services: const AsyncLoading());
 
-   final List<Service> service= await FirestoreServices.getService();
+    final List<Service> service = await FirestoreServices.getServices();
 
-    state =state.copyWith(services: AsyncData(service));
+    state = state.copyWith(services: AsyncData(service));
 
-    Utils.log(message: 'Service => ${state.services.value}');
-
-}
+    Utils.log(message: 'Service => ${state.services.value?.length}');
+  }
 }

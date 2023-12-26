@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:zognest_website/resources/assets.dart';
 
 class Technology extends Equatable {
   final String name;
@@ -35,6 +36,9 @@ class Technology extends Equatable {
       image: map['image'] as String,
     );
   }
+
+  factory Technology.empty() =>
+      const Technology(name: 'Test', image: Assets.zognestLogo);
 
   String toJson() => json.encode(toMap());
 

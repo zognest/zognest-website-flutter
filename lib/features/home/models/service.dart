@@ -2,7 +2,6 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-
 import 'package:zognest_website/shared/models/technology.dart';
 
 class Service extends Equatable {
@@ -10,6 +9,8 @@ class Service extends Equatable {
   final String title;
   final String description;
   final List<Technology> technologies;
+
+  // TODO: Add background_image
 
   const Service({
     required this.highlight,
@@ -46,11 +47,7 @@ class Service extends Equatable {
       highlight: map['highlight'] as String,
       title: map['title'] as String,
       description: map['description'] as String,
-      technologies: List<Technology>.from(
-        (map['technologies'] as List<int>).map<Technology>(
-          (x) => Technology.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      technologies: [Technology.empty()],
     );
   }
 

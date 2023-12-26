@@ -41,7 +41,7 @@ class GalleryDialog extends StatelessWidget {
                 ),
                 items: event.images.map(
                   (image) {
-                    return Image.asset(
+                    return Image.network(
                       image,
                       width: double.infinity,
                       height: double.infinity,

@@ -9,7 +9,6 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
-import '../../../config/theme/palette.dart';
 import '../models/purchasable_service.dart';
 
 class OurServicesPage extends ConsumerStatefulWidget {
@@ -17,14 +16,13 @@ class OurServicesPage extends ConsumerStatefulWidget {
 
   static const route = '/our-services';
 
-
   @override
   ConsumerState<OurServicesPage> createState() => _OurServicesPageState();
 }
 
 class _OurServicesPageState extends ConsumerState<OurServicesPage> {
   late final ScrollController _controller;
-   late final PurchasableService purchasable;
+  late final PurchasableService purchasable;
 
   @override
   void initState() {
@@ -41,7 +39,8 @@ class _OurServicesPageState extends ConsumerState<OurServicesPage> {
   @override
   Widget build(BuildContext context) {
     final purchasableService =
-        ref.watch(appControllerProvider).purchasableService;
+        ref.watch(appControllerProvider).purchasableServices;
+    final theme = Theme.of(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PrimaryAppBar(scrollController: _controller),
@@ -53,9 +52,10 @@ class _OurServicesPageState extends ConsumerState<OurServicesPage> {
             SvgPicture.asset(Assets.gridLines),
             purchasableService.when(
               data: (purchasableService) {
-                return  Column(
+                return Column(
                   children: [
                     const SizedBox(height: Constants.appBarHeight * 1.5),
+                    // FIXME: Remove riverpod from this screen and add in [ServicesBrowser]
                     const ServicesBrowser(),
                     const SizedBox(height: Constants.sectionSpacing),
                     const Divider(),
@@ -64,20 +64,18 @@ class _OurServicesPageState extends ConsumerState<OurServicesPage> {
                       onTabUp: () => _controller.animateTo(
                         _controller.position.minScrollExtent,
                         duration: const Duration(
-                            milliseconds: Constants.scrollToDuration),
-                        curve: Curves.ease,
-                      ),
+                                milliseconds: Constants.scrollToDuration),
+                            curve: Curves.ease,
+                          ),
                     ),
                   ],
                 );
               },
               error: (_, __) => const Text('error'),
-              // todo if i make theme.primaryColor ; display error so i make this
               loading: () =>
-                  const CircularProgressIndicator(color: Palette.primary),
+                  CircularProgressIndicator(color: theme.primaryColor),
             ),
             // const CreateOrder(),
-
           ],
         ),
       ),

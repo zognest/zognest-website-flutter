@@ -8,7 +8,6 @@ import 'package:zognest_website/features/our_work/models/project.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
-import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 
@@ -37,72 +36,71 @@ class _ZognestProjectsState extends ConsumerState<ZognestProjects> {
 
   @override
   Widget build(BuildContext context) {
-    final project= ref.watch(appControllerProvider).project;
+    final project = ref.watch(appControllerProvider).projects;
     final theme = Theme.of(context);
-    return project.when(data:(project){
-      return Column(
-      children: [
-        if (Responsive.isDesktop(context)) const Divider(),
-        ScrollHeadline(
-          headline: TextSpan(
-            children: [
-              TextSpan(
-                text: Strings.our.toUpperCase(),
-                style: theme.textTheme.displaySmall,
+    return project.when(
+      data: (project) {
+        return Column(
+          children: [
+            if (Responsive.isDesktop(context)) const Divider(),
+            ScrollHeadline(
+              headline: TextSpan(
+                children: [
+                  TextSpan(
+                    text: Strings.our.toUpperCase(),
+                    style: theme.textTheme.displaySmall,
+                  ),
+                  TextSpan(
+                    text: Strings.best.toUpperCase(),
+                    style: theme.textTheme.displaySmall
+                        ?.copyWith(foreground: TextThemes.foreground),
+                  ),
+                  TextSpan(
+                    text: Strings.projects.toUpperCase(),
+                    style: theme.textTheme.displaySmall,
+                  ),
+                ],
               ),
-              TextSpan(
-                text: Strings.best.toUpperCase(),
-                style: theme.textTheme.displaySmall
-                    ?.copyWith(foreground: TextThemes.foreground),
-              ),
-              TextSpan(
-                text: Strings.projects.toUpperCase(),
-                style: theme.textTheme.displaySmall,
-              ),
-            ],
-          ),
-          onTapScroll: () {
-            if (_controller.offset == _controller.position.maxScrollExtent) {
-              currentIndex = 0;
-            }
-            _controller.animateTo(
-              Constants.servicesCardWidth * currentIndex,
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.ease,
-            );
-            currentIndex++;
-          },
-        ),
-        SizedBox(
-          height: Constants.listHeight,
-          child: ListView.separated(
-            padding: EdgeInsets.symmetric(
-              horizontal: Responsive.isDesktop(context)
-                  ? Constants.webHorizontalPadding
-                  : Constants.mobileHorizontalPadding,
+              onTapScroll: () {
+                if (_controller.offset ==
+                    _controller.position.maxScrollExtent) {
+                  currentIndex = 0;
+                }
+                _controller.animateTo(
+                  Constants.servicesCardWidth * currentIndex,
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.ease,
+                );
+                currentIndex++;
+              },
             ),
-            scrollDirection: Axis.horizontal,
-            controller: _controller,
-            itemBuilder: (context, index) {
-             /* final i = index % Data.projects.length;
-              final project = Data.projects[i];*/
-              return ProjectItem(project: project[index]);
-            },
-            separatorBuilder: (context, index) =>
-                const SizedBox(width: Constants.listCardSeparatorWidth),
-            itemCount: project.length,
-          ),
-        ),
-        const Divider(),
-      ],
-    );
-    } ,
-      error:(_ ,__)=>const Text('error'),
-      loading: ()=>CircularProgressIndicator(color:theme.primaryColor),
+            SizedBox(
+              height: Constants.listHeight,
+              child: ListView.separated(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Responsive.isDesktop(context)
+                      ? Constants.webHorizontalPadding
+                      : Constants.mobileHorizontalPadding,
+                ),
+                scrollDirection: Axis.horizontal,
+                controller: _controller,
+                itemBuilder: (context, index) {
+                  return ProjectItem(project: project[index]);
+                },
+                separatorBuilder: (context, index) =>
+                    const SizedBox(width: Constants.listCardSeparatorWidth),
+                itemCount: project.length,
+              ),
+            ),
+            const Divider(),
+          ],
+        );
+      },
+      error: (_, __) => const Text('error'),
+      loading: () => CircularProgressIndicator(color: theme.primaryColor),
     );
   }
 }
-
 
 class ProjectItem extends StatefulWidget {
   const ProjectItem({super.key, required this.project});
@@ -143,7 +141,6 @@ class _ProjectItemState extends State<ProjectItem> {
                   Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                 );
               },
-              //todo i convert child from image.assets to image.network
               child: Image.network(
                 widget.project.image,
                 width: double.infinity,
@@ -158,7 +155,6 @@ class _ProjectItemState extends State<ProjectItem> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const Spacer(flex: 2),
-                  //todo i convert child from image.assets to image.network
                   Image.network(widget.project.icon),
                   const SizedBox(height: Spacing.l32),
                   Row(

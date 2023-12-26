@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/features/our_services/widgets/services_browser.dart';
@@ -11,16 +10,16 @@ import 'package:zognest_website/shared/widgets/footer.dart';
 
 import '../models/purchasable_service.dart';
 
-class OurServicesPage extends ConsumerStatefulWidget {
+class OurServicesPage extends StatefulWidget {
   const OurServicesPage({super.key});
 
   static const route = '/our-services';
 
   @override
-  ConsumerState<OurServicesPage> createState() => _OurServicesPageState();
+  State<OurServicesPage> createState() => _OurServicesPageState();
 }
 
-class _OurServicesPageState extends ConsumerState<OurServicesPage> {
+class _OurServicesPageState extends State<OurServicesPage> {
   late final ScrollController _controller;
   late final PurchasableService purchasable;
 
@@ -38,9 +37,6 @@ class _OurServicesPageState extends ConsumerState<OurServicesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final purchasableService =
-        ref.watch(appControllerProvider).purchasableServices;
-    final theme = Theme.of(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PrimaryAppBar(scrollController: _controller),
@@ -50,12 +46,10 @@ class _OurServicesPageState extends ConsumerState<OurServicesPage> {
         child: Stack(
           children: [
             SvgPicture.asset(Assets.gridLines),
-            purchasableService.when(
-              data: (purchasableService) {
-                return Column(
+                 Column(
                   children: [
                     const SizedBox(height: Constants.appBarHeight * 1.5),
-                    // FIXME: Remove riverpod from this screen and add in [ServicesBrowser]
+
                     const ServicesBrowser(),
                     const SizedBox(height: Constants.sectionSpacing),
                     const Divider(),
@@ -69,11 +63,6 @@ class _OurServicesPageState extends ConsumerState<OurServicesPage> {
                           ),
                     ),
                   ],
-                );
-              },
-              error: (_, __) => const Text('error'),
-              loading: () =>
-                  CircularProgressIndicator(color: theme.primaryColor),
             ),
             // const CreateOrder(),
           ],

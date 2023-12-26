@@ -79,6 +79,7 @@ class Data {
     const Service(
       highlight: 'Our',
       title: 'Dedicate Team',
+      backgroundImage: '',
       description:
           'Team is not enough to define us, we are family of different species of birds, each one of us have unique capabilities.',
       technologies: [
@@ -92,6 +93,37 @@ class Data {
     ),
     const Service(
       highlight: 'Our',
+      title: 'Dedicate Team',
+      backgroundImage: '',
+      description:
+          'Team is not enough to define us, we are family of different species of birds, each one of us have unique capabilities.',
+      technologies: [
+        Technology(name: 'Photoshop', image: Assets.photoshop),
+        Technology(name: 'Illustrator', image: Assets.illustrator),
+        Technology(name: 'Zeplin', image: Assets.zeplin),
+        Technology(name: 'Figma', image: Assets.figmaColoured),
+        Technology(name: 'XD', image: Assets.xd),
+        Technology(name: 'Sketch', image: Assets.sketch),
+      ],
+    ),
+    const Service(
+      highlight: 'Our',
+      title: 'Dedicate Team',
+      backgroundImage: '',
+      description:
+          'Team is not enough to define us, we are family of different species of birds, each one of us have unique capabilities.',
+      technologies: [
+        Technology(name: 'Photoshop', image: Assets.photoshop),
+        Technology(name: 'Illustrator', image: Assets.illustrator),
+        Technology(name: 'Zeplin', image: Assets.zeplin),
+        Technology(name: 'Figma', image: Assets.figmaColoured),
+        Technology(name: 'XD', image: Assets.xd),
+        Technology(name: 'Sketch', image: Assets.sketch),
+      ],
+    ),
+    const Service(
+      highlight: 'Our',
+      backgroundImage: '',
       title: 'Dedicate Team',
       description:
           'Team is not enough to define us, we are family of different species of birds, each one of us have unique capabilities.',
@@ -107,34 +139,7 @@ class Data {
     const Service(
       highlight: 'Our',
       title: 'Dedicate Team',
-      description:
-          'Team is not enough to define us, we are family of different species of birds, each one of us have unique capabilities.',
-      technologies: [
-        Technology(name: 'Photoshop', image: Assets.photoshop),
-        Technology(name: 'Illustrator', image: Assets.illustrator),
-        Technology(name: 'Zeplin', image: Assets.zeplin),
-        Technology(name: 'Figma', image: Assets.figmaColoured),
-        Technology(name: 'XD', image: Assets.xd),
-        Technology(name: 'Sketch', image: Assets.sketch),
-      ],
-    ),
-    const Service(
-      highlight: 'Our',
-      title: 'Dedicate Team',
-      description:
-          'Team is not enough to define us, we are family of different species of birds, each one of us have unique capabilities.',
-      technologies: [
-        Technology(name: 'Photoshop', image: Assets.photoshop),
-        Technology(name: 'Illustrator', image: Assets.illustrator),
-        Technology(name: 'Zeplin', image: Assets.zeplin),
-        Technology(name: 'Figma', image: Assets.figmaColoured),
-        Technology(name: 'XD', image: Assets.xd),
-        Technology(name: 'Sketch', image: Assets.sketch),
-      ],
-    ),
-    const Service(
-      highlight: 'Our',
-      title: 'Dedicate Team',
+      backgroundImage: '',
       description:
           'Team is not  to define us, we are family of different species of birds, each one of us have unique capabilities.',
       technologies: [

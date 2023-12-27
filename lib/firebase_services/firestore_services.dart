@@ -7,6 +7,7 @@ import 'package:zognest_website/features/our_services/models/purchasable_service
 import 'package:zognest_website/features/our_space/models/event.dart';
 import 'package:zognest_website/features/our_work/models/project.dart';
 import 'package:zognest_website/firebase_services/firebase_paths.dart';
+import 'package:zognest_website/shared/models/technology.dart';
 
 class FirestoreServices {
   static final firestore = FirebaseFirestore.instance;
@@ -89,10 +90,38 @@ class FirestoreServices {
     final servicesJson =
         await firestore.collection(FirebasePaths.services.path).get();
 
-    final services = servicesJson.docs
-        .map((serviceDoc) => Service.fromMap(serviceDoc.data()))
-        .toList();
+    final services = await Future.wait(
+      servicesJson.docs.map(
+        (serviceDoc) async {
+          final technologies = await getTechnologiesFromRefs(
+            serviceDoc.data()['technologies'],
+          );
+
+          Service service = Service.fromMap(serviceDoc.data())
+              .copyWith(technologies: technologies);
+          return service;
+        },
+      ),
+    );
+
+    print(services.toString());
 
     return services;
+  }
+
+  static Future<List<Technology>> getTechnologiesFromRefs(
+      List<dynamic> refs) async {
+    List<Technology> technologies = [];
+    for (final DocumentReference technologyRef in refs) {
+      final technologyDoc = await technologyRef.get();
+
+      if (technologyDoc.exists) {
+        technologies.add(
+          Technology.fromMap(technologyDoc.data() as Map<String, dynamic>),
+        );
+      }
+    }
+
+    return technologies;
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/firebase_options.dart';
+import 'package:zognest_website/firebase_services/firestore_services.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 
 import 'config/routes.dart';
@@ -10,7 +11,8 @@ import 'config/theme/custom_theme.dart';
 
 Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const ProviderScope(child: MyApp()));
+  await FirestoreServices.getServices();
+  // runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {

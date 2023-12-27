@@ -32,8 +32,8 @@ class Technology extends Equatable {
 
   factory Technology.fromMap(Map<String, dynamic> map) {
     return Technology(
-      name: map['name'] as String,
-      image: map['image'] as String,
+      name: map['name'],
+      image: map['image'],
     );
   }
 

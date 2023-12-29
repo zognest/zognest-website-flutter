@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zognest_website/features/about_us/models/staff.dart';
 import 'package:zognest_website/features/home/models/blog.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
 import 'package:zognest_website/features/home/models/offer.dart';
@@ -20,6 +21,7 @@ class AppState extends Equatable {
       required this.videoUrl,
       required this.projects,
       required this.purchasableServices,
+      required this.staff,
       required this.services});
 
   final bool loaded;
@@ -31,6 +33,7 @@ class AppState extends Equatable {
   final AsyncValue<List<Project>> projects;
   final AsyncValue<List<PurchasableService>> purchasableServices;
   final AsyncValue<List<Service>> services;
+  final AsyncValue<List<Staff>> staff;
 
   AppState copyWith({
     bool? loaded,
@@ -42,6 +45,7 @@ class AppState extends Equatable {
     AsyncValue<List<Project>>? projects,
     AsyncValue<List<PurchasableService>>? purchasableServices,
     AsyncValue<List<Service>>? services,
+    AsyncValue<List<Staff>>? staff,
   }) {
     return AppState(
       loaded: loaded ?? this.loaded,
@@ -52,13 +56,13 @@ class AppState extends Equatable {
       videoUrl: videoUrl ?? this.videoUrl,
       projects: projects ?? this.projects,
       services: services ?? this.services,
+      staff: staff ?? this.staff,
       purchasableServices: purchasableServices ?? this.purchasableServices,
     );
   }
 
   @override
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         loaded,
         blogs,
         clientFeedbacks,
@@ -67,6 +71,7 @@ class AppState extends Equatable {
         videoUrl,
         projects,
         purchasableServices,
-        services
+        services,
+        staff
       ];
 }

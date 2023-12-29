@@ -7,8 +7,10 @@ import 'package:zognest_website/features/our_services/models/purchasable_service
 import 'package:zognest_website/features/our_space/models/event.dart';
 import 'package:zognest_website/firebase_services/firestore_services.dart';
 import 'package:zognest_website/riverpod/state.dart';
+import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/utils.dart';
 
+import '../features/about_us/models/staff.dart';
 import '../features/our_work/models/project.dart';
 
 final appControllerProvider = StateNotifierProvider<AppController, AppState>(
@@ -24,6 +26,7 @@ final appControllerProvider = StateNotifierProvider<AppController, AppState>(
         projects: AsyncData([]),
         purchasableServices: AsyncData([]),
         services: AsyncData([]),
+        staff:AsyncData([]),
       ),
     );
   },
@@ -44,6 +47,7 @@ class AppController extends StateNotifier<AppState> {
       getProjects(),
       getServices(),
       getPurchasableServices(),
+      getStaff(),
     ]);
   }
 
@@ -148,5 +152,17 @@ class AppController extends StateNotifier<AppState> {
     state = state.copyWith(services: AsyncData(service));
 
     Utils.log(message: 'Service => ${state.services.value?.length}');
+  }
+
+  Future<void> getStaff() async {
+    if (state.staff.asData?.value.isNotEmpty ?? false) return;
+
+    state = state.copyWith(staff: const AsyncLoading());
+
+    final List<Staff> staff = await FirestoreServices.getStaff();
+
+    state = state.copyWith(staff:AsyncData(staff));
+
+    Utils.log(message: 'staff => ${state.services.value?.length}');
   }
 }

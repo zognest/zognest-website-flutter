@@ -172,6 +172,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                       ).toList(),
                     ),
                   ),
+                  //button get in touch
                   PrimaryButton(
                     onTap: () {},
                     title: Strings.getInTouch.toUpperCase(),
@@ -190,6 +191,7 @@ class MobileAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Row(
       children: [
         const ZognestLogo(),

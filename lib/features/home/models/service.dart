@@ -10,6 +10,7 @@ class Service extends Equatable {
   final String description;
   final String backgroundImage;
   final List<Technology> technologies;
+
   const Service(
       {required this.highlight,
       required this.title,
@@ -48,9 +49,9 @@ class Service extends Equatable {
       highlight: map['highlight'] as String,
       title: map['title'] as String,
       description: map['description'] as String,
-      // TODO: Add to firestore collection services/.. and then uncomment.
-      // FIXME: Fix the name of [backgroundImage] on Firebase, make it background_image.
-      backgroundImage: '' /*map['background_image'] as String*/,
+      // TODO: Add to firestore collection services/.. and then uncomment[done].
+      // FIXME: Fix the name of [backgroundImage] on Firebase, make it `background_image`[done].
+      backgroundImage: map['background_image'] as String ,
       technologies: [Technology.empty()],
     );
   }
@@ -66,5 +67,6 @@ class Service extends Equatable {
   }
 
   @override
-  List<Object> get props => [highlight, title, description, technologies, backgroundImage];
+  List<Object> get props =>
+      [highlight, title, description, technologies, backgroundImage];
 }

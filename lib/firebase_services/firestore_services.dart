@@ -9,6 +9,8 @@ import 'package:zognest_website/features/our_work/models/project.dart';
 import 'package:zognest_website/firebase_services/firebase_paths.dart';
 import 'package:zognest_website/shared/models/technology.dart';
 
+import '../features/about_us/models/staff.dart';
+
 class FirestoreServices {
   static final firestore = FirebaseFirestore.instance;
 
@@ -108,6 +110,26 @@ class FirestoreServices {
 
     return services;
   }
+
+  static Future<List<Staff>> getStaff() async {
+    final staffJson =
+    await firestore.collection(FirebasePaths.staff.path).get();
+
+    final staff = await Future.wait(
+      staffJson.docs.map(
+            (staffDoc) async {
+          final technologies = await getTechnologiesFromRefs(
+            staffDoc.data()['technologies'],
+          );
+          Staff staff=Staff.fromMap(staffDoc.data())
+              .copyWith(technologies: technologies);
+          return staff;
+        },
+      ),
+    );
+    return staff;
+  }
+
 
   static Future<List<Technology>> getTechnologiesFromRefs(
       List<dynamic> refs) async {

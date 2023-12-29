@@ -11,8 +11,8 @@ import 'config/theme/custom_theme.dart';
 
 Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirestoreServices.getServices();
-  // runApp(const ProviderScope(child: MyApp()));
+  /*await FirestoreServices.getStaff();*/
+   runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {

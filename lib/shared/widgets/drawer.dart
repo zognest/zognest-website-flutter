@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
+import 'package:zognest_website/shared/widgets/primary_button.dart';
+import 'package:zognest_website/shared/widgets/social_button.dart';
+
+import '../../config/responsive.dart';
+import '../../resources/assets.dart';
+import '../../resources/strings.dart';
+import 'circle_button.dart';
 
 class PrimaryDrawer extends StatelessWidget {
   const PrimaryDrawer({super.key});
@@ -15,11 +23,12 @@ class PrimaryDrawer extends StatelessWidget {
     return Align(
       alignment: Alignment.topCenter,
       child: ColoredBox(
+        //black
         color: Palette.cardBackgroundColor,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Padding(
+             const Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: Spacing.s12,
                   horizontal: Constants.mobileHorizontalPadding,
@@ -27,7 +36,7 @@ class PrimaryDrawer extends StatelessWidget {
                 child: MobileAppBar()),
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: AppBarButtons.values.map(
+              children: [...AppBarButtons.values.map(
                 (button) {
                   return InkWell(
                     onTap: () => context.go(button.route),
@@ -52,6 +61,33 @@ class PrimaryDrawer extends StatelessWidget {
                   );
                 },
               ).toList(),
+                FittedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: SocialButtons.values
+                        .map((button) => Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal:
+                        Responsive.isMobile(context)
+                            ? Spacing.s8
+                            : Spacing.s4,
+                      ),
+                      child: SocialButton(button: button),
+                    ))
+                        .toList(),
+                  ),
+                ),
+                const SizedBox(height: Spacing.s12),
+                PrimaryButton(
+                  onTap: () {},
+                  height:50,
+                  width: 80,
+                  title: Strings.getInTouch.toUpperCase(),
+                  trailing:
+                  CircleButton(child: SvgPicture.asset(Assets.mail)),
+                ),
+                const SizedBox(height: Spacing.s12),
+              ]
             ),
           ],
         ),

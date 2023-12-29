@@ -57,11 +57,7 @@ class Staff extends Equatable {
       description: map['description'] as String,
       url: map['url'] as String,
       backgroundImage: map['background_image'] as String,
-      technologies: List<Technology>.from(
-        (map['technologies'] as List<int>).map<Technology>(
-          (x) => Technology.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      technologies: [Technology.empty()],
     );
   }
 

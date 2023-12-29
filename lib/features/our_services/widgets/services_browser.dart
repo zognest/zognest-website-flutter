@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -8,37 +9,52 @@ import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
+import '../../../riverpod/controller.dart';
 
-class ServicesBrowser extends StatelessWidget {
+class ServicesBrowser extends ConsumerStatefulWidget {
   const ServicesBrowser({super.key});
 
   @override
+  ConsumerState<ServicesBrowser> createState() => _ServicesBrowserState();
+}
+
+class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (Responsive.isDesktop(context)) const Divider(),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: Responsive.isDesktop(context)
-                ? Constants.webHorizontalPadding
-                : Constants.mobileHorizontalPadding,
-          ),
-          child: Wrap(
-            runSpacing: Constants.listCardSeparatorWidth,
-            spacing: Constants.listCardSeparatorWidth,
-            children: Data.purchasableServices.map((service) {
-              return SizedBox(
-                height: Responsive.isDesktop(context)
-                    ? Constants.servicesBrowserItemHeight
-                    : Constants.mobileServicesBrowserItemHeight,
-                width: Constants.servicesBrowserItemWidth,
-                child: ServiceItem(service: service),
-              );
-            }).toList(),
-          ),
-        ),
-        const Divider(),
-      ],
+    final purchasableService =
+        ref.watch(appControllerProvider).purchasableServices;
+    final theme = Theme.of(context);
+    return purchasableService.when(
+        data: (purchasableServices) {
+          return Column(
+            children: [
+              if (Responsive.isDesktop(context)) const Divider(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Responsive.isDesktop(context)
+                      ? Constants.webHorizontalPadding
+                      : Constants.mobileHorizontalPadding,
+                ),
+                child: Wrap(
+                  runSpacing: Constants.listCardSeparatorWidth,
+                  spacing: Constants.listCardSeparatorWidth,
+                  children: Data.purchasableServices.map((service) {
+                    return SizedBox(
+                      height: Responsive.isDesktop(context)
+                          ? Constants.servicesBrowserItemHeight
+                          : Constants.mobileServicesBrowserItemHeight,
+                      width: Constants.servicesBrowserItemWidth,
+                      child: ServiceItem(service: service),
+                    );
+                  }).toList(),
+                ),
+              ),
+              const Divider(),
+            ],
+          );
+        },
+        error: (_, __) => const Text('error'),
+        loading: () => CircularProgressIndicator(color: theme.primaryColor),
     );
   }
 }

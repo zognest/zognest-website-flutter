@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:zognest_website/resources/assets.dart';
 
 class Technology extends Equatable {
   final String name;
@@ -31,10 +32,13 @@ class Technology extends Equatable {
 
   factory Technology.fromMap(Map<String, dynamic> map) {
     return Technology(
-      name: map['name'] as String,
-      image: map['image'] as String,
+      name: map['name'],
+      image: map['image'],
     );
   }
+
+  factory Technology.empty() =>
+      const Technology(name: 'Test', image: Assets.zognestLogo);
 
   String toJson() => json.encode(toMap());
 

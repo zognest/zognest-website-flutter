@@ -10,8 +10,10 @@ class Staff extends Equatable {
   final String description;
   final String url;
   final List<Technology> technologies;
+  final String backgroundImage;
 
   const Staff({
+    required this.backgroundImage,
     required this.name,
     required this.position,
     required this.description,
@@ -25,6 +27,7 @@ class Staff extends Equatable {
     String? description,
     String? url,
     List<Technology>? technologies,
+    String? backgroundImage,
   }) {
     return Staff(
       name: name ?? this.name,
@@ -32,6 +35,7 @@ class Staff extends Equatable {
       description: description ?? this.description,
       url: url ?? this.url,
       technologies: technologies ?? this.technologies,
+      backgroundImage: backgroundImage ?? this.backgroundImage,
     );
   }
 
@@ -41,6 +45,7 @@ class Staff extends Equatable {
       'position': position,
       'description': description,
       'url': url,
+      'backgroundImage': backgroundImage,
       'technologies': technologies.map((x) => x.toMap()).toList(),
     };
   }
@@ -51,11 +56,8 @@ class Staff extends Equatable {
       position: map['position'] as String,
       description: map['description'] as String,
       url: map['url'] as String,
-      technologies: List<Technology>.from(
-        (map['technologies'] as List<int>).map<Technology>(
-          (x) => Technology.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      backgroundImage: map['background_image'] as String,
+      technologies: [Technology.empty()],
     );
   }
 
@@ -66,7 +68,7 @@ class Staff extends Equatable {
 
   @override
   String toString() {
-    return 'Staff(name: $name, position: $position, description: $description, url: $url, technologies: $technologies)';
+    return 'Staff(name: $name, position: $position, description: $description, url: $url, technologies: $technologies, backgroundImage: $backgroundImage)';
   }
 
   @override
@@ -77,6 +79,7 @@ class Staff extends Equatable {
       description,
       url,
       technologies,
+      backgroundImage,
     ];
   }
 }

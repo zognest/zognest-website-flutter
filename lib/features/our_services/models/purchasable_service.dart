@@ -44,7 +44,7 @@ class PurchasableService extends Equatable {
       title: map['title'],
       description: map['description'],
       image: map['image'],
-      id: map['id'],
+      id: map['id'] ?? 0,
     );
   }
 

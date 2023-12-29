@@ -11,7 +11,6 @@ import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
-
 import '../../../resources/spacing.dart';
 
 class ZognestClients extends ConsumerStatefulWidget {

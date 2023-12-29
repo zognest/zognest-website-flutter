@@ -17,7 +17,7 @@ abstract final class Routing {
       GoRoute(
         name: HomePage.route,
         path: HomePage.route,
-        builder: (_, __) => const HomePage(),
+        builder: (context, state) => const HomePage(),
       ),
       GoRoute(
         name: OurServicesPage.route,

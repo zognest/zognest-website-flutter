@@ -106,30 +106,28 @@ class FirestoreServices {
       ),
     );
 
-    print(services.toString());
-
     return services;
   }
 
   static Future<List<Staff>> getStaff() async {
     final staffJson =
-    await firestore.collection(FirebasePaths.staff.path).get();
+        await firestore.collection(FirebasePaths.staff.path).get();
 
     final staff = await Future.wait(
       staffJson.docs.map(
-            (staffDoc) async {
+        (staffDoc) async {
           final technologies = await getTechnologiesFromRefs(
             staffDoc.data()['technologies'],
           );
-          Staff staff=Staff.fromMap(staffDoc.data())
+          Staff staff = Staff.fromMap(staffDoc.data())
               .copyWith(technologies: technologies);
           return staff;
         },
       ),
     );
+
     return staff;
   }
-
 
   static Future<List<Technology>> getTechnologiesFromRefs(
       List<dynamic> refs) async {

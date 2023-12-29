@@ -49,8 +49,6 @@ class Service extends Equatable {
       highlight: map['highlight'] as String,
       title: map['title'] as String,
       description: map['description'] as String,
-      // TODO: Add to firestore collection services/.. and then uncomment[done].
-      // FIXME: Fix the name of [backgroundImage] on Firebase, make it `background_image`[done].
       backgroundImage: map['background_image'] as String ,
       technologies: [Technology.empty()],
     );

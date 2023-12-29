@@ -8,7 +8,6 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/social_button.dart';
 
-import '../../config/responsive.dart';
 import '../../resources/assets.dart';
 import '../../resources/strings.dart';
 import 'circle_button.dart';
@@ -23,71 +22,65 @@ class PrimaryDrawer extends StatelessWidget {
     return Align(
       alignment: Alignment.topCenter,
       child: ColoredBox(
-        //black
         color: Palette.cardBackgroundColor,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-             const Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: Spacing.s12,
-                  horizontal: Constants.mobileHorizontalPadding,
-                ),
-                child: MobileAppBar()),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: Spacing.s12,
+                horizontal: Constants.mobileHorizontalPadding,
+              ),
+              child: MobileAppBar(),
+            ),
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: [...AppBarButtons.values.map(
-                (button) {
-                  return InkWell(
-                    onTap: () => context.go(button.route),
-                    overlayColor:
-                        MaterialStateProperty.all(Palette.transparent),
-                    child: Container(
-                      color: route.name == button.route
-                          ? theme.primaryColor
-                          : Palette.transparent,
-                      padding:
-                          const EdgeInsets.symmetric(vertical: Spacing.l32),
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      child: Text(
-                        button.title.toUpperCase(),
-                        style: route.name == button.route
-                            ? theme.textTheme.labelLarge
-                                ?.copyWith(color: Palette.black)
-                            : theme.textTheme.labelMedium,
+              children: [
+                ...AppBarButtons.values.map(
+                  (button) {
+                    return InkWell(
+                      onTap: () => context.go(button.route),
+                      overlayColor:
+                          MaterialStateProperty.all(Palette.transparent),
+                      child: Container(
+                        color: route.name == button.route
+                            ? theme.primaryColor
+                            : Palette.transparent,
+                        padding:
+                            const EdgeInsets.symmetric(vertical: Spacing.l32),
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: Text(
+                          button.title.toUpperCase(),
+                          style: route.name == button.route
+                              ? theme.textTheme.labelLarge
+                                  ?.copyWith(color: Palette.black)
+                              : theme.textTheme.labelMedium,
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ).toList(),
-                FittedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(Spacing.s4),
+                  child: Wrap(
+                    runSpacing: Spacing.s8,
+                    spacing: Spacing.s8,
                     children: SocialButtons.values
-                        .map((button) => Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal:
-                        Responsive.isMobile(context)
-                            ? Spacing.s8
-                            : Spacing.s4,
-                      ),
-                      child: SocialButton(button: button),
-                    ))
+                        .map((button) => SocialButton(button: button))
                         .toList(),
                   ),
                 ),
                 const SizedBox(height: Spacing.s12),
                 PrimaryButton(
                   onTap: () {},
-                  height:50,
+                  height: 50,
                   width: 80,
                   title: Strings.getInTouch.toUpperCase(),
-                  trailing:
-                  CircleButton(child: SvgPicture.asset(Assets.mail)),
+                  trailing: CircleButton(child: SvgPicture.asset(Assets.mail)),
                 ),
                 const SizedBox(height: Spacing.s12),
-              ]
+              ],
             ),
           ],
         ),

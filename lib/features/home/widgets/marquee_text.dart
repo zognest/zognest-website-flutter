@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/strings.dart';
-
 import '../../../../config/constants.dart';
 import '../../../config/responsive.dart';
 
+
+//todo task 7 done
 class MarqueeText extends StatefulWidget {
   const MarqueeText({super.key});
 
@@ -57,38 +59,28 @@ class _MarqueeTextState extends State<MarqueeText>
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return RichText(
-                text: TextSpan(
-                    text: Strings.weAreTheCre.toUpperCase(),
-                    style: theme.textTheme.displaySmall?.copyWith(
-                      foreground: TextThemes.foreground,
-                    ),
-                    children: [
-                      WidgetSpan(
-                        alignment: PlaceholderAlignment.middle,
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Text(
-                                Strings.eight.toUpperCase(),
-                                style: theme.textTheme.displaySmall
-                                    ?.copyWith(color: theme.primaryColor),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Text(
-                                Strings.eight.toUpperCase(),
-                                style: theme.textTheme.displaySmall?.copyWith(
-                                    foreground: TextThemes.foreground),
-                              ),
-                            ),
-                          ],
-                        ),
+              return Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: RichText(
+                  text: TextSpan(
+                      text: '',
+                      style: theme.textTheme.displaySmall?.copyWith(
+                        foreground: null,
                       ),
-                      TextSpan(text: Strings.tive.toUpperCase()),
-                    ]),
+                      children: [
+                        TextSpan(
+                          text: Strings.weAreThe.toUpperCase(),
+                          style: theme.textTheme.displaySmall?.copyWith(
+                            foreground: TextThemes.foreground,
+                          ),
+                        ),
+                        TextSpan(
+                          text: Strings.CreEeighttive.toUpperCase(),
+                          style: theme.textTheme.displaySmall?.copyWith(
+                              foreground: null, color: Palette.primary),
+                        ),
+                      ]),
+                ),
               );
             },
           ),
@@ -98,3 +90,4 @@ class _MarqueeTextState extends State<MarqueeText>
     );
   }
 }
+

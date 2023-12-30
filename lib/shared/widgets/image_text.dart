@@ -9,6 +9,8 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/gradient_container.dart';
 
+//todo task 5 done
+
 class ImageText extends StatelessWidget {
   const ImageText({super.key, this.hasGradient = false, required this.image});
 
@@ -18,7 +20,7 @@ class ImageText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
+
     return Responsive.isDesktop(context)
         ? Column(
             children: [
@@ -44,6 +46,7 @@ class ImageText extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
+                          //image
                           Expanded(
                             child: Image.asset(
                               image,
@@ -51,11 +54,12 @@ class ImageText extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
+                          //width between image and text
                           const SizedBox(width: Spacing.l40),
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                  vertical: Spacing.l40),
+                                  vertical: Spacing.l32),
                               child: Column(
                                 children: [
                                   Expanded(
@@ -129,7 +133,7 @@ class ImageTextMobile extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: Spacing.l32,
+            vertical: Spacing.m20,
             horizontal: Constants.mobileHorizontalPadding,
           ),
           child: Column(
@@ -158,7 +162,7 @@ class ImageTextMobile extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: Constants.sectionSpacing),
+              const SizedBox(height: Constants.sectionSpacingHelpingBusiness),
               Text(
                 Strings.zognestDescription,
                 style: theme.textTheme.bodyLarge,

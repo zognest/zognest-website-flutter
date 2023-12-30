@@ -33,6 +33,9 @@ class Constants {
   /// The spacing between each component
   static const sectionSpacing = 75.0;
 
+  /// The spacing between helping your business component
+  static const sectionSpacingHelpingBusiness = 30.0;
+
   /// The height of [MarqueeText] component
   static const marqueeHeight = 150.0;
 

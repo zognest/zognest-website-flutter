@@ -96,47 +96,53 @@ class _ZognestOffersState extends ConsumerState<ZognestOffers> {
   }
 }
 
-class ZognestOffersMobile extends StatelessWidget {
+class ZognestOffersMobile extends ConsumerWidget {
   const ZognestOffersMobile({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,ref) {
+    // asd
     final theme = Theme.of(context);
-    return Column(
-      children: [
-        const Divider(),
-        ScrollHeadline(
-          headline: TextSpan(
-            text: Strings.what.toUpperCase(),
-            style: theme.textTheme.displaySmall,
-            children: [
-              TextSpan(
-                text: '${Strings.we}\n'.toUpperCase(),
-                style: theme.textTheme.displaySmall?.copyWith(
-                  foreground: TextThemes.foreground,
+    final offers=ref.watch(appControllerProvider).offers;
+    return  offers.when(data: (offers){
+      return Column(
+        children: [
+          const Divider(),
+          ScrollHeadline(
+            headline: TextSpan(
+              text: Strings.what.toUpperCase(),
+              style: theme.textTheme.displaySmall,
+              children: [
+                TextSpan(
+                  text: '${Strings.we}\n'.toUpperCase(),
+                  style: theme.textTheme.displaySmall?.copyWith(
+                    foreground: TextThemes.foreground,
+                  ),
                 ),
-              ),
-              TextSpan(text: Strings.offer.toUpperCase()),
-            ],
+                TextSpan(text: Strings.offer.toUpperCase()),
+              ],
+            ),
+            onTapScroll: null,
           ),
-          onTapScroll: null,
-        ),
-        ListView.separated(
-          physics: const NeverScrollableScrollPhysics(),
-          addAutomaticKeepAlives: false,
-          padding: const EdgeInsets.symmetric(
-            horizontal: Constants.mobileHorizontalPadding,
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            addAutomaticKeepAlives: false,
+            padding: const EdgeInsets.symmetric(
+              horizontal: Constants.mobileHorizontalPadding,
+            ),
+            shrinkWrap: true,
+            itemBuilder: (_,index) {
+              return OfferItem(offer: offers[index]);
+            },
+            separatorBuilder: (_, __) => const SizedBox(height: Spacing.s12),
+            itemCount: offers.length,
           ),
-          shrinkWrap: true,
-          itemBuilder: (_, index) {
-            return OfferItem(offer: Data.offers[index], colored: index == 0);
-          },
-          separatorBuilder: (_, __) => const SizedBox(height: Spacing.s12),
-          itemCount: Data.offers.length,
-        ),
-        const Divider(),
-      ],
-    );
+          const Divider(),
+        ],
+      );
+    }, error: (_, __) => const Text('error'),
+    loading: () => CircularProgressIndicator(color: theme.primaryColor));
+
   }
 }
 

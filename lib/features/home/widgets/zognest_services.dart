@@ -95,8 +95,6 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
                         scrollDirection: Axis.horizontal,
                         controller: _controller,
                         itemBuilder: (context, index) {
-                          /*final i = index % Data.services.length;
-                  final service = Data.services[i];*/
                           return Container(
                             constraints: BoxConstraints.tight(
                               const Size(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/spacing.dart';
 
@@ -35,7 +36,7 @@ class TechnologyContainer extends StatelessWidget {
               border: Border.all(color: const Color(0xffF5F5F5)),
             ),
             padding: const EdgeInsets.all(Spacing.s4),
-            child: Image.asset(
+            child: SvgPicture.network(
               image,
               fit: BoxFit.contain,
             ),

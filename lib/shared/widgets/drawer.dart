@@ -75,7 +75,7 @@ class PrimaryDrawer extends StatelessWidget {
                 PrimaryButton(
                   onTap: () {},
                   height: 50,
-                  width: 80,
+                  width: 180,
                   title: Strings.getInTouch.toUpperCase(),
                   trailing: CircleButton(child: SvgPicture.asset(Assets.mail)),
                 ),

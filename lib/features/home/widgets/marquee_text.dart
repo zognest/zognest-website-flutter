@@ -68,15 +68,21 @@ class _MarqueeTextState extends State<MarqueeText>
                         alignment: PlaceholderAlignment.middle,
                         child: Stack(
                           children: [
-                            Text(
-                              Strings.eight.toUpperCase(),
-                              style: theme.textTheme.displaySmall
-                                  ?.copyWith(color: theme.primaryColor),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Text(
+                                Strings.eight.toUpperCase(),
+                                style: theme.textTheme.displaySmall
+                                    ?.copyWith(color: theme.primaryColor),
+                              ),
                             ),
-                            Text(
-                              Strings.eight.toUpperCase(),
-                              style: theme.textTheme.displaySmall
-                                  ?.copyWith(foreground: TextThemes.foreground),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Text(
+                                Strings.eight.toUpperCase(),
+                                style: theme.textTheme.displaySmall?.copyWith(
+                                    foreground: TextThemes.foreground),
+                              ),
                             ),
                           ],
                         ),

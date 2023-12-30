@@ -26,7 +26,7 @@ abstract final class Strings {
   static const offer = 'Offer.';
   static const scroll = 'Scroll';
   static const toExploreMore = 'To explore more';
-  static const weAreThe = 'We are the  -  ';
+  static const weAreThe = ' - We are the ';
 
   // ignore: constant_identifier_names
   static const creative = 'cre8tive';

@@ -6,7 +6,6 @@ import 'package:zognest_website/resources/strings.dart';
 import '../../../../config/constants.dart';
 import '../../../config/responsive.dart';
 
-//todo task 7 done
 class MarqueeText extends StatefulWidget {
   const MarqueeText({super.key});
 
@@ -72,10 +71,23 @@ class _MarqueeTextState extends State<MarqueeText>
                           foreground: TextThemes.foreground,
                         ),
                       ),
-                      TextSpan(
-                        text: Strings.creative.toUpperCase(),
-                        style: theme.textTheme.displaySmall?.copyWith(
-                          color: Palette.primary,
+                      WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
+                        child: Stack(
+                          children: [
+                            Text(
+                              Strings.creative.toUpperCase(),
+                              style: theme.textTheme.displaySmall?.copyWith(
+                                color: Palette.primary,
+                              ),
+                            ),
+                            Text(
+                              Strings.creative.toUpperCase(),
+                              style: theme.textTheme.displaySmall?.copyWith(
+                                foreground: TextThemes.foreground,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

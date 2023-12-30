@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/strings.dart';
+
 import '../../../../config/constants.dart';
 import '../../../config/responsive.dart';
-
 
 //todo task 7 done
 class MarqueeText extends StatefulWidget {
@@ -63,23 +63,23 @@ class _MarqueeTextState extends State<MarqueeText>
                 padding: const EdgeInsets.only(top: 10),
                 child: RichText(
                   text: TextSpan(
-                      text: '',
-                      style: theme.textTheme.displaySmall?.copyWith(
-                        foreground: null,
+                    text: '',
+                    style: theme.textTheme.displaySmall,
+                    children: [
+                      TextSpan(
+                        text: Strings.weAreThe.toUpperCase(),
+                        style: theme.textTheme.displaySmall?.copyWith(
+                          foreground: TextThemes.foreground,
+                        ),
                       ),
-                      children: [
-                        TextSpan(
-                          text: Strings.weAreThe.toUpperCase(),
-                          style: theme.textTheme.displaySmall?.copyWith(
-                            foreground: TextThemes.foreground,
-                          ),
+                      TextSpan(
+                        text: Strings.creative.toUpperCase(),
+                        style: theme.textTheme.displaySmall?.copyWith(
+                          color: Palette.primary,
                         ),
-                        TextSpan(
-                          text: Strings.CreEeighttive.toUpperCase(),
-                          style: theme.textTheme.displaySmall?.copyWith(
-                              foreground: null, color: Palette.primary),
-                        ),
-                      ]),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
@@ -90,4 +90,3 @@ class _MarqueeTextState extends State<MarqueeText>
     );
   }
 }
-

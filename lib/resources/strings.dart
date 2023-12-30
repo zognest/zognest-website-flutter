@@ -27,8 +27,9 @@ abstract final class Strings {
   static const scroll = 'Scroll';
   static const toExploreMore = 'To explore more';
   static const weAreThe = 'We are the  -  ';
+
   // ignore: constant_identifier_names
-  static const CreEeighttive = 'cre8tive';
+  static const creative = 'cre8tive';
   static const eight = '8';
   static const tive = 'tive  -  ';
   static const backHome = 'Back Home';

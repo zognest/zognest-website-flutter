@@ -9,8 +9,6 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/gradient_container.dart';
 
-//todo task 5 done
-
 class ImageText extends StatelessWidget {
   const ImageText({super.key, this.hasGradient = false, required this.image});
 
@@ -162,7 +160,7 @@ class ImageTextMobile extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: Constants.sectionSpacingHelpingBusiness),
+              const SizedBox(height: 30),
               Text(
                 Strings.zognestDescription,
                 style: theme.textTheme.bodyLarge,

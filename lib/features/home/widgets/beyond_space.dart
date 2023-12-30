@@ -139,7 +139,7 @@ class BeyondSpaceCarousel extends StatelessWidget {
     );
   }
 }
-
+ //todo task 3 done
 class BeyondSpaceMobile extends StatelessWidget {
   const BeyondSpaceMobile({super.key});
 
@@ -155,7 +155,7 @@ class BeyondSpaceMobile extends StatelessWidget {
           ),
           child: Column(
             children: [
-              const SizedBox(height: Spacing.s12),
+              const SizedBox(height: Spacing.l32),
               AutoSizeText.rich(
                 textAlign: TextAlign.center,
                 TextSpan(

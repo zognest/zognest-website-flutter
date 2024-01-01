@@ -15,6 +15,9 @@ class ZognestVideo extends ConsumerStatefulWidget {
 
 class _ZognestVideoState extends ConsumerState<ZognestVideo> {
   late VideoPlayerController _controller;
+  bool isMusicOn = true;
+  bool isPlayOn = true;
+  bool isFullScreen = true;
 
   @override
   void initState() {
@@ -68,24 +71,67 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         VideoPlayer(_controller),
-                        IconButton(
-                          onPressed: () {
-                            _controller.value.isPlaying
-                                ? _controller.pause()
-                                : _controller.play();
-                          },
-                          icon: const Icon(
-                            Icons.play_circle,
-                            color: Colors.red,
-                          ),
-                        ),
                         VideoProgressIndicator(
                           _controller,
                           allowScrubbing: false,
                           colors: VideoProgressColors(
                             playedColor: Theme.of(context).primaryColor,
                           ),
-                        )
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _controller.value.isPlaying
+                                        ? _controller.pause()
+                                        : _controller.play();
+                                    isPlayOn = !isPlayOn;
+                                  });
+                                },
+                                icon: Icon(
+                                  isPlayOn == true
+                                      ? Icons.play_circle
+                                      : Icons.pause_circle,
+                                  color: Colors.red,
+                                )),
+                            const SizedBox(width: 5),
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isMusicOn == false
+                                        ? _controller.setVolume(1)
+                                        : _controller.setVolume(0);
+                                    isMusicOn = !isMusicOn;
+                                  });
+                                },
+                                icon: Icon(
+                                  isMusicOn == true
+                                      ? Icons.volume_up
+                                      : Icons.volume_off,
+                                  color: Colors.red,
+                                )),
+                            const Spacer(),
+                            IconButton(
+                                onPressed: () {
+                                  /*   setState(() {
+                                isFullScreen == false
+                                    ? _controller.value.isCompleted
+                                    : _controller.value.
+                                isMusicOn = !isMusicOn;
+                              });*/
+                                },
+                                icon: Icon(
+                                  isFullScreen == true
+                                      ? Icons.fullscreen_sharp
+                                      : Icons.fullscreen_exit,
+                                  color: Colors.red,
+                                )),
+                          ],
+                        ),
+
+
                       ],
                     ),
                   )

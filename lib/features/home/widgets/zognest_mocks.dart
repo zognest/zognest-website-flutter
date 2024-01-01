@@ -5,7 +5,7 @@ import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/strings.dart';
-
+//todo task[done]
 class ZognestMocks extends StatefulWidget {
   const ZognestMocks({super.key});
 
@@ -31,8 +31,8 @@ class _ZognestMocksState extends State<ZognestMocks>
     );
 
     _offsetAnimation = Tween<Offset>(
-      begin: const Offset(1, 0),
-      end: const Offset(-0.4, 0),
+      begin: const Offset(-1, 0),
+      end: const Offset(0, 0),
     ).animate(curvedAnimation);
   }
 

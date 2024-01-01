@@ -17,7 +17,7 @@ import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
 
 import '../../../riverpod/controller.dart';
-
+// todo task[done]
 class ZognestServices extends ConsumerStatefulWidget {
   const ZognestServices({super.key});
 
@@ -85,6 +85,7 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
                     child: ScrollConfiguration(
                       behavior: ScrollConfiguration.of(context).copyWith(
                         dragDevices: {
+                          // todo what is it?
                           PointerDeviceKind.touch,
                           PointerDeviceKind.mouse,
                         },
@@ -96,6 +97,7 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
                         controller: _controller,
                         itemBuilder: (context, index) {
                           return Container(
+
                             constraints: BoxConstraints.tight(
                               const Size(
                                 Constants.servicesCardWidth,
@@ -119,7 +121,7 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
                       horizontal: Constants.mobileHorizontalPadding,
                     ),
                     child: Column(
-                      children: Data.services
+                      children:service
                           .mapIndexed(
                             (index, service) => Padding(
                               padding:
@@ -154,8 +156,8 @@ class FrontService extends StatelessWidget {
     final theme = Theme.of(context);
     return Stack(
       children: [
-        Image.asset(
-          Assets.serviceBackground,
+        Image.network(
+         service.backgroundImage,
           width: double.infinity,
           height: double.infinity,
           fit: BoxFit.cover,

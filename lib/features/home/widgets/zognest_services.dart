@@ -77,7 +77,7 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
             ),
             !Responsive.isMobile(context)
                 ? SizedBox(
-              height: Constants.servicesCardHeight,
+                    height: Constants.servicesCardHeight,
                     child: ListView.separated(
                       padding: const EdgeInsets.symmetric(
                           horizontal: Constants.webHorizontalPadding),

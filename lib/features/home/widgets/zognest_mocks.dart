@@ -5,7 +5,6 @@ import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/strings.dart';
-//todo task[done]
 class ZognestMocks extends StatefulWidget {
   const ZognestMocks({super.key});
 

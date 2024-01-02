@@ -4,6 +4,7 @@ import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
+import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 
 class ZognestVideo extends ConsumerStatefulWidget {
@@ -15,14 +16,13 @@ class ZognestVideo extends ConsumerStatefulWidget {
 
 class _ZognestVideoState extends ConsumerState<ZognestVideo> {
   late VideoPlayerController _controller;
-  bool isMusicOn = true;
-  bool isPlayOn = true;
-  bool isFullScreen = true;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(''));
+    _controller = VideoPlayerController.networkUrl(
+      Uri.parse(''),
+    );
   }
 
   @override
@@ -31,9 +31,17 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
     super.dispose();
   }
 
+  String formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60).abs());
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60).abs());
+    return "$twoDigitMinutes:$twoDigitSeconds";
+  }
+
   @override
   Widget build(BuildContext context) {
     final url = ref.watch(appControllerProvider).videoUrl;
+    final theme = Theme.of(context);
     url.when(
       data: (url) {
         if (_controller.value.isInitialized) return;
@@ -71,67 +79,73 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         VideoPlayer(_controller),
-                        VideoProgressIndicator(
-                          _controller,
-                          allowScrubbing: false,
-                          colors: VideoProgressColors(
-                            playedColor: Theme.of(context).primaryColor,
+                        SizedBox.expand(
+                          child: GestureDetector(
+                            onTap: () {
+                              _controller.value.isPlaying
+                                  ? _controller.pause()
+                                  : _controller.play();
+                              setState(() {});
+                            },
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        Row(
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            IconButton(
-                                onPressed: () {
-                                  setState(() {
+                            VideoProgressIndicator(
+                              _controller,
+                              colors: VideoProgressColors(
+                                playedColor: theme.primaryColor,
+                              ),
+                              allowScrubbing: false,
+                            ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {
                                     _controller.value.isPlaying
                                         ? _controller.pause()
                                         : _controller.play();
-                                    isPlayOn = !isPlayOn;
-                                  });
-                                },
-                                icon: Icon(
-                                  isPlayOn == true
-                                      ? Icons.play_circle
-                                      : Icons.pause_circle,
-                                  color: Colors.red,
-                                )),
-                            const SizedBox(width: 5),
-                            IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isMusicOn == false
+                                    setState(() {});
+                                  },
+                                  icon: Icon(
+                                    _controller.value.isPlaying
+                                        ? Icons.pause_rounded
+                                        : Icons.play_arrow_rounded,
+                                    color: theme.primaryColor,
+                                    size: 34,
+                                  ),
+                                ),
+                                const SizedBox(width: Spacing.s8),
+                                IconButton(
+                                  onPressed: () {
+                                    _controller.value.volume == 0
                                         ? _controller.setVolume(1)
                                         : _controller.setVolume(0);
-                                    isMusicOn = !isMusicOn;
-                                  });
-                                },
-                                icon: Icon(
-                                  isMusicOn == true
-                                      ? Icons.volume_up
-                                      : Icons.volume_off,
-                                  color: Colors.red,
-                                )),
-                            const Spacer(),
-                            IconButton(
-                                onPressed: () {
-                                  /*   setState(() {
-                                isFullScreen == false
-                                    ? _controller.value.isCompleted
-                                    : _controller.value.
-                                isMusicOn = !isMusicOn;
-                              });*/
-                                },
-                                icon: Icon(
-                                  isFullScreen == true
-                                      ? Icons.fullscreen_sharp
-                                      : Icons.fullscreen_exit,
-                                  color: Colors.red,
-                                )),
+                                    setState(() {});
+                                  },
+                                  icon: Icon(
+                                    _controller.value.volume == 0
+                                        ? Icons.volume_off_rounded
+                                        : Icons.volume_up_rounded,
+                                    // color: theme.primaryColor,
+                                    size: 24,
+                                  ),
+                                ),
+                                const SizedBox(width: Spacing.m16),
+                                StreamBuilder(
+                                  stream: Stream.periodic(Durations.extralong4),
+                                  builder: (_, __) {
+                                    return Text(
+                                      '${formatDuration(_controller.value.position)} / ${formatDuration(_controller.value.duration)}',
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ],
                         ),
-
-
                       ],
                     ),
                   )

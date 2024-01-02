@@ -31,7 +31,7 @@ class _ZognestMocksState extends State<ZognestMocks>
 
     _offsetAnimation = Tween<Offset>(
       begin: const Offset(-1, 0),
-      end: const Offset(0, 0),
+      end: const Offset(-.300, 0),
     ).animate(curvedAnimation);
   }
 
@@ -58,16 +58,19 @@ class _ZognestMocksState extends State<ZognestMocks>
               },
               child: SlideTransition(
                 position: _offsetAnimation,
-                child: Image.asset(Assets.screens),
+                // image moon
+                child: Image.asset(Assets.screens,width: size.width * 0.65,),
               ),
             ),
             const Divider(),
           ],
         ),
+        //image screen
         Image.asset(
           Assets.mercury,
-          width: size.width * 0.55,
+          width: size.width * 0.60,
         ),
+        //text
         SizedBox(
           width: size.width * 0.45,
           child: Padding(

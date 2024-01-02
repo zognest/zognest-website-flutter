@@ -115,8 +115,8 @@ class ZognestOffersMobile extends ConsumerWidget {
   const ZognestOffersMobile({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
-    // asd
+  Widget build(context, ref) {
+
     final theme = Theme.of(context);
     final offers = ref.watch(appControllerProvider).offers;
     return offers.when(
@@ -173,6 +173,7 @@ class OfferItem extends StatelessWidget {
   final Offer offer;
   final bool colored;
 
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -186,6 +187,7 @@ class OfferItem extends StatelessWidget {
         horizontal: Spacing.l32,
         vertical: Spacing.l48,
       ),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -55,7 +55,8 @@ class Project extends Equatable {
       brief: map['brief'] as String,
       description: map['description'] as String,
       image: map['image'] as String,
-      splash: map['splash'] as String,
+      splash: map['splash'] ??
+          'https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/placeholders%2Fplaceholder.png?alt=media&token=dba87b46-6597-458a-89d5-a8361ba9e87e',
       icon: map['icon'] as String,
     );
   }

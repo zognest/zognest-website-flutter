@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -8,7 +9,7 @@ import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
-import 'package:zognest_website/shared/data.dart';
+import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/circle_button.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
@@ -102,44 +103,62 @@ class BeyondSpace extends StatelessWidget {
   }
 }
 
-class BeyondSpaceCarousel extends StatelessWidget {
+class BeyondSpaceCarousel extends ConsumerWidget {
   const BeyondSpaceCarousel({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return CarouselSlider(
-      items: Data.beyondSpaceImages.map((image) {
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            Image.asset(Assets.phoneMockup),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 12,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final projects = ref.watch(appControllerProvider).projects;
+    final size = MediaQuery.sizeOf(context);
+    return projects.when(
+      data: (projects) {
+        return CarouselSlider(
+          items: projects.map((project) {
+            return AspectRatio(
+              aspectRatio: 370 / 747,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 8,
+                ),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(Assets.phoneMockup),
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                    (size.width *
+                            (Responsive.isDesktop(context) ? 0.02 : 0.03)) +
+                        12,
+                  ),
+                  child: Image.network(
+                    project.splash,
+                    height: double.infinity,
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
-              child: Image.asset(
-                image,
-                height: double.infinity,
-              ),
-            ),
-          ],
+            );
+          }).toList(),
+          options: CarouselOptions(
+            aspectRatio: 1.3,
+            viewportFraction: 0.4,
+            enlargeCenterPage: true,
+            enlargeFactor: 0.2,
+            padEnds: !Responsive.isDesktop(context),
+            autoPlayInterval:
+                const Duration(seconds: Constants.beyondSpaceAppDuration),
+            autoPlay: true,
+          ),
         );
-      }).toList(),
-      options: CarouselOptions(
-        aspectRatio: 1.3,
-        viewportFraction: 0.4,
-        enlargeCenterPage: true,
-        enlargeFactor: 0.2,
-        padEnds: !Responsive.isDesktop(context),
-        autoPlayInterval:
-            const Duration(seconds: Constants.beyondSpaceAppDuration),
-        autoPlay: true,
-      ),
+      },
+      error: (_, __) => const SizedBox.shrink(),
+      loading: () => const CircularProgressIndicator(),
     );
   }
 }
- //todo task 3 done
+
 class BeyondSpaceMobile extends StatelessWidget {
   const BeyondSpaceMobile({super.key});
 

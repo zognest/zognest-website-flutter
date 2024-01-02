@@ -1,6 +1,3 @@
-// ignore: depend_on_referenced_packages
-import 'package:collection/collection.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
@@ -10,7 +7,6 @@ import 'package:zognest_website/features/home/models/service.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
-import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/flipping_widget.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
@@ -44,9 +40,9 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final service = ref.watch(appControllerProvider).services;
-    return service.when(
-      data: (service) {
+    final services = ref.watch(appControllerProvider).services;
+    return services.when(
+      data: (services) {
         return Column(
           children: [
             const Divider(),
@@ -82,36 +78,28 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
             !Responsive.isMobile(context)
                 ? SizedBox(
                     height: Constants.servicesCardHeight,
-                    child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context).copyWith(
-                        dragDevices: {
-                          PointerDeviceKind.touch,
-                          PointerDeviceKind.mouse,
-                        },
-                      ),
-                      child: ListView.separated(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: Constants.webHorizontalPadding),
-                        scrollDirection: Axis.horizontal,
-                        controller: _controller,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            constraints: BoxConstraints.tight(
-                              const Size(
-                                Constants.servicesCardWidth,
-                                Constants.servicesCardHeight,
-                              ),
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: Constants.webHorizontalPadding),
+                      scrollDirection: Axis.horizontal,
+                      controller: _controller,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          constraints: BoxConstraints.tight(
+                            const Size(
+                              Constants.servicesCardWidth,
+                              Constants.servicesCardHeight,
                             ),
-                            child: FlippingWidget(
-                              front: FrontService(service: service[index]),
-                              back: BackService(service: service[index]),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(width: Spacing.l24),
-                        itemCount: service.length,
-                      ),
+                          ),
+                          child: FlippingWidget(
+                            front: FrontService(service: services[index]),
+                            back: BackService(service: services[index]),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: Spacing.l24),
+                      itemCount: services.length,
                     ),
                   )
                 : Padding(
@@ -119,15 +107,18 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
                       horizontal: Constants.mobileHorizontalPadding,
                     ),
                     child: Column(
-                      children: Data.services
-                          .mapIndexed(
-                            (index, service) => Padding(
+                      children: services
+                          .map(
+                            (service) => Padding(
                               padding:
                                   const EdgeInsets.only(bottom: Spacing.s12),
                               child: SizedBox(
                                 height: Constants.servicesCardHeight,
                                 width: double.infinity,
-                                child: FrontService(service: service),
+                                child: FlippingWidget(
+                                  front: FrontService(service: service),
+                                  back: BackService(service: service),
+                                ),
                               ),
                             ),
                           )
@@ -154,8 +145,8 @@ class FrontService extends StatelessWidget {
     final theme = Theme.of(context);
     return Stack(
       children: [
-        Image.asset(
-          Assets.serviceBackground,
+        Image.network(
+          service.backgroundImage,
           width: double.infinity,
           height: double.infinity,
           fit: BoxFit.cover,

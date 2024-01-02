@@ -8,8 +8,8 @@ class FlippingWidget extends StatefulWidget {
     super.key,
     required this.front,
     required this.back,
-    this.animationDuration,
     this.curve,
+    this.animationDuration,
   });
 
   final Widget front;
@@ -24,11 +24,10 @@ class FlippingWidget extends StatefulWidget {
 class _FlippingWidgetState extends State<FlippingWidget>
     with SingleTickerProviderStateMixin {
   bool _flip = false;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => setState(() => _flip = !_flip),
       onHover: (_) => setState(() => _flip = !_flip),
       overlayColor: MaterialStateProperty.all(Palette.transparent),
       child: AnimatedSwitcher(
@@ -57,7 +56,7 @@ class _FlippingWidgetState extends State<FlippingWidget>
             },
           );
         },
-        child: _flip ? widget.back : widget.front,
+        child: _flip ? widget.back : AbsorbPointer(child: widget.front),
       ),
     );
   }

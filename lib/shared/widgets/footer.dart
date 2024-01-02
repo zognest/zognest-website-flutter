@@ -43,17 +43,32 @@ class Footer extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    //the point above the up arrow
                     Container(
-                      height: Constants.circleButtonRadius,
+
+                      height: Responsive.isDesktop(context) ||
+                              Responsive.isTablet(context)
+                          ? Spacing.s4
+                          : Spacing.s8,
                       decoration: BoxDecoration(
                         color: theme.primaryColor,
                         shape: BoxShape.circle,
                       ),
                     ),
-                    const SizedBox(height: Spacing.s4),
+                    // the height between the point and image
+                    SizedBox(
+                      height: Responsive.isDesktop(context) ||
+                              Responsive.isTablet(context)
+                          ? Spacing.s4
+                          : Spacing.s4,
+                    ),
+                    // the up arrow
                     SvgPicture.asset(
                       Assets.upArrow,
-                      height: Spacing.s12,
+                      height:  Responsive.isDesktop(context) ||
+                            Responsive.isTablet(context)
+                            ? Spacing.s12
+                            : Spacing.m14,
                     ),
                   ],
                 ),
@@ -160,7 +175,10 @@ class Footer extends StatelessWidget {
                             style: (Responsive.isDesktop(context)
                                     ? theme.textTheme.labelMedium
                                     : theme.textTheme.labelSmall)
-                                ?.copyWith(fontFamily: 'SF Pro Rounded'),
+                                ?.copyWith(
+                                    fontFamily: 'SF Pro Rounded',
+                                    letterSpacing: 5,
+                                    wordSpacing: 2),
                           ),
                         ),
                       ],

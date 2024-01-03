@@ -160,7 +160,10 @@ class Footer extends StatelessWidget {
                             style: (Responsive.isDesktop(context)
                                     ? theme.textTheme.labelMedium
                                     : theme.textTheme.labelSmall)
-                                ?.copyWith(fontFamily: 'SF Pro Rounded'),
+                                ?.copyWith(
+                              fontFamily: 'SF Pro Rounded',
+                              letterSpacing: -0.5,
+                            ),
                           ),
                         ),
                       ],

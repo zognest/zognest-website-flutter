@@ -5,6 +5,7 @@ import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/strings.dart';
+
 class ZognestMocks extends StatefulWidget {
   const ZognestMocks({super.key});
 
@@ -31,7 +32,7 @@ class _ZognestMocksState extends State<ZognestMocks>
 
     _offsetAnimation = Tween<Offset>(
       begin: const Offset(-1, 0),
-      end: const Offset(-.300, 0),
+      end: const Offset(-0.46, 0),
     ).animate(curvedAnimation);
   }
 
@@ -49,6 +50,7 @@ class _ZognestMocksState extends State<ZognestMocks>
       alignment: Alignment.centerRight,
       children: [
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Divider(),
             VisibilityDetector(
@@ -56,49 +58,56 @@ class _ZognestMocksState extends State<ZognestMocks>
               onVisibilityChanged: (info) {
                 if (info.visibleFraction >= 0.8) _animationController.forward();
               },
-              child: SlideTransition(
-                position: _offsetAnimation,
-                // image moon
-                child: Image.asset(Assets.screens,width: size.width * 0.65,),
+              child: AspectRatio(
+                aspectRatio:
+                    Responsive.isDesktop(context) ? 2100 / 960 : 600 / 400,
+                child: SlideTransition(
+                  position: _offsetAnimation,
+                  child: Image.asset(
+                    Assets.screens,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
             const Divider(),
           ],
         ),
-        //image screen
-        Image.asset(
-          Assets.mercury,
-          width: size.width * 0.60,
-        ),
-        //text
-        SizedBox(
-          width: size.width * 0.45,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: Responsive.isDesktop(context)
-                  ? Constants.webHorizontalPadding
-                  : Constants.mobileHorizontalPadding,
-            ),
-            child: FittedBox(
-              child: Text.rich(
-                textAlign: TextAlign.right,
-                maxLines: 4,
-                TextSpan(
-                  text: '\t${Strings.weGiveWingz.toUpperCase()}',
-                  style: theme.textTheme.displayMedium,
-                  children: [
+        Stack(
+          alignment: Alignment.centerRight,
+          children: [
+            Image.asset(Assets.mercury),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context)
+                    ? Constants.webHorizontalPadding
+                    : Constants.mobileHorizontalPadding,
+              ),
+              child: SizedBox(
+                width:
+                    size.width * (Responsive.isDesktop(context) ? 0.45 : 0.7),
+                child: FittedBox(
+                  child: Text.rich(
+                    textAlign: TextAlign.right,
+                    maxLines: 4,
                     TextSpan(
-                      text: '${Strings.to.toUpperCase()}\n',
-                      style: theme.textTheme.displayMedium?.copyWith(
-                        foreground: TextThemes.foreground,
-                      ),
+                      text: '\t${Strings.weGiveWingz.toUpperCase()}',
+                      style: theme.textTheme.displayMedium,
+                      children: [
+                        TextSpan(
+                          text: '${Strings.to.toUpperCase()}\n',
+                          style: theme.textTheme.displayMedium?.copyWith(
+                            foreground: TextThemes.foreground,
+                          ),
+                        ),
+                        TextSpan(text: Strings.yourBusiness.toUpperCase()),
+                      ],
                     ),
-                    TextSpan(text: Strings.yourBusiness.toUpperCase()),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ],
     );

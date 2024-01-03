@@ -12,7 +12,7 @@ class Constants {
 
   // region Horizontal Lists
   static const listHeight = 500.0;
-  static const listCardWidth = 335.0;
+  static const listCardWidth = 400.0;
   static const listCardSeparatorWidth = Spacing.m20;
 
   // endregion

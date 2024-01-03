@@ -10,11 +10,12 @@ import 'package:zognest_website/shared/widgets/gradient_container.dart';
 import 'package:zognest_website/shared/widgets/social_button.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
+// todo fix the button mobile
+
 class Footer extends StatelessWidget {
   const Footer({super.key, required this.onTabUp});
 
   final VoidCallback onTabUp;
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

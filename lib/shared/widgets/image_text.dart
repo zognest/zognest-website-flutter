@@ -35,9 +35,9 @@ class ImageText extends StatelessWidget {
                     ),
                   FrostedContainer(
                     height: Constants.imageTextHeight,
-                    blurStrength: 4,
+                    blurStrength: 8,
                     backgroundColor:
-                        Palette.cardBackgroundColor.withOpacity(0.1),
+                        Palette.cardBackgroundColor.withOpacity(0.5),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: Constants.webHorizontalPadding,
@@ -58,47 +58,44 @@ class ImageText extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: Spacing.l32),
-                              child: Opacity(
-                                opacity:.6,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: AutoSizeText.rich(
-                                        stepGranularity: 1,
-                                        maxLines: 5,
-                                        TextSpan(
-                                          text: Strings.helpingYourBusiness
-                                              .toUpperCase(),
-                                          style: theme.textTheme.displaySmall,
-                                          children: [
-                                            TextSpan(
-                                              text: Strings.to.toUpperCase(),
-                                              style: theme.textTheme.displaySmall
-                                                  ?.copyWith(
-                                                fontVariations:
-                                                    TextThemes.fontVariation(3),
-                                              ),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: AutoSizeText.rich(
+                                      stepGranularity: 1,
+                                      maxLines: 5,
+                                      TextSpan(
+                                        text: Strings.helpingYourBusiness
+                                            .toUpperCase(),
+                                        style: theme.textTheme.displaySmall,
+                                        children: [
+                                          TextSpan(
+                                            text: Strings.to.toUpperCase(),
+                                            style: theme.textTheme.displaySmall
+                                                ?.copyWith(
+                                              fontVariations:
+                                                  TextThemes.fontVariation(3),
                                             ),
-                                            TextSpan(
-                                                text: Strings.exploreThe
-                                                    .toUpperCase()),
-                                            TextSpan(
-                                              text: Strings.sky.toUpperCase(),
-                                              style: theme.textTheme.displaySmall
-                                                  ?.copyWith(
-                                                color: theme.primaryColor,
-                                              ),
+                                          ),
+                                          TextSpan(
+                                              text: Strings.exploreThe
+                                                  .toUpperCase()),
+                                          TextSpan(
+                                            text: Strings.sky.toUpperCase(),
+                                            style: theme.textTheme.displaySmall
+                                                ?.copyWith(
+                                              color: theme.primaryColor,
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Text(
-                                      Strings.zognestDescription,
-                                      style: theme.textTheme.bodyLarge,
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  Text(
+                                    Strings.zognestDescription,
+                                    style: theme.textTheme.bodyLarge,
+                                  ),
+                                ],
                               ),
                             ),
                           ),

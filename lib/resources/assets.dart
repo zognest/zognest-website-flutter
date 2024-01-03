@@ -20,7 +20,6 @@ abstract final class Assets {
   static const dribble = '${Paths.svg}/dribble.svg';
   static const impactLines = '${Paths.svg}/impact_lines.svg';
   static const mail = '${Paths.svg}/mail.svg';
-  static const notFound = '${Paths.svg}/404.svg';
   static const drawer = '${Paths.svg}/drawer.svg';
 
   // Images
@@ -45,33 +44,13 @@ abstract final class Assets {
   static const ourServicesText = '${Paths.images}/our_services_text.png';
 
   // Temporary assets
-  static const cuckoo = '${Paths.temp}/cuckoo.png';
-  static const salt = '${Paths.temp}/salt.png';
-  static const drop = '${Paths.temp}/drop.png';
-  static const myPocket = '${Paths.temp}/my_pocket.png';
-  static const storeLoop = '${Paths.temp}/store_loop.png';
   static const ajmera = '${Paths.temp}/ajmera.png';
   static const mahalaxmi = '${Paths.temp}/mahalaxmi.png';
   static const sjrc = '${Paths.temp}/sjrc.png';
   static const texasChiro = '${Paths.temp}/texas_chiro.png';
   static const tooth = '${Paths.temp}/tooth.png';
   static const vais = '${Paths.temp}/vais.png';
-  static const photoshop = '${Paths.temp}/photoshop.png';
-  static const illustrator = '${Paths.temp}/illustrator.png';
-  static const zeplin = '${Paths.temp}/zeplin.png';
-  static const xd = '${Paths.temp}/xd.png';
-  static const figmaColoured = '${Paths.temp}/figma.png';
-  static const sketch = '${Paths.temp}/sketch.png';
   static const serviceBackground = '${Paths.temp}/service_background.png';
-  static const clientImage = '${Paths.temp}/client_image.png';
-  static const blog = '${Paths.temp}/blog_image.png';
-  static const projectIcon = '${Paths.temp}/project_icon.png';
-  static const clientFeedbackBackgroundImage1 =
-      '${Paths.temp}/client_feedback_1.png';
-  static const clientFeedbackBackgroundImage2 =
-      '${Paths.temp}/client_feedback_2.png';
   static const purchasableServicesImage =
       '${Paths.temp}/purchasable_service_image.png';
-  static const eventImage = '${Paths.temp}/event_image.png';
-  static const eventCover = '${Paths.temp}/event_cover.png';
 }

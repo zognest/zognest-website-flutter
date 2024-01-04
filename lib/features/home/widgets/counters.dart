@@ -184,7 +184,7 @@ class CounterItem extends StatelessWidget {
       height: Responsive.isDesktop(context)
           ? Constants.webCountItemHeight
           : Constants.mobileCountItemHeight,
-      width: Responsive.isDesktop(context) ? 220 : 160,
+      width: Responsive.isDesktop(context) ? 220 : 190,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -192,6 +192,7 @@ class CounterItem extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
+
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Countup(
@@ -201,8 +202,8 @@ class CounterItem extends StatelessWidget {
                   separator: ',',
                   style: theme.textTheme.headlineLarge?.copyWith(
                     color: theme.primaryColor,
-                    fontSize: Responsive.isMobile(context) ? 40 : null,
-                    height: 1,
+                    fontSize: Responsive.isMobile(context) ? 25 : null,
+                    height: .5,
                   ),
                 ),
                 if (hasPlus)
@@ -211,22 +212,22 @@ class CounterItem extends StatelessWidget {
                     child: Text(
                       '+',
                       style: theme.textTheme.headlineLarge?.copyWith(
-                        fontSize: Responsive.isMobile(context) ? 20 : 60,
+                        fontSize: Responsive.isMobile(context) ? 15 : 60,
                         color: theme.primaryColor,
-                        height: 1,
+                        height: .8,
                       ),
                     ),
                   ),
               ],
             ),
           ),
-          const SizedBox(height: Spacing.s12),
+          const SizedBox(height: Spacing.s8),
           Text(
             title.toUpperCase(),
             textAlign: TextAlign.center,
             maxLines: 2,
             style: theme.textTheme.labelLarge
-                ?.copyWith(fontSize: Responsive.isDesktop(context) ? null : 12),
+                ?.copyWith(fontSize: Responsive.isDesktop(context) ? null : 10),
           ),
         ],
       ),

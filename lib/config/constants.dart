@@ -7,8 +7,8 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 
 class Constants {
   /// Horizontal padding of any main component or the children inside it
-  static const webHorizontalPadding = Spacing.xl72;
-  static const mobileHorizontalPadding = Spacing.m20;
+  static const webHorizontalPadding = Spacing.xl60;
+  static const mobileHorizontalPadding = Spacing.m16;
 
   // region Horizontal Lists
   static const listHeight = 500.0;
@@ -56,8 +56,9 @@ class Constants {
 
   /// region [Counters]
   static const countersAnimationDuration = 3000;
-  static const webCountItemHeight = 120.0;
-  static const mobileCountItemHeight = 72.0;
+  static const webCountItemHeight = 200.0;
+ /* static const mobileCountItemHeight = 72.0;150*/
+   static const mobileCountItemHeight = 140.0;
 
   // endregion
 

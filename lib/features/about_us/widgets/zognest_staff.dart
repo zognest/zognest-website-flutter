@@ -121,7 +121,7 @@ class FrontCard extends StatelessWidget {
       children: [
         Expanded(
           child: Image.network(
-            Assets.zognestTeam,
+            staff.backgroundImage,
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,
@@ -200,11 +200,14 @@ class BackCard extends StatelessWidget {
     final theme = Theme.of(context);
     return Stack(
       children: [
-        Image.network(
-          Assets.serviceBackground,
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
+        Opacity(
+          opacity: 0.1,
+          child: Image.network(
+            staff.backgroundImage,
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(

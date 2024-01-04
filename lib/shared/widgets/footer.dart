@@ -11,10 +11,11 @@ import 'package:zognest_website/shared/widgets/gradient_container.dart';
 import 'package:zognest_website/shared/widgets/social_button.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
-class Footer extends StatelessWidget {
+class Footer extends StatefulWidget {
   const Footer({super.key, required this.onTabUp});
 
   final VoidCallback onTabUp;
+
   @override
   State<Footer> createState() => _FooterState();
 }

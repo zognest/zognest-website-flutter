@@ -11,6 +11,7 @@ import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
+
 import '../../../resources/spacing.dart';
 
 class ZognestClients extends ConsumerStatefulWidget {
@@ -122,128 +123,124 @@ class _ClientItemState extends State<ClientItem> {
       width: Constants.listCardWidth,
       height: double.infinity,
       padding: const EdgeInsets.symmetric(
-          horizontal: Spacing.l24, vertical: Spacing.m20),
+          horizontal: Spacing.l32, vertical: Spacing.l24),
       child: InkWell(
         onTap: () {},
         onHover: (over) {
           setState(() => hovered = !hovered);
         },
         overlayColor: MaterialStateProperty.all(Palette.transparent),
-        child: Stack(
-         children: [
-           Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
-             children: [
-
-               SizedBox(
-                 height: Constants.listHeight * 0.5,
-                 child: GreyscaleFilter(
-                   isHovered: hovered,
-                   child: Stack(
-                     children: [
-                       Row(
-                         children: [
-                           Expanded(
-                             // image 1
-                             child: Image.network(
-                               widget.clientFeedback.backgroundImages[0],
-                               height: double.infinity,
-                               width:Constants.listCardWidth * 0.7 ,
-                               fit: BoxFit.cover,
-                             ),
-                           ),
-                           const SizedBox(width: Spacing.s12),
-                           Expanded(
-                             //image 2
-                             child: Image.network(
-                               widget.clientFeedback.backgroundImages[1],
-                               height: double.infinity,
-                               width:Constants.listCardWidth * 0.2,
-                               fit: BoxFit.cover,
-                             ),
-                           ),
-                         ],
-                       ),
-
-                     ],
-                   ),
-                 ),
-               ),
-
-               Expanded(
-                 child: Column(
-                   children: [
-                     const Spacer(),
-                     Row(
-                       children: [
-                         Column(
-                           crossAxisAlignment: CrossAxisAlignment.start,
-                           children: [
-                             Text(
-                               widget.clientFeedback.name,
-                               style: theme.textTheme.bodyLarge?.copyWith(
-                                 fontWeight: FontWeight.w700,
-                               ),
-                             ),
-                             Text(
-                               widget.clientFeedback.id,
-                               style: theme.textTheme.bodySmall?.copyWith(
-                                 color: theme.primaryColor,
-                               ),
-                             ),
-                           ],
-                         ),
-                         const Spacer(),
-                         CircleAvatar(
-                           backgroundColor: Palette.white,
-                           child: Icon(
-                             Icons.play_arrow,
-                             color: theme.primaryColor,
-                           ),
-                         ),
-                         const SizedBox(width: Spacing.s12),
-                         PrimaryButton(
-                           title: Strings.view.toUpperCase(),
-                           filled: false,
-                           padding: const EdgeInsets.symmetric(
-                             horizontal: Spacing.m20,
-                             vertical: Spacing.m18,
-                           ),
-                           onTap: () {},
-                         ),
-                       ],
-                     ),
-                     const Spacer(),
-                     Expanded(
-                       flex: 2,
-                       child: SingleChildScrollView(
-                         child: Text(
-                           widget.clientFeedback.description,
-                           style: theme.textTheme.bodyMedium,
-                         ),
-                       ),
-                     ),
-                   ],
-                 ),
-               ),
-             ],
-           ),
-           Positioned(
-             left: 20,
-             top: 200,
-             child: Container(
-               decoration: const BoxDecoration(
-                   color: Colors.transparent, shape: BoxShape.circle),
-               child: ClipOval(
-                 child: SizedBox.fromSize(
-                   size: const Size.fromRadius(45),
-                   child: Image.network(widget.clientFeedback.clientImage, height: 105,width: 100,fit: BoxFit.cover),
-                 ),
-               ),
-             ),
-
-           ),
-         ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: GreyscaleFilter(
+                isHovered: hovered,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 48),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Image.network(
+                              widget.clientFeedback.backgroundImages[0],
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const SizedBox(width: Spacing.m16),
+                          Expanded(
+                            child: Image.network(
+                              widget.clientFeedback.backgroundImages[1],
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      left: 20,
+                      bottom: 0,
+                      child: Container(
+                        width: 108,
+                        height: 108,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Palette.cardBackgroundColor,
+                            width: Spacing.s4,
+                          ),
+                          image: DecorationImage(
+                            image:
+                                NetworkImage(widget.clientFeedback.clientImage),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.clientFeedback.name,
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            widget.clientFeedback.id,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: theme.primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      CircleAvatar(
+                        backgroundColor: Palette.white,
+                        child: Icon(
+                          Icons.play_arrow,
+                          color: theme.primaryColor,
+                        ),
+                      ),
+                      const SizedBox(width: Spacing.s12),
+                      PrimaryButton(
+                        title: Strings.view.toUpperCase(),
+                        filled: false,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Spacing.m20,
+                          vertical: Spacing.m18,
+                        ),
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Expanded(
+                    flex: 2,
+                    child: SingleChildScrollView(
+                      child: Text(
+                        widget.clientFeedback.description,
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

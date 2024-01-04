@@ -11,6 +11,7 @@ import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
+
 import '../../../resources/spacing.dart';
 
 class ZognestClients extends ConsumerStatefulWidget {
@@ -132,35 +133,52 @@ class _ClientItemState extends State<ClientItem> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: Constants.listHeight * 0.5,
+            Expanded(
               child: GreyscaleFilter(
                 isHovered: hovered,
                 child: Stack(
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Image.network(
-                            widget.clientFeedback.backgroundImages[0],
-                            // height: double.infinity,
-                            fit: BoxFit.cover,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 48),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Image.network(
+                              widget.clientFeedback.backgroundImages[0],
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: Spacing.m16),
-                        Expanded(
-                          child: Image.network(
-                            widget.clientFeedback.backgroundImages[1],
-                            height: double.infinity,
-                            fit: BoxFit.cover,
+                          const SizedBox(width: Spacing.m16),
+                          Expanded(
+                            child: Image.network(
+                              widget.clientFeedback.backgroundImages[1],
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Positioned(
                       left: 20,
                       bottom: 0,
-                      child: Image.network(widget.clientFeedback.clientImage),
+                      child: Container(
+                        width: 108,
+                        height: 108,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Palette.cardBackgroundColor,
+                            width: Spacing.s4,
+                          ),
+                          image: DecorationImage(
+                            image:
+                                NetworkImage(widget.clientFeedback.clientImage),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -168,6 +186,7 @@ class _ClientItemState extends State<ClientItem> {
             ),
             Expanded(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
                     children: [

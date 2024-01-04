@@ -35,9 +35,9 @@ class ImageText extends StatelessWidget {
                     ),
                   FrostedContainer(
                     height: Constants.imageTextHeight,
-                    blurStrength: 4,
+                    blurStrength: 8,
                     backgroundColor:
-                        Palette.cardBackgroundColor.withOpacity(0.1),
+                        Palette.cardBackgroundColor.withOpacity(0.5),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: Constants.webHorizontalPadding,

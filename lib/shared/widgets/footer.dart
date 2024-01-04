@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
+import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
@@ -10,12 +11,17 @@ import 'package:zognest_website/shared/widgets/gradient_container.dart';
 import 'package:zognest_website/shared/widgets/social_button.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
-// todo fix the button mobile
-
 class Footer extends StatelessWidget {
   const Footer({super.key, required this.onTabUp});
 
   final VoidCallback onTabUp;
+  @override
+  State<Footer> createState() => _FooterState();
+}
+
+class _FooterState extends State<Footer> {
+  bool hovered = false;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -39,8 +45,8 @@ class Footer extends StatelessWidget {
               right: Spacing.m16,
               top: Spacing.m16,
               child: CircleButton(
-                onTap: onTabUp,
-                radius: Spacing.l24,
+                onTap: widget.onTabUp,
+                radius: Spacing.m16,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -82,12 +88,23 @@ class Footer extends StatelessWidget {
                         ),
                         const SizedBox(height: Spacing.s12),
                         FittedBox(
-                          child: Text(
-                            Strings.zognestMail,
-                            style: theme.textTheme.headlineLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              fontSize: Responsive.isDesktop(context) ? 70 : 20,
-                              color: const Color(0xffAEB2BA),
+                          child: InkWell(
+                            onTap: () {},
+                            onHover: (over) {
+                              setState(() => hovered = over);
+                            },
+                            overlayColor: const MaterialStatePropertyAll(
+                                Palette.transparent),
+                            child: Text(
+                              Strings.zognestMail,
+                              style: theme.textTheme.headlineLarge?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                fontSize:
+                                    Responsive.isDesktop(context) ? 70 : 20,
+                                color: hovered
+                                    ? theme.primaryColor
+                                    : const Color(0xffAEB2BA),
+                              ),
                             ),
                           ),
                         ),
@@ -111,7 +128,7 @@ class Footer extends StatelessWidget {
                             ),
                             if (Responsive.isDesktop(context))
                               CircleButton(
-                                onTap: onTabUp,
+                                onTap: widget.onTabUp,
                                 radius: Responsive.isDesktop(context)
                                     ? Spacing.l32
                                     : Spacing.m16,

@@ -90,22 +90,21 @@ class _FooterState extends State<Footer> {
                         const SizedBox(height: Spacing.s12),
                         FittedBox(
                           child: InkWell(
-                            onTap: (){},
+                            onTap: () {},
                             onHover: (over) {
-                              setState(() {
-                                hovered = over;
-                              });
+                              setState(() => hovered = over);
                             },
-                            /*overlayColor: MaterialStateProperty.all(hovered
-                                ? const Color(0xffAEB2BA):Palette.primary),*/
+                            overlayColor: const MaterialStatePropertyAll(
+                                Palette.transparent),
                             child: Text(
                               Strings.zognestMail,
                               style: theme.textTheme.headlineLarge?.copyWith(
                                 fontWeight: FontWeight.w700,
                                 fontSize:
                                     Responsive.isDesktop(context) ? 70 : 20,
-                                color:hovered ?Palette.primary:const Color(0xffAEB2BA)
-
+                                color: hovered
+                                    ? theme.primaryColor
+                                    : const Color(0xffAEB2BA),
                               ),
                             ),
                           ),

@@ -40,36 +40,21 @@ class Footer extends StatelessWidget {
               top: Spacing.m16,
               child: CircleButton(
                 onTap: onTabUp,
-                radius: Spacing.m16,
+                radius: Spacing.l24,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //the point above the up arrow
                     Container(
-
-                      height: Responsive.isDesktop(context) ||
-                              Responsive.isTablet(context)
-                          ? Spacing.s4
-                          : Spacing.s8,
+                      height: Spacing.s4,
                       decoration: BoxDecoration(
                         color: theme.primaryColor,
                         shape: BoxShape.circle,
                       ),
                     ),
-                    // the height between the point and image
-                    SizedBox(
-                      height: Responsive.isDesktop(context) ||
-                              Responsive.isTablet(context)
-                          ? Spacing.s4
-                          : Spacing.s4,
-                    ),
-                    // the up arrow
+                    const SizedBox(height: Spacing.s4),
                     SvgPicture.asset(
                       Assets.upArrow,
-                      height:  Responsive.isDesktop(context) ||
-                            Responsive.isTablet(context)
-                            ? Spacing.s12
-                            : Spacing.m14,
+                      height: Spacing.m16,
                     ),
                   ],
                 ),
@@ -177,9 +162,9 @@ class Footer extends StatelessWidget {
                                     ? theme.textTheme.labelMedium
                                     : theme.textTheme.labelSmall)
                                 ?.copyWith(
-                                    fontFamily: 'SF Pro Rounded',
-                                    letterSpacing: 5,
-                                    wordSpacing: 2),
+                              fontFamily: 'SF Pro Rounded',
+                              letterSpacing: -0.5,
+                            ),
                           ),
                         ),
                       ],

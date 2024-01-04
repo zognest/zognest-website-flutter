@@ -11,11 +11,10 @@ import 'package:zognest_website/shared/widgets/gradient_container.dart';
 import 'package:zognest_website/shared/widgets/social_button.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
-class Footer extends StatefulWidget {
+class Footer extends StatelessWidget {
   const Footer({super.key, required this.onTabUp});
 
   final VoidCallback onTabUp;
-
   @override
   State<Footer> createState() => _FooterState();
 }
@@ -52,7 +51,7 @@ class _FooterState extends State<Footer> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      height: Constants.circleButtonRadius,
+                      height: Spacing.s4,
                       decoration: BoxDecoration(
                         color: theme.primaryColor,
                         shape: BoxShape.circle,
@@ -61,7 +60,7 @@ class _FooterState extends State<Footer> {
                     const SizedBox(height: Spacing.s4),
                     SvgPicture.asset(
                       Assets.upArrow,
-                      height: Spacing.s12,
+                      height: Spacing.m16,
                     ),
                   ],
                 ),

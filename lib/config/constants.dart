@@ -41,6 +41,7 @@ class Constants {
 
   /// Radius of [CircleButton] used to scroll to end/start
   static const circleButtonRadius = Spacing.s4;
+  static const circleButtonRadiusMobile = Spacing.s6;
 
   /// region [ZognestVideo]
   static const videoAspectRatio = 16 / 9;

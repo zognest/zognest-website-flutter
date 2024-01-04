@@ -135,8 +135,7 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
                                 ),
                                 const SizedBox(width: Spacing.m16),
                                 StreamBuilder(
-                                  stream: Stream.periodic(
-                                      const Duration(seconds: 1)),
+                                  stream: Stream.periodic(const Duration(seconds:1)),
                                   builder: (_, __) {
                                     return Text(
                                       '${formatDuration(_controller.value.position)} / ${formatDuration(_controller.value.duration)}',

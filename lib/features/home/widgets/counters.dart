@@ -7,7 +7,6 @@ import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
-import 'package:zognest_website/shared/widgets/row_divider.dart';
 
 class Counters extends StatefulWidget {
   const Counters({super.key});
@@ -44,7 +43,7 @@ class _CountersState extends State<Counters>
       children: [
         const Divider(),
         Padding(
-          padding: EdgeInsets.only(bottom: size.width * 0.025),
+          padding: const EdgeInsets.only(bottom: 20),
           child: Column(
             children: [
               Stack(
@@ -98,7 +97,7 @@ class _CountersState extends State<Counters>
                 padding: EdgeInsets.symmetric(
                   horizontal: Responsive.isDesktop(context)
                       ? Constants.webHorizontalPadding
-                      : Constants.mobileHorizontalPadding,
+                      : 16,
                 ),
                 child: VisibilityDetector(
                   key: ValueKey(runtimeType.toString()),
@@ -108,48 +107,36 @@ class _CountersState extends State<Counters>
                   },
                   child: Wrap(
                     direction: Axis.horizontal,
+                    alignment: WrapAlignment.center,
+                    runSpacing: 16,
+                    spacing: 16,
                     children: [
                       CounterItem(
                         count: 09,
                         title: Strings.appDevelopment,
                         controller: _controller,
                       ),
-                      const RowDivider(),
                       CounterItem(
                         count: 12,
                         title: Strings.webDevelopment,
                         controller: _controller,
                       ),
-                      if (Responsive.isDesktop(context)) const RowDivider(),
                       CounterItem(
                         count: 17,
                         title: Strings.uiUxForCompanies,
                         controller: _controller,
                       ),
-                      const RowDivider(),
                       CounterItem(
                         count: 36,
                         title: Strings.happyCustomer,
                         controller: _controller,
                       ),
-                      if (Responsive.isDesktop(context)) const RowDivider(),
-                      if (Responsive.isMobile(context))
-                        Align(
-                          alignment: Alignment.center,
-                          child: CounterItem(
-                            count: 36,
-                            title: Strings.projectsCompleted,
-                            hasPlus: false,
-                            controller: _controller,
-                          ),
-                        ),
-                      if (!Responsive.isMobile(context))
-                        CounterItem(
-                          count: 36,
-                          title: Strings.projectsCompleted,
-                          hasPlus: false,
-                          controller: _controller,
-                        ),
+                      CounterItem(
+                        count: 36,
+                        title: Strings.projectsCompleted,
+                        hasPlus: false,
+                        controller: _controller,
+                      ),
                     ],
                   ),
                 ),
@@ -180,11 +167,10 @@ class CounterItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
-      height: Responsive.isDesktop(context)
-          ? Constants.webCountItemHeight
-          : Constants.mobileCountItemHeight,
-      width: Responsive.isDesktop(context) ? 220 : 160,
+    return Container(
+      color: Colors.red.withOpacity(0.3),
+      height: Constants.countItemHeight,
+      width: 140,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -201,7 +187,7 @@ class CounterItem extends StatelessWidget {
                   separator: ',',
                   style: theme.textTheme.headlineLarge?.copyWith(
                     color: theme.primaryColor,
-                    fontSize: Responsive.isMobile(context) ? 40 : null,
+                    fontSize: Responsive.isMobile(context) ? 40 : 72,
                     height: 1,
                   ),
                 ),
@@ -225,111 +211,10 @@ class CounterItem extends StatelessWidget {
             title.toUpperCase(),
             textAlign: TextAlign.center,
             maxLines: 2,
-            style: theme.textTheme.labelLarge
-                ?.copyWith(fontSize: Responsive.isDesktop(context) ? null : 12),
+            style: theme.textTheme.labelMedium,
           ),
         ],
       ),
     );
   }
 }
-
-/*class CountElement extends StatefulWidget {
-  const CountElement({
-    super.key,
-    required this.count,
-    required this.title,
-    this.hasPlus = true,
-  });
-
-  final int count;
-  final String title;
-  final bool hasPlus;
-
-  @override
-  State<CountElement> createState() => _CountElementState();
-}
-
-class _CountElementState extends State<CountElement>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration:
-          const Duration(milliseconds: Constants.countersAnimationDuration),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return SizedBox(
-      height: Responsive.isDesktop(context)
-          ? Constants.webCountItemHeight
-          : Constants.mobileCountItemHeight,
-      width: Responsive.isDesktop(context) ? 220 : 160,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: VisibilityDetector(
-              key: Key(widget.title),
-              onVisibilityChanged: (info) {
-                if (_controller.isCompleted) return;
-                if (info.visibleFraction == 1) _controller.forward();
-              },
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Countup(
-                    animationController: _controller,
-                    begin: 0,
-                    end: widget.count.toDouble(),
-                    separator: ',',
-                    style: theme.textTheme.headlineLarge?.copyWith(
-                      color: theme.primaryColor,
-                      fontSize: Responsive.isMobile(context) ? 40 : null,
-                      height: 1,
-                    ),
-                  ),
-                  if (widget.hasPlus)
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                        '+',
-                        style: theme.textTheme.headlineLarge?.copyWith(
-                          fontSize: Responsive.isMobile(context) ? 20 : 60,
-                          color: theme.primaryColor,
-                          height: 1,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: Spacing.s12),
-          Text(
-            widget.title.toUpperCase(),
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            style: theme.textTheme.labelLarge
-                ?.copyWith(fontSize: Responsive.isDesktop(context) ? null : 12),
-          ),
-        ],
-      ),
-    );
-  }
-}*/

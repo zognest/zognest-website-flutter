@@ -56,8 +56,7 @@ class Constants {
 
   /// region [Counters]
   static const countersAnimationDuration = 3000;
-  static const webCountItemHeight = 120.0;
-  static const mobileCountItemHeight = 72.0;
+  static const countItemHeight = 120.0;
 
   // endregion
 

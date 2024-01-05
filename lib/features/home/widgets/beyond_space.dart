@@ -109,7 +109,6 @@ class BeyondSpaceCarousel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final projects = ref.watch(appControllerProvider).projects;
-    final size = MediaQuery.sizeOf(context);
     return projects.when(
       data: (projects) {
         return CarouselSlider(
@@ -117,26 +116,19 @@ class BeyondSpaceCarousel extends ConsumerWidget {
             return AspectRatio(
               aspectRatio: 370 / 747,
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 8,
+                padding: EdgeInsets.symmetric(
+                  horizontal: Responsive.isDesktop(context) ? 18 : 12,
+                  vertical: Responsive.isDesktop(context) ? 16 : 10,
                 ),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(Assets.phoneMockup),
-                  ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                    (size.width *
-                            (Responsive.isDesktop(context) ? 0.02 : 0.03)) +
-                        12,
-                  ),
-                  child: Image.network(
-                    project.splash,
-                    height: double.infinity,
                     fit: BoxFit.fill,
                   ),
+                ),
+                child: Image.network(
+                  project.splash,
+                  fit: BoxFit.fill,
                 ),
               ),
             );
@@ -154,7 +146,7 @@ class BeyondSpaceCarousel extends ConsumerWidget {
         );
       },
       error: (_, __) => const SizedBox.shrink(),
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const SizedBox.shrink(),
     );
   }
 }

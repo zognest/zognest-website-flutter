@@ -4,7 +4,6 @@ import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/service.dart';
-import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/flipping_widget.dart';
@@ -222,8 +221,8 @@ class BackService extends StatelessWidget {
     final theme = Theme.of(context);
     return Stack(
       children: [
-        Image.asset(
-          Assets.serviceBackground,
+        Image.network(
+          service.backgroundImage,
           width: double.infinity,
           height: double.infinity,
           fit: BoxFit.contain,

@@ -7,8 +7,8 @@ import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/our_services/models/purchasable_service.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
-import 'package:zognest_website/shared/data.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
+
 import '../../../riverpod/controller.dart';
 
 class ServicesBrowser extends ConsumerStatefulWidget {
@@ -38,15 +38,15 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
                 child: Wrap(
                   runSpacing: Constants.listCardSeparatorWidth,
                   spacing: Constants.listCardSeparatorWidth,
-                  children: Data.purchasableServices.map((service) {
-                    return SizedBox(
-                      height: Responsive.isDesktop(context)
-                          ? Constants.servicesBrowserItemHeight
-                          : Constants.mobileServicesBrowserItemHeight,
-                      width: Constants.servicesBrowserItemWidth,
-                      child: ServiceItem(service: service),
-                    );
-                  }).toList(),
+                  children: purchasableServices.map((service) {
+                  return SizedBox(
+                    height: Responsive.isDesktop(context)
+                        ? Constants.servicesBrowserItemHeight
+                        : Constants.mobileServicesBrowserItemHeight,
+                    width: Constants.servicesBrowserItemWidth,
+                    child: ServiceItem(service: service),
+                  );
+                }).toList(),
                 ),
               ),
               const Divider(),
@@ -109,7 +109,7 @@ class ServiceItem extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Image.asset(
+            child: Image.network(
               service.image,
               height: double.infinity,
               fit: BoxFit.cover,

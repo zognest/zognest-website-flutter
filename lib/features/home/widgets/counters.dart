@@ -166,8 +166,7 @@ class CounterItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      color: Colors.red.withOpacity(0.3),
+    return SizedBox(
       height: Constants.countItemHeight,
       width: 140,
       child: Column(

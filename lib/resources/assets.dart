@@ -50,7 +50,4 @@ abstract final class Assets {
   static const texasChiro = '${Paths.temp}/texas_chiro.png';
   static const tooth = '${Paths.temp}/tooth.png';
   static const vais = '${Paths.temp}/vais.png';
-  static const serviceBackground = '${Paths.temp}/service_background.png';
-  static const purchasableServicesImage =
-      '${Paths.temp}/purchasable_service_image.png';
 }

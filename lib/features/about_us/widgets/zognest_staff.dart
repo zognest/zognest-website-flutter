@@ -1,3 +1,6 @@
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:js' as js;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
@@ -5,7 +8,6 @@ import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/about_us/models/staff.dart';
-import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
@@ -83,13 +85,13 @@ class _ZognestServicesStaff extends ConsumerState<ZognestStaff> {
                   scrollDirection: Axis.horizontal,
                   controller: _controller,
                   itemBuilder: (context, index) {
-                   /* final i = index % Data.staff.length;
+                    /* final i = index % Data.staff.length;
                     final staff = Data.staff[i];*/
                     return SizedBox(
                       width: Constants.listCardWidth,
                       child: FlippingWidget(
-                        front: FrontCard(staff:staff[index]),
-                        back: BackCard(staff:staff[index]),
+                        front: FrontCard(staff: staff[index]),
+                        back: BackCard(staff: staff[index]),
                       ),
                     );
                   },
@@ -117,22 +119,110 @@ class FrontCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      children: [
-        Expanded(
-          child: Image.network(
-            Assets.zognestTeam,
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
+    return Container(
+      color: Palette.cardBackgroundColor,
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
+              color: staff.color,
+              width: double.infinity,
+              child: Image.network(
+                staff.avatar,
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
-        ),
-        Expanded(
-          child: Container(
-            color: Palette.cardBackgroundColor,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Spacing.l24,
+                vertical: Spacing.l24,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          staff.name.toUpperCase(),
+                          style: theme.textTheme.headlineLarge?.copyWith(
+                            fontSize: 32,
+                          ),
+                        ),
+                        Text(
+                          staff.position.toUpperCase(),
+                          style: theme.textTheme.labelMedium?.copyWith(
+                            color: theme.primaryColor,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: Spacing.m14,
+                            ),
+                            child: Text(
+                              staff.description,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: theme.textTheme.bodyLarge,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  PrimaryButton(
+                    title: Strings.more.toUpperCase(),
+                    filled: false,
+                    width: Constants.listCardWidth * 0.3,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Constants.listButtonHorizontalPadding,
+                      vertical: Constants.listButtonVerticalPadding,
+                    ),
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BackCard extends StatelessWidget {
+  const BackCard({super.key, required this.staff});
+
+  final Staff staff;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      color: Palette.cardBackgroundColor,
+      child: Stack(
+        children: [
+          Opacity(
+            opacity: 0.3,
+            child: ColoredBox(
+              color: staff.color,
+              child: Image.network(
+                staff.avatar,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: Spacing.l24,
-              vertical: Spacing.l32,
+              vertical: Spacing.l24,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,7 +230,6 @@ class FrontCard extends StatelessWidget {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         staff.name.toUpperCase(),
@@ -156,15 +245,28 @@ class FrontCard extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: Spacing.m20,
-                          ),
+                        child: SingleChildScrollView(
                           child: Text(
                             staff.description,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
                             style: theme.textTheme.bodyLarge,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: Spacing.m20),
+                      Expanded(
+                        flex: 3,
+                        child: SingleChildScrollView(
+                          padding:
+                              const EdgeInsets.symmetric(vertical: Spacing.s12),
+                          child: Wrap(
+                            runSpacing: Spacing.s8,
+                            spacing: Spacing.s8,
+                            children: staff.technologies.map((tech) {
+                              return TechnologyContainer(
+                                image: tech.image,
+                                title: tech.name,
+                              );
+                            }).toList(),
                           ),
                         ),
                       ),
@@ -172,107 +274,19 @@ class FrontCard extends StatelessWidget {
                   ),
                 ),
                 PrimaryButton(
-                  title: Strings.more.toUpperCase(),
-                  filled: false,
+                  title: Strings.linkedIn.toUpperCase(),
                   width: Constants.listCardWidth * 0.3,
                   padding: const EdgeInsets.symmetric(
                     horizontal: Constants.listButtonHorizontalPadding,
                     vertical: Constants.listButtonVerticalPadding,
                   ),
-                  onTap: () {},
+                  onTap: () => js.context.callMethod('open', [staff.url]),
                 ),
               ],
             ),
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class BackCard extends StatelessWidget {
-  const BackCard({super.key, required this.staff});
-
-  final Staff staff;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Stack(
-      children: [
-        Image.network(
-          Assets.serviceBackground,
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Spacing.l24,
-            vertical: Spacing.l32,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      staff.name.toUpperCase(),
-                      style: theme.textTheme.headlineLarge?.copyWith(
-                        fontSize: 32,
-                      ),
-                    ),
-                    Text(
-                      staff.position.toUpperCase(),
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        color: theme.primaryColor,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Text(
-                          staff.description,
-                          style: theme.textTheme.bodyLarge,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: Spacing.m20),
-                    Expanded(
-                      flex: 3,
-                      child: SingleChildScrollView(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: Spacing.s12),
-                        child: Wrap(
-                          runSpacing: Spacing.s8,
-                          spacing: Spacing.s8,
-                          children: staff.technologies.map((tech) {
-                            return TechnologyContainer(
-                              image: tech.image,
-                              title: tech.name,
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              PrimaryButton(
-                title: Strings.linkedIn.toUpperCase(),
-                width: Constants.listCardWidth * 0.3,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.listButtonHorizontalPadding,
-                  vertical: Constants.listButtonVerticalPadding,
-                ),
-                onTap: () {},
-              ),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

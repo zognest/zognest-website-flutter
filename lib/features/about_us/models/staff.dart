@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:zognest_website/shared/models/technology.dart';
 
 class Staff extends Equatable {
@@ -10,15 +12,17 @@ class Staff extends Equatable {
   final String description;
   final String url;
   final List<Technology> technologies;
-  final String backgroundImage;
+  final String avatar;
+  final Color color;
 
   const Staff({
-    required this.backgroundImage,
+    required this.avatar,
     required this.name,
     required this.position,
     required this.description,
     required this.url,
     required this.technologies,
+    required this.color,
   });
 
   Staff copyWith({
@@ -27,7 +31,8 @@ class Staff extends Equatable {
     String? description,
     String? url,
     List<Technology>? technologies,
-    String? backgroundImage,
+    String? avatar,
+    Color? color,
   }) {
     return Staff(
       name: name ?? this.name,
@@ -35,7 +40,8 @@ class Staff extends Equatable {
       description: description ?? this.description,
       url: url ?? this.url,
       technologies: technologies ?? this.technologies,
-      backgroundImage: backgroundImage ?? this.backgroundImage,
+      avatar: avatar ?? this.avatar,
+      color: color ?? this.color,
     );
   }
 
@@ -45,19 +51,21 @@ class Staff extends Equatable {
       'position': position,
       'description': description,
       'url': url,
-      'backgroundImage': backgroundImage,
+      'backgroundImage': avatar,
       'technologies': technologies.map((x) => x.toMap()).toList(),
     };
   }
 
   factory Staff.fromMap(Map<String, dynamic> map) {
     return Staff(
-      name: map['name'] as String,
-      position: map['position'] as String,
-      description: map['description'] as String,
-      url: map['url'] as String,
-      backgroundImage: map['background_image'] as String,
+      name: map['name'],
+      position: map['position'],
+      description: map['description'],
+      url: map['url'],
+      avatar: map['avatar'],
       technologies: [Technology.empty()],
+      color: Colors.primaries[Random().nextInt(Colors.primaries.length)]
+          .withOpacity(0.5),
     );
   }
 
@@ -68,7 +76,7 @@ class Staff extends Equatable {
 
   @override
   String toString() {
-    return 'Staff(name: $name, position: $position, description: $description, url: $url, technologies: $technologies, backgroundImage: $backgroundImage)';
+    return 'Staff(name: $name, position: $position, description: $description, url: $url, technologies: $technologies, avatar: $avatar, color: ${color.value})';
   }
 
   @override
@@ -79,7 +87,7 @@ class Staff extends Equatable {
       description,
       url,
       technologies,
-      backgroundImage,
+      avatar,
     ];
   }
 }

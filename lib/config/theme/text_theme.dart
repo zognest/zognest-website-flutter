@@ -80,7 +80,7 @@ abstract final class TextThemes {
         fontWeight: FontWeight.w500,
       ),
       bodyLarge: theme.textTheme.bodyLarge?.copyWith(
-        fontSize: Responsive.isDesktop(context) ? 24 : 16,
+        fontSize: Responsive.isDesktop(context) ? 20 : 16,
         fontFamily: 'SF Pro Rounded',
         color: Palette.bodyTextColor,
         fontWeight: FontWeight.w500,

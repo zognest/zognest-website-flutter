@@ -142,7 +142,7 @@ class _ProjectItemState extends State<ProjectItem> {
                 );
               },
               child: Image.network(
-                widget.project.image,
+                widget.project.cover,
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.cover,

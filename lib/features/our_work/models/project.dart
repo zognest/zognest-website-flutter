@@ -7,7 +7,7 @@ class Project extends Equatable {
   final String title;
   final String brief;
   final String description;
-  final String image;
+  final String cover;
   final String splash;
   final String icon;
 
@@ -15,7 +15,7 @@ class Project extends Equatable {
     required this.title,
     required this.brief,
     required this.description,
-    required this.image,
+    required this.cover,
     required this.splash,
     required this.icon,
   });
@@ -24,7 +24,7 @@ class Project extends Equatable {
     String? title,
     String? brief,
     String? description,
-    String? image,
+    String? cover,
     String? splash,
     String? icon,
   }) {
@@ -32,7 +32,7 @@ class Project extends Equatable {
       title: title ?? this.title,
       brief: brief ?? this.brief,
       description: description ?? this.description,
-      image: image ?? this.image,
+      cover: cover ?? this.cover,
       splash: splash ?? this.splash,
       icon: icon ?? this.icon,
     );
@@ -43,7 +43,7 @@ class Project extends Equatable {
       'title': title,
       'brief': brief,
       'description': description,
-      'image': image,
+      'image': cover,
       'splash': splash,
       'icon': icon,
     };
@@ -51,13 +51,13 @@ class Project extends Equatable {
 
   factory Project.fromMap(Map<String, dynamic> map) {
     return Project(
-      title: map['title'] as String,
-      brief: map['brief'] as String,
-      description: map['description'] as String,
-      image: map['image'] as String,
+      title: map['title'],
+      brief: map['brief'],
+      description: map['description'],
+      cover: map['cover'],
       splash: map['splash'] ??
           'https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/placeholders%2Fplaceholder.png?alt=media&token=dba87b46-6597-458a-89d5-a8361ba9e87e',
-      icon: map['icon'] as String,
+      icon: map['icon'],
     );
   }
 
@@ -75,7 +75,7 @@ class Project extends Equatable {
       title,
       brief,
       description,
-      image,
+      cover,
       splash,
       icon,
     ];

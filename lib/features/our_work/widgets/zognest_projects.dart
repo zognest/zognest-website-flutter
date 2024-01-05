@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -10,6 +11,8 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
+
+import '../../../shared/widgets/network_fading_image.dart';
 
 class ZognestProjects extends ConsumerStatefulWidget {
   const ZognestProjects({super.key});
@@ -141,8 +144,8 @@ class _ProjectItemState extends State<ProjectItem> {
                   Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                 );
               },
-              child: Image.network(
-                widget.project.cover,
+              child: NetworkFadingImage(
+                path: widget.project.cover,
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.cover,
@@ -155,7 +158,7 @@ class _ProjectItemState extends State<ProjectItem> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const Spacer(flex: 2),
-                  Image.network(widget.project.icon),
+                  NetworkFadingImage(path:widget.project.icon),
                   const SizedBox(height: Spacing.l32),
                   Row(
                     children: [
@@ -220,3 +223,16 @@ class _ProjectItemState extends State<ProjectItem> {
     );
   }
 }
+
+// drop
+// vice
+// svvean
+// smile
+// seller
+// three
+// data
+
+//atth
+//
+//
+//

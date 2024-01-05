@@ -13,6 +13,7 @@ import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 
 import '../../../../resources/spacing.dart';
+import '../../../shared/widgets/network_fading_image.dart';
 
 class ZognestBlogs extends ConsumerStatefulWidget {
   const ZognestBlogs({super.key});
@@ -136,7 +137,7 @@ class _BlogItemState extends State<BlogItem> {
               flex: 2,
               child: GreyscaleFilter(
                 isHovered: hovered,
-                child: Image.network(widget.blog.image, fit: BoxFit.cover),
+                child: NetworkFadingImage(path:widget.blog.image, fit: BoxFit.cover),
               ),
             ),
             Expanded(

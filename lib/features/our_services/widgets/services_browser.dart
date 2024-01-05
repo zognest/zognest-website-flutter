@@ -10,6 +10,7 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 import '../../../riverpod/controller.dart';
+import '../../../shared/widgets/network_fading_image.dart';
 
 class ServicesBrowser extends ConsumerStatefulWidget {
   const ServicesBrowser({super.key});
@@ -109,7 +110,8 @@ class ServiceItem extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Image.network(
+            child: NetworkFadingImage(
+              path:
               service.image,
               height: double.infinity,
               fit: BoxFit.cover,

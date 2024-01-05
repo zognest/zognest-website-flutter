@@ -16,6 +16,8 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
 
+import '../../../shared/widgets/network_fading_image.dart';
+
 class ZognestStaff extends ConsumerStatefulWidget {
   const ZognestStaff({super.key});
 
@@ -85,8 +87,7 @@ class _ZognestServicesStaff extends ConsumerState<ZognestStaff> {
                   scrollDirection: Axis.horizontal,
                   controller: _controller,
                   itemBuilder: (context, index) {
-                    /* final i = index % Data.staff.length;
-                    final staff = Data.staff[i];*/
+
                     return SizedBox(
                       width: Constants.listCardWidth,
                       child: FlippingWidget(
@@ -127,8 +128,8 @@ class FrontCard extends StatelessWidget {
             child: Container(
               color: staff.color,
               width: double.infinity,
-              child: Image.network(
-                staff.avatar,
+              child:NetworkFadingImage(
+                path: staff.avatar,
                 fit: BoxFit.contain,
               ),
             ),
@@ -211,8 +212,8 @@ class BackCard extends StatelessWidget {
             opacity: 0.3,
             child: ColoredBox(
               color: staff.color,
-              child: Image.network(
-                staff.avatar,
+              child: NetworkFadingImage(
+                path: staff.avatar,
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.contain,

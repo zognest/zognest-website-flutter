@@ -13,6 +13,7 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 
 import '../../../resources/spacing.dart';
+import '../../../shared/widgets/network_fading_image.dart';
 
 class ZognestClients extends ConsumerStatefulWidget {
   const ZognestClients({super.key});
@@ -144,15 +145,16 @@ class _ClientItemState extends State<ClientItem> {
                         children: [
                           Expanded(
                             flex: 2,
-                            child: Image.network(
-                              widget.clientFeedback.backgroundImages[0],
-                              height: double.infinity,
+                            child: NetworkFadingImage(
+                               path:widget.clientFeedback.backgroundImages[0],
+                                height: double.infinity ,
                               fit: BoxFit.cover,
                             ),
                           ),
                           const SizedBox(width: Spacing.m16),
                           Expanded(
-                            child: Image.network(
+                            child: NetworkFadingImage(
+                              path:
                               widget.clientFeedback.backgroundImages[1],
                               height: double.infinity,
                               fit: BoxFit.cover,

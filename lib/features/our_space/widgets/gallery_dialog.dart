@@ -10,6 +10,8 @@ import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 
+import '../../../shared/widgets/network_fading_image.dart';
+
 class GalleryDialog extends StatelessWidget {
   GalleryDialog({super.key, required this.event});
 
@@ -41,8 +43,8 @@ class GalleryDialog extends StatelessWidget {
                 ),
                 items: event.images.map(
                   (image) {
-                    return Image.network(
-                      image,
+                    return NetworkFadingImage(
+                      path:image,
                       width: double.infinity,
                       height: double.infinity,
                       fit: BoxFit.cover,

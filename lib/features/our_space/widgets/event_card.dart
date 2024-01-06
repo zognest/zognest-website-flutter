@@ -6,6 +6,8 @@ import 'package:zognest_website/features/our_space/widgets/gallery_dialog.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 
+import '../../../shared/widgets/network_fading_image.dart';
+
 class EventCard extends StatefulWidget {
   const EventCard({super.key, required this.event});
 
@@ -36,8 +38,8 @@ class _EventCardState extends State<EventCard> {
         child: Column(
           children: [
             Expanded(
-              child: Image.network(
-                widget.event.coverImage,
+              child: NetworkFadingImage(
+                path: widget.event.coverImage,
                 height: double.infinity,
                 width: double.infinity,
                 fit: BoxFit.cover,

@@ -13,6 +13,8 @@ import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/circle_button.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
+import '../../../shared/widgets/network_fading_image.dart';
+
 class BeyondSpace extends StatelessWidget {
   const BeyondSpace({super.key, required this.onTabDown});
 
@@ -126,7 +128,8 @@ class BeyondSpaceCarousel extends ConsumerWidget {
                     fit: BoxFit.fill,
                   ),
                 ),
-                child: Image.network(
+                child: NetworkFadingImage(
+                  path:
                   project.splash,
                   fit: BoxFit.fill,
                 ),

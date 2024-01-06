@@ -12,6 +12,7 @@ import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
 
 import '../../../riverpod/controller.dart';
+import '../../../shared/widgets/network_fading_image.dart';
 
 class ZognestServices extends ConsumerStatefulWidget {
   const ZognestServices({super.key});
@@ -144,7 +145,8 @@ class FrontService extends StatelessWidget {
     final theme = Theme.of(context);
     return Stack(
       children: [
-        Image.network(
+        NetworkFadingImage(
+          path:
           service.backgroundImage,
           width: double.infinity,
           height: double.infinity,
@@ -221,7 +223,8 @@ class BackService extends StatelessWidget {
     final theme = Theme.of(context);
     return Stack(
       children: [
-        Image.network(
+        NetworkFadingImage(
+          path:
           service.backgroundImage,
           width: double.infinity,
           height: double.infinity,

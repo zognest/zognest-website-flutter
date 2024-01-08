@@ -127,7 +127,7 @@ class ContactForm extends StatelessWidget {
                                     Expanded(
                                       child: PrimaryButton(
                                         title:
-                                            Strings.requestCall.toUpperCase(),
+                                            Strings.requestACall.toUpperCase(),
                                         backgroundColor: Palette.white,
                                         height: 75,
                                         textStyle:
@@ -266,7 +266,7 @@ class ContactFormMobile extends StatelessWidget {
                   const SizedBox(width: Spacing.s12),
                   Expanded(
                     child: PrimaryButton(
-                      title: Strings.requestCall.toUpperCase(),
+                      title: Strings.requestACall.toUpperCase(),
                       backgroundColor: Palette.white,
                       height: 50,
                       textStyle: theme.textTheme.bodyLarge?.copyWith(

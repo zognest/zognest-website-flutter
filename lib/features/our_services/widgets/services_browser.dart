@@ -51,6 +51,7 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
                 }).toList(),
               ),
             ),
+            const _SectionGetInTouch(),
             const Divider(),
           ],
         );
@@ -127,121 +128,270 @@ class ServiceItem extends StatelessWidget {
 }
 
 class _SectionGetInTouch extends StatelessWidget {
-  const _SectionGetInTouch({super.key});
+  const _SectionGetInTouch();
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Row(
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(50, 25, 50, 100),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-      Expanded(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const InputFormField(
-                hint: Strings.yourName,
-                required: false,
-                keyboardType: TextInputType.name,
-              ),
-              const Row(
+          // section 1
+          Expanded(
+            flex: 2,
+            child: Wrap(
+              runSpacing: Spacing.s8,
+              spacing: Spacing.s8,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    height: 120,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Image.asset(
+                            'assets/images/office.png',
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const SizedBox(width: Spacing.m20),
+                        AutoSizeText(
+                          'service.title',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w900,
+                            color: Palette.white,
+                          ),
+                        ),
+                        const SizedBox(height: Spacing.m20),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Palette.black,
+                              shape: const CircleBorder(
+                                  side: BorderSide(color: Palette.white)),
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              weight: 100,
+                              size: 25,
+                              color: Palette.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    height: 120,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Image.asset(
+                            'assets/images/office.png',
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const SizedBox(width: Spacing.m20),
+                        AutoSizeText(
+                          'service.title',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w900,
+                            color: Palette.white,
+                          ),
+                        ),
+                        const SizedBox(height: Spacing.m20),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Palette.black,
+                              shape: const CircleBorder(
+                                  side: BorderSide(color: Palette.white)),
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              weight: 100,
+                              size: 25,
+                              color: Palette.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    height: 120,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Image.asset(
+                            'assets/images/office.png',
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const SizedBox(width: Spacing.m20),
+                        AutoSizeText(
+                          'service.title',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w900,
+                            color: Palette.white,
+                          ),
+                        ),
+                        const SizedBox(height: Spacing.m20),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Palette.black,
+                              shape: const CircleBorder(
+                                  side: BorderSide(color: Palette.white)),
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              weight: 100,
+                              size: 25,
+                              color: Palette.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    height: 120,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Image.asset(
+                            'assets/images/office.png',
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const SizedBox(width: Spacing.m20),
+                        AutoSizeText(
+                          'service.title',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w900,
+                            color: Palette.white,
+                          ),
+                        ),
+                        const SizedBox(height: Spacing.m20),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Palette.black,
+                              shape: const CircleBorder(
+                                  side: BorderSide(color: Palette.white)),
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              weight: 100,
+                              size: 25,
+                              color: Palette.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // between section1 and 2
+          const SizedBox(width: 50),
+          // section 2
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
                 children: [
-                  InputFormField(
+                  const InputFormField(
+                    hint: Strings.yourName,
+                    required: false,
+                    keyboardType: TextInputType.name,
+                  ),
+                  const InputFormField(
                     hint: Strings.yourEmail,
                     required: false,
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  InputFormField(
+                  const InputFormField(
                     hint: Strings.mobileNo,
                     required: false,
                     keyboardType: TextInputType.phone,
                   ),
+                  const InputFormField(
+                    hint: Strings.message,
+                    required: true,
+                    multiline: true,
+                    keyboardType: TextInputType.multiline,
+                  ),
+                  const SizedBox(height: 30),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryButton(
+                          title: Strings.sendMessage.toUpperCase(),
+                          height: 70,
+                          textStyle: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                          onTap: () {},
+                        ),
+                      ),
+                      const SizedBox(width: Spacing.s8),
+                      Expanded(
+                        child: PrimaryButton(
+                          title: Strings.requestACall.toUpperCase(),
+                          height: 70,
+                          textStyle: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                          onTap: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 64),
                 ],
               ),
-              const InputFormField(
-                hint: Strings.Budget,
-                required: true,
-                multiline: true,
-                // i cant know what is budget ? but i choose multiline,because is not number is name
-                keyboardType: TextInputType.multiline,
-              ),
-              const InputFormField(
-                hint: Strings.message,
-                required: true,
-                multiline: true,
-                keyboardType: TextInputType.multiline,
-              ),
-              const SizedBox(height: Spacing.m20),
-              Row(
-                children: [
-                  Expanded(
-                    child: PrimaryButton(
-                      title: Strings.sendMessage.toUpperCase(),
-                      height: 50,
-                      textStyle: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        /*color: Palette.primary*/
-                      ),
-                      onTap: () {},
-                    ),
-                  ),
-                  const SizedBox(width: Spacing.s12),
-                  Expanded(
-                    child: PrimaryButton(
-                      title: Strings.requestCall.toUpperCase(),
-                      backgroundColor: Palette.white,
-                      height: 50,
-                      textStyle: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                      ),
-                      onTap: () {},
-                    ),
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-      Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-        children: [
-            Expanded(
-              child: Image.asset(
-                'assets/images/screens.png',
-                height: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(height: Spacing.m20),
-            AutoSizeText(
-              'service.title',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.w900,
-                color: theme.primaryColor,
-              ),
-            ),
-            const SizedBox(height: Spacing.m20),
-            Expanded(
-              child: CircleButton(
-                radius: Spacing.l32,
-                child: IconButton(
-                  color: Palette.black,
-                  icon: const Icon(Icons.close,color: Palette.white,),
-                  onPressed: () {},
-                ),
-              ),
-            ),
         ],
       ),
-          ))
-    ]
     );
   }
 }

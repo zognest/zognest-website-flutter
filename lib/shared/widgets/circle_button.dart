@@ -7,11 +7,13 @@ class CircleButton extends StatelessWidget {
     required this.child,
     this.onTap,
     this.radius,
+    this.color
   });
 
   final Widget child;
   final double? radius;
   final Function()? onTap;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class CircleButton extends StatelessWidget {
       overlayColor: MaterialStateProperty.all(Palette.transparent),
       child: CircleAvatar(
         radius: radius,
+        foregroundColor: color,
         backgroundColor: Palette.white,
         child: child,
       ),

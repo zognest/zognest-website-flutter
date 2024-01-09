@@ -12,18 +12,19 @@ import 'package:zognest_website/features/our_work/models/project.dart';
 
 @immutable
 class AppState extends Equatable {
-  const AppState(
-      {required this.loaded,
-      required this.blogs,
-      required this.clientFeedbacks,
-      required this.events,
-      required this.offers,
-      required this.videoUrl,
-      required this.projects,
-      required this.purchasableServices,
-      required this.staff,
-      required this.services,
-      required this.addService});
+  const AppState({
+    required this.loaded,
+    required this.blogs,
+    required this.clientFeedbacks,
+    required this.events,
+    required this.offers,
+    required this.videoUrl,
+    required this.projects,
+    required this.purchasableServices,
+    required this.staff,
+    required this.services,
+    required this.addedServices,
+  });
 
   final bool loaded;
   final AsyncValue<List<Blog>> blogs;
@@ -35,7 +36,7 @@ class AppState extends Equatable {
   final AsyncValue<List<PurchasableService>> purchasableServices;
   final AsyncValue<List<Service>> services;
   final AsyncValue<List<Staff>> staff;
-  final List<PurchasableService> addService;
+  final List<PurchasableService> addedServices;
 
   AppState copyWith({
     bool? loaded,
@@ -51,17 +52,18 @@ class AppState extends Equatable {
     List<PurchasableService>? addService,
   }) {
     return AppState(
-        loaded: loaded ?? this.loaded,
-        blogs: blogs ?? this.blogs,
-        clientFeedbacks: clientFeedbacks ?? this.clientFeedbacks,
-        events: events ?? this.events,
-        offers: offers ?? this.offers,
-        videoUrl: videoUrl ?? this.videoUrl,
-        projects: projects ?? this.projects,
-        services: services ?? this.services,
-        staff: staff ?? this.staff,
-        purchasableServices: purchasableServices ?? this.purchasableServices,
-        addService: addService ?? this.addService);
+      loaded: loaded ?? this.loaded,
+      blogs: blogs ?? this.blogs,
+      clientFeedbacks: clientFeedbacks ?? this.clientFeedbacks,
+      events: events ?? this.events,
+      offers: offers ?? this.offers,
+      videoUrl: videoUrl ?? this.videoUrl,
+      projects: projects ?? this.projects,
+      services: services ?? this.services,
+      staff: staff ?? this.staff,
+      purchasableServices: purchasableServices ?? this.purchasableServices,
+      addedServices: addService ?? this.addedServices,
+    );
   }
 
   @override
@@ -76,6 +78,6 @@ class AppState extends Equatable {
         purchasableServices,
         services,
         staff,
-        addService
+        addedServices,
       ];
 }

@@ -8,6 +8,7 @@ import 'package:zognest_website/features/our_space/models/event.dart';
 import 'package:zognest_website/firebase_services/firestore_services.dart';
 import 'package:zognest_website/riverpod/state.dart';
 import 'package:zognest_website/shared/utils.dart';
+
 import '../features/about_us/models/staff.dart';
 import '../features/our_work/models/project.dart';
 
@@ -24,8 +25,8 @@ final appControllerProvider = StateNotifierProvider<AppController, AppState>(
         projects: AsyncData([]),
         purchasableServices: AsyncData([]),
         services: AsyncData([]),
-        staff:AsyncData([]),
-        addService: []
+        staff: AsyncData([]),
+        addedServices: [],
       ),
     );
   },
@@ -165,7 +166,13 @@ class AppController extends StateNotifier<AppState> {
     Utils.log(message: 'Loaded Staff => ${state.staff.value?.length}');
   }
 
-  void addService(PurchasableService purchasableService){
-   state = state.copyWith(addService:state.addService.add(purchasableService));
+  void addService(PurchasableService service) {
+    // Try this
+    state.addedServices.add(service);
+
+    // Then try this
+    state = state.copyWith(
+      addService: [...state.addedServices, service],
+    );
   }
 }

@@ -22,7 +22,8 @@ class AppState extends Equatable {
       required this.projects,
       required this.purchasableServices,
       required this.staff,
-      required this.services});
+      required this.services,
+      required this.addService});
 
   final bool loaded;
   final AsyncValue<List<Blog>> blogs;
@@ -34,6 +35,7 @@ class AppState extends Equatable {
   final AsyncValue<List<PurchasableService>> purchasableServices;
   final AsyncValue<List<Service>> services;
   final AsyncValue<List<Staff>> staff;
+  final List<PurchasableService> addService;
 
   AppState copyWith({
     bool? loaded,
@@ -46,19 +48,20 @@ class AppState extends Equatable {
     AsyncValue<List<PurchasableService>>? purchasableServices,
     AsyncValue<List<Service>>? services,
     AsyncValue<List<Staff>>? staff,
+    List<PurchasableService>? addService,
   }) {
     return AppState(
-      loaded: loaded ?? this.loaded,
-      blogs: blogs ?? this.blogs,
-      clientFeedbacks: clientFeedbacks ?? this.clientFeedbacks,
-      events: events ?? this.events,
-      offers: offers ?? this.offers,
-      videoUrl: videoUrl ?? this.videoUrl,
-      projects: projects ?? this.projects,
-      services: services ?? this.services,
-      staff: staff ?? this.staff,
-      purchasableServices: purchasableServices ?? this.purchasableServices,
-    );
+        loaded: loaded ?? this.loaded,
+        blogs: blogs ?? this.blogs,
+        clientFeedbacks: clientFeedbacks ?? this.clientFeedbacks,
+        events: events ?? this.events,
+        offers: offers ?? this.offers,
+        videoUrl: videoUrl ?? this.videoUrl,
+        projects: projects ?? this.projects,
+        services: services ?? this.services,
+        staff: staff ?? this.staff,
+        purchasableServices: purchasableServices ?? this.purchasableServices,
+        addService: addService ?? this.addService);
   }
 
   @override
@@ -72,6 +75,7 @@ class AppState extends Equatable {
         projects,
         purchasableServices,
         services,
-        staff
+        staff,
+        addService
       ];
 }

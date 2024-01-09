@@ -10,6 +10,7 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 import '../../../riverpod/controller.dart';
+import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
 class ServicesBrowser extends ConsumerStatefulWidget {
@@ -26,20 +27,20 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
         ref.watch(appControllerProvider).purchasableServices;
     final theme = Theme.of(context);
     return purchasableService.when(
-        data: (purchasableServices) {
-          return Column(
-            children: [
-              if (Responsive.isDesktop(context)) const Divider(),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Responsive.isDesktop(context)
-                      ? Constants.webHorizontalPadding
-                      : Constants.mobileHorizontalPadding,
-                ),
-                child: Wrap(
-                  runSpacing: Constants.listCardSeparatorWidth,
-                  spacing: Constants.listCardSeparatorWidth,
-                  children: purchasableServices.map((service) {
+      data: (purchasableServices) {
+        return Column(
+          children: [
+            if (Responsive.isDesktop(context)) const Divider(),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context)
+                    ? Constants.webHorizontalPadding
+                    : Constants.mobileHorizontalPadding,
+              ),
+              child: Wrap(
+                runSpacing: Constants.listCardSeparatorWidth,
+                spacing: Constants.listCardSeparatorWidth,
+                children: purchasableServices.map((service) {
                   return SizedBox(
                     height: Responsive.isDesktop(context)
                         ? Constants.servicesBrowserItemHeight
@@ -48,23 +49,29 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
                     child: ServiceItem(service: service),
                   );
                 }).toList(),
-                ),
               ),
-              const Divider(),
-            ],
-          );
-        },
-        error: (_, __) => const Text('error'),
-        loading: () => CircularProgressIndicator(color: theme.primaryColor),
+            ),
+            const Divider(),
+
+          ],
+        );
+      },
+      error: (_, __) => const Text('error'),
+      loading: () => CircularProgressIndicator(color: theme.primaryColor),
     );
   }
 }
 
-class ServiceItem extends StatelessWidget {
+class ServiceItem extends ConsumerStatefulWidget {
   const ServiceItem({super.key, required this.service});
 
   final PurchasableService service;
 
+  @override
+  ConsumerState<ServiceItem> createState() => _ServiceItemState();
+}
+
+class _ServiceItemState extends ConsumerState<ServiceItem> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -79,7 +86,7 @@ class ServiceItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AutoSizeText(
-                    service.title,
+                    widget.service.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodyLarge?.copyWith(
@@ -89,7 +96,7 @@ class ServiceItem extends StatelessWidget {
                   ),
                   const SizedBox(height: Spacing.s8),
                   AutoSizeText(
-                    service.description,
+                    widget.service.description,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall,
@@ -103,7 +110,13 @@ class ServiceItem extends StatelessWidget {
                       vertical: Constants.listButtonVerticalPadding,
                       horizontal: Constants.listButtonHorizontalPadding,
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      ref.watch(appControllerProvider).addedServices
+                      .isEmpty
+                          ? _SectionGetInTouch
+                          : const SizedBox();
+                      ref.read(appControllerProvider.notifier).addService(widget.service);
+                    },
                   ),
                 ],
               ),
@@ -111,10 +124,148 @@ class ServiceItem extends StatelessWidget {
           ),
           Expanded(
             child: NetworkFadingImage(
-              path:
-              service.image,
+              path: widget.service.image,
               height: double.infinity,
               fit: BoxFit.cover,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionGetInTouch extends StatelessWidget {
+  const _SectionGetInTouch(this.service);
+  final PurchasableService service;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(50, 25, 50, 100),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // section 1
+          Expanded(
+            flex: 2,
+            child: Wrap(
+              runSpacing: Spacing.s8,
+              spacing: Spacing.s8,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: SizedBox(
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.25,
+                    height: 120,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child:  NetworkFadingImage(
+                              path:service.image,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const SizedBox(width: Spacing.m20),
+                        AutoSizeText(
+                          service.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w900,
+                            color: Palette.white,
+                          ),
+                        ),
+                        const SizedBox(height: Spacing.m20),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Palette.black,
+                              shape: const CircleBorder(
+                                  side: BorderSide(color: Palette.white)),
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              weight: 100,
+                              size: 25,
+                              color: Palette.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+          // between section1 and 2
+          const SizedBox(width: 50),
+          // section 2
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  const InputFormField(
+                    hint: Strings.yourName,
+                    required: false,
+                    keyboardType: TextInputType.name,
+                  ),
+                  const InputFormField(
+                    hint: Strings.yourEmail,
+                    required: false,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  const InputFormField(
+                    hint: Strings.mobileNo,
+                    required: false,
+                    keyboardType: TextInputType.phone,
+                  ),
+                  const InputFormField(
+                    hint: Strings.message,
+                    required: true,
+                    multiline: true,
+                    keyboardType: TextInputType.multiline,
+                  ),
+                  const SizedBox(height: 30),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryButton(
+                          title: Strings.sendMessage.toUpperCase(),
+                          height: 70,
+                          textStyle: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                          onTap: () {},
+                        ),
+                      ),
+                      const SizedBox(width: Spacing.s8),
+                      Expanded(
+                        child: PrimaryButton(
+                          title: Strings.requestACall.toUpperCase(),
+                          height: 70,
+                          textStyle: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                          onTap: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 64),
+                ],
+              ),
             ),
           ),
         ],

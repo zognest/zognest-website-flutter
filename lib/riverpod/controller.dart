@@ -167,10 +167,11 @@ class AppController extends StateNotifier<AppState> {
   }
 
   void addService(PurchasableService service) {
-    // Try this
-    state.addedServices.add(service);
+    /*// Try this
+    state.addedServices.add(service);*/
 
     // Then try this
+// i think this is right because when i make run it dosent throw an error
     state = state.copyWith(
       addService: [...state.addedServices, service],
     );

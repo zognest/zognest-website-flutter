@@ -8,8 +8,8 @@ import 'package:zognest_website/features/our_services/models/purchasable_service
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
+
 import '../../../riverpod/controller.dart';
-import '../../../shared/widgets/circle_button.dart';
 import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
@@ -30,6 +30,7 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
       data: (purchasableServices) {
         return Column(
           children: [
+            const ServicesCart(),
             if (Responsive.isDesktop(context)) const Divider(),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -51,7 +52,6 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
                 }).toList(),
               ),
             ),
-            const _SectionGetInTouch(),
             const Divider(),
           ],
         );
@@ -127,267 +127,120 @@ class ServiceItem extends StatelessWidget {
   }
 }
 
-class _SectionGetInTouch extends StatelessWidget {
-  const _SectionGetInTouch();
+class ServicesCart extends StatelessWidget {
+  const ServicesCart({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final width = MediaQuery.sizeOf(context).width;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(50, 25, 50, 100),
+      padding: const EdgeInsets.symmetric(
+          horizontal: Constants.webHorizontalPadding),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // section 1
           Expanded(
             flex: 2,
             child: Wrap(
               runSpacing: Spacing.s8,
               spacing: Spacing.s8,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    height: 120,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            'assets/images/office.png',
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
+                SizedBox(
+                  width: width * 0.25,
+                  height: 120,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Image.asset(
+                          'assets/images/office.png',
+                          fit: BoxFit.cover,
                         ),
-                        const SizedBox(width: Spacing.m20),
-                        AutoSizeText(
-                          'service.title',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
+                      ),
+                      const SizedBox(width: Spacing.m20),
+                      AutoSizeText(
+                        'service.title',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w900,
+                          color: Palette.white,
+                        ),
+                      ),
+                      const SizedBox(height: Spacing.m20),
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Palette.black,
+                            shape: const CircleBorder(
+                                side: BorderSide(color: Palette.white)),
+                          ),
+                          child: const Icon(
+                            Icons.close,
+                            weight: 100,
+                            size: 25,
                             color: Palette.white,
                           ),
+                          onPressed: () {},
                         ),
-                        const SizedBox(height: Spacing.m20),
-                        Expanded(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Palette.black,
-                              shape: const CircleBorder(
-                                  side: BorderSide(color: Palette.white)),
-                            ),
-                            child: const Icon(
-                              Icons.close,
-                              weight: 100,
-                              size: 25,
-                              color: Palette.white,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    height: 120,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            'assets/images/office.png',
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(width: Spacing.m20),
-                        AutoSizeText(
-                          'service.title',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            color: Palette.white,
-                          ),
-                        ),
-                        const SizedBox(height: Spacing.m20),
-                        Expanded(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Palette.black,
-                              shape: const CircleBorder(
-                                  side: BorderSide(color: Palette.white)),
-                            ),
-                            child: const Icon(
-                              Icons.close,
-                              weight: 100,
-                              size: 25,
-                              color: Palette.white,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    height: 120,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            'assets/images/office.png',
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(width: Spacing.m20),
-                        AutoSizeText(
-                          'service.title',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            color: Palette.white,
-                          ),
-                        ),
-                        const SizedBox(height: Spacing.m20),
-                        Expanded(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Palette.black,
-                              shape: const CircleBorder(
-                                  side: BorderSide(color: Palette.white)),
-                            ),
-                            child: const Icon(
-                              Icons.close,
-                              weight: 100,
-                              size: 25,
-                              color: Palette.white,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    height: 120,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            'assets/images/office.png',
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(width: Spacing.m20),
-                        AutoSizeText(
-                          'service.title',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            color: Palette.white,
-                          ),
-                        ),
-                        const SizedBox(height: Spacing.m20),
-                        Expanded(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Palette.black,
-                              shape: const CircleBorder(
-                                  side: BorderSide(color: Palette.white)),
-                            ),
-                            child: const Icon(
-                              Icons.close,
-                              weight: 100,
-                              size: 25,
-                              color: Palette.white,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
-          // between section1 and 2
           const SizedBox(width: 50),
-          // section 2
           Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                children: [
-                  const InputFormField(
-                    hint: Strings.yourName,
-                    required: false,
-                    keyboardType: TextInputType.name,
-                  ),
-                  const InputFormField(
-                    hint: Strings.yourEmail,
-                    required: false,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const InputFormField(
-                    hint: Strings.mobileNo,
-                    required: false,
-                    keyboardType: TextInputType.phone,
-                  ),
-                  const InputFormField(
-                    hint: Strings.message,
-                    required: true,
-                    multiline: true,
-                    keyboardType: TextInputType.multiline,
-                  ),
-                  const SizedBox(height: 30),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: PrimaryButton(
-                          title: Strings.sendMessage.toUpperCase(),
-                          height: 70,
-                          textStyle: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                          onTap: () {},
+            child: Column(
+              children: [
+                const InputFormField(
+                  hint: Strings.yourName,
+                  required: false,
+                  keyboardType: TextInputType.name,
+                ),
+                const InputFormField(
+                  hint: Strings.yourEmail,
+                  required: false,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const InputFormField(
+                  hint: Strings.mobileNo,
+                  required: false,
+                  keyboardType: TextInputType.phone,
+                ),
+                const InputFormField(
+                  hint: Strings.message,
+                  required: true,
+                  multiline: true,
+                  keyboardType: TextInputType.multiline,
+                ),
+                const SizedBox(height: 30),
+                Row(
+                  children: [
+                    Expanded(
+                      child: PrimaryButton(
+                        title: Strings.sendMessage.toUpperCase(),
+                        height: 70,
+                        textStyle: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
                         ),
+                        onTap: () {},
                       ),
-                      const SizedBox(width: Spacing.s8),
-                      Expanded(
-                        child: PrimaryButton(
-                          title: Strings.requestACall.toUpperCase(),
-                          height: 70,
-                          textStyle: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                          onTap: () {},
+                    ),
+                    const SizedBox(width: Spacing.s8),
+                    Expanded(
+                      child: PrimaryButton(
+                        title: Strings.requestACall.toUpperCase(),
+                        height: 70,
+                        textStyle: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
                         ),
+                        onTap: () {},
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 64),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],

@@ -115,7 +115,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                     ),
                     onTap: () {
                       ref.watch(appControllerProvider).cartServices.isEmpty
-                          ? _SectionGetInTouch
+                          ? const ServicesCart()
                           : const SizedBox();
                       ref
                           .read(appControllerProvider.notifier)
@@ -128,7 +128,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
           ),
           Expanded(
             child: NetworkFadingImage(
-              path: service.image,
+              path: widget.service.image,
               height: double.infinity,
               fit: BoxFit.cover,
             ),
@@ -242,7 +242,7 @@ class ServicesCart extends StatelessWidget {
                     const SizedBox(width: Spacing.s8),
                     Expanded(
                       child: PrimaryButton(
-                        title: Strings.requestACall.toUpperCase(),
+                        title: Strings.requestCall.toUpperCase(),
                         height: 70,
                         textStyle: theme.textTheme.bodyLarge?.copyWith(
                           fontWeight: FontWeight.w600,

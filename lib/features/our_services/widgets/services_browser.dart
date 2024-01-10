@@ -25,12 +25,16 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
   Widget build(BuildContext context) {
     final purchasableService =
         ref.watch(appControllerProvider).purchasableServices;
+    final servicesCart = ref.watch(appControllerProvider).cartServices;
     final theme = Theme.of(context);
     return purchasableService.when(
       data: (purchasableServices) {
         return Column(
           children: [
-            const ServicesCart(),
+            if (servicesCart.isNotEmpty) ...[
+              const ServicesCart(),
+              const SizedBox(height: Constants.sectionSpacing),
+            ],
             if (Responsive.isDesktop(context)) const Divider(),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -75,6 +79,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final cartServices = ref.watch(appControllerProvider).cartServices;
     return Container(
       color: Palette.cardBackgroundColor,
       child: Row(
@@ -85,7 +90,6 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //title
                   AutoSizeText(
                     widget.service.title,
                     maxLines: 2,
@@ -95,9 +99,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                       color: theme.primaryColor,
                     ),
                   ),
-                  // between title and description
                   const SizedBox(height: Spacing.s8),
-                  // description
                   AutoSizeText(
                     widget.service.description,
                     maxLines: 2,
@@ -113,10 +115,8 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                       vertical: Constants.listButtonVerticalPadding,
                       horizontal: Constants.listButtonHorizontalPadding,
                     ),
+                    enabled: !cartServices.contains(widget.service),
                     onTap: () {
-                      ref.watch(appControllerProvider).cartServices.isEmpty
-                          ? const ServicesCart()
-                          : const SizedBox();
                       ref
                           .read(appControllerProvider.notifier)
                           .addService(widget.service);
@@ -139,61 +139,153 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
   }
 }
 
-class ServicesCart extends StatelessWidget {
+class ServicesCart extends ConsumerWidget {
   const ServicesCart({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final width = MediaQuery.sizeOf(context).width;
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: Constants.webHorizontalPadding),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Wrap(
-              runSpacing: Spacing.s8,
-              spacing: Spacing.s8,
+    final cartServices = ref.watch(appControllerProvider).cartServices;
+    return Column(
+      children: [
+        const Divider(),
+        SizedBox(
+          height: 600,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Constants.webHorizontalPadding,
+            ),
+            child: Row(
               children: [
-                SizedBox(
-                  width: width * 0.25,
-                  height: 120,
-                  child: Row(
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: const Color(0xffAEB2BA)),
+                    ),
+                    height: double.infinity,
+                    padding: const EdgeInsets.all(12),
+                    child: SingleChildScrollView(
+                      child: Wrap(
+                        runSpacing: Spacing.m20,
+                        spacing: Spacing.m20,
+                        children: cartServices.map((service) {
+                          return Container(
+                            width: width * 0.28,
+                            height: 140,
+                            color: Palette.cardBackgroundColor,
+                            child: Row(
+                              children: [
+                                Image.network(
+                                  service.image,
+                                  fit: BoxFit.cover,
+                                ),
+                                const SizedBox(width: 20),
+                                Expanded(
+                                  child: Text(
+                                    service.title,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: theme.textTheme.bodyLarge?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 20),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Palette.transparent,
+                                    shape: const CircleBorder(
+                                      side: BorderSide(color: Palette.white),
+                                    ),
+                                    minimumSize: const Size.fromRadius(28),
+                                  ),
+                                  child: const Icon(
+                                    Icons.close,
+                                    size: 14,
+                                  ),
+                                  onPressed: () {
+                                    ref
+                                        .read(appControllerProvider.notifier)
+                                        .removeService(service);
+                                  },
+                                ),
+                                const SizedBox(width: 20),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 50),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Image.asset(
-                          'assets/images/office.png',
-                          fit: BoxFit.cover,
-                        ),
+                      const InputFormField(
+                        hint: Strings.yourName,
+                        required: false,
+                        keyboardType: TextInputType.name,
                       ),
-                      const SizedBox(width: Spacing.m20),
-                      AutoSizeText(
-                        'service.title',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w900,
-                          color: Palette.white,
-                        ),
+                      const Row(
+                        children: [
+                          Expanded(
+                            child: InputFormField(
+                              hint: Strings.yourEmail,
+                              required: false,
+                              keyboardType: TextInputType.emailAddress,
+                            ),
+                          ),
+                          SizedBox(width: 12),
+                          Expanded(
+                            child: InputFormField(
+                              hint: Strings.mobileNo,
+                              required: false,
+                              keyboardType: TextInputType.phone,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: Spacing.m20),
-                      Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Palette.black,
-                            shape: const CircleBorder(
-                                side: BorderSide(color: Palette.white)),
+                      const InputFormField(
+                        hint: Strings.budget,
+                        required: false,
+                        keyboardType: TextInputType.text,
+                      ),
+                      const InputFormField(
+                        hint: Strings.message,
+                        required: true,
+                        multiline: true,
+                        keyboardType: TextInputType.multiline,
+                      ),
+                      const SizedBox(height: 30),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: PrimaryButton(
+                              title: Strings.sendMessage.toUpperCase(),
+                              height: 70,
+                              textStyle: theme.textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                              onTap: () {},
+                            ),
                           ),
-                          child: const Icon(
-                            Icons.close,
-                            weight: 100,
-                            size: 25,
-                            color: Palette.white,
+                          const SizedBox(width: Spacing.s8),
+                          Expanded(
+                            child: PrimaryButton(
+                              title: Strings.requestCall.toUpperCase(),
+                              height: 70,
+                              textStyle: theme.textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                              onTap: () {},
+                            ),
                           ),
-                          onPressed: () {},
-                        ),
+                        ],
                       ),
                     ],
                   ),
@@ -201,62 +293,9 @@ class ServicesCart extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 50),
-          Expanded(
-            child: Column(
-              children: [
-                const InputFormField(
-                  hint: Strings.yourName,
-                  required: false,
-                  keyboardType: TextInputType.name,
-                ),
-                const InputFormField(
-                  hint: Strings.yourEmail,
-                  required: false,
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                const InputFormField(
-                  hint: Strings.mobileNo,
-                  required: false,
-                  keyboardType: TextInputType.phone,
-                ),
-                const InputFormField(
-                  hint: Strings.message,
-                  required: true,
-                  multiline: true,
-                  keyboardType: TextInputType.multiline,
-                ),
-                const SizedBox(height: 30),
-                Row(
-                  children: [
-                    Expanded(
-                      child: PrimaryButton(
-                        title: Strings.sendMessage.toUpperCase(),
-                        height: 70,
-                        textStyle: theme.textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                        onTap: () {},
-                      ),
-                    ),
-                    const SizedBox(width: Spacing.s8),
-                    Expanded(
-                      child: PrimaryButton(
-                        title: Strings.requestCall.toUpperCase(),
-                        height: 70,
-                        textStyle: theme.textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                        onTap: () {},
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+        const Divider(),
+      ],
     );
   }
 }

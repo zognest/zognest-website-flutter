@@ -171,4 +171,10 @@ class AppController extends StateNotifier<AppState> {
       cartServices: [...state.cartServices, service],
     );
   }
+
+  void removeService(PurchasableService service) {
+    state = state.copyWith(
+      cartServices: state.cartServices..remove(service),
+    );
+  }
 }

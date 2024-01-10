@@ -11,6 +11,7 @@ abstract final class Strings {
   static const getInTouch = 'Get in touch';
   static const beyond = 'Beyond';
   static const space = 'Space';
+  static const budget = 'Budget';
   static const bookOurServices = 'Book our services';
   static const beyondSpaceBody =
       'Freedom serves as the foundation on which we build excellent experiences.';

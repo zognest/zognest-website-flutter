@@ -12,6 +12,7 @@ class PrimaryButton extends StatelessWidget {
     this.trailing,
     this.textStyle,
     this.height,
+    this.enabled = true,
     this.backgroundColor,
     this.padding,
     this.width,
@@ -22,6 +23,7 @@ class PrimaryButton extends StatelessWidget {
   final double? height;
   final double? width;
   final bool filled;
+  final bool enabled;
   final Color? backgroundColor;
   final Widget? trailing;
   final EdgeInsets? padding;
@@ -34,18 +36,22 @@ class PrimaryButton extends StatelessWidget {
       height: height,
       width: width,
       child: OutlinedButton(
-        onPressed: onTap,
+        onPressed: enabled ? onTap : null,
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
-            filled
-                ? backgroundColor ?? theme.primaryColor
-                : Palette.transparent,
+            !enabled
+                ? Palette.transparent
+                : filled
+                    ? backgroundColor ?? theme.primaryColor
+                    : Palette.transparent,
           ),
           side: MaterialStateProperty.all(
             BorderSide(
-              color: filled
-                  ? backgroundColor ?? theme.primaryColor
-                  : Palette.white,
+              color: !enabled
+                  ? Palette.white
+                  : filled
+                      ? backgroundColor ?? theme.primaryColor
+                      : Palette.white,
             ),
           ),
           padding: MaterialStateProperty.all(

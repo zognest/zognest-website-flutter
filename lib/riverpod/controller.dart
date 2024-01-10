@@ -26,7 +26,7 @@ final appControllerProvider = StateNotifierProvider<AppController, AppState>(
         purchasableServices: AsyncData([]),
         services: AsyncData([]),
         staff: AsyncData([]),
-        addedServices: [],
+        cartServices: [],
       ),
     );
   },
@@ -167,13 +167,8 @@ class AppController extends StateNotifier<AppState> {
   }
 
   void addService(PurchasableService service) {
-    /*// Try this
-    state.addedServices.add(service);*/
-
-    // Then try this
-// i think this is right because when i make run it dosent throw an error
     state = state.copyWith(
-      addService: [...state.addedServices, service],
+      cartServices: [...state.cartServices, service],
     );
   }
 }

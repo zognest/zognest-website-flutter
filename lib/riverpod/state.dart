@@ -23,7 +23,7 @@ class AppState extends Equatable {
     required this.purchasableServices,
     required this.staff,
     required this.services,
-    required this.addedServices,
+    required this.cartServices,
   });
 
   final bool loaded;
@@ -36,7 +36,7 @@ class AppState extends Equatable {
   final AsyncValue<List<PurchasableService>> purchasableServices;
   final AsyncValue<List<Service>> services;
   final AsyncValue<List<Staff>> staff;
-  final List<PurchasableService> addedServices;
+  final List<PurchasableService> cartServices;
 
   AppState copyWith({
     bool? loaded,
@@ -49,7 +49,7 @@ class AppState extends Equatable {
     AsyncValue<List<PurchasableService>>? purchasableServices,
     AsyncValue<List<Service>>? services,
     AsyncValue<List<Staff>>? staff,
-    List<PurchasableService>? addService,
+    List<PurchasableService>? cartServices,
   }) {
     return AppState(
       loaded: loaded ?? this.loaded,
@@ -62,7 +62,7 @@ class AppState extends Equatable {
       services: services ?? this.services,
       staff: staff ?? this.staff,
       purchasableServices: purchasableServices ?? this.purchasableServices,
-      addedServices: addService ?? this.addedServices,
+      cartServices: cartServices ?? this.cartServices,
     );
   }
 
@@ -78,6 +78,6 @@ class AppState extends Equatable {
         purchasableServices,
         services,
         staff,
-        addedServices,
+        cartServices,
       ];
 }

@@ -52,7 +52,6 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
               ),
             ),
             const Divider(),
-
           ],
         );
       },
@@ -111,11 +110,12 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                       horizontal: Constants.listButtonHorizontalPadding,
                     ),
                     onTap: () {
-                      ref.watch(appControllerProvider).addedServices
-                      .isEmpty
+                      ref.watch(appControllerProvider).cartServices.isEmpty
                           ? _SectionGetInTouch
                           : const SizedBox();
-                      ref.read(appControllerProvider.notifier).addService(widget.service);
+                      ref
+                          .read(appControllerProvider.notifier)
+                          .addService(widget.service);
                     },
                   ),
                 ],
@@ -158,16 +158,13 @@ class _SectionGetInTouch extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: SizedBox(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 0.25,
+                    width: MediaQuery.of(context).size.width * 0.25,
                     height: 120,
                     child: Row(
                       children: [
                         Expanded(
-                          child:  NetworkFadingImage(
-                              path:service.image,
+                          child: NetworkFadingImage(
+                            path: service.image,
                             height: 100,
                             fit: BoxFit.cover,
                           ),
@@ -203,7 +200,6 @@ class _SectionGetInTouch extends StatelessWidget {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

@@ -12,17 +12,19 @@ import 'package:zognest_website/features/our_work/models/project.dart';
 
 @immutable
 class AppState extends Equatable {
-  const AppState(
-      {required this.loaded,
-      required this.blogs,
-      required this.clientFeedbacks,
-      required this.events,
-      required this.offers,
-      required this.videoUrl,
-      required this.projects,
-      required this.purchasableServices,
-      required this.staff,
-      required this.services});
+  const AppState({
+    required this.loaded,
+    required this.blogs,
+    required this.clientFeedbacks,
+    required this.events,
+    required this.offers,
+    required this.videoUrl,
+    required this.projects,
+    required this.purchasableServices,
+    required this.staff,
+    required this.services,
+    required this.cartServices,
+  });
 
   final bool loaded;
   final AsyncValue<List<Blog>> blogs;
@@ -34,6 +36,7 @@ class AppState extends Equatable {
   final AsyncValue<List<PurchasableService>> purchasableServices;
   final AsyncValue<List<Service>> services;
   final AsyncValue<List<Staff>> staff;
+  final List<PurchasableService> cartServices;
 
   AppState copyWith({
     bool? loaded,
@@ -46,6 +49,7 @@ class AppState extends Equatable {
     AsyncValue<List<PurchasableService>>? purchasableServices,
     AsyncValue<List<Service>>? services,
     AsyncValue<List<Staff>>? staff,
+    List<PurchasableService>? cartServices,
   }) {
     return AppState(
       loaded: loaded ?? this.loaded,
@@ -58,6 +62,7 @@ class AppState extends Equatable {
       services: services ?? this.services,
       staff: staff ?? this.staff,
       purchasableServices: purchasableServices ?? this.purchasableServices,
+      cartServices: cartServices ?? this.cartServices,
     );
   }
 
@@ -72,6 +77,7 @@ class AppState extends Equatable {
         projects,
         purchasableServices,
         services,
-        staff
+        staff,
+        cartServices,
       ];
 }

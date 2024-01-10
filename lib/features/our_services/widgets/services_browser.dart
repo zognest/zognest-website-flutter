@@ -62,11 +62,16 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
   }
 }
 
-class ServiceItem extends StatelessWidget {
+class ServiceItem extends ConsumerStatefulWidget {
   const ServiceItem({super.key, required this.service});
 
   final PurchasableService service;
 
+  @override
+  ConsumerState<ServiceItem> createState() => _ServiceItemState();
+}
+
+class _ServiceItemState extends ConsumerState<ServiceItem> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -82,7 +87,7 @@ class ServiceItem extends StatelessWidget {
                 children: [
                   //title
                   AutoSizeText(
-                    service.title,
+                    widget.service.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodyLarge?.copyWith(
@@ -94,7 +99,7 @@ class ServiceItem extends StatelessWidget {
                   const SizedBox(height: Spacing.s8),
                   // description
                   AutoSizeText(
-                    service.description,
+                    widget.service.description,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall,
@@ -108,7 +113,14 @@ class ServiceItem extends StatelessWidget {
                       vertical: Constants.listButtonVerticalPadding,
                       horizontal: Constants.listButtonHorizontalPadding,
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      ref.watch(appControllerProvider).cartServices.isEmpty
+                          ? _SectionGetInTouch
+                          : const SizedBox();
+                      ref
+                          .read(appControllerProvider.notifier)
+                          .addService(widget.service);
+                    },
                   ),
                 ],
               ),

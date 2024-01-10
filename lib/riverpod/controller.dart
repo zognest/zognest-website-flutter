@@ -25,7 +25,8 @@ final appControllerProvider = StateNotifierProvider<AppController, AppState>(
         projects: AsyncData([]),
         purchasableServices: AsyncData([]),
         services: AsyncData([]),
-        staff:AsyncData([]),
+        staff: AsyncData([]),
+        cartServices: [],
       ),
     );
   },
@@ -163,5 +164,11 @@ class AppController extends StateNotifier<AppState> {
     state = state.copyWith(staff: AsyncData(staff));
 
     Utils.log(message: 'Loaded Staff => ${state.staff.value?.length}');
+  }
+
+  void addService(PurchasableService service) {
+    state = state.copyWith(
+      cartServices: [...state.cartServices, service],
+    );
   }
 }

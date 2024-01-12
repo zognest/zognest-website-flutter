@@ -5,6 +5,7 @@ import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/our_services/models/purchasable_service.dart';
+import 'package:zognest_website/features/our_services/widgets/service_card_mobile.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
@@ -20,6 +21,8 @@ class ServicesBrowser extends ConsumerStatefulWidget {
   ConsumerState<ServicesBrowser> createState() => _ServicesBrowserState();
 }
 
+late  PurchasableService service;
+
 class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
   @override
   Widget build(BuildContext context) {
@@ -31,8 +34,10 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
       data: (purchasableServices) {
         return Column(
           children: [
+
             if (servicesCart.isNotEmpty) ...[
-              const ServicesCart(),
+             /*const ServicesCart(),,*/
+              Responsive.isDesktop(context) ? const ServicesCart() :const ServicesCartMobile(),
               const SizedBox(height: Constants.sectionSpacing),
             ],
             if (Responsive.isDesktop(context)) const Divider(),

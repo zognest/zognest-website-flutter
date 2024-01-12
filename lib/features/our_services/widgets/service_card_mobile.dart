@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/constants.dart';
@@ -21,7 +22,7 @@ class ServicesCartMobile extends ConsumerWidget {
         const Divider(),
         // all section
         SizedBox(
-          height: 1100,// height all section
+          height: 1100, // height all section
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -33,52 +34,65 @@ class ServicesCartMobile extends ConsumerWidget {
                 // section 1 card
                 Expanded(
                   flex: 1,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: const Color(0xffAEB2BA)),
-                          ),
-
-                          padding: const EdgeInsets.all(12),
-                          child: SingleChildScrollView(
-                            child: Wrap(
-                              runSpacing: Spacing.m20,
-                              spacing: Spacing.m20,
-                              children: cartServices.map((service) {
-                                return Container(
-                                  width: width * 0.7,
-                                  height: 140,
-                                  color: Palette.cardBackgroundColor,
-                                  child: Row(
-                                    children: [
-                                      Image.network(
-                                        service.image,
-                                        height: 140,
-                                        fit: BoxFit.cover,
-                                      ),
-                                          const SizedBox(width: 15),
+                  child: SingleChildScrollView(
+                    child: Expanded(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(color: const Color(0xffAEB2BA)),
+                              ),
+                              padding: const EdgeInsets.all(12),
+                              child: SingleChildScrollView(
+                                child: Wrap(
+                                  runSpacing: Spacing.m20,
+                                  spacing: Spacing.m20,
+                                  // what is this ? what do it this ?
+                                  children: cartServices.map((service) {
+                                    return Container(
+                                      width: double.infinity,
+                                      /*width * 0.7*/
+                                      /* height: 140,*/
+                                      color: Palette.cardBackgroundColor,
+                                      child: Row(
+                                        children: [
                                           Expanded(
-                                            child: Text(
-                                              service.title,
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              style:
-                                              theme.textTheme.bodyLarge?.copyWith(
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                            child: Image.network(
+                                              service.image,
+                                              height: 140,
+                                              width: 75,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
-                                          const SizedBox(width: 5),
-                                          ElevatedButton(
+                                           Row(
+                                            children: [
+                                           const SizedBox(width: 15),
+                                           AutoSizeText(
+                                             service.title,
+                                             maxLines: 2,
+                                             overflow: TextOverflow.ellipsis,
+                                             style: theme.textTheme.bodyLarge
+                                                 ?.copyWith(
+                                               fontWeight: FontWeight.w600,
+                                             ),
+                                           ),
+                                           const SizedBox(width: 5),
+                                            ],
+                                          ),
+                                          Expanded(child:ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor: Palette.transparent,
+                                              backgroundColor:
+                                              Palette.transparent,
                                               shape: const CircleBorder(
-                                                side: BorderSide(color: Palette.white),
+                                                side: BorderSide(
+                                                    color: Palette.white),
                                               ),
-                                              minimumSize: const Size.fromRadius(28),
+                                              minimumSize:
+                                              const Size.fromRadius(28),
                                             ),
                                             child: const Icon(
                                               Icons.close,
@@ -86,28 +100,29 @@ class ServicesCartMobile extends ConsumerWidget {
                                             ),
                                             onPressed: () {
                                               ref
-                                                  .read(appControllerProvider.notifier)
+                                                  .read(
+                                                  appControllerProvider
+                                                      .notifier)
                                                   .removeService(service);
                                             },
-                                          ),
-                                          const SizedBox(width: 25),
-
-
-                                    ],
-                                  ),
-                                );
-                              }).toList(),
+                                          ),)
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ]),
+                          ]),
+                    ),
+                  ),
                 ),
                 // between 1 and2
                 const SizedBox(height: 50),
                 // section 2
                 Expanded(
-                  flex:1,
-                  child:Column(
+                  flex: 1,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const InputFormField(

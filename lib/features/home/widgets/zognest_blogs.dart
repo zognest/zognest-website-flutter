@@ -122,6 +122,7 @@ class _BlogItemState extends State<BlogItem> {
     final theme = Theme.of(context);
     return FrostedContainer(
       width: Constants.listCardWidth,
+      borderRadius:25,
       padding: const EdgeInsets.symmetric(
           horizontal: Spacing.l32, vertical: Spacing.l24),
       child: InkWell(
@@ -137,7 +138,10 @@ class _BlogItemState extends State<BlogItem> {
               flex: 2,
               child: GreyscaleFilter(
                 isHovered: hovered,
-                child: NetworkFadingImage(path:widget.blog.image, fit: BoxFit.cover),
+                child: Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: NetworkFadingImage(
+                        path: widget.blog.image, fit: BoxFit.cover)),
               ),
             ),
             Expanded(

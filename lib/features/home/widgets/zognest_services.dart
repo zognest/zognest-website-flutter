@@ -143,72 +143,76 @@ class FrontService extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Stack(
-      children: [
-        NetworkFadingImage(
-          path:
-          service.backgroundImage,
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Spacing.l24,
-            vertical: Spacing.l32,
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Stack(
+        children: [
+          NetworkFadingImage(
+            path:
+            service.backgroundImage,
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Spacer(),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      service.highlight.toUpperCase(),
-                      style: theme.textTheme.headlineMedium?.copyWith(
-                        color: theme.primaryColor,
-                        fontVariations: TextThemes.fontVariation(1),
-                      ),
-                    ),
-                    Text(
-                      service.title.toUpperCase(),
-                      style: theme.textTheme.headlineMedium,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: Spacing.m20),
-                        child: Text(
-                          service.description,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 5,
-                          style:
-                              theme.textTheme.bodyMedium?.copyWith(height: 1.3),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Spacing.l24,
+              vertical: Spacing.l32,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Spacer(),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        service.highlight.toUpperCase(),
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          color: theme.primaryColor,
+                          fontVariations: TextThemes.fontVariation(1),
                         ),
                       ),
-                    ),
-                  ],
+                      Text(
+                        service.title.toUpperCase(),
+                        style: theme.textTheme.headlineMedium,
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.symmetric(vertical: Spacing.m20),
+                          child: Text(
+                            service.description,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 5,
+                            style:
+                                theme.textTheme.bodyMedium?.copyWith(height: 1.3),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              PrimaryButton(
-                title: Strings.more.toUpperCase(),
-                filled: false,
-                width: Constants.servicesCardWidth * 0.4,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Spacing.s12,
-                  vertical: Spacing.m20,
+                PrimaryButton(
+                  title: Strings.more.toUpperCase(),
+                  filled: false,
+                  width: Constants.servicesCardWidth * 0.4,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Spacing.s12,
+                    vertical: Spacing.m20,
+                  ),
+                  onTap: () {},
                 ),
-                onTap: () {},
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -221,69 +225,73 @@ class BackService extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Stack(
-      children: [
-        NetworkFadingImage(
-          path:
-          service.backgroundImage,
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.contain,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Spacing.l24,
-            vertical: Spacing.l32,
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Stack(
+        children: [
+          NetworkFadingImage(
+            path:
+            service.backgroundImage,
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.contain,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      service.highlight.toUpperCase(),
-                      style: theme.textTheme.headlineSmall
-                          ?.copyWith(color: theme.primaryColor),
-                    ),
-                    Text(
-                      service.title.toUpperCase(),
-                      style: theme.textTheme.headlineMedium,
-                    ),
-                    const SizedBox(height: Spacing.m20),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: Spacing.s12),
-                        child: Wrap(
-                          runSpacing: Spacing.s8,
-                          spacing: Spacing.s8,
-                          children: service.technologies.map((tech) {
-                            return TechnologyContainer(
-                              image: tech.image,
-                              title: tech.name,
-                            );
-                          }).toList(),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Spacing.l24,
+              vertical: Spacing.l32,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        service.highlight.toUpperCase(),
+                        style: theme.textTheme.headlineSmall
+                            ?.copyWith(color: theme.primaryColor),
+                      ),
+                      Text(
+                        service.title.toUpperCase(),
+                        style: theme.textTheme.headlineMedium,
+                      ),
+                      const SizedBox(height: Spacing.m20),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          padding:
+                              const EdgeInsets.symmetric(vertical: Spacing.s12),
+                          child: Wrap(
+                            runSpacing: Spacing.s8,
+                            spacing: Spacing.s8,
+                            children: service.technologies.map((tech) {
+                              return TechnologyContainer(
+                                image: tech.image,
+                                title: tech.name,
+                              );
+                            }).toList(),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              PrimaryButton(
-                title: Strings.add.toUpperCase(),
-                width: Constants.servicesCardWidth * 0.4,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Spacing.s12,
-                  vertical: Spacing.m20,
+                PrimaryButton(
+                  title: Strings.add.toUpperCase(),
+                  width: Constants.servicesCardWidth * 0.4,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Spacing.s12,
+                    vertical: Spacing.m20,
+                  ),
+                  onTap: () {},
                 ),
-                onTap: () {},
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

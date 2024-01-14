@@ -223,16 +223,3 @@ class _ProjectItemState extends State<ProjectItem> {
     );
   }
 }
-
-// drop
-// vice
-// svvean
-// smile
-// seller
-// three
-// data
-
-//atth
-//
-//
-//

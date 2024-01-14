@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/spacing.dart';
-import 'package:zognest_website/shared/data.dart';
+import 'package:zognest_website/riverpod/controller.dart';
+import '../../our_work/models/project.dart';
 
-class ClientsMarquee extends StatefulWidget {
+class ClientsMarquee extends ConsumerStatefulWidget {
   const ClientsMarquee({super.key});
 
   @override
-  State<ClientsMarquee> createState() => _ClientsMarqueeState();
+  ConsumerState<ClientsMarquee> createState() => _ClientsMarqueeState();
 }
 
-class _ClientsMarqueeState extends State<ClientsMarquee>
+class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
     with SingleTickerProviderStateMixin {
   late final ScrollController _scrollController;
   late final AnimationController _animationController;
@@ -47,44 +49,95 @@ class _ClientsMarqueeState extends State<ClientsMarquee>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Divider(),
-        SizedBox(
-          height: Responsive.isDesktop(context)
-              ? Constants.clientsMarqueeHeight
-              : Constants.mobileClientsMarqueeHeight,
-          child: ListView.builder(
-            controller: _scrollController,
-            padding: const EdgeInsets.symmetric(vertical: Spacing.s8),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              final i = index % Data.clientsImageAssets.length;
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Spacing.l24),
-                child: InkWell(
-                  onTap: () {},
-                  onHover: (over) {
-                    if (over) {
-                      setState(() => hoveredIndex = i);
-                      _animationController.stop(canceled: false);
-                      return;
-                    }
-                    setState(() => hoveredIndex = -1);
-                    _animationController.repeat();
-                  },
-                  overlayColor: MaterialStateProperty.all(Palette.transparent),
-                  child: Image.asset(
-                    Data.clientsImageAssets[i],
-                    color: hoveredIndex == i ? Palette.primary : null,
-                  ),
+    final theme = Theme.of(context);
+    final project = ref.watch(appControllerProvider).projects;
+    return project.when(
+      data: (project) {
+        return Column(
+          children: [
+            const Divider(),
+            SizedBox(
+              height: Responsive.isDesktop(context)
+                  ? Constants.clientsMarqueeHeight
+                  : Constants.mobileClientsMarqueeHeight,
+              child: ListView.builder(
+                controller: _scrollController,
+                padding: const EdgeInsets.symmetric(vertical: Spacing.s8),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  final i = index % project.length;
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: Spacing.l24),
+                    child: InkWell(
+                        onTap: () {},
+                        onHover: (over) {
+                          if (over) {
+                            setState(() => hoveredIndex = i);
+                            _animationController.stop(canceled: false);
+                            return;
+                          }
+                          setState(() => hoveredIndex = -1);
+                          _animationController.repeat();
+                        },
+                        overlayColor:
+                            MaterialStateProperty.all(Palette.transparent),
+                        child: ItemServiceMerquee(
+                          project: project[index],
+                        )
+                        /* Image.asset(
+                        Data.clientsImageAssets[i],
+                        color: hoveredIndex == i ? Palette.primary : null,
+                      ),*/
+                        ),
+                  );
+                },
+              ),
+            ),
+            const Divider(),
+          ],
+        );
+      },
+      error: (_, __) => const Text('error'),
+      loading: () => CircularProgressIndicator(color: theme.primaryColor),
+    );
+  }
+}
+
+class ItemServiceMerquee extends StatelessWidget {
+  const ItemServiceMerquee({super.key, required this.project});
+
+  final Project project;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 250,
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(50)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal:2),
+        child: FittedBox(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Card(
+
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(120),
                 ),
-              );
-            },
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: Image.network(project.icon)),
+              const SizedBox(width: 10),
+              Text(project.title),
+              const SizedBox(width: 10),
+            ],
           ),
         ),
-        const Divider(),
-      ],
+      ),
     );
   }
 }

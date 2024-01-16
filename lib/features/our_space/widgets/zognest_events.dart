@@ -39,8 +39,8 @@ class _ZognestEventsState extends ConsumerState<ZognestEvents> {
                     tabAlignment: TabAlignment.start,
                     padding: EdgeInsets.symmetric(
                       horizontal: Responsive.isDesktop(context)
-                          ? Constants.webHorizontalPadding
-                          : Constants.mobileHorizontalPadding,
+                          ? 30
+                          : 15,
                     ),
                     indicator: ShapeDecoration(
                       color: theme.primaryColor,
@@ -90,8 +90,8 @@ class _ZognestEventsState extends ConsumerState<ZognestEvents> {
                         return ListView.separated(
                           padding: EdgeInsets.symmetric(
                             horizontal: Responsive.isDesktop(context)
-                                ? Constants.webHorizontalPadding
-                                : Constants.mobileHorizontalPadding,
+                                ? 30
+                                : 15,
                           ),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {

@@ -82,8 +82,8 @@ class _ZognestProjectsState extends ConsumerState<ZognestProjects> {
               child: ListView.separated(
                 padding: EdgeInsets.symmetric(
                   horizontal: Responsive.isDesktop(context)
-                      ? Constants.webHorizontalPadding
-                      : Constants.mobileHorizontalPadding,
+                      ? 30
+                      : 15,
                 ),
                 scrollDirection: Axis.horizontal,
                 controller: _controller,

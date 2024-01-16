@@ -18,7 +18,7 @@ class OptimismText extends StatelessWidget {
         Responsive.isDesktop(context)
             ? Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: Constants.webHorizontalPadding),
+                    horizontal: 30),
                 child: SizedBox(
                   height: Constants.optimismSectionHeight,
                   child: Stack(
@@ -116,7 +116,7 @@ class OptimismTextMobile extends StatelessWidget {
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: Constants.mobileHorizontalPadding,
+        horizontal: 15,
       ),
       child: Stack(
         alignment: Alignment.center,

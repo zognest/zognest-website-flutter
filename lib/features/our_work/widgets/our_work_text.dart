@@ -14,8 +14,8 @@ class OurWorkText extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: Responsive.isDesktop(context)
-                ? Constants.webHorizontalPadding
-                : Constants.mobileHorizontalPadding,
+                ? 30
+                : 15,
           ),
           child: Stack(
             alignment: Alignment.center,

@@ -29,7 +29,7 @@ class PrimaryDrawer extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(
                 vertical: Spacing.s12,
-                horizontal: Constants.mobileHorizontalPadding,
+                horizontal: 15,
               ),
               child: MobileAppBar(),
             ),

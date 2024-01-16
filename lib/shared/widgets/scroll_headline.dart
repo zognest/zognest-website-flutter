@@ -22,8 +22,8 @@ class ScrollHeadline extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: Responsive.isDesktop(context)
-            ? Constants.webHorizontalPadding
-            : Constants.mobileHorizontalPadding,
+            ? 30
+            : 15,
         vertical: Responsive.isDesktop(context) ? Spacing.l40 : Spacing.m16,
       ),
       child: Row(

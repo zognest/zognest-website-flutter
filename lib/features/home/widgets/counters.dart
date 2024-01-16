@@ -76,8 +76,8 @@ class _CountersState extends State<Counters>
                   Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: Responsive.isDesktop(context)
-                          ? Constants.webHorizontalPadding
-                          : Constants.mobileHorizontalPadding,
+                          ? 30
+                          : 15,
                     ),
                     child: FittedBox(
                       child: Text(
@@ -95,7 +95,7 @@ class _CountersState extends State<Counters>
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: Responsive.isDesktop(context)
-                      ? Constants.webHorizontalPadding
+                      ? 30
                       : 16,
                 ),
                 child: VisibilityDetector(

@@ -39,7 +39,7 @@ class ContactForm extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.webHorizontalPadding,
+                        horizontal: 30,
                         vertical: Constants.webVerticalPadding,
                       ),
                       child: Row(
@@ -180,7 +180,7 @@ class ContactFormMobile extends StatelessWidget {
             ),
           ),
           padding: const EdgeInsets.symmetric(
-            horizontal: Constants.mobileHorizontalPadding,
+            horizontal: 15,
             vertical: Constants.mobileVerticalPadding,
           ),
           child: Column(
@@ -225,7 +225,7 @@ class ContactFormMobile extends StatelessWidget {
         const SizedBox(height: Spacing.m16),
         Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: Constants.mobileHorizontalPadding),
+              horizontal: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

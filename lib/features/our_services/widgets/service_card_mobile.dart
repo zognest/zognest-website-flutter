@@ -27,7 +27,7 @@ class ServicesCartMobile extends ConsumerWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 10,
-              // Constants.mobileHorizontalPadding
+              // 15
             ),
             child: Column(
               children: [

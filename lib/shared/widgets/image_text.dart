@@ -40,7 +40,7 @@ class ImageText extends StatelessWidget {
                         Palette.cardBackgroundColor.withOpacity(0.5),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.webHorizontalPadding,
+                        horizontal: 30,
                       ),
                       child: Row(
                         children: [
@@ -132,7 +132,7 @@ class ImageTextMobile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(
             vertical: Spacing.m20,
-            horizontal: Constants.mobileHorizontalPadding,
+            horizontal: 15,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

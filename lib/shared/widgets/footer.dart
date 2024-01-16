@@ -76,8 +76,8 @@ class _FooterState extends State<Footer> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: Responsive.isDesktop(context)
-                          ? Constants.webHorizontalPadding
-                          : Constants.mobileHorizontalPadding,
+                          ? 30
+                          : 15,
                       vertical: Spacing.l24,
                     ),
                     child: Column(

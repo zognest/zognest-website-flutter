@@ -69,8 +69,8 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: Responsive.isDesktop(context)
-                  ? Constants.webHorizontalPadding
-                  : Constants.mobileHorizontalPadding,
+                  ? 30
+                  : 15,
             ),
             child: _controller.value.isInitialized
                 ? AspectRatio(

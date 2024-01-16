@@ -44,8 +44,8 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: Responsive.isDesktop(context)
-                    ? Constants.webHorizontalPadding
-                    : Constants.mobileHorizontalPadding,
+                    ? 30
+                    : 15,
               ),
               child: Wrap(
                 runSpacing: Constants.listCardSeparatorWidth,
@@ -159,7 +159,7 @@ class ServicesCart extends ConsumerWidget {
           height: 600,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: Constants.webHorizontalPadding,
+              horizontal: 30,
             ),
             child: Row(
               children: [

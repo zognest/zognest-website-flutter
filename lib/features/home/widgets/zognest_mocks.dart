@@ -80,8 +80,8 @@ class _ZognestMocksState extends State<ZognestMocks>
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: Responsive.isDesktop(context)
-                    ? Constants.webHorizontalPadding
-                    : Constants.mobileHorizontalPadding,
+                    ? 30
+                    : 15,
               ),
               child: SizedBox(
                 width:

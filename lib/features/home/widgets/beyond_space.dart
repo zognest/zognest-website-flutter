@@ -31,7 +31,7 @@ class BeyondSpace extends StatelessWidget {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(
-                        left: Constants.webHorizontalPadding,
+                        left: 30,
                         right: Spacing.xl60,
                       ),
                       child: Column(
@@ -165,7 +165,7 @@ class BeyondSpaceMobile extends StatelessWidget {
         const BeyondSpaceCarousel(),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Constants.mobileHorizontalPadding,
+            horizontal: 15,
           ),
           child: Column(
             children: [

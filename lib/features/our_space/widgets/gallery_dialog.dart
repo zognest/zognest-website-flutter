@@ -58,8 +58,8 @@ class GalleryDialog extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: Responsive.isDesktop(context)
-                      ? Constants.webHorizontalPadding
-                      : Constants.mobileHorizontalPadding,
+                      ? 30
+                      : 15,
                   vertical: Responsive.isDesktop(context)
                       ? Constants.webVerticalPadding
                       : Constants.mobileVerticalPadding,

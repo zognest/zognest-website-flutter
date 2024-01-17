@@ -121,6 +121,7 @@ class _ClientItemState extends State<ClientItem> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return FrostedContainer(
+      borderRadius: 20,
       width: Constants.listCardWidth,
       height: double.infinity,
       padding: const EdgeInsets.symmetric(
@@ -143,21 +144,27 @@ class _ClientItemState extends State<ClientItem> {
                       padding: const EdgeInsets.only(bottom: 48),
                       child: Row(
                         children: [
-                          Expanded(
-                            flex: 2,
-                            child: NetworkFadingImage(
-                               path:widget.clientFeedback.backgroundImages[0],
-                                height: double.infinity ,
-                              fit: BoxFit.cover,
+                          Card(
+                            clipBehavior:Clip.antiAliasWithSaveLayer,
+                            child: Expanded(
+                              flex: 2,
+                              child: NetworkFadingImage(
+                                 path:widget.clientFeedback.backgroundImages[0],
+                                  height: double.infinity ,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           const SizedBox(width: Spacing.m16),
                           Expanded(
-                            child: NetworkFadingImage(
-                              path:
-                              widget.clientFeedback.backgroundImages[1],
-                              height: double.infinity,
-                              fit: BoxFit.cover,
+                            child: Card(
+                              clipBehavior:Clip.antiAliasWithSaveLayer,
+                              child: NetworkFadingImage(
+                                path:
+                                widget.clientFeedback.backgroundImages[1],
+                                height: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ],

@@ -68,7 +68,8 @@ class _MarqueeTextState extends State<MarqueeText>
                       TextSpan(
                         text: Strings.weAreThe.toUpperCase(),
                         style: theme.textTheme.displaySmall?.copyWith(
-                          foreground: TextThemes.foreground,
+                          /*foreground: TextThemes.foreground,*/
+                          color: const Color(0xFF222222),
                         ),
                       ),
                       WidgetSpan(
@@ -78,7 +79,7 @@ class _MarqueeTextState extends State<MarqueeText>
                             Text(
                               Strings.creative.toUpperCase(),
                               style: theme.textTheme.displaySmall?.copyWith(
-                                color: Palette.primary,
+                                color:Palette.white,
                               ),
                             ),
                             Text(

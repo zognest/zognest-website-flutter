@@ -145,12 +145,11 @@ class FrontService extends StatelessWidget {
     final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+      clipBehavior: Clip.hardEdge,
       child: Stack(
         children: [
           NetworkFadingImage(
-            path:
-            service.backgroundImage,
+            path: service.backgroundImage,
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,
@@ -227,12 +226,11 @@ class BackService extends StatelessWidget {
     final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+      clipBehavior: Clip.hardEdge,
       child: Stack(
         children: [
           NetworkFadingImage(
-            path:
-            service.backgroundImage,
+            path: service.backgroundImage,
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.contain,

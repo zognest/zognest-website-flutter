@@ -5,6 +5,7 @@ import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/riverpod/controller.dart';
+
 import '../../our_work/models/project.dart';
 
 class ClientsMarquee extends ConsumerStatefulWidget {
@@ -68,28 +69,22 @@ class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
                   final i = index % project.length;
                   return Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: Spacing.l24),
+                        const EdgeInsets.symmetric(horizontal: Spacing.m20),
                     child: InkWell(
-                        onTap: () {},
-                        onHover: (over) {
-                          if (over) {
-                            setState(() => hoveredIndex = i);
-                            _animationController.stop(canceled: false);
-                            return;
-                          }
-                          setState(() => hoveredIndex = -1);
-                          _animationController.repeat();
-                        },
-                        overlayColor:
-                            MaterialStateProperty.all(Palette.transparent),
-                        child: ItemServiceMerquee(
-                          project: project[index],
-                        )
-                        /* Image.asset(
-                        Data.clientsImageAssets[i],
-                        color: hoveredIndex == i ? Palette.primary : null,
-                      ),*/
-                        ),
+                      onTap: () {},
+                      onHover: (over) {
+                        if (over) {
+                          setState(() => hoveredIndex = i);
+                          _animationController.stop(canceled: false);
+                          return;
+                        }
+                        setState(() => hoveredIndex = -1);
+                        _animationController.repeat();
+                      },
+                      overlayColor:
+                          MaterialStateProperty.all(Palette.transparent),
+                      child: ItemServiceMarquee(project: project[i]),
+                    ),
                   );
                 },
               ),
@@ -104,38 +99,40 @@ class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
   }
 }
 
-class ItemServiceMerquee extends StatelessWidget {
-  const ItemServiceMerquee({super.key, required this.project});
+class ItemServiceMarquee extends StatelessWidget {
+  const ItemServiceMarquee({super.key, required this.project});
 
   final Project project;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(50)),
+      decoration: const ShapeDecoration(
+        color: Palette.cardBackgroundColor,
+        shape: StadiumBorder(
+          side: BorderSide(color: Color(0xff3B3B3B)),
+        ),
+      ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal:2),
-        child: FittedBox(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Card(
-
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            FittedBox(
+              child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(120),
                 ),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Image.network(project.icon)),
-              const SizedBox(width: 10),
-              Text(project.title),
-              const SizedBox(width: 10),
-            ],
-          ),
+                clipBehavior: Clip.hardEdge,
+                child: Image.network(project.icon),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Text(project.title),
+            const SizedBox(width: 8),
+          ],
         ),
       ),
     );

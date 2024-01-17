@@ -144,24 +144,24 @@ class _ClientItemState extends State<ClientItem> {
                       padding: const EdgeInsets.only(bottom: 48),
                       child: Row(
                         children: [
-                          Card(
-                            clipBehavior:Clip.antiAliasWithSaveLayer,
-                            child: Expanded(
-                              flex: 2,
+                          Expanded(
+                            flex: 3,
+                            child: Card(
+                              clipBehavior: Clip.hardEdge,
                               child: NetworkFadingImage(
-                                 path:widget.clientFeedback.backgroundImages[0],
-                                  height: double.infinity ,
+                                path: widget.clientFeedback.backgroundImages[0],
+                                height: double.infinity,
                                 fit: BoxFit.cover,
                               ),
                             ),
                           ),
-                          const SizedBox(width: Spacing.m16),
+                          const SizedBox(width: Spacing.s8),
                           Expanded(
+                            flex: 2,
                             child: Card(
-                              clipBehavior:Clip.antiAliasWithSaveLayer,
+                              clipBehavior: Clip.hardEdge,
                               child: NetworkFadingImage(
-                                path:
-                                widget.clientFeedback.backgroundImages[1],
+                                path: widget.clientFeedback.backgroundImages[1],
                                 height: double.infinity,
                                 fit: BoxFit.cover,
                               ),

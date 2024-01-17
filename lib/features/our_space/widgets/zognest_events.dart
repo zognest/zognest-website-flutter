@@ -25,7 +25,6 @@ class _ZognestEventsState extends ConsumerState<ZognestEvents> {
       data: (events) {
         final eventsYears =
             events.map((event) => event.date.year).toSet().toList();
-        print(eventsYears);
         return Column(
           children: [
             if (Responsive.isDesktop(context)) const Divider(),

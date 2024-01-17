@@ -27,9 +27,9 @@ class NetworkFadingImage extends StatelessWidget {
           child: child,
         );
       },
-      errorBuilder: (_, __, ___) {
-        return const SizedBox.shrink();
-      },
+      /*errorBuilder: (_, __, ___) {
+        return const Icon(Icons.error);
+      },*/
       filterQuality: FilterQuality.none,
       width: width,
       height: height,

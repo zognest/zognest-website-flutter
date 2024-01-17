@@ -1,6 +1,5 @@
 import 'package:zognest_website/features/home/widgets/marquee_text.dart';
 import 'package:zognest_website/features/home/widgets/zognest_clients.dart';
-import 'package:zognest_website/features/home/widgets/zognest_mocks.dart';
 import 'package:zognest_website/features/home/widgets/zognest_services.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
@@ -8,7 +7,6 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 class Constants {
   /// Horizontal padding of any main component or the children inside it
   static const webHorizontalPadding = Spacing.xl72;
-  static const webHorizontalPaddingOurSpace = Spacing.l32 ;
   static const mobileHorizontalPadding = Spacing.m20;
 
   // region Horizontal Lists
@@ -34,15 +32,11 @@ class Constants {
   /// The spacing between each component
   static const sectionSpacing = 75.0;
 
-  /// The spacing between helping your business component
-  static const sectionSpacingHelpingBusiness = 30.0;
-
   /// The height of [MarqueeText] component
   static const marqueeHeight = 150.0;
 
   /// Radius of [CircleButton] used to scroll to end/start
   static const circleButtonRadius = Spacing.s4;
-  static const circleButtonRadiusMobile = Spacing.s6;
 
   /// region [ZognestVideo]
   static const videoAspectRatio = 16 / 9;
@@ -65,10 +59,6 @@ class Constants {
   static const servicesCardWidth = 360.0;
   static const servicesCardHeight = 540.0;
 
-  // endregion
-
-  /// region [ZognestMocks]
-  static const mocksSectionHeight = 1000.0;
   // endregion
 
   /// region [ZognestClients]
@@ -96,7 +86,6 @@ class Constants {
   /// region [ZognestEvents]
   static const eventsDesktopTabHeight = 60.0;
   static const eventsMobileTabHeight = 40.0;
-  static const eventsDialogHeight = 700.0;
 
   // endRegion
 

@@ -39,127 +39,132 @@ class _ZognestOffersState extends ConsumerState<ZognestOffers> {
   Widget build(BuildContext context) {
     final offers = ref.watch(appControllerProvider).offers;
     final theme = Theme.of(context);
-    return offers.when(
-      data: (offers) {
-        return Column(
-          children: [
-            const Divider(),
-            ScrollHeadline(
-              headline: TextSpan(
-                text: Strings.what.toUpperCase(),
-                style: theme.textTheme.displaySmall,
-                children: [
-                  TextSpan(
-                    text: '${Strings.we}\n'.toUpperCase(),
-                    style: theme.textTheme.displaySmall?.copyWith(
-                      foreground: TextThemes.foreground,
-                    ),
-                  ),
-                  TextSpan(text: Strings.offer.toUpperCase()),
-                ],
+    return Column(
+      children: [
+        const Divider(),
+        ScrollHeadline(
+          headline: TextSpan(
+            text: Strings.what.toUpperCase(),
+            style: theme.textTheme.displaySmall,
+            children: [
+              TextSpan(
+                text: '${Strings.we}\n'.toUpperCase(),
+                style: theme.textTheme.displaySmall?.copyWith(
+                  foreground: TextThemes.foreground,
+                ),
               ),
-              onTapScroll: () {
-                if (_controller.offset ==
-                    _controller.position.maxScrollExtent) {
-                  currentIndex = 0;
-                }
-                _controller.animateTo(
-                  Constants.zognestOffersItemWidth * currentIndex,
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.ease,
-                );
-                currentIndex++;
-              },
-            ),
-            SizedBox(
-              height: Constants.zognestOffersListHeight,
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: Constants.webHorizontalPadding),
-                scrollDirection: Axis.horizontal,
-                controller: _controller,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {},
-                    onHover: (over) {
-                      if (over) {
-                        hoveredIndex = index;
+              TextSpan(text: Strings.offer.toUpperCase()),
+            ],
+          ),
+          onTapScroll: () {
+            if (_controller.offset == _controller.position.maxScrollExtent) {
+              currentIndex = 0;
+            }
+            _controller.animateTo(
+              Constants.zognestOffersItemWidth * currentIndex,
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.ease,
+            );
+            currentIndex++;
+          },
+        ),
+        Consumer(builder: (_, ref, __) {
+          return offers.when(
+            data: (offers) {
+              return SizedBox(
+                height: Constants.zognestOffersListHeight,
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: Constants.webHorizontalPadding),
+                  scrollDirection: Axis.horizontal,
+                  controller: _controller,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {},
+                      onHover: (over) {
+                        if (over) {
+                          hoveredIndex = index;
+                          setState(() {});
+                          return;
+                        }
+                        hoveredIndex = -1;
                         setState(() {});
-                        return;
-                      }
-                      hoveredIndex = -1;
-                      setState(() {});
-                    },
-                    child: OfferItem(
-                      offer: offers[index],
-                      colored: hoveredIndex == index,
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(width: Spacing.l24),
-                itemCount: offers.length,
-              ),
-            ),
-            const Divider(),
-          ],
-        );
-      },
-      error: (_, __) => const Text('error'),
-      loading: () => CircularProgressIndicator(color: theme.primaryColor),
+                      },
+                      child: OfferItem(
+                        offer: offers[index],
+                        colored: hoveredIndex == index,
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: Spacing.l24),
+                  itemCount: offers.length,
+                ),
+              );
+            },
+            error: (_, __) => const Text('error'),
+            loading: () => CircularProgressIndicator(color: theme.primaryColor),
+          );
+        }),
+        const Divider(),
+      ],
     );
   }
 }
 
-class ZognestOffersMobile extends ConsumerWidget {
+class ZognestOffersMobile extends StatelessWidget {
   const ZognestOffersMobile({super.key});
 
   @override
-  Widget build(context, ref) {
-
+  Widget build(context) {
     final theme = Theme.of(context);
-    final offers = ref.watch(appControllerProvider).offers;
-    return offers.when(
-        data: (offers) {
-          return Column(
+    return Column(
+      children: [
+        const Divider(),
+        ScrollHeadline(
+          headline: TextSpan(
+            text: Strings.what.toUpperCase(),
+            style: theme.textTheme.displaySmall,
             children: [
-              const Divider(),
-              ScrollHeadline(
-                headline: TextSpan(
-                  text: Strings.what.toUpperCase(),
-                  style: theme.textTheme.displaySmall,
-                  children: [
-                    TextSpan(
-                      text: '${Strings.we}\n'.toUpperCase(),
-                      style: theme.textTheme.displaySmall?.copyWith(
-                        foreground: TextThemes.foreground,
-                      ),
-                    ),
-                    TextSpan(text: Strings.offer.toUpperCase()),
-                  ],
+              TextSpan(
+                text: '${Strings.we}\n'.toUpperCase(),
+                style: theme.textTheme.displaySmall?.copyWith(
+                  foreground: TextThemes.foreground,
                 ),
-                onTapScroll: null,
               ),
-              ListView.separated(
-                physics: const NeverScrollableScrollPhysics(),
-                addAutomaticKeepAlives: false,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.mobileHorizontalPadding,
-                ),
-                shrinkWrap: true,
-                itemBuilder: (_, index) {
-                  return OfferItem(offer: offers[index]);
-                },
-                separatorBuilder: (_, __) =>
-                    const SizedBox(height: Spacing.s12),
-                itemCount: offers.length,
-              ),
-              const Divider(),
+              TextSpan(text: Strings.offer.toUpperCase()),
             ],
-          );
-        },
-        error: (_, __) => const Text('error'),
-        loading: () => CircularProgressIndicator(color: theme.primaryColor));
+          ),
+          onTapScroll: null,
+        ),
+        Consumer(
+          builder: (__, ref, _) {
+            final offers = ref.watch(appControllerProvider).offers;
+            return offers.when(
+              data: (offers) {
+                return ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  addAutomaticKeepAlives: false,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Constants.mobileHorizontalPadding,
+                  ),
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) {
+                    return OfferItem(offer: offers[index]);
+                  },
+                  separatorBuilder: (_, __) =>
+                      const SizedBox(height: Spacing.s12),
+                  itemCount: offers.length,
+                );
+              },
+              error: (_, __) => const SizedBox.shrink(),
+              loading: () => const SizedBox.shrink(),
+            );
+          },
+        ),
+        const Divider(),
+      ],
+    );
   }
 }
 
@@ -172,7 +177,6 @@ class OfferItem extends StatelessWidget {
 
   final Offer offer;
   final bool colored;
-
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +191,6 @@ class OfferItem extends StatelessWidget {
         horizontal: Spacing.l32,
         vertical: Spacing.l48,
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

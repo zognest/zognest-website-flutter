@@ -15,14 +15,14 @@ import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import '../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ZognestClients extends ConsumerStatefulWidget {
+class ZognestClients extends StatefulWidget {
   const ZognestClients({super.key});
 
   @override
-  ConsumerState<ZognestClients> createState() => _ZognestClientsState();
+  State<ZognestClients> createState() => _ZognestClientsState();
 }
 
-class _ZognestClientsState extends ConsumerState<ZognestClients> {
+class _ZognestClientsState extends State<ZognestClients> {
   late final ScrollController _controller;
   int currentIndex = 1;
 
@@ -41,9 +41,6 @@ class _ZognestClientsState extends ConsumerState<ZognestClients> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final clientFeedbacks = ref.watch(appControllerProvider).clientFeedbacks;
-    return clientFeedbacks.when(
-      data: (clientFeedbacks) {
         return Column(
           children: [
             const Divider(),
@@ -74,31 +71,35 @@ class _ZognestClientsState extends ConsumerState<ZognestClients> {
                 currentIndex++;
               },
             ),
-            SizedBox(
-              height: Constants.listHeight,
-              child: ListView.separated(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Responsive.isDesktop(context)
-                      ? Constants.webHorizontalPadding
-                      : Constants.mobileHorizontalPadding,
-                ),
-                scrollDirection: Axis.horizontal,
-                controller: _controller,
-                itemBuilder: (context, index) {
-                  return ClientItem(clientFeedback: clientFeedbacks[index]);
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(width: Constants.listCardSeparatorWidth),
-                itemCount: clientFeedbacks.length,
-              ),
+            Consumer(
+              builder: (context, ref , child) {
+                final clientFeedbacks = ref.watch(appControllerProvider).clientFeedbacks;
+                return clientFeedbacks.when(data: ( clientFeedbacks){
+                  return SizedBox(
+                    height: Constants.listHeight,
+                    child: ListView.separated(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Responsive.isDesktop(context)
+                            ? Constants.webHorizontalPadding
+                            : Constants.mobileHorizontalPadding,
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      controller: _controller,
+                      itemBuilder: (context, index) {
+                        return ClientItem(clientFeedback: clientFeedbacks[index]);
+                      },
+                      separatorBuilder: (context, index) =>
+                      const SizedBox(width: Constants.listCardSeparatorWidth),
+                      itemCount: clientFeedbacks.length,
+                    ),
+                  );
+                }, error:(_,__)=>const SizedBox.shrink(),
+                  loading: () =>const SizedBox.shrink(),);
+              }
             ),
             const Divider(),
           ],
         );
-      },
-      error: (_, __) => const Text('Error'),
-      loading: () => CircularProgressIndicator(color: theme.primaryColor),
-    );
   }
 }
 

@@ -7,14 +7,14 @@ import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 
-class ZognestVideo extends ConsumerStatefulWidget {
+class ZognestVideo extends StatefulWidget {
   const ZognestVideo({super.key});
 
   @override
-  ConsumerState<ZognestVideo> createState() => _ZognestVideoState();
+  State<ZognestVideo> createState() => _ZognestVideoState();
 }
 
-class _ZognestVideoState extends ConsumerState<ZognestVideo> {
+class _ZognestVideoState extends State<ZognestVideo> {
   late VideoPlayerController _controller;
 
   @override
@@ -40,40 +40,30 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
 
   @override
   Widget build(BuildContext context) {
-    final url = ref.watch(appControllerProvider).videoUrl;
+
     final theme = Theme.of(context);
-    url.when(
-      data: (url) {
-        if (_controller.value.isInitialized) return;
-        _controller = VideoPlayerController.networkUrl(
-          Uri.parse(url),
-        )..initialize().then((_) => setState(() {}));
-      },
-      error: (_, __) {
-        print('error');
-      },
-      loading: () {
-        print('loading');
-      },
-    );
     return Column(
       children: [
         const Divider(),
-        VisibilityDetector(
-          key: ValueKey(runtimeType.toString()),
-          onVisibilityChanged: (info) {
-            if (info.visibleFraction >= 3) {
-              if (_controller.value.isInitialized) _controller.play();
-            }
-          },
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: Responsive.isDesktop(context)
-                  ? Constants.webHorizontalPadding
-                  : Constants.mobileHorizontalPadding,
-            ),
-            child: _controller.value.isInitialized
-                ? AspectRatio(
+        Consumer(
+          builder: (context, ref, child) {
+            final url = ref.watch(appControllerProvider).videoUrl;
+            return url.when(data:(url){
+              return VisibilityDetector(
+                key: ValueKey(runtimeType.toString()),
+                onVisibilityChanged: (info) {
+                  if (info.visibleFraction >= 3) {
+                    if (_controller.value.isInitialized) _controller.play();
+                  }
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Responsive.isDesktop(context)
+                        ? Constants.webHorizontalPadding
+                        : Constants.mobileHorizontalPadding,
+                  ),
+                  child: _controller.value.isInitialized
+                      ? AspectRatio(
                     aspectRatio: Constants.videoAspectRatio,
                     child: Stack(
                       alignment: Alignment.bottomCenter,
@@ -149,8 +139,12 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
                       ],
                     ),
                   )
-                : const SizedBox.shrink(),
-          ),
+                      : const SizedBox.shrink(),
+                ),
+              );
+            } , error:(_,__)=>const SizedBox.shrink(),
+                loading: () =>const SizedBox.shrink());
+          }
         ),
         const Divider(),
       ],

@@ -66,17 +66,16 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
               if (_controller.value.isInitialized) _controller.play();
             }
           },
-
-
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: Constants.paddingHorizontalMobileAndWeb,
               ),
               child: _controller.value.isInitialized
                   ? Container(
-                decoration: BoxDecoration(
-                    border: Border.all(width: 5),
-                    borderRadius: BorderRadius.circular(25)),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(width:2)
+                    ),
                     child: AspectRatio(
                         aspectRatio: Constants.videoAspectRatio,
                         child: Stack(

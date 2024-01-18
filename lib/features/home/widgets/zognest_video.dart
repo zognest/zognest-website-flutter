@@ -79,7 +79,9 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         VideoPlayer(_controller),
-                        SizedBox.expand(
+
+
+                         SizedBox.expand(
                           child: GestureDetector(
                             onTap: () {
                               _controller.value.isPlaying

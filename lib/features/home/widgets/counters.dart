@@ -74,29 +74,24 @@ class _CountersState extends State<Counters>
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Responsive.isDesktop(context)
-                          ? Constants.webHorizontalPadding
-                          : Constants.mobileHorizontalPadding,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal:Constants.paddingHorizontalMobileAndWeb
                     ),
-                    child: FittedBox(
-                      child: Text(
-                        Strings.someCountThatMatters.toUpperCase(),
-                        style: theme.textTheme.headlineMedium?.copyWith(
-                          color: theme.primaryColor,
-                          fontSize: Responsive.isDesktop(context) ? 42 : 18,
-                          height: 0,
-                        ),
+                    // delet fitted box from here
+                    child: Text(
+                      Strings.someCountThatMatters.toUpperCase(),
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                        color: theme.primaryColor,
+                        fontSize: Responsive.isDesktop(context) ? 42 : 18,
+                        height: 0,
                       ),
                     ),
                   ),
                 ],
               ),
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Responsive.isDesktop(context)
-                      ? Constants.webHorizontalPadding
-                      : 16,
+                padding: const EdgeInsets.symmetric(
+                  horizontal:Constants.paddingHorizontalMobileAndWeb
                 ),
                 child: VisibilityDetector(
                   key: ValueKey(runtimeType.toString()),

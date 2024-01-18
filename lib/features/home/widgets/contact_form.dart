@@ -38,8 +38,8 @@ class ContactForm extends StatelessWidget {
                       child: SvgPicture.asset(Assets.impactLines),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.webHorizontalPadding,
+                      padding:  const EdgeInsets.symmetric(
+                        horizontal: Constants.paddingHorizontalMobileAndWeb,
                         vertical: Constants.webVerticalPadding,
                       ),
                       child: Row(
@@ -49,6 +49,7 @@ class ContactForm extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: FittedBox(
+                                // hassan
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,

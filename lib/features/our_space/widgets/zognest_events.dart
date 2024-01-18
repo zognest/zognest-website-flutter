@@ -36,10 +36,8 @@ class _ZognestEventsState extends ConsumerState<ZognestEvents> {
                   TabBar(
                     isScrollable: true,
                     tabAlignment: TabAlignment.start,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Responsive.isDesktop(context)
-                          ? Constants.webHorizontalPadding
-                          : Constants.mobileHorizontalPadding,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Constants.paddingHorizontalMobileAndWeb,
                     ),
                     indicator: ShapeDecoration(
                       color: theme.primaryColor,
@@ -87,10 +85,8 @@ class _ZognestEventsState extends ConsumerState<ZognestEvents> {
                     child: TabBarView(
                       children: eventsYears.map((year) {
                         return ListView.separated(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: Responsive.isDesktop(context)
-                                ? Constants.webHorizontalPadding
-                                : Constants.mobileHorizontalPadding,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal:Constants.paddingHorizontalMobileAndWeb,
                           ),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {

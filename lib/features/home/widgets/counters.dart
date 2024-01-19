@@ -75,15 +75,15 @@ class _CountersState extends State<Counters>
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.horizontalPadding),
-                    child: FittedBox(
-                      child: Text(
-                        Strings.someCountThatMatters.toUpperCase(),
-                        style: theme.textTheme.headlineMedium?.copyWith(
-                          color: theme.primaryColor,
-                          fontSize: Responsive.isDesktop(context) ? 42 : 18,
-                          height: 0,
-                        ),
+                      horizontal:Constants.horizontalPadding,
+                    ),
+                    // delet fitted box from here
+                    child: Text(
+                      Strings.someCountThatMatters.toUpperCase(),
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                        color: theme.primaryColor,
+                        fontSize: Responsive.isDesktop(context) ? 42 : 18,
+                        height: 0,
                       ),
                     ),
                   ),

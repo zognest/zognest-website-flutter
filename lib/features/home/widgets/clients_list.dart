@@ -114,20 +114,19 @@ class ItemServiceMarquee extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            FittedBox(
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(120),
-                ),
-                clipBehavior: Clip.hardEdge,
-                child: Image.network(project.icon),
+            // remove fitted box
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(120),
               ),
+              clipBehavior: Clip.hardEdge,
+              child: Image.network(project.icon),
             ),
             const SizedBox(width: 10),
             Text(project.title),

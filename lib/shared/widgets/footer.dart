@@ -86,24 +86,22 @@ class _FooterState extends State<Footer> {
                           size: Constants.zognestFooterSectionHeight * 0.15,
                         ),
                         const SizedBox(height: Spacing.s12),
-                        FittedBox(
-                          child: InkWell(
-                            onTap: () {},
-                            onHover: (over) {
-                              setState(() => hovered = over);
-                            },
-                            overlayColor: const MaterialStatePropertyAll(
-                                Palette.transparent),
-                            child: Text(
-                              Strings.zognestMail,
-                              style: theme.textTheme.headlineLarge?.copyWith(
-                                fontWeight: FontWeight.w700,
-                                fontSize:
-                                    Responsive.isDesktop(context) ? 70 : 20,
-                                color: hovered
-                                    ? theme.primaryColor
-                                    : const Color(0xffAEB2BA),
-                              ),
+                        InkWell(
+                          onTap: () {},
+                          onHover: (over) {
+                            setState(() => hovered = over);
+                          },
+                          overlayColor: const MaterialStatePropertyAll(
+                              Palette.transparent),
+                          child: Text(
+                            Strings.zognestMail,
+                            style: theme.textTheme.headlineLarge?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              fontSize:
+                                  Responsive.isDesktop(context) ? 70 : 20,
+                              color: hovered
+                                  ? theme.primaryColor
+                                  : const Color(0xffAEB2BA),
                             ),
                           ),
                         ),
@@ -171,16 +169,14 @@ class _FooterState extends State<Footer> {
                           ),
                         ),
                         const SizedBox(height: Spacing.l32),
-                        FittedBox(
-                          child: Text(
-                            Strings.copyRights,
-                            style: (Responsive.isDesktop(context)
-                                    ? theme.textTheme.labelMedium
-                                    : theme.textTheme.labelSmall)
-                                ?.copyWith(
-                              fontFamily: 'SF Pro Rounded',
-                              letterSpacing: -0.5,
-                            ),
+                        Text(
+                          Strings.copyRights,
+                          style: (Responsive.isDesktop(context)
+                                  ? theme.textTheme.labelMedium
+                                  : theme.textTheme.labelSmall)
+                              ?.copyWith(
+                            fontFamily: 'SF Pro Rounded',
+                            letterSpacing: -0.5,
                           ),
                         ),
                       ],

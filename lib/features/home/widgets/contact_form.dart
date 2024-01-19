@@ -257,9 +257,9 @@ class ContactFormMobile extends StatelessWidget {
                   Expanded(
                     child: PrimaryButton(
                       title: Strings.sendMessage.toUpperCase(),
-                      height: 50,
+                      height: 40,
                       textStyle: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                       onTap: () {},
                     ),
@@ -269,9 +269,9 @@ class ContactFormMobile extends StatelessWidget {
                     child: PrimaryButton(
                       title: Strings.requestCall.toUpperCase(),
                       backgroundColor: Palette.white,
-                      height: 50,
+                      height: 40,
                       textStyle: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                         color: Colors.black,
                       ),
                       onTap: () {},
@@ -282,6 +282,7 @@ class ContactFormMobile extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: Spacing.m18),
       ],
     );
   }

@@ -54,6 +54,7 @@ class GalleryDialog extends StatelessWidget {
               padding: const EdgeInsets.all(40),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   if (Responsive.isDesktop(context))
                     Expanded(

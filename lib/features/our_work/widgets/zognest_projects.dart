@@ -82,9 +82,9 @@ class _ZognestProjectsState extends State<ZognestProjects> {
                   return SizedBox(
                     height: Constants.listHeight,
                     child: ListView.separated(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: Constants.horizontalPadding,
-                      ),
+                      padding: const EdgeInsets.symmetric(
+                      horizontal: Constants.horizontalPadding,
+                    ),
                       scrollDirection: Axis.horizontal,
                       controller: _controller,
                       itemBuilder: (context, index) {

@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../config/constants.dart';
+
 import '../../../config/theme/palette.dart';
 import '../../../resources/spacing.dart';
 import '../../../resources/strings.dart';

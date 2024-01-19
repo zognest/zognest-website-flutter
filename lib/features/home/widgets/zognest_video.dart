@@ -56,9 +56,8 @@ class _ZognestVideoState extends State<ZognestVideo> {
                   }
                 },
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: Constants.horizontalPadding
-                  ),
+                  padding: const EdgeInsets.symmetric(
+                        horizontal: Constants.horizontalPadding),
                   child: _controller.value.isInitialized
                       ? AspectRatio(
                     aspectRatio: Constants.videoAspectRatio,

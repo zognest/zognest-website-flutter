@@ -13,14 +13,14 @@ import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ZognestProjects extends ConsumerStatefulWidget {
+class ZognestProjects extends StatefulWidget {
   const ZognestProjects({super.key});
 
   @override
-  ConsumerState<ZognestProjects> createState() => _ZognestProjectsState();
+  State<ZognestProjects> createState() => _ZognestProjectsState();
 }
 
-class _ZognestProjectsState extends ConsumerState<ZognestProjects> {
+class _ZognestProjectsState extends State<ZognestProjects> {
   late final ScrollController _controller;
   int currentIndex = 1;
 
@@ -38,10 +38,9 @@ class _ZognestProjectsState extends ConsumerState<ZognestProjects> {
 
   @override
   Widget build(BuildContext context) {
-    final project = ref.watch(appControllerProvider).projects;
+
     final theme = Theme.of(context);
-    return project.when(
-      data: (project) {
+
         return Column(
           children: [
             if (Responsive.isDesktop(context)) const Divider(),
@@ -76,28 +75,34 @@ class _ZognestProjectsState extends ConsumerState<ZognestProjects> {
                 currentIndex++;
               },
             ),
-            SizedBox(
-              height: Constants.listHeight,
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.horizontalPadding),
-                scrollDirection: Axis.horizontal,
-                controller: _controller,
-                itemBuilder: (context, index) {
-                  return ProjectItem(project: project[index]);
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(width: Constants.listCardSeparatorWidth),
-                itemCount: project.length,
-              ),
+            Consumer(
+              builder: (context, ref , _) {
+                final project = ref.watch(appControllerProvider).projects;
+               return project.when(data: (project){
+                  return SizedBox(
+                    height: Constants.listHeight,
+                    child: ListView.separated(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Constants.horizontalPadding,
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      controller: _controller,
+                      itemBuilder: (context, index) {
+                        return ProjectItem(project: project[index]);
+                      },
+                      separatorBuilder: (context, index) =>
+                      const SizedBox(width: Constants.listCardSeparatorWidth),
+                      itemCount: project.length,
+                    ),
+                  );
+                }, error:(_,__)=>const SizedBox.shrink(),
+                  loading: () =>const SizedBox.shrink());
+
+              }
             ),
             const Divider(),
           ],
         );
-      },
-      error: (_, __) => const Text('error'),
-      loading: () => CircularProgressIndicator(color: theme.primaryColor),
-    );
   }
 }
 

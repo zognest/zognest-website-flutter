@@ -18,14 +18,14 @@ import 'package:zognest_website/shared/widgets/technology_container.dart';
 
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ZognestStaff extends ConsumerStatefulWidget {
+class ZognestStaff extends StatefulWidget {
   const ZognestStaff({super.key});
 
   @override
-  ConsumerState<ZognestStaff> createState() => _ZognestServicesStaff();
+  State<ZognestStaff> createState() => _ZognestServicesStaff();
 }
 
-class _ZognestServicesStaff extends ConsumerState<ZognestStaff> {
+class _ZognestServicesStaff extends State<ZognestStaff> {
   late final ScrollController _controller;
   int currentIndex = 1;
 
@@ -44,9 +44,6 @@ class _ZognestServicesStaff extends ConsumerState<ZognestStaff> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final staff = ref.watch(appControllerProvider).staff;
-    return staff.when(
-        data: (staff) {
           return Column(
             children: [
               const Divider(),
@@ -76,37 +73,41 @@ class _ZognestServicesStaff extends ConsumerState<ZognestStaff> {
                   currentIndex++;
                 },
               ),
-              SizedBox(
-                height: Constants.listHeight,
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Constants.horizontalPadding,
-                  ),
-                  scrollDirection: Axis.horizontal,
-                  controller: _controller,
-                  itemBuilder: (context, index) {
-
+              Consumer(
+                builder: (context, ref , child) {
+                  final staff = ref.watch(appControllerProvider).staff;
+                  return staff.when(data: (staff){
                     return SizedBox(
-                      width: Constants.listCardWidth,
-                      child: FlippingWidget(
-                        front: FrontCard(staff: staff[index]),
-                        back: BackCard(staff: staff[index]),
+                      height: Constants.listHeight,
+                      child: ListView.separated(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Constants.horizontalPadding
+                        ),
+                        scrollDirection: Axis.horizontal,
+                        controller: _controller,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            width: Constants.listCardWidth,
+                            child: FlippingWidget(
+                              front: FrontCard(staff: staff[index]),
+                              back: BackCard(staff: staff[index]),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) => SizedBox(
+                          width: Constants.listCardSeparatorWidth *
+                              (Responsive.isDesktop(context) ? 1 : 0.5),
+                        ),
+                        itemCount: staff.length,
                       ),
                     );
-                  },
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: Constants.listCardSeparatorWidth *
-                        (Responsive.isDesktop(context) ? 1 : 0.5),
-                  ),
-                  itemCount: staff.length,
-                ),
+                  },error: (_, __) => const Text('error'),
+                      loading: () => CircularProgressIndicator(color: theme.primaryColor));
+                }
               ),
               const Divider(),
             ],
           );
-        },
-        error: (_, __) => const Text('error'),
-        loading: () => CircularProgressIndicator(color: theme.primaryColor));
   }
 }
 

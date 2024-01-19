@@ -14,14 +14,14 @@ import 'package:zognest_website/shared/widgets/technology_container.dart';
 import '../../../riverpod/controller.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ZognestServices extends ConsumerStatefulWidget {
+class ZognestServices extends StatefulWidget {
   const ZognestServices({super.key});
 
   @override
-  ConsumerState<ZognestServices> createState() => _ZognestServicesState();
+  State<ZognestServices> createState() => _ZognestServicesState();
 }
 
-class _ZognestServicesState extends ConsumerState<ZognestServices> {
+class _ZognestServicesState extends State<ZognestServices> {
   late final ScrollController _controller;
   int currentIndex = 1;
 
@@ -40,9 +40,6 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final services = ref.watch(appControllerProvider).services;
-    return services.when(
-      data: (services) {
         return Column(
           children: [
             const Divider(),
@@ -75,9 +72,13 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
                     }
                   : null,
             ),
-            !Responsive.isMobile(context)
-                ? SizedBox(
-              height: Constants.servicesCardHeight,
+            Consumer(
+              builder: (context, ref ,child) {
+                final services = ref.watch(appControllerProvider).services;
+                return services.when(data:(services) {
+                  return !Responsive.isMobile(context)
+                      ? SizedBox(
+                    height: Constants.servicesCardHeight,
                     child: ListView.separated(
                       padding: const EdgeInsets.symmetric(
                           horizontal: Constants.horizontalPadding),
@@ -98,11 +99,11 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
                         );
                       },
                       separatorBuilder: (context, index) =>
-                          const SizedBox(width: Spacing.l24),
+                      const SizedBox(width: Spacing.l24),
                       itemCount: services.length,
                     ),
                   )
-                : Padding(
+                      : Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: Constants.mobileHorizontalPadding,
                     ),
@@ -110,28 +111,30 @@ class _ZognestServicesState extends ConsumerState<ZognestServices> {
                       children: services
                           .map(
                             (service) => Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: Spacing.s12),
-                              child: SizedBox(
-                                height: Constants.servicesCardHeight,
-                                width: double.infinity,
-                                child: FlippingWidget(
-                                  front: FrontService(service: service),
-                                  back: BackService(service: service),
-                                ),
-                              ),
+                          padding:
+                          const EdgeInsets.only(bottom: Spacing.s12),
+                          child: SizedBox(
+                            height: Constants.servicesCardHeight,
+                            width: double.infinity,
+                            child: FlippingWidget(
+                              front: FrontService(service: service),
+                              back: BackService(service: service),
                             ),
-                          )
+                          ),
+                        ),
+                      )
                           .toList(),
                     ),
-                  ),
+                  );
+                }, error:(_,__)=>const SizedBox.shrink(),
+                  loading: () =>const SizedBox.shrink(),
+                );
+
+              }
+            ),
             const Divider(),
           ],
         );
-      },
-      error: (_, __) => const Text('error'),
-      loading: () => CircularProgressIndicator(color: theme.primaryColor),
-    );
   }
 }
 

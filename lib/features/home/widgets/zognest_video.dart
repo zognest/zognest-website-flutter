@@ -6,14 +6,14 @@ import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 
-class ZognestVideo extends ConsumerStatefulWidget {
+class ZognestVideo extends StatefulWidget {
   const ZognestVideo({super.key});
 
   @override
-  ConsumerState<ZognestVideo> createState() => _ZognestVideoState();
+  State<ZognestVideo> createState() => _ZognestVideoState();
 }
 
-class _ZognestVideoState extends ConsumerState<ZognestVideo> {
+class _ZognestVideoState extends State<ZognestVideo> {
   late VideoPlayerController _controller;
 
   @override
@@ -39,123 +39,110 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
 
   @override
   Widget build(BuildContext context) {
-    final url = ref.watch(appControllerProvider).videoUrl;
+
     final theme = Theme.of(context);
-    url.when(
-      data: (url) {
-        if (_controller.value.isInitialized) return;
-        _controller = VideoPlayerController.networkUrl(
-          Uri.parse(url),
-        )..initialize().then((_) => setState(() {}));
-      },
-      error: (_, __) {
-        print('error');
-      },
-      loading: () {
-        print('loading');
-      },
-    );
     return Column(
       children: [
         const Divider(),
-        VisibilityDetector(
-          key: ValueKey(runtimeType.toString()),
-          onVisibilityChanged: (info) {
-            if (info.visibleFraction >= 3) {
-              if (_controller.value.isInitialized) _controller.play();
-            }
-          },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Constants.horizontalPadding,
-            ),
-              child: _controller.value.isInitialized
-                  ? Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(width:2)
-                    ),
-                    child: AspectRatio(
-                        aspectRatio: Constants.videoAspectRatio,
-                        child: Stack(
-                          alignment: Alignment.bottomCenter,
+        Consumer(
+          builder: (context, ref, child) {
+            final url = ref.watch(appControllerProvider).videoUrl;
+            return url.when(data:(url){
+              return VisibilityDetector(
+                key: ValueKey(runtimeType.toString()),
+                onVisibilityChanged: (info) {
+                  if (info.visibleFraction >= 3) {
+                    if (_controller.value.isInitialized) _controller.play();
+                  }
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Constants.horizontalPadding
+                  ),
+                  child: _controller.value.isInitialized
+                      ? AspectRatio(
+                    aspectRatio: Constants.videoAspectRatio,
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        VideoPlayer(_controller),
+                        SizedBox.expand(
+                          child: GestureDetector(
+                            onTap: () {
+                              _controller.value.isPlaying
+                                  ? _controller.pause()
+                                  : _controller.play();
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            VideoPlayer(_controller),
-                            SizedBox.expand(
-                              child: GestureDetector(
-                                onTap: () {
-                                  _controller.value.isPlaying
-                                      ? _controller.pause()
-                                      : _controller.play();
-                                  setState(() {});
-                                },
+                            VideoProgressIndicator(
+                              _controller,
+                              colors: VideoProgressColors(
+                                playedColor: theme.primaryColor,
                               ),
+                              allowScrubbing: false,
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
+                            Row(
                               children: [
-                                VideoProgressIndicator(
-                                  _controller,
-                                  colors: VideoProgressColors(
-                                    playedColor: theme.primaryColor,
+                                IconButton(
+                                  onPressed: () {
+                                    _controller.value.isPlaying
+                                        ? _controller.pause()
+                                        : _controller.play();
+                                    setState(() {});
+                                  },
+                                  icon: Icon(
+                                    _controller.value.isPlaying
+                                        ? Icons.pause_rounded
+                                        : Icons.play_arrow_rounded,
+                                    color: theme.primaryColor,
+                                    size: 34,
                                   ),
-                                  allowScrubbing: false,
                                 ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        _controller.value.isPlaying
-                                            ? _controller.pause()
-                                            : _controller.play();
-                                        setState(() {});
-                                      },
-                                      icon: Icon(
-                                        _controller.value.isPlaying
-                                            ? Icons.pause_rounded
-                                            : Icons.play_arrow_rounded,
-                                        color: theme.primaryColor,
-                                        size: 34,
-                                      ),
-                                    ),
-                                    const SizedBox(width: Spacing.s8),
-                                    IconButton(
-                                      onPressed: () {
-                                        _controller.value.volume == 0
-                                            ? _controller.setVolume(1)
-                                            : _controller.setVolume(0);
-                                        setState(() {});
-                                      },
-                                      icon: Icon(
-                                        _controller.value.volume == 0
-                                            ? Icons.volume_off_rounded
-                                            : Icons.volume_up_rounded,
-                                        // color: theme.primaryColor,
-                                        size: 24,
-                                      ),
-                                    ),
-                                    const SizedBox(width: Spacing.m16),
-                                    StreamBuilder(
-                                      stream: Stream.periodic(
-                                          const Duration(seconds: 1)),
-                                      builder: (_, __) {
-                                        return Text(
-                                          '${formatDuration(_controller.value.position)} / ${formatDuration(_controller.value.duration)}',
-                                        );
-                                      },
-                                    ),
-                                  ],
+                                const SizedBox(width: Spacing.s8),
+                                IconButton(
+                                  onPressed: () {
+                                    _controller.value.volume == 0
+                                        ? _controller.setVolume(1)
+                                        : _controller.setVolume(0);
+                                    setState(() {});
+                                  },
+                                  icon: Icon(
+                                    _controller.value.volume == 0
+                                        ? Icons.volume_off_rounded
+                                        : Icons.volume_up_rounded,
+                                    // color: theme.primaryColor,
+                                    size: 24,
+                                  ),
+                                ),
+                                const SizedBox(width: Spacing.m16),
+                                StreamBuilder(
+                                  stream: Stream.periodic(const Duration(seconds:1)),
+                                  builder: (_, __) {
+                                    return Text(
+                                      '${formatDuration(_controller.value.position)} / ${formatDuration(_controller.value.duration)}',
+                                    );
+                                  },
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ),
+                      ],
+                    ),
                   )
-                  : const SizedBox.shrink(),
-            ),
-          ),
+                      : const SizedBox.shrink(),
+                ),
+              );
+            } , error:(_,__)=>const SizedBox.shrink(),
+                loading: () =>const SizedBox.shrink());
+          }
+        ),
         const Divider(),
       ],
     );

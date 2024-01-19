@@ -14,14 +14,14 @@ import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import '../../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ZognestBlogs extends ConsumerStatefulWidget {
+class ZognestBlogs extends StatefulWidget {
   const ZognestBlogs({super.key});
 
   @override
-  ConsumerState<ZognestBlogs> createState() => _ZognestBlogsState();
+  State<ZognestBlogs> createState() => _ZognestBlogsState();
 }
 
-class _ZognestBlogsState extends ConsumerState<ZognestBlogs> {
+class _ZognestBlogsState extends State<ZognestBlogs> {
   late final ScrollController _controller;
   int currentIndex = 1;
 
@@ -40,60 +40,61 @@ class _ZognestBlogsState extends ConsumerState<ZognestBlogs> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final blogs = ref.watch(appControllerProvider).blogs;
-    return blogs.when(
-      data: (blogs) {
-        return Column(
-          children: [
-            const Divider(),
-            ScrollHeadline(
-              headline: TextSpan(
-                children: [
-                  TextSpan(
-                    text: '${Strings.our}\n'.toUpperCase(),
-                    style: theme.textTheme.displaySmall
-                        ?.copyWith(foreground: TextThemes.foreground),
-                  ),
-                  TextSpan(
-                    text: Strings.blogs.toUpperCase(),
-                    style: theme.textTheme.displaySmall,
-                  ),
-                ],
+    return Column(
+      children: [
+        const Divider(),
+        ScrollHeadline(
+          headline: TextSpan(
+            children: [
+              TextSpan(
+                text: '${Strings.our}\n'.toUpperCase(),
+                style: theme.textTheme.displaySmall
+                    ?.copyWith(foreground: TextThemes.foreground),
               ),
-              onTapScroll: () {
-                if (_controller.offset ==
-                    _controller.position.maxScrollExtent) {
-                  currentIndex = 0;
-                }
-                _controller.animateTo(
-                  Constants.blogsItemWidth * currentIndex,
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.ease,
+              TextSpan(
+                text: Strings.blogs.toUpperCase(),
+                style: theme.textTheme.displaySmall,
+              ),
+            ],
+          ),
+          onTapScroll: () {
+            if (_controller.offset == _controller.position.maxScrollExtent) {
+              currentIndex = 0;
+            }
+            _controller.animateTo(
+              Constants.blogsItemWidth * currentIndex,
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.ease,
+            );
+            currentIndex++;
+          },
+        ),
+        Consumer(builder: (context, ref, child) {
+          final blogs = ref.watch(appControllerProvider).blogs;
+          return blogs.when(
+              data: (blogs) {
+                return SizedBox(
+                  height: Constants.listHeight,
+                  child: ListView.separated(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Constants.horizontalPadding
+                    ),
+                    scrollDirection: Axis.horizontal,
+                    controller: _controller,
+                    itemBuilder: (context, index) {
+                      return BlogItem(blog: blogs[index]);
+                    },
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: Constants.listCardSeparatorWidth),
+                    itemCount: blogs.length,
+                  ),
                 );
-                currentIndex++;
               },
-            ),
-            SizedBox(
-              height: Constants.listHeight,
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.horizontalPadding),
-                scrollDirection: Axis.horizontal,
-                controller: _controller,
-                itemBuilder: (context, index) {
-                  return BlogItem(blog: blogs[index]);
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(width: Constants.listCardSeparatorWidth),
-                itemCount: blogs.length,
-              ),
-            ),
-            const Divider(),
-          ],
-        );
-      },
-      error: (_, __) => const Text('Error'),
-      loading: () => CircularProgressIndicator(color: theme.primaryColor),
+            error:(_,__)=>const SizedBox.shrink(),
+            loading: () =>const SizedBox.shrink());
+        }),
+        const Divider(),
+      ],
     );
   }
 }

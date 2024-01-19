@@ -13,7 +13,7 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 import '../../../riverpod/controller.dart';
 import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/network_fading_image.dart';
-
+ //todo ask him about this
 class ServicesBrowser extends ConsumerStatefulWidget {
   const ServicesBrowser({super.key});
 
@@ -34,9 +34,7 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
       data: (purchasableServices) {
         return Column(
           children: [
-
             if (servicesCart.isNotEmpty) ...[
-             /*const ServicesCart(),,*/
               Responsive.isDesktop(context) ? const ServicesCart() :const ServicesCartMobile(),
               const SizedBox(height: Constants.sectionSpacing),
             ],
@@ -141,160 +139,164 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
   }
 }
 
-class ServicesCart extends ConsumerWidget {
+class ServicesCart extends StatelessWidget {
   const ServicesCart({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final width = MediaQuery.sizeOf(context).width;
-    final cartServices = ref.watch(appControllerProvider).cartServices;
     return Column(
       children: [
         const Divider(),
-        SizedBox(
-          height: 600,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: Constants.horizontalPadding,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: const Color(0xffAEB2BA)),
-                    ),
-                    height: double.infinity,
-                    padding: const EdgeInsets.all(12),
-                    child: SingleChildScrollView(
-                      child: Wrap(
-                        runSpacing: Spacing.m20,
-                        spacing: Spacing.m20,
-                        children: cartServices.map((service) {
-                          return Container(
-                            width: width * 0.28,
-                            height: 140,
-                            color: Palette.cardBackgroundColor,
-                            child: Row(
-                              children: [
-                                Image.network(
-                                  service.image,
-                                  fit: BoxFit.cover,
-                                ),
-                                const SizedBox(width: 20),
-                                Expanded(
-                                  child: Text(
-                                    service.title,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: theme.textTheme.bodyLarge?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 20),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Palette.transparent,
-                                    shape: const CircleBorder(
-                                      side: BorderSide(color: Palette.white),
-                                    ),
-                                    minimumSize: const Size.fromRadius(28),
-                                  ),
-                                  child: const Icon(
-                                    Icons.close,
-                                    size: 14,
-                                  ),
-                                  onPressed: () {
-                                    ref
-                                        .read(appControllerProvider.notifier)
-                                        .removeService(service);
-                                  },
-                                ),
-                                const SizedBox(width: 20),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
+        Consumer(
+          builder: (context, ref, _) {
+            final cartServices = ref.watch(appControllerProvider).cartServices;
+            return SizedBox(
+              height: 600,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Constants.horizontalPadding,
                 ),
-                const SizedBox(width: 50),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const InputFormField(
-                        hint: Strings.yourName,
-                        required: false,
-                        keyboardType: TextInputType.name,
-                      ),
-                      const Row(
-                        children: [
-                          Expanded(
-                            child: InputFormField(
-                              hint: Strings.yourEmail,
-                              required: false,
-                              keyboardType: TextInputType.emailAddress,
-                            ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: const Color(0xffAEB2BA)),
+                        ),
+                        height: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        child: SingleChildScrollView(
+                          child: Wrap(
+                            runSpacing: Spacing.m20,
+                            spacing: Spacing.m20,
+                            children: cartServices.map((service) {
+                              return Container(
+                                width: width * 0.28,
+                                height: 140,
+                                color: Palette.cardBackgroundColor,
+                                child: Row(
+                                  children: [
+                                    Image.network(
+                                      service.image,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    const SizedBox(width: 20),
+                                    Expanded(
+                                      child: Text(
+                                        service.title,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: theme.textTheme.bodyLarge?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 20),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Palette.transparent,
+                                        shape: const CircleBorder(
+                                          side: BorderSide(color: Palette.white),
+                                        ),
+                                        minimumSize: const Size.fromRadius(28),
+                                      ),
+                                      child: const Icon(
+                                        Icons.close,
+                                        size: 14,
+                                      ),
+                                      onPressed: () {
+                                        ref
+                                            .read(appControllerProvider.notifier)
+                                            .removeService(service);
+                                      },
+                                    ),
+                                    const SizedBox(width: 20),
+                                  ],
+                                ),
+                              );
+                            }).toList(),
                           ),
-                          SizedBox(width: 12),
-                          Expanded(
-                            child: InputFormField(
-                              hint: Strings.mobileNo,
-                              required: false,
-                              keyboardType: TextInputType.phone,
-                            ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 50),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const InputFormField(
+                            hint: Strings.yourName,
+                            required: false,
+                            keyboardType: TextInputType.name,
+                          ),
+                          const Row(
+                            children: [
+                              Expanded(
+                                child: InputFormField(
+                                  hint: Strings.yourEmail,
+                                  required: false,
+                                  keyboardType: TextInputType.emailAddress,
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Expanded(
+                                child: InputFormField(
+                                  hint: Strings.mobileNo,
+                                  required: false,
+                                  keyboardType: TextInputType.phone,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const InputFormField(
+                            hint: Strings.budget,
+                            required: false,
+                            keyboardType: TextInputType.text,
+                          ),
+                          const InputFormField(
+                            hint: Strings.message,
+                            required: true,
+                            multiline: true,
+                            keyboardType: TextInputType.multiline,
+                          ),
+                          const SizedBox(height: 30),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: PrimaryButton(
+                                  title: Strings.sendMessage.toUpperCase(),
+                                  height: 70,
+                                  textStyle: theme.textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  onTap: () {},
+                                ),
+                              ),
+                              const SizedBox(width: Spacing.s8),
+                              Expanded(
+                                child: PrimaryButton(
+                                  title: Strings.requestCall.toUpperCase(),
+                                  height: 70,
+                                  textStyle: theme.textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  onTap: () {},
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      const InputFormField(
-                        hint: Strings.budget,
-                        required: false,
-                        keyboardType: TextInputType.text,
-                      ),
-                      const InputFormField(
-                        hint: Strings.message,
-                        required: true,
-                        multiline: true,
-                        keyboardType: TextInputType.multiline,
-                      ),
-                      const SizedBox(height: 30),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: PrimaryButton(
-                              title: Strings.sendMessage.toUpperCase(),
-                              height: 70,
-                              textStyle: theme.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
-                              onTap: () {},
-                            ),
-                          ),
-                          const SizedBox(width: Spacing.s8),
-                          Expanded(
-                            child: PrimaryButton(
-                              title: Strings.requestCall.toUpperCase(),
-                              height: 70,
-                              textStyle: theme.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
-                              onTap: () {},
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          }
         ),
         const Divider(),
       ],

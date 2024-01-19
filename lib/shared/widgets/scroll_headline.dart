@@ -21,7 +21,7 @@ class ScrollHeadline extends StatelessWidget {
     final theme = Theme.of(context);
     return Padding(
       padding: EdgeInsets.symmetric(
-     horizontal:Constants.paddingHorizontalMobileAndWeb,
+     horizontal: Constants.horizontalPadding,
         vertical: Responsive.isDesktop(context) ? Spacing.l40 : Spacing.m16,
       ),
       child: Row(

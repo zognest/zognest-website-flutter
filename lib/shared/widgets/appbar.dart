@@ -118,7 +118,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
         height: Constants.appBarHeight,
         padding: const EdgeInsets.symmetric(
           vertical: Spacing.s12,
-          horizontal:Constants.paddingHorizontalMobileAndWeb,
+          horizontal: Constants.horizontalPadding,
         ),
         decoration: BoxDecoration(
           color: Palette.appBarBackground.withOpacity(0.6),

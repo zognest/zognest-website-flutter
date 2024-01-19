@@ -75,8 +75,7 @@ class _ZognestOffersState extends ConsumerState<ZognestOffers> {
                 height: Constants.zognestOffersListHeight,
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.paddingHorizontalMobileAndWeb
-                  ),
+                      horizontal: Constants.horizontalPadding),
                   scrollDirection: Axis.horizontal,
                   controller: _controller,
                   itemBuilder: (context, index) {

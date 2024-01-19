@@ -79,8 +79,7 @@ class _ZognestMocksState extends State<ZognestMocks>
             Image.asset(Assets.mercury),
             Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: Constants.paddingHorizontalMobileAndWeb
-              ),
+                horizontal: Constants.horizontalPadding),
               child: SizedBox(
                 width:
                     size.width * (Responsive.isDesktop(context) ? 0.45 : 0.7),

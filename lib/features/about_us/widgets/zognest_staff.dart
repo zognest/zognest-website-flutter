@@ -80,7 +80,7 @@ class _ZognestServicesStaff extends ConsumerState<ZognestStaff> {
                 height: Constants.listHeight,
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(
-                    horizontal:Constants.paddingHorizontalMobileAndWeb,
+                    horizontal: Constants.horizontalPadding,
                   ),
                   scrollDirection: Axis.horizontal,
                   controller: _controller,

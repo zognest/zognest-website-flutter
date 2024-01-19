@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
-import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 
@@ -68,8 +67,8 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
           },
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: Constants.paddingHorizontalMobileAndWeb,
-              ),
+                horizontal: Constants.horizontalPadding,
+            ),
               child: _controller.value.isInitialized
                   ? Container(
                     decoration: BoxDecoration(

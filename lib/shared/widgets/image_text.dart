@@ -40,7 +40,7 @@ class ImageText extends StatelessWidget {
                         Palette.cardBackgroundColor.withOpacity(0.5),
                     child: Padding(
                       padding:  const EdgeInsets.symmetric(
-                        horizontal:Constants.paddingHorizontalMobileAndWeb,
+                        horizontal: Constants.horizontalPadding,
                       ),
                       child: Row(
                         children: [

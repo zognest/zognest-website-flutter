@@ -75,8 +75,7 @@ class _CountersState extends State<Counters>
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal:Constants.paddingHorizontalMobileAndWeb
-                    ),
+                      horizontal: Constants.horizontalPadding),
                     child: FittedBox(
                       child: Text(
                         Strings.someCountThatMatters.toUpperCase(),
@@ -92,8 +91,7 @@ class _CountersState extends State<Counters>
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal:Constants.paddingHorizontalMobileAndWeb
-                ),
+                    horizontal: Constants.horizontalPadding),
                 child: VisibilityDetector(
                   key: ValueKey(runtimeType.toString()),
                   onVisibilityChanged: (info) {

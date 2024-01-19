@@ -6,9 +6,8 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 
 class Constants {
   /// Horizontal padding of any main component or the children inside it
-  static const webHorizontalPadding = Spacing.xl72;
   static const mobileHorizontalPadding = Spacing.m20;
-  static const paddingHorizontalMobileAndWeb = 24.0;
+  static const horizontalPadding = 24.0;
 
   // region Horizontal Lists
   static const listHeight = 500.0;

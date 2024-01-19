@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
-import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
@@ -78,8 +77,7 @@ class _ZognestClientsState extends ConsumerState<ZognestClients> {
               height: Constants.listHeight,
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.paddingHorizontalMobileAndWeb
-                ),
+                  horizontal: Constants.horizontalPadding),
                 scrollDirection: Axis.horizontal,
                 controller: _controller,
                 itemBuilder: (context, index) {

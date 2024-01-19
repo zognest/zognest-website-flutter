@@ -12,10 +12,8 @@ class OurWorkText extends StatelessWidget {
       children: [
         const Divider(),
         Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: Responsive.isDesktop(context)
-                ? Constants.webHorizontalPadding
-                : Constants.mobileHorizontalPadding,
+          padding: const EdgeInsets.symmetric(
+            horizontal:Constants.paddingHorizontalMobileAndWeb
           ),
           child: Stack(
             alignment: Alignment.center,

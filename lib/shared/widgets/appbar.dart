@@ -116,11 +116,9 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
       child: FrostedContainer(
         width: double.infinity,
         height: Constants.appBarHeight,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: Spacing.s12,
-          horizontal: Responsive.isDesktop(context)
-              ? Constants.webHorizontalPadding
-              : Constants.mobileHorizontalPadding,
+          horizontal:Constants.paddingHorizontalMobileAndWeb,
         ),
         decoration: BoxDecoration(
           color: Palette.appBarBackground.withOpacity(0.6),

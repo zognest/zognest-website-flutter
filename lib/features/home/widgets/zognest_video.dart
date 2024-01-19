@@ -66,92 +66,97 @@ class _ZognestVideoState extends ConsumerState<ZognestVideo> {
               if (_controller.value.isInitialized) _controller.play();
             }
           },
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: Responsive.isDesktop(context)
-                  ? Constants.webHorizontalPadding
-                  : Constants.mobileHorizontalPadding,
-            ),
-            child: _controller.value.isInitialized
-                ? AspectRatio(
-                    aspectRatio: Constants.videoAspectRatio,
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        VideoPlayer(_controller),
-                        SizedBox.expand(
-                          child: GestureDetector(
-                            onTap: () {
-                              _controller.value.isPlaying
-                                  ? _controller.pause()
-                                  : _controller.play();
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Constants.paddingHorizontalMobileAndWeb,
+              ),
+              child: _controller.value.isInitialized
+                  ? Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(width:2)
+                    ),
+                    child: AspectRatio(
+                        aspectRatio: Constants.videoAspectRatio,
+                        child: Stack(
+                          alignment: Alignment.bottomCenter,
                           children: [
-                            VideoProgressIndicator(
-                              _controller,
-                              colors: VideoProgressColors(
-                                playedColor: theme.primaryColor,
+                            VideoPlayer(_controller),
+                            SizedBox.expand(
+                              child: GestureDetector(
+                                onTap: () {
+                                  _controller.value.isPlaying
+                                      ? _controller.pause()
+                                      : _controller.play();
+                                  setState(() {});
+                                },
                               ),
-                              allowScrubbing: false,
                             ),
-                            Row(
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                IconButton(
-                                  onPressed: () {
-                                    _controller.value.isPlaying
-                                        ? _controller.pause()
-                                        : _controller.play();
-                                    setState(() {});
-                                  },
-                                  icon: Icon(
-                                    _controller.value.isPlaying
-                                        ? Icons.pause_rounded
-                                        : Icons.play_arrow_rounded,
-                                    color: theme.primaryColor,
-                                    size: 34,
+                                VideoProgressIndicator(
+                                  _controller,
+                                  colors: VideoProgressColors(
+                                    playedColor: theme.primaryColor,
                                   ),
+                                  allowScrubbing: false,
                                 ),
-                                const SizedBox(width: Spacing.s8),
-                                IconButton(
-                                  onPressed: () {
-                                    _controller.value.volume == 0
-                                        ? _controller.setVolume(1)
-                                        : _controller.setVolume(0);
-                                    setState(() {});
-                                  },
-                                  icon: Icon(
-                                    _controller.value.volume == 0
-                                        ? Icons.volume_off_rounded
-                                        : Icons.volume_up_rounded,
-                                    // color: theme.primaryColor,
-                                    size: 24,
-                                  ),
-                                ),
-                                const SizedBox(width: Spacing.m16),
-                                StreamBuilder(
-                                  stream: Stream.periodic(const Duration(seconds:1)),
-                                  builder: (_, __) {
-                                    return Text(
-                                      '${formatDuration(_controller.value.position)} / ${formatDuration(_controller.value.duration)}',
-                                    );
-                                  },
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        _controller.value.isPlaying
+                                            ? _controller.pause()
+                                            : _controller.play();
+                                        setState(() {});
+                                      },
+                                      icon: Icon(
+                                        _controller.value.isPlaying
+                                            ? Icons.pause_rounded
+                                            : Icons.play_arrow_rounded,
+                                        color: theme.primaryColor,
+                                        size: 34,
+                                      ),
+                                    ),
+                                    const SizedBox(width: Spacing.s8),
+                                    IconButton(
+                                      onPressed: () {
+                                        _controller.value.volume == 0
+                                            ? _controller.setVolume(1)
+                                            : _controller.setVolume(0);
+                                        setState(() {});
+                                      },
+                                      icon: Icon(
+                                        _controller.value.volume == 0
+                                            ? Icons.volume_off_rounded
+                                            : Icons.volume_up_rounded,
+                                        // color: theme.primaryColor,
+                                        size: 24,
+                                      ),
+                                    ),
+                                    const SizedBox(width: Spacing.m16),
+                                    StreamBuilder(
+                                      stream: Stream.periodic(
+                                          const Duration(seconds: 1)),
+                                      builder: (_, __) {
+                                        return Text(
+                                          '${formatDuration(_controller.value.position)} / ${formatDuration(_controller.value.duration)}',
+                                        );
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
                   )
-                : const SizedBox.shrink(),
+                  : const SizedBox.shrink(),
+            ),
           ),
-        ),
         const Divider(),
       ],
     );

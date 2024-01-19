@@ -77,10 +77,8 @@ class _ZognestClientsState extends ConsumerState<ZognestClients> {
             SizedBox(
               height: Constants.listHeight,
               child: ListView.separated(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Responsive.isDesktop(context)
-                      ? Constants.webHorizontalPadding
-                      : Constants.mobileHorizontalPadding,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Constants.paddingHorizontalMobileAndWeb
                 ),
                 scrollDirection: Axis.horizontal,
                 controller: _controller,

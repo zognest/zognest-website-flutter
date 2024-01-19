@@ -74,10 +74,8 @@ class _CountersState extends State<Counters>
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Responsive.isDesktop(context)
-                          ? Constants.webHorizontalPadding
-                          : Constants.mobileHorizontalPadding,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal:Constants.paddingHorizontalMobileAndWeb
                     ),
                     child: FittedBox(
                       child: Text(
@@ -93,10 +91,8 @@ class _CountersState extends State<Counters>
                 ],
               ),
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Responsive.isDesktop(context)
-                      ? Constants.webHorizontalPadding
-                      : 16,
+                padding: const EdgeInsets.symmetric(
+                  horizontal:Constants.paddingHorizontalMobileAndWeb
                 ),
                 child: VisibilityDetector(
                   key: ValueKey(runtimeType.toString()),

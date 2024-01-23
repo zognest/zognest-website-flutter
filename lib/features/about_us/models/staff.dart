@@ -41,7 +41,7 @@ class Staff extends Equatable {
       url: url ?? this.url,
       technologies: technologies ?? this.technologies,
       avatar: avatar ?? this.avatar,
-      color: color ?? this.color,
+      color: color??this.color,
     );
   }
 
@@ -51,6 +51,7 @@ class Staff extends Equatable {
       'position': position,
       'description': description,
       'url': url,
+      'color':color,
       'backgroundImage': avatar,
       'technologies': technologies.map((x) => x.toMap()).toList(),
     };
@@ -64,11 +65,11 @@ class Staff extends Equatable {
       url: map['url'],
       avatar: map['avatar'],
       technologies: [Technology.empty()],
-      color: Colors.primaries[Random().nextInt(Colors.primaries.length)]
-          .withOpacity(0.5),
+      color:Color(int.parse(map['color'],radix: 16)),
     );
   }
-
+/*Colors.primaries[Random().nextInt(Colors.primaries.length)]
+          .withOpacity(0.5),*/
   String toJson() => json.encode(toMap());
 
   factory Staff.fromJson(String source) =>
@@ -76,13 +77,23 @@ class Staff extends Equatable {
 
   @override
   String toString() {
-    return 'Staff(name: $name, position: $position, description: $description, url: $url, technologies: $technologies, avatar: $avatar, color: ${color.value})';
+    return 'Staff('
+        'name: $name'
+        ', position: $position,'
+        ' description: $description,'
+        ' url: $url,'
+        ' technologies: '
+        '$technologies, '
+        'avatar: $avatar,'
+        ' color: $color'
+        ')';
   }
 
   @override
   List<Object> get props {
     return [
       name,
+      color,
       position,
       description,
       url,

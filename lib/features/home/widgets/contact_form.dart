@@ -43,7 +43,7 @@ class ContactForm extends StatelessWidget {
                         vertical: Constants.webVerticalPadding,
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Align(
@@ -94,11 +94,11 @@ class ContactForm extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(width: Spacing.l40),
+                        /*  const SizedBox(width: Spacing.l40),*/
                           SizedBox(
                             width: size.width * 0.4,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 const InputFormField(hint: Strings.yourName),
                                 const InputFormField(hint: Strings.yourEmail),

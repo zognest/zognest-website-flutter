@@ -197,6 +197,7 @@ class OfferItem extends StatelessWidget {
             offer.highlight.toUpperCase(),
             style: theme.textTheme.headlineMedium?.copyWith(
               color: colored ? Colors.black : theme.primaryColor,
+              fontFamily: 'SF Pro Rounded',
               fontVariations: TextThemes.fontVariation(3),
             ),
           ),
@@ -204,6 +205,7 @@ class OfferItem extends StatelessWidget {
             offer.title.toUpperCase(),
             style: theme.textTheme.headlineMedium?.copyWith(
               color: colored ? Colors.black : null,
+              fontFamily: 'SF Pro Rounded',
             ),
           ),
           const SizedBox(height: Spacing.s12),
@@ -213,6 +215,7 @@ class OfferItem extends StatelessWidget {
                 offer.description,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: colored ? Colors.black : null,
+                  fontSize: Responsive.isDesktop(context) ? 20 : 16,
                 ),
               ),
             ),

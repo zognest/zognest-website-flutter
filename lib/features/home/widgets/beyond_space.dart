@@ -115,25 +115,10 @@ class BeyondSpaceCarousel extends ConsumerWidget {
       data: (projects) {
         return CarouselSlider(
           items: projects.map((project) {
-            return AspectRatio(
-              aspectRatio: 370 / 747,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Responsive.isDesktop(context) ? 18 : 12,
-                  vertical: Responsive.isDesktop(context) ? 16 : 10,
-                ),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(Assets.phoneMockup),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                child: NetworkFadingImage(
-                  path:
-                  project.splash,
-                  fit: BoxFit.fill,
-                ),
-              ),
+            return NetworkFadingImage(
+              path:
+              project.splash,
+              fit: BoxFit.fill,
             );
           }).toList(),
           options: CarouselOptions(
@@ -153,7 +138,27 @@ class BeyondSpaceCarousel extends ConsumerWidget {
     );
   }
 }
-
+/*AspectRatio(
+              aspectRatio: 370 / 747,
+              child: Container(
+                padding: EdgeInsets.symmetric  (
+                  horizontal: Responsive.isDesktop(context) ? 18 : 12,
+                  vertical: Responsive.isDesktop(context) ? 16 : 10,
+                ),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(Assets.phoneMockup),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                child: NetworkFadingImage(
+                  path:
+                  project.splash,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            );
+          }).toList(),*/
 class BeyondSpaceMobile extends StatelessWidget {
   const BeyondSpaceMobile({super.key});
 

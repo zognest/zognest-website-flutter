@@ -74,7 +74,7 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                 },
               ),
               Consumer(
-                builder: (context, ref , child) {
+                builder: (__, ref , _) {
                   final staff = ref.watch(appControllerProvider).staff;
                   return staff.when(data: (staff){
                     return SizedBox(
@@ -167,7 +167,9 @@ class FrontCard extends StatelessWidget {
                               staff.description,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
-                              style: theme.textTheme.bodyLarge,
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                fontSize: Responsive.isDesktop(context)? 20 : 16 ,
+                              ),
                             ),
                           ),
                         ),
@@ -247,7 +249,9 @@ class BackCard extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: Text(
                             staff.description,
-                            style: theme.textTheme.bodyLarge,
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                                fontSize: Responsive.isDesktop(context) ? 20 : 16
+                            ),
                           ),
                         ),
                       ),

@@ -40,7 +40,6 @@ class _ZognestProjectsState extends State<ZognestProjects> {
   Widget build(BuildContext context) {
 
     final theme = Theme.of(context);
-
         return Column(
           children: [
             if (Responsive.isDesktop(context)) const Divider(),
@@ -199,7 +198,9 @@ class _ProjectItemState extends State<ProjectItem> {
                       widget.project.description,
                       maxLines: over ? null : 2,
                       overflow: over ? null : TextOverflow.ellipsis,
-                      style: theme.textTheme.bodyLarge,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                          fontSize: Responsive.isDesktop(context) ? 20 : 16
+                      ),
                     ),
                   ),
                   if (!over) ...[

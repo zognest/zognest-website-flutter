@@ -48,7 +48,6 @@ class _OurServicesPageState extends State<OurServicesPage> {
                  Column(
                   children: [
                     const SizedBox(height: Constants.appBarHeight * 1.5),
-
                     const ServicesBrowser(),
                     const SizedBox(height: Constants.sectionSpacing),
                     const Divider(),

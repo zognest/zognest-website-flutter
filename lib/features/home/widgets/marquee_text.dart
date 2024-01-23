@@ -72,25 +72,18 @@ class _MarqueeTextState extends State<MarqueeText>
                           color: const Color(0xFF222222),
                         ),
                       ),
-                      WidgetSpan(
-                        alignment: PlaceholderAlignment.middle,
-                        child: Stack(
-                          children: [
-                            Text(
-                              Strings.creative.toUpperCase(),
-                              style: theme.textTheme.displaySmall?.copyWith(
-                                color:Palette.white,
-                              ),
-                            ),
-                            Text(
-                              Strings.creative.toUpperCase(),
-                              style: theme.textTheme.displaySmall?.copyWith(
-                                foreground: TextThemes.foreground,
-                              ),
-                            ),
-                          ],
+                      TextSpan(
+                        text:Strings.creative.toUpperCase(),
+                        style: theme.textTheme.displaySmall?.copyWith(
+                          color:Palette.white,
                         ),
                       ),
+                     /* Text(
+                        Strings.creative.toUpperCase(),
+                        style: theme.textTheme.displaySmall?.copyWith(
+                          foreground: TextThemes.foreground,
+                        ),
+                      ),*/
                     ],
                   ),
                 ),

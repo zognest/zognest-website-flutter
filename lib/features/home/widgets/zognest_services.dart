@@ -193,7 +193,9 @@ class FrontService extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 5,
                             style:
-                                theme.textTheme.bodyMedium?.copyWith(height: 1.3),
+                                theme.textTheme.bodyMedium?.copyWith(
+                                    fontSize:Responsive.isDesktop(context)? 20 : 16,
+                                    height: 1.3),
                           ),
                         ),
                       ),

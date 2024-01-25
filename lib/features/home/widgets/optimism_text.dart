@@ -10,8 +10,8 @@ class OptimismText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
+    /*final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);*/
     return Column(
       children: [
         const Divider(),
@@ -24,8 +24,8 @@ class OptimismText extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      Image.asset(Assets.mercuryVenus),
-                      Align(
+                      Image.asset(Assets.optimisTextWeb,fit:BoxFit.cover),
+                      /*Align(
                         alignment: Alignment.topLeft,
                         child: SizedBox(
                           width: size.width * 0.45,
@@ -96,7 +96,7 @@ class OptimismText extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                 ),
@@ -121,8 +121,8 @@ class OptimismTextMobile extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(Assets.mercuryVenus),
-          Column(
+          Image.asset(Assets.optimisTextMobile, fit:BoxFit.cover ,),
+          /*Column(
             children: [
               FittedBox(
                 child: Text.rich(
@@ -179,7 +179,7 @@ class OptimismTextMobile extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          ),*/
         ],
       ),
     );

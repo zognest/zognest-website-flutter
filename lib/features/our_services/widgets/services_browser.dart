@@ -104,7 +104,9 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                     widget.service.description,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                        fontSize: Responsive.isDesktop(context) ? 20 : 16
+                    ),
                   ),
                   const Spacer(),
                   PrimaryButton(

@@ -36,7 +36,7 @@ class InputFormField extends StatelessWidget {
             return null;
           },
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(Spacing.l32),
+            contentPadding: const EdgeInsets.all(Spacing.m20),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Spacing.s12),
               borderSide: BorderSide(color: theme.primaryColor, width: 1.50),

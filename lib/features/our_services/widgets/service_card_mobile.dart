@@ -11,7 +11,8 @@ import '../../../shared/widgets/primary_button.dart';
 
 class ServicesCartMobile extends StatelessWidget {
   const ServicesCartMobile({super.key});
- // todo ask him about this
+
+  // todo ask him about this
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -31,68 +32,71 @@ class ServicesCartMobile extends StatelessWidget {
             child: Column(
               children: [
                 // section 1 card
-                Consumer(
-                  builder: (context , ref , child) {
-                    final cartServices = ref.watch(appControllerProvider).cartServices;
-                    return Expanded(
-                      flex: 1,
-                      child: SingleChildScrollView(
-                        child: Expanded(
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border:
-                                        Border.all(color: const Color(0xffAEB2BA)),
-                                  ),
-                                  padding: const EdgeInsets.all(12),
-                                  child: SingleChildScrollView(
-                                    child: Wrap(
-                                      runSpacing: Spacing.m20,
-                                      spacing: Spacing.m20,
-                                      // what is this ? what do it this ?
-                                      children: cartServices.map((service) {
-                                        return Container(
-                                          width: double.infinity,
-                                          color: Palette.cardBackgroundColor,
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                child: Image.network(
-                                                  service.image,
-                                                  height: 140,
-                                                  width: 75,
-                                                  fit: BoxFit.cover,
+                Consumer(builder: (context, ref, child) {
+                  final cartServices =
+                      ref.watch(appControllerProvider).cartServices;
+                  return Expanded(
+                    flex: 1,
+                    child: SingleChildScrollView(
+                      child: Expanded(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                      color: const Color(0xffAEB2BA)),
+                                ),
+                                padding: const EdgeInsets.all(12),
+                                child: SingleChildScrollView(
+                                  child: Wrap(
+                                    runSpacing: Spacing.m20,
+                                    spacing: Spacing.m20,
+                                    // what is this ? what do it this ?
+                                    children: cartServices.map((service) {
+                                      return Container(
+                                        width: double.infinity,
+                                        color: Palette.cardBackgroundColor,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Image.network(
+                                                service.image,
+                                                height: 140,
+                                                width: 75,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Row(
+                                              children: [
+                                                const SizedBox(width: 15),
+                                                AutoSizeText(
+                                                  service.title,
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: theme
+                                                      .textTheme.bodyLarge
+                                                      ?.copyWith(
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
                                                 ),
-                                              ),
-                                               Row(
-                                                children: [
-                                               const SizedBox(width: 15),
-                                               AutoSizeText(
-                                                 service.title,
-                                                 maxLines: 2,
-                                                 overflow: TextOverflow.ellipsis,
-                                                 style: theme.textTheme.bodyLarge
-                                                     ?.copyWith(
-                                                   fontWeight: FontWeight.w600,
-                                                 ),
-                                               ),
-                                               const SizedBox(width: 5),
-                                                ],
-                                              ),
-                                              Expanded(child:ElevatedButton(
+                                                const SizedBox(width: 5),
+                                              ],
+                                            ),
+                                            Expanded(
+                                              child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                   backgroundColor:
-                                                  Palette.transparent,
+                                                      Palette.transparent,
                                                   shape: const CircleBorder(
                                                     side: BorderSide(
                                                         color: Palette.white),
                                                   ),
                                                   minimumSize:
-                                                  const Size.fromRadius(28),
+                                                      const Size.fromRadius(28),
                                                 ),
                                                 child: const Icon(
                                                   Icons.close,
@@ -101,24 +105,24 @@ class ServicesCartMobile extends StatelessWidget {
                                                 onPressed: () {
                                                   ref
                                                       .read(
-                                                      appControllerProvider
-                                                          .notifier)
+                                                          appControllerProvider
+                                                              .notifier)
                                                       .removeService(service);
                                                 },
-                                              ),)
-                                            ],
-                                          ),
-                                        );
-                                      }).toList(),
-                                    ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    }).toList(),
                                   ),
                                 ),
-                              ]),
-                        ),
+                              ),
+                            ]),
                       ),
-                    );
-                  }
-                ),
+                    ),
+                  );
+                }),
                 // between 1 and2
                 const SizedBox(height: 50),
                 // section 2
@@ -168,9 +172,9 @@ class ServicesCartMobile extends StatelessWidget {
                           Expanded(
                             child: PrimaryButton(
                               title: Strings.sendMessage.toUpperCase(),
-                              height: 70,
+                              height: 45,
                               textStyle: theme.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                               ),
                               onTap: () {},
                             ),
@@ -179,9 +183,9 @@ class ServicesCartMobile extends StatelessWidget {
                           Expanded(
                             child: PrimaryButton(
                               title: Strings.requestCall.toUpperCase(),
-                              height: 70,
+                              height: 45,
                               textStyle: theme.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                               ),
                               onTap: () {},
                             ),

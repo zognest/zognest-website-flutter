@@ -23,13 +23,11 @@ abstract final class Assets {
   static const drawer = '${Paths.svg}/drawer.svg';
 
   // Images
-  static const phoneMockup = '${Paths.images}/phone_mockup.png';
   static const impactLinesPng = '${Paths.images}/impact_lines.png';
   static const zognestLogo = '${Paths.images}/logo.png';
   static const mercuries = '${Paths.images}/mercuries.png';
   static const office = '${Paths.images}/office.png';
   static const arrowRight = '${Paths.images}/arrow_right.png';
-  static const mercuryVenus = '${Paths.images}/mercury_venus.png';
   static const mercury = '${Paths.images}/mercury.png';
   static const screens = '${Paths.images}/screens.png';
   static const smallMercury = '${Paths.images}/small_mercury.png';
@@ -42,14 +40,6 @@ abstract final class Assets {
   static const aboutUsText = '${Paths.images}/about_us_text.png';
   static const mobileAboutUsText = '${Paths.images}/mobile_about_us_text.png';
   static const ourServicesText = '${Paths.images}/our_services_text.png';
-  static const optimisTextMobile='${Paths.images}/optimis_mobile.png';
-  static const optimisTextWeb='${Paths.images}/optimis.png';
-
-  // Temporary assets
-  static const ajmera = '${Paths.temp}/ajmera.png';
-  static const mahalaxmi = '${Paths.temp}/mahalaxmi.png';
-  static const sjrc = '${Paths.temp}/sjrc.png';
-  static const texasChiro = '${Paths.temp}/texas_chiro.png';
-  static const tooth = '${Paths.temp}/tooth.png';
-  static const vais = '${Paths.temp}/vais.png';
+  static const optimismTextMobile = '${Paths.images}/optimism_mobile.png';
+  static const optimismTextWeb = '${Paths.images}/optimism.png';
 }

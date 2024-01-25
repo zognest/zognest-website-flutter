@@ -7,7 +7,6 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 class Constants {
   /// Horizontal padding of any main component or the children inside it
   static const mobileHorizontalPadding = Spacing.m20;
-  static const paddingBeyondSpaceMobile = Spacing.m20;
   static const horizontalPadding = 24.0;
 
   // region Horizontal Lists

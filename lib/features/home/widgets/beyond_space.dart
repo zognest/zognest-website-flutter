@@ -165,7 +165,7 @@ class BeyondSpaceMobile extends StatelessWidget {
         const BeyondSpaceCarousel(),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal:Constants.paddingBeyondSpaceMobile,
+            horizontal: Constants.horizontalPadding,
           ),
           child: Column(
             children: [

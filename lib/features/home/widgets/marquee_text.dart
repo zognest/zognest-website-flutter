@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/theme/palette.dart';
-import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/strings.dart';
 
 import '../../../../config/constants.dart';
@@ -58,8 +57,7 @@ class _MarqueeTextState extends State<MarqueeText>
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 28),
+              return Center(
                 child: RichText(
                   text: TextSpan(
                     text: '',
@@ -68,14 +66,13 @@ class _MarqueeTextState extends State<MarqueeText>
                       TextSpan(
                         text: Strings.weAreThe.toUpperCase(),
                         style: theme.textTheme.displaySmall?.copyWith(
-
                           color: const Color(0xFF222222),
                         ),
                       ),
                       TextSpan(
-                        text:Strings.creative.toUpperCase(),
+                        text: Strings.creative.toUpperCase(),
                         style: theme.textTheme.displaySmall?.copyWith(
-                          color:Palette.white,
+                          color: Palette.white,
                         ),
                       ),
                     ],

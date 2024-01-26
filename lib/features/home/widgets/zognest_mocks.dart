@@ -63,12 +63,9 @@ class _ZognestMocksState extends State<ZognestMocks>
                     Responsive.isDesktop(context) ? 2100 / 960 : 600 / 400,
                 child: SlideTransition(
                   position: _offsetAnimation,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom:10),
-                    child: Image.asset(
-                      Assets.screens,
-                      fit: BoxFit.cover,
-                    ),
+                  child: Image.asset(
+                    Assets.screens,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

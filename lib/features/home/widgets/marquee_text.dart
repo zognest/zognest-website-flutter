@@ -59,7 +59,7 @@ class _MarqueeTextState extends State<MarqueeText>
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.only(top: 28),
                 child: RichText(
                   text: TextSpan(
                     text: '',

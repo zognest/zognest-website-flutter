@@ -23,133 +23,132 @@ class ContactForm extends StatelessWidget {
       children: [
         const Divider(),
         Responsive.isDesktop(context)
-            ? SizedBox(
-                height: Constants.contactUsSectionHeight,
-                child: Stack(
-                  children: [
-                    GradientContainer(
-                      color: theme.primaryColor,
-                      alignment: const Alignment(-0.5, 0),
-                      colorStartingOpacity: 0.3,
-                      radius: 1,
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: SvgPicture.asset(Assets.impactLines),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.horizontalPadding,
-                        vertical: Constants.webVerticalPadding,
+            ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SizedBox(
+                  height: Constants.contactUsSectionHeight,
+                  child: Stack(
+                    children: [
+                      GradientContainer(
+                        color: theme.primaryColor,
+                        alignment: const Alignment(-0.5, 0),
+                        colorStartingOpacity: 0.3,
+                        radius: 1,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: FittedBox(
-                                // hassan
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text.rich(
-                                      TextSpan(
-                                        text: Strings.get.toUpperCase(),
-                                        style: theme.textTheme.displayMedium,
-                                        children: [
-                                          TextSpan(
-                                            text:
-                                                '${Strings.inText.toUpperCase()}\n',
-                                            style: theme.textTheme.displayMedium
-                                                ?.copyWith(
-                                                    foreground:
-                                                        TextThemes.foreground),
-                                          ),
-                                          TextSpan(
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: SvgPicture.asset(Assets.impactLines),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Constants.horizontalPadding,
+                          vertical: Constants.webVerticalPadding,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: FittedBox(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text.rich(
+                                        TextSpan(
+                                          text: Strings.get.toUpperCase(),
+                                          style: theme.textTheme.displayMedium,
+                                          children: [
+                                            TextSpan(
                                               text:
-                                                  Strings.touch.toUpperCase()),
-                                        ],
+                                                  '${Strings.inText.toUpperCase()}\n',
+                                              style: theme.textTheme.displayMedium
+                                                  ?.copyWith(foreground:TextThemes.foreground),
+                                            ),
+                                            TextSpan(
+                                                text:
+                                                    Strings.touch.toUpperCase()),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(height: Spacing.m20),
-                                    Text(
-                                      Strings.contactDetails.toUpperCase(),
-                                      style: theme.textTheme.headlineMedium
-                                          ?.copyWith(color: theme.primaryColor),
-                                    ),
-                                    const SizedBox(height: Spacing.m20),
-                                    Text(
-                                      Strings.address,
-                                      style: theme.textTheme.bodyLarge,
-                                    ),
-                                    const SizedBox(height: Spacing.m20),
-                                    Text(
-                                      Strings.contactInfo,
-                                      style: theme.textTheme.bodyMedium,
-                                    ),
-                                  ],
+                                      const SizedBox(height: Spacing.m20),
+                                      Text(
+                                        Strings.contactDetails.toUpperCase(),
+                                        style: theme.textTheme.headlineMedium
+                                            ?.copyWith(color: theme.primaryColor),
+                                      ),
+                                      const SizedBox(height: Spacing.m20),
+                                      Text(
+                                        Strings.address,
+                                        style: theme.textTheme.bodyLarge,
+                                      ),
+                                      const SizedBox(height: Spacing.m20),
+                                      Text(
+                                        Strings.contactInfo,
+                                        style: theme.textTheme.bodyMedium,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        /*  const SizedBox(width: Spacing.l40),*/
-                          SizedBox(
-                            width: size.width * 0.4,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                const InputFormField(hint: Strings.yourName),
-                                const InputFormField(hint: Strings.yourEmail),
-                                const InputFormField(hint: Strings.mobileNo),
-                                const InputFormField(
-                                  hint: Strings.message,
-                                  required: false,
-                                  multiline: true,
-                                  keyboardType: TextInputType.multiline,
-                                ),
-                                const SizedBox(height: Spacing.l40),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: PrimaryButton(
-                                        title:
-                                            Strings.sendMessage.toUpperCase(),
-                                        height: 75,
-                                        textStyle:
-                                            theme.textTheme.bodyLarge?.copyWith(
-                                          fontWeight: FontWeight.w600,
+                            SizedBox(
+                              width: size.width * 0.4,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const InputFormField(hint: Strings.yourName),
+                                  const InputFormField(hint: Strings.yourEmail),
+                                  const InputFormField(hint: Strings.mobileNo),
+                                  const InputFormField(
+                                    hint: Strings.message,
+                                    required: false,
+                                    multiline: true,
+                                    keyboardType: TextInputType.multiline,
+                                  ),
+                                  const SizedBox(height: Spacing.l40),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: PrimaryButton(
+                                          title:
+                                              Strings.sendMessage.toUpperCase(),
+                                          height: 75,
+                                          textStyle:
+                                              theme.textTheme.bodyLarge?.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          onTap: () {},
                                         ),
-                                        onTap: () {},
                                       ),
-                                    ),
-                                    const SizedBox(width: Spacing.s12),
-                                    Expanded(
-                                      child: PrimaryButton(
-                                        title:
-                                            Strings.requestCall.toUpperCase(),
-                                        backgroundColor: Palette.white,
-                                        height: 75,
-                                        textStyle:
-                                            theme.textTheme.bodyLarge?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black,
+                                      const SizedBox(width: Spacing.s12),
+                                      Expanded(
+                                        child: PrimaryButton(
+                                          title:
+                                              Strings.requestCall.toUpperCase(),
+                                          backgroundColor: Palette.white,
+                                          height: 75,
+                                          textStyle:
+                                              theme.textTheme.bodyLarge?.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black,
+                                          ),
+                                          onTap: () {},
                                         ),
-                                        onTap: () {},
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              )
+            )
             : const ContactFormMobile(),
         const Divider(),
       ],

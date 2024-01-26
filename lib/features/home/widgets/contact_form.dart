@@ -47,9 +47,8 @@ class ContactForm extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Align(
-                              alignment: Alignment.centerLeft,
+                              alignment: Alignment.center,
                               child: FittedBox(
-                                // hassan
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,9 +62,7 @@ class ContactForm extends StatelessWidget {
                                             text:
                                                 '${Strings.inText.toUpperCase()}\n',
                                             style: theme.textTheme.displayMedium
-                                                ?.copyWith(
-                                                    foreground:
-                                                        TextThemes.foreground),
+                                                ?.copyWith(foreground: TextThemes.foreground),
                                           ),
                                           TextSpan(
                                               text:
@@ -94,7 +91,6 @@ class ContactForm extends StatelessWidget {
                               ),
                             ),
                           ),
-                        /*  const SizedBox(width: Spacing.l40),*/
                           SizedBox(
                             width: size.width * 0.4,
                             child: Column(

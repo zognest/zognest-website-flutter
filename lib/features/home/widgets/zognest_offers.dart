@@ -37,85 +37,84 @@ class _ZognestOffersState extends State<ZognestOffers> {
 
   @override
   Widget build(BuildContext context) {
-
     final theme = Theme.of(context);
-        return Column(
-          children: [
-            const Divider(),
-            ScrollHeadline(
-              headline: TextSpan(
-                text: Strings.what.toUpperCase(),
-                style: theme.textTheme.displaySmall,
-                children: [
-                  TextSpan(
-                    text: '${Strings.we}\n'.toUpperCase(),
-                    style: theme.textTheme.displaySmall?.copyWith(
-                      foreground: TextThemes.foreground,
-                    ),
-                  ),
-                  TextSpan(text: Strings.offer.toUpperCase()),
-                ],
+    return Column(
+      children: [
+        const Divider(),
+        ScrollHeadline(
+          headline: TextSpan(
+            text: Strings.what.toUpperCase(),
+            style: theme.textTheme.displaySmall,
+            children: [
+              TextSpan(
+                text: '${Strings.we}\n'.toUpperCase(),
+                style: theme.textTheme.displaySmall?.copyWith(
+                  foreground: TextThemes.foreground,
+                ),
               ),
-              onTapScroll: () {
-                if (_controller.offset ==
-                    _controller.position.maxScrollExtent) {
-                  currentIndex = 0;
-                }
-                _controller.animateTo(
-                  Constants.zognestOffersItemWidth * currentIndex,
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.ease,
-                );
-                currentIndex++;
-              },
-            ),
-            Consumer(
-              builder: (context, ref, child) {
-                final offers = ref.watch(appControllerProvider).offers;
-                return offers.when(data: (offers){
-                  return SizedBox(
-                    height: Constants.zognestOffersListHeight,
-                    child: ListView.separated(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: Constants.horizontalPadding),
-                      scrollDirection: Axis.horizontal,
-                      controller: _controller,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {},
-                          onHover: (over) {
-                            if (over) {
-                              hoveredIndex = index;
-                              setState(() {});
-                              return;
-                            }
-                            hoveredIndex = -1;
-                            setState(() {});
-                          },
-                          child: OfferItem(
-                            offer: offers[index],
-                            colored: hoveredIndex == index,
-                          ),
-                        );
+              TextSpan(text: Strings.offer.toUpperCase()),
+            ],
+          ),
+          onTapScroll: () {
+            if (_controller.offset == _controller.position.maxScrollExtent) {
+              currentIndex = 0;
+            }
+            _controller.animateTo(
+              Constants.zognestOffersItemWidth * currentIndex,
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.ease,
+            );
+            currentIndex++;
+          },
+        ),
+        Consumer(builder: (context, ref, child) {
+          final offers = ref.watch(appControllerProvider).offers;
+          return offers.when(
+            data: (offers) {
+              return SizedBox(
+                height: Constants.zognestOffersListHeight,
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: Constants.horizontalPadding),
+                  scrollDirection: Axis.horizontal,
+                  controller: _controller,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {},
+                      onHover: (over) {
+                        if (over) {
+                          hoveredIndex = index;
+                          setState(() {});
+                          return;
+                        }
+                        hoveredIndex = -1;
+                        setState(() {});
                       },
-                      separatorBuilder: (context, index) =>
+                      child: OfferItem(
+                        offer: offers[index],
+                        colored: hoveredIndex == index,
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
                       const SizedBox(width: Spacing.l24),
-                      itemCount: offers.length,
-                    ),
-                  );
-                },
-                error:(_,__)=>const SizedBox.shrink(),
-                loading: () =>const SizedBox.shrink(),
-                );}
-            ),
-            const Divider(),
-          ],
-        );
-      }
+                  itemCount: offers.length,
+                ),
+              );
+            },
+            error: (_, __) => const SizedBox.shrink(),
+            loading: () => const SizedBox.shrink(),
+          );
+        }),
+        const Divider(),
+      ],
+    );
+  }
 }
 
 class ZognestOffersMobile extends StatelessWidget {
   const ZognestOffersMobile({super.key});
+
   @override
   Widget build(context) {
     final theme = Theme.of(context);
@@ -138,10 +137,10 @@ class ZognestOffersMobile extends StatelessWidget {
           ),
           onTapScroll: null,
         ),
-        Consumer(
-          builder: (__,ref, _) {
-            final offers = ref.watch(appControllerProvider).offers;
-          return offers.when(data: (offers){
+        Consumer(builder: (__, ref, _) {
+          final offers = ref.watch(appControllerProvider).offers;
+          return offers.when(
+            data: (offers) {
               return ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 addAutomaticKeepAlives: false,
@@ -153,14 +152,14 @@ class ZognestOffersMobile extends StatelessWidget {
                   return OfferItem(offer: offers[index]);
                 },
                 separatorBuilder: (_, __) =>
-                const SizedBox(height: Spacing.s12),
+                    const SizedBox(height: Spacing.s12),
                 itemCount: offers.length,
               );
             },
-            error:(_,__)=>const SizedBox.shrink(),
-            loading: () =>const SizedBox.shrink(),);
-          }
-        ),
+            error: (_, __) => const SizedBox.shrink(),
+            loading: () => const SizedBox.shrink(),
+          );
+        }),
         const Divider(),
       ],
     );
@@ -182,6 +181,11 @@ class OfferItem extends StatelessWidget {
     final theme = Theme.of(context);
     return Card(
       clipBehavior: Clip.antiAlias,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(25),
+              topLeft: Radius.circular(25)),
+      ),
       child: Container(
         width: !Responsive.isMobile(context)
             ? Constants.zognestOffersItemWidth

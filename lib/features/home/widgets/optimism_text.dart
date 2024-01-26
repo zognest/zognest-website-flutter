@@ -7,8 +7,6 @@ class OptimismText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /*final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);*/
     return Column(
       children: [
         const Divider(),

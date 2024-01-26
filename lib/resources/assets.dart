@@ -40,6 +40,6 @@ abstract final class Assets {
   static const aboutUsText = '${Paths.images}/about_us_text.png';
   static const mobileAboutUsText = '${Paths.images}/mobile_about_us_text.png';
   static const ourServicesText = '${Paths.images}/our_services_text.png';
-  static const optimismTextMobile = '${Paths.images}/optimism_mobile.png';
-  static const optimismTextWeb = '${Paths.images}/optimism.png';
+  static const optimismTextMobile = '${Paths.images}/optimis_mobile.png';
+  static const optimismTextWeb = '${Paths.images}/optimis.png';
 }

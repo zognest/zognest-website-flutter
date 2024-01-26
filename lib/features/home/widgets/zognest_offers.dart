@@ -106,7 +106,7 @@ class _ZognestOffersState extends State<ZognestOffers> {
             loading: () => const SizedBox.shrink(),
           );
         }),
-        const Divider(),
+         const Divider(height:.1),
       ],
     );
   }
@@ -137,10 +137,10 @@ class ZognestOffersMobile extends StatelessWidget {
           ),
           onTapScroll: null,
         ),
-        Consumer(builder: (__, ref, _) {
+        Consumer(
+            builder: (__, ref, _) {
           final offers = ref.watch(appControllerProvider).offers;
-          return offers.when(
-            data: (offers) {
+          return offers.when(data: (offers) {
               return ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 addAutomaticKeepAlives: false,
@@ -183,9 +183,7 @@ class OfferItem extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topRight: Radius.circular(25),
-              topLeft: Radius.circular(25)),
-      ),
+              topLeft: Radius.circular(25), topRight: Radius.circular(25))),
       child: Container(
         width: !Responsive.isMobile(context)
             ? Constants.zognestOffersItemWidth

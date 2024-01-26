@@ -59,7 +59,7 @@ class _MarqueeTextState extends State<MarqueeText>
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.only(top: 14),
+                padding: const EdgeInsets.only(top: 28),
                 child: RichText(
                   text: TextSpan(
                     text: '',
@@ -68,6 +68,7 @@ class _MarqueeTextState extends State<MarqueeText>
                       TextSpan(
                         text: Strings.weAreThe.toUpperCase(),
                         style: theme.textTheme.displaySmall?.copyWith(
+
                           color: const Color(0xFF222222),
                         ),
                       ),

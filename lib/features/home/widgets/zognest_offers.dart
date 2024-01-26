@@ -180,47 +180,48 @@ class OfferItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      width: !Responsive.isMobile(context)
-          ? Constants.zognestOffersItemWidth
-          : double.infinity,
-      height: Constants.zognestOffersListHeight,
-      color: colored ? theme.primaryColor : Palette.cardBackgroundColor,
-      padding: const EdgeInsets.symmetric(
-        horizontal: Spacing.l32,
-        vertical: Spacing.l48,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            offer.highlight.toUpperCase(),
-            style: theme.textTheme.headlineMedium?.copyWith(
-              color: colored ? Colors.black : theme.primaryColor,
-              fontFamily: 'SF Pro Rounded',
-              fontVariations: TextThemes.fontVariation(3),
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: Container(
+        width: !Responsive.isMobile(context)
+            ? Constants.zognestOffersItemWidth
+            : double.infinity,
+        height: Constants.zognestOffersListHeight,
+        color: colored ? theme.primaryColor : Palette.cardBackgroundColor,
+        padding: const EdgeInsets.symmetric(
+          horizontal: Spacing.l32,
+          vertical: Spacing.l48,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              offer.highlight.toUpperCase(),
+              style: theme.textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: colored ? Colors.black : theme.primaryColor,
+                fontVariations: TextThemes.fontVariation(3),
+              ),
             ),
-          ),
-          Text(
-            offer.title.toUpperCase(),
-            style: theme.textTheme.headlineMedium?.copyWith(
-              color: colored ? Colors.black : null,
-              fontFamily: 'SF Pro Rounded',
+            Text(
+              offer.title.toUpperCase(),
+              style: theme.textTheme.headlineMedium?.copyWith(
+                color: colored ? Colors.black : null,
+              ),
             ),
-          ),
-          const SizedBox(height: Spacing.s12),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Text(
-                offer.description,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: colored ? Colors.black : null,
-                  fontSize: Responsive.isDesktop(context) ? 20 : 16,
+            const SizedBox(height: Spacing.s12),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Text(
+                  offer.description,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: colored ? Colors.black : null,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -31,16 +31,8 @@ abstract final class Strings {
 
   // ignore: constant_identifier_names
   static const creative = 'cre8tive';
-  static const eight = '8';
   static const backHome = 'Back Home';
-  static const optimism = 'Optimism';
-  static const isThe = 'Is The';
-  static const faith = 'Faith';
-  static const that = 'That';
-  static const leadsTo = 'Leads to';
-  static const achievement = 'Achievement';
-  static const nothingCanBeDone =
-      'Nothing can be done\nwithout hope\nand confidence';
+
   static const someCountThatMatters = 'Some count that matters';
   static const appDevelopment = 'App Development';
   static const webDevelopment = 'Website Development';

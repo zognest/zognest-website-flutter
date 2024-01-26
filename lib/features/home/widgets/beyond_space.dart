@@ -138,27 +138,7 @@ class BeyondSpaceCarousel extends ConsumerWidget {
     );
   }
 }
-/*AspectRatio(
-              aspectRatio: 370 / 747,
-              child: Container(
-                padding: EdgeInsets.symmetric  (
-                  horizontal: Responsive.isDesktop(context) ? 18 : 12,
-                  vertical: Responsive.isDesktop(context) ? 16 : 10,
-                ),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(Assets.phoneMockup),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                child: NetworkFadingImage(
-                  path:
-                  project.splash,
-                  fit: BoxFit.fill,
-                ),
-              ),
-            );
-          }).toList(),*/
+
 class BeyondSpaceMobile extends StatelessWidget {
   const BeyondSpaceMobile({super.key});
 
@@ -170,7 +150,7 @@ class BeyondSpaceMobile extends StatelessWidget {
         const BeyondSpaceCarousel(),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Constants.horizontalPadding,
+            horizontal: Constants.mobileHorizontalPadding,
           ),
           child: Column(
             children: [

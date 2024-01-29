@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 
@@ -36,9 +37,9 @@ class InputFormField extends StatelessWidget {
             return null;
           },
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: Spacing.m20,
-              vertical: 32,
+            contentPadding:  EdgeInsets.symmetric(
+              horizontal:Spacing.m20,
+              vertical: Responsive.isDesktop(context)? 32:20,
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Spacing.s12),

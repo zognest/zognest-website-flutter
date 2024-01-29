@@ -37,13 +37,13 @@ class ServicesCartMobile extends StatelessWidget {
                       ref.watch(appControllerProvider).cartServices;
                   return Expanded(
                     flex: 1,
-                    child: SingleChildScrollView(
-                      child: Expanded(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
@@ -69,22 +69,25 @@ class ServicesCartMobile extends StatelessWidget {
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
-                                            Row(
-                                              children: [
-                                                const SizedBox(width: 15),
-                                                AutoSizeText(
-                                                  service.title,
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: theme
-                                                      .textTheme.bodyLarge
-                                                      ?.copyWith(
-                                                    fontWeight: FontWeight.w600,
+                                            Expanded(
+                                              flex: 2,
+                                              child: Row(
+                                                children: [
+                                                  const SizedBox(width: 10),
+                                                  AutoSizeText(
+                                                    service.title,
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: theme
+                                                        .textTheme.bodyLarge
+                                                        ?.copyWith(
+                                                      fontFamily: 'SF Pro Rounded',
+                                                      fontWeight: FontWeight.w600,
+                                                    ),
                                                   ),
-                                                ),
-                                                const SizedBox(width: 5),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                             Expanded(
                                               child: ElevatedButton(
@@ -118,9 +121,9 @@ class ServicesCartMobile extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                            ]),
-                      ),
-                    ),
+                            ),
+                          ),
+                        ],),
                   );
                 }),
                 // between 1 and2

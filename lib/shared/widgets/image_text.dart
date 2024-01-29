@@ -105,7 +105,7 @@ class ImageText extends StatelessWidget {
                   ),
                 ],
               ),
-              const Divider(),
+
             ],
           )
         : ImageTextMobile(image: image);

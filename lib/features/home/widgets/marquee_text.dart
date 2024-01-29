@@ -66,7 +66,7 @@ class _MarqueeTextState extends State<MarqueeText>
                       TextSpan(
                         text: Strings.weAreThe.toUpperCase(),
                         style: theme.textTheme.displaySmall?.copyWith(
-                          color: const Color(0xFF222222),
+                          color: const Color(0xFF222222).withOpacity(0.9),
                         ),
                       ),
                       TextSpan(

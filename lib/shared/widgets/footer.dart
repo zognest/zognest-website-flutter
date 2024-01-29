@@ -98,7 +98,7 @@ class _FooterState extends State<Footer> {
                             style: theme.textTheme.headlineLarge?.copyWith(
                               fontWeight: FontWeight.w700,
                               fontSize:
-                                  Responsive.isDesktop(context) ? 70 : 20,
+                              Responsive.isDesktop(context) ? 70 : 20,
                               color: hovered
                                   ? theme.primaryColor
                                   : const Color(0xffAEB2BA),
@@ -157,27 +157,70 @@ class _FooterState extends State<Footer> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: SocialButtons.values
                                 .map((button) => Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            Responsive.isDesktop(context)
-                                                ? Spacing.s8
-                                                : Spacing.s4,
-                                      ),
-                                      child: SocialButton(button: button),
-                                    ))
+                              padding: EdgeInsets.symmetric(
+                                horizontal:
+                                Responsive.isDesktop(context)
+                                    ? Spacing.s8
+                                    : Spacing.s4,
+                              ),
+                              child: SocialButton(button: button),
+                            ))
                                 .toList(),
                           ),
                         ),
                         const SizedBox(height: Spacing.l32),
-                        Text(
-                          Strings.copyRights,
-                          style: (Responsive.isDesktop(context)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(width:Responsive.isDesktop(context)? 80:15 ),
+                                Text(
+                                  'Account',
+                                  style: (Responsive.isDesktop(context)
+                                      ? theme.textTheme.labelMedium
+                                      : theme.textTheme.labelSmall?.copyWith(fontSize: 12))
+                                      ?.copyWith(fontFamily: 'SF Pro Rounded'),
+                                ),
+                                Text(
+                                  'Conditions of Solutions',
+                                  style: (Responsive.isDesktop(context)
+                                      ? theme.textTheme.labelMedium
+                                      : theme.textTheme.labelSmall?.copyWith(
+                                    fontSize: 12,))
+                                      ?.copyWith(fontFamily: 'SF Pro Rounded'),
+                                ),
+                                Text(
+                                  'Privacy Notice',
+                                  style: (Responsive.isDesktop(context)
+                                      ? theme.textTheme.labelMedium
+                                      : theme.textTheme.labelSmall?.copyWith(
+                                    fontSize: 12,
+                                    fontFamily: 'SF Pro Rounded',
+                                  ))
+                                      ?.copyWith(fontFamily: 'SF Pro Rounded'),
+                                ),
+                                SizedBox(width:Responsive.isDesktop(context)?80:15 ),
+                              ],
+                            ),
+                            const SizedBox(height: Spacing.s12),
+                            Text(
+                              Strings.copyRights,
+                              style: (Responsive.isDesktop(context)
                                   ? theme.textTheme.labelMedium
-                                  : theme.textTheme.labelSmall)
-                              ?.copyWith(
-                            fontFamily: 'SF Pro Rounded',
-                            letterSpacing: -0.5,
-                          ),
+                                  : theme.textTheme.labelSmall?.copyWith(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w100,
+                              ))
+                                  ?.copyWith(
+                                fontFamily: 'SF Pro Rounded',
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: -0.5,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

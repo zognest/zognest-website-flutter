@@ -223,6 +223,7 @@ class _ClientItemState extends State<ClientItem> {
                       ),
                       const SizedBox(width: Spacing.s12),
                       PrimaryButton(
+                        height: 30 ,
                         title: Strings.view.toUpperCase(),
                         filled: false,
                         padding: const EdgeInsets.symmetric(
@@ -239,7 +240,7 @@ class _ClientItemState extends State<ClientItem> {
                     child: SingleChildScrollView(
                       child: Text(
                         widget.clientFeedback.description,
-                        style: theme.textTheme.bodyMedium,
+                        style: theme.textTheme.bodyLarge,
                       ),
                     ),
                   ),

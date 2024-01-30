@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
@@ -7,7 +8,6 @@ import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/circle_button.dart';
-import 'package:zognest_website/shared/widgets/gradient_container.dart';
 import 'package:zognest_website/shared/widgets/social_button.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
@@ -26,204 +26,109 @@ class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
-      height: Responsive.isDesktop(context)
-          ? 900
-          : Responsive.isTablet(context)
-              ? 700
-              : 400,
-      child: Stack(
+    return Container(
+      decoration: BoxDecoration(
+        gradient: RadialGradient(
+          center: Alignment.bottomCenter,
+          radius: 1,
+          colors: [
+            theme.primaryColor.withOpacity(0.2),
+            theme.primaryColor.withOpacity(0),
+          ],
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          GradientContainer(
-            colorStartingOpacity: 0.2,
-            color: theme.primaryColor,
-            alignment: Alignment.bottomCenter,
-            radius: 1,
-            height: double.infinity,
-          ),
-          if (!Responsive.isDesktop(context))
-            Positioned(
-              right: Spacing.m16,
-              top: Spacing.m16,
-              child: CircleButton(
-                onTap: widget.onTabUp,
-                radius: Spacing.m16,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: Spacing.s4,
-                      decoration: BoxDecoration(
-                        color: theme.primaryColor,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    const SizedBox(height: Spacing.s4),
-                    SvgPicture.asset(
-                      Assets.upArrow,
-                      height: Spacing.m16,
-                    ),
-                  ],
-                ),
-              ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Constants.horizontalPadding,
+              vertical: Spacing.l24,
             ),
-          SizedBox(
-            height: double.infinity,
             child: Column(
               children: [
-                const Divider(),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.horizontalPadding,
-                      vertical: Spacing.l24,
+                const ZognestLogo(
+                  iconOnly: true,
+                  size: 80,
+                ),
+                const SizedBox(height: Spacing.s12),
+                InkWell(
+                  onTap: () {},
+                  onHover: (over) {
+                    setState(() => hovered = over);
+                  },
+                  overlayColor:
+                      const MaterialStatePropertyAll(Palette.transparent),
+                  child: Text(
+                    Strings.zognestMail,
+                    style: theme.textTheme.headlineLarge?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      fontSize: Responsive.isDesktop(context) ? 70 : 20,
+                      color: hovered
+                          ? theme.primaryColor
+                          : const Color(0xffAEB2BA),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const ZognestLogo(
-                          iconOnly: true,
-                          size: Constants.zognestFooterSectionHeight * 0.15,
+                  ),
+                ),
+                const SizedBox(height: Spacing.l24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Expanded(
+                      child: AutoSizeText(
+                        Strings.zognest.toUpperCase(),
+                        maxLines: 1,
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.displayLarge?.copyWith(
+                          fontFamily: 'SF Pro Rounded',
+                          fontWeight: FontWeight.w900,
                         ),
-                        const SizedBox(height: Spacing.s12),
-                        InkWell(
-                          onTap: () {},
-                          onHover: (over) {
-                            setState(() => hovered = over);
-                          },
-                          overlayColor: const MaterialStatePropertyAll(
-                              Palette.transparent),
-                          child: Text(
-                            Strings.zognestMail,
-                            style: theme.textTheme.headlineLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              fontSize:
-                              Responsive.isDesktop(context) ? 70 : 20,
-                              color: hovered
-                                  ? theme.primaryColor
-                                  : const Color(0xffAEB2BA),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: Spacing.l24),
-                        Row(
+                      ),
+                    ),
+                    if (Responsive.isDesktop(context))
+                      CircleButton(
+                        onTap: widget.onTabUp,
+                        radius: Responsive.isDesktop(context)
+                            ? Spacing.l32
+                            : Spacing.m16,
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          textBaseline: TextBaseline.alphabetic,
                           children: [
-                            Expanded(
-                              child: FittedBox(
-                                child: Text(
-                                  Strings.zognest.toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: theme.textTheme.displayLarge?.copyWith(
-                                    fontFamily: 'SF Pro Rounded',
-                                    fontWeight: FontWeight.w900,
-                                    letterSpacing: -15,
-                                  ),
-                                ),
+                            Container(
+                              height: Constants.circleButtonRadius,
+                              decoration: BoxDecoration(
+                                color: theme.primaryColor,
+                                shape: BoxShape.circle,
                               ),
                             ),
-                            if (Responsive.isDesktop(context))
-                              CircleButton(
-                                onTap: widget.onTabUp,
-                                radius: Responsive.isDesktop(context)
-                                    ? Spacing.l32
-                                    : Spacing.m16,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: Constants.circleButtonRadius,
-                                      decoration: BoxDecoration(
-                                        color: theme.primaryColor,
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    const SizedBox(height: Spacing.s4),
-                                    SvgPicture.asset(
-                                      Assets.upArrow,
-                                      height: Responsive.isDesktop(context)
-                                          ? Spacing.m20
-                                          : Spacing.s12,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                          ],
-                        ),
-                        const SizedBox(height: Spacing.l24),
-                        FittedBox(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: SocialButtons.values
-                                .map((button) => Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal:
-                                Responsive.isDesktop(context)
-                                    ? Spacing.s8
-                                    : Spacing.s4,
-                              ),
-                              child: SocialButton(button: button),
-                            ))
-                                .toList(),
-                          ),
-                        ),
-                        const SizedBox(height: Spacing.l32),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(width:Responsive.isDesktop(context)? 80:15 ),
-                                Text(
-                                  'Account',
-                                  style: (Responsive.isDesktop(context)
-                                      ? theme.textTheme.labelMedium
-                                      : theme.textTheme.labelSmall?.copyWith(fontSize: 12))
-                                      ?.copyWith(fontFamily: 'SF Pro Rounded'),
-                                ),
-                                Text(
-                                  'Conditions of Solutions',
-                                  style: (Responsive.isDesktop(context)
-                                      ? theme.textTheme.labelMedium
-                                      : theme.textTheme.labelSmall?.copyWith(
-                                    fontSize: 12,))
-                                      ?.copyWith(fontFamily: 'SF Pro Rounded'),
-                                ),
-                                Text(
-                                  'Privacy Notice',
-                                  style: (Responsive.isDesktop(context)
-                                      ? theme.textTheme.labelMedium
-                                      : theme.textTheme.labelSmall?.copyWith(
-                                    fontSize: 12,
-                                    fontFamily: 'SF Pro Rounded',
-                                  ))
-                                      ?.copyWith(fontFamily: 'SF Pro Rounded'),
-                                ),
-                                SizedBox(width:Responsive.isDesktop(context)?80:15 ),
-                              ],
-                            ),
-                            const SizedBox(height: Spacing.s12),
-                            Text(
-                              Strings.copyRights,
-                              style: (Responsive.isDesktop(context)
-                                  ? theme.textTheme.labelMedium
-                                  : theme.textTheme.labelSmall?.copyWith(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w100,
-                              ))
-                                  ?.copyWith(
-                                fontFamily: 'SF Pro Rounded',
-                                fontWeight: FontWeight.w400,
-                                letterSpacing: -0.5,
-                              ),
+                            const SizedBox(height: Spacing.s4),
+                            SvgPicture.asset(
+                              Assets.upArrow,
+                              height: Responsive.isDesktop(context)
+                                  ? Spacing.m20
+                                  : Spacing.s12,
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: Spacing.l24),
+                Wrap(
+                  spacing: 4,
+                  runSpacing: 4,
+                  children: SocialButtons.values
+                      .map((button) => SocialButton(button: button))
+                      .toList(),
+                ),
+                const SizedBox(height: Spacing.l24),
+                Text(
+                  Strings.copyRights,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],

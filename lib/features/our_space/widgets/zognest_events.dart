@@ -91,7 +91,7 @@ class _ZognestEventsState extends ConsumerState<ZognestEvents> {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return SizedBox(
-                              width: Constants.listCardWidth,
+                              width:Responsive.isDesktop(context)? Constants.listCardWidth:300,
                               child: EventCard(
                                 event: events
                                     .where((event) => event.date.year == year)

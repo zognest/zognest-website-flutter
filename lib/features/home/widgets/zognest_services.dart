@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
@@ -13,6 +14,7 @@ import 'package:zognest_website/shared/widgets/technology_container.dart';
 
 import '../../../riverpod/controller.dart';
 import '../../../shared/widgets/network_fading_image.dart';
+import '../../our_services/pages/our_services_page.dart';
 
 class ZognestServices extends StatefulWidget {
   const ZognestServices({super.key});
@@ -45,11 +47,11 @@ class _ZognestServicesState extends State<ZognestServices> {
             const Divider(),
             ScrollHeadline(
               headline: TextSpan(
-                text: Strings.services.toUpperCase(),
+                text: 'services\n'.toUpperCase(),
                 style: theme.textTheme.displaySmall,
                 children: [
                   TextSpan(
-                    text: '${Strings.we}\n'.toUpperCase(),
+                    text: Strings.we.toUpperCase(),
                     style: theme.textTheme.displaySmall?.copyWith(
                       foreground: TextThemes.foreground,
                     ),
@@ -193,7 +195,8 @@ class FrontService extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 5,
                             style:
-                                theme.textTheme.bodyMedium?.copyWith(
+                                theme.textTheme.bodyLarge?.copyWith(
+                                    fontFamily: 'SF Pro Rounded',
                                     fontSize:Responsive.isDesktop(context)? 20 : 16,
                                     height: 1.3),
                           ),
@@ -238,7 +241,7 @@ class BackService extends StatelessWidget {
             path: service.backgroundImage,
             width: double.infinity,
             height: double.infinity,
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -288,7 +291,9 @@ class BackService extends StatelessWidget {
                     horizontal: Spacing.s12,
                     vertical: Spacing.m20,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    context.go(OurServicesPage.route);
+                  },
                 ),
               ],
             ),

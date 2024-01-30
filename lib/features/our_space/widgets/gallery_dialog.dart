@@ -28,7 +28,7 @@ class GalleryDialog extends StatelessWidget {
           children: [
             SizedBox(
               width: double.infinity,
-              height: double.infinity,
+              height: Responsive.isDesktop(context)? double.infinity :MediaQuery.sizeOf(context).height*0.70,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: CarouselSlider(

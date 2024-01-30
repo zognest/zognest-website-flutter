@@ -44,69 +44,69 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-          return Column(
+    return Column(
+      children: [
+        const Divider(),
+        ScrollHeadline(
+          headline: TextSpan(
+            text: '',
+            style: theme.textTheme.displaySmall,
             children: [
-              const Divider(),
-              ScrollHeadline(
-                headline: TextSpan(
-                  text: '',
-                  style: theme.textTheme.displaySmall,
-                  children: [
-                    TextSpan(
-                      text: '${Strings.our.toUpperCase()}\n',
-                      style: theme.textTheme.displaySmall
-                          ?.copyWith(foreground: TextThemes.foreground),
-                    ),
-                    TextSpan(text: Strings.birds.toUpperCase()),
-                  ],
-                ),
-                onTapScroll: () {
-                  if (_controller.offset ==
-                      _controller.position.maxScrollExtent) {
-                    currentIndex = 0;
-                  }
-                  _controller.animateTo(
-                    Constants.servicesCardWidth * currentIndex,
-                    duration: const Duration(milliseconds: 1000),
-                    curve: Curves.ease,
-                  );
-                  currentIndex++;
-                },
+              TextSpan(
+                text: '${Strings.our.toUpperCase()}\n',
+                style: theme.textTheme.displaySmall
+                    ?.copyWith(foreground: TextThemes.foreground),
               ),
-              Consumer(
-                builder: (__, ref , _) {
-                  final staff = ref.watch(appControllerProvider).staff;
-                  return staff.when(data: (staff){
-                    return SizedBox(
-                      height: Constants.listHeight,
-                      child: ListView.separated(
-                        padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.horizontalPadding),
-                        scrollDirection: Axis.horizontal,
-                        controller: _controller,
-                        itemBuilder: (context, index) {
-                          return SizedBox(
-                            width: Constants.listCardWidth,
-                            child: FlippingWidget(
-                              front: FrontCard(staff: staff[index]),
-                              back: BackCard(staff: staff[index]),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) => SizedBox(
-                          width: Constants.listCardSeparatorWidth *
-                              (Responsive.isDesktop(context) ? 1 : 0.5),
-                        ),
-                        itemCount: staff.length,
-                      ),
-                    );
-                  },error: (_, __) => const Text('error'),
-                      loading: () => CircularProgressIndicator(color: theme.primaryColor));
-                }
-              ),
-              const Divider(),
+              TextSpan(text: Strings.birds.toUpperCase()),
             ],
-          );
+          ),
+          onTapScroll: () {
+            if (_controller.offset == _controller.position.maxScrollExtent) {
+              currentIndex = 0;
+            }
+            _controller.animateTo(
+              Constants.servicesCardWidth * currentIndex,
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.ease,
+            );
+            currentIndex++;
+          },
+        ),
+        Consumer(builder: (__, ref, _) {
+          final staff = ref.watch(appControllerProvider).staff;
+          return staff.when(
+              data: (staff) {
+                return SizedBox(
+                  height: Constants.listHeight,
+                  child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Constants.horizontalPadding),
+                    scrollDirection: Axis.horizontal,
+                    controller: _controller,
+                    itemBuilder: (context, index) {
+                      return SizedBox(
+                        width: Responsive.isDesktop(context)?Constants.listCardWidth:300,
+                        child: FlippingWidget(
+                          front: FrontCard(staff: staff[index]),
+                          back: BackCard(staff: staff[index]),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) => SizedBox(
+                      width: Constants.listCardSeparatorWidth *
+                          (Responsive.isDesktop(context) ? 1 : 0.5),
+                    ),
+                    itemCount: staff.length,
+                  ),
+                );
+              },
+              error: (_, __) => const Text('error'),
+              loading: () =>
+                  CircularProgressIndicator(color: theme.primaryColor));
+        }),
+        const Divider(),
+      ],
+    );
   }
 }
 
@@ -126,7 +126,7 @@ class FrontCard extends StatelessWidget {
             child: Container(
               color: staff.color,
               width: double.infinity,
-              child:NetworkFadingImage(
+              child: NetworkFadingImage(
                 path: staff.avatar,
                 fit: BoxFit.contain,
               ),
@@ -149,6 +149,7 @@ class FrontCard extends StatelessWidget {
                           staff.name.toUpperCase(),
                           style: theme.textTheme.headlineLarge?.copyWith(
                             fontSize: 32,
+                              fontFamily: 'SF Pro Rounded'
                           ),
                         ),
                         Text(
@@ -156,6 +157,7 @@ class FrontCard extends StatelessWidget {
                           style: theme.textTheme.labelMedium?.copyWith(
                             color: theme.primaryColor,
                             fontWeight: FontWeight.w700,
+                              fontFamily: 'SF Pro Rounded'
                           ),
                         ),
                         Expanded(
@@ -168,7 +170,9 @@ class FrontCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style: theme.textTheme.bodyLarge?.copyWith(
-                                fontSize: Responsive.isDesktop(context)? 20 : 16 ,
+                                fontFamily: 'SF Pro Rounded',
+                                fontSize:
+                                    Responsive.isDesktop(context) ? 20 : 16,
                               ),
                             ),
                           ),
@@ -236,6 +240,7 @@ class BackCard extends StatelessWidget {
                         staff.name.toUpperCase(),
                         style: theme.textTheme.headlineLarge?.copyWith(
                           fontSize: 32,
+                            fontFamily: 'SF Pro Rounded'
                         ),
                       ),
                       Text(
@@ -243,6 +248,7 @@ class BackCard extends StatelessWidget {
                         style: theme.textTheme.labelMedium?.copyWith(
                           color: theme.primaryColor,
                           fontWeight: FontWeight.w700,
+                            fontFamily: 'SF Pro Rounded'
                         ),
                       ),
                       Expanded(
@@ -250,8 +256,9 @@ class BackCard extends StatelessWidget {
                           child: Text(
                             staff.description,
                             style: theme.textTheme.bodyLarge?.copyWith(
-                                fontSize: Responsive.isDesktop(context) ? 20 : 16
-                            ),
+                              fontFamily: 'SF Pro Rounded',
+                                fontSize:
+                                    Responsive.isDesktop(context) ? 20 : 16),
                           ),
                         ),
                       ),

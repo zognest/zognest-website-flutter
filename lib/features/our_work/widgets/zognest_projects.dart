@@ -38,70 +38,67 @@ class _ZognestProjectsState extends State<ZognestProjects> {
 
   @override
   Widget build(BuildContext context) {
-
     final theme = Theme.of(context);
-        return Column(
-          children: [
-            if (Responsive.isDesktop(context)) const Divider(),
-            ScrollHeadline(
-              headline: TextSpan(
-                children: [
-                  TextSpan(
-                    text: Strings.our.toUpperCase(),
-                    style: theme.textTheme.displaySmall,
-                  ),
-                  TextSpan(
-                    text: Strings.best.toUpperCase(),
-                    style: theme.textTheme.displaySmall
-                        ?.copyWith(foreground: TextThemes.foreground),
-                  ),
-                  TextSpan(
-                    text: Strings.projects.toUpperCase(),
-                    style: theme.textTheme.displaySmall,
-                  ),
-                ],
+    return Column(
+      children: [
+        if (Responsive.isDesktop(context)) const Divider(),
+        ScrollHeadline(
+          headline: TextSpan(
+            children: [
+              TextSpan(
+                text: Strings.our.toUpperCase(),
+                style: theme.textTheme.displaySmall,
               ),
-              onTapScroll: () {
-                if (_controller.offset ==
-                    _controller.position.maxScrollExtent) {
-                  currentIndex = 0;
-                }
-                _controller.animateTo(
-                  Constants.servicesCardWidth * currentIndex,
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.ease,
-                );
-                currentIndex++;
-              },
-            ),
-            Consumer(
-              builder: (context, ref , _) {
-                final project = ref.watch(appControllerProvider).projects;
-               return project.when(data: (project){
-                  return SizedBox(
-                    height: Constants.listHeight,
-                    child: ListView.separated(
-                      padding: const EdgeInsets.symmetric(
+              TextSpan(
+                text: Strings.best.toUpperCase(),
+                style: theme.textTheme.displaySmall
+                    ?.copyWith(foreground: TextThemes.foreground),
+              ),
+              TextSpan(
+                text: Strings.projects.toUpperCase(),
+                style: theme.textTheme.displaySmall,
+              ),
+            ],
+          ),
+          onTapScroll: () {
+            if (_controller.offset == _controller.position.maxScrollExtent) {
+              currentIndex = 0;
+            }
+            _controller.animateTo(
+              Constants.servicesCardWidth * currentIndex,
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.ease,
+            );
+            currentIndex++;
+          },
+        ),
+        Consumer(builder: (context, ref, _) {
+          final project = ref.watch(appControllerProvider).projects;
+          return project.when(
+              data: (project) {
+                return SizedBox(
+                  height: Constants.listHeight,
+                  child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: Constants.horizontalPadding,
                     ),
-                      scrollDirection: Axis.horizontal,
-                      controller: _controller,
-                      itemBuilder: (context, index) {
-                        return ProjectItem(project: project[index]);
-                      },
-                      separatorBuilder: (context, index) =>
-                      const SizedBox(width: Constants.listCardSeparatorWidth),
-                      itemCount: project.length,
-                    ),
-                  );
-                }, error:(_,__)=>const SizedBox.shrink(),
-                  loading: () =>const SizedBox.shrink());
-
-              }
-            ),
-            const Divider(),
-          ],
-        );
+                    scrollDirection: Axis.horizontal,
+                    controller: _controller,
+                    itemBuilder: (context, index) {
+                      return ProjectItem(project: project[index]);
+                    },
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: Constants.listCardSeparatorWidth),
+                    itemCount: project.length,
+                  ),
+                );
+              },
+              error: (_, __) => const SizedBox.shrink(),
+              loading: () => const SizedBox.shrink());
+        }),
+        const Divider(),
+      ],
+    );
   }
 }
 
@@ -123,7 +120,9 @@ class _ProjectItemState extends State<ProjectItem> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 1000),
       curve: Curves.fastOutSlowIn,
-      width: Constants.listCardWidth * (over ? 2 : 1),
+      width: Responsive.isDesktop(context)
+          ? Constants.listCardWidth * (over ? 2 : 1)
+          : 296 * (over ? 2 : 1),
       height: Constants.projectHeight,
       child: InkWell(
         onTap: () {},
@@ -158,7 +157,7 @@ class _ProjectItemState extends State<ProjectItem> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const Spacer(flex: 2),
-                  NetworkFadingImage(path:widget.project.icon),
+                  NetworkFadingImage(path: widget.project.icon),
                   const SizedBox(height: Spacing.l32),
                   Row(
                     children: [
@@ -167,8 +166,10 @@ class _ProjectItemState extends State<ProjectItem> {
                           widget.project.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.labelLarge
-                              ?.copyWith(fontSize: 32),
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            fontFamily: 'SF Pro Rounded',
+                            fontSize: 32,
+                          ),
                         ),
                       ),
                       if (over)
@@ -199,8 +200,8 @@ class _ProjectItemState extends State<ProjectItem> {
                       maxLines: over ? null : 2,
                       overflow: over ? null : TextOverflow.ellipsis,
                       style: theme.textTheme.bodyLarge?.copyWith(
-                          fontSize: Responsive.isDesktop(context) ? 20 : 16
-                      ),
+                          fontFamily: 'SF Pro Rounded',
+                          fontSize: Responsive.isDesktop(context) ? 20 : 16),
                     ),
                   ),
                   if (!over) ...[

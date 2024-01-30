@@ -97,6 +97,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                     style: theme.textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w900,
                       color: theme.primaryColor,
+                        fontFamily: 'SF Pro Rounded',
                     ),
                   ),
                   const SizedBox(height: Spacing.s8),
@@ -105,6 +106,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall?.copyWith(
+                        fontFamily: 'SF Pro Rounded',
                         fontSize: Responsive.isDesktop(context) ? 20 : 16
                     ),
                   ),
@@ -194,6 +196,7 @@ class ServicesCart extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis,
                                         style: theme.textTheme.bodyLarge?.copyWith(
                                           fontWeight: FontWeight.w600,
+                                            fontFamily: 'SF Pro Rounded',
                                         ),
                                       ),
                                     ),

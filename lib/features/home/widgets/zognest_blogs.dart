@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/models/blog.dart';
@@ -74,7 +75,7 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
           return blogs.when(
               data: (blogs) {
                 return SizedBox(
-                  height: Constants.listHeight,
+                  height:Responsive.isDesktop(context)?Constants.listHeight:450,
                   child: ListView.separated(
                     padding: const EdgeInsets.symmetric(
                         horizontal: Constants.horizontalPadding),
@@ -117,10 +118,10 @@ class _BlogItemState extends State<BlogItem> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return FrostedContainer(
-      width: Constants.listCardWidth,
+      width: Responsive.isDesktop(context)?Constants.listCardWidth:300,
       borderRadius: 25,
       padding: const EdgeInsets.symmetric(
-          horizontal: Spacing.l32, vertical: Spacing.l24),
+          horizontal: Spacing.l24, vertical: Spacing.l24),
       child: InkWell(
         onTap: () {},
         onHover: (over) {
@@ -148,6 +149,7 @@ class _BlogItemState extends State<BlogItem> {
                     widget.blog.title,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w700,
+                        fontFamily: 'SF Pro Rounded'
                     ),
                   ),
                   Text(

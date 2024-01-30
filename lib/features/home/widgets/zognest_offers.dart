@@ -179,11 +179,14 @@ class OfferItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Card(
+    return  Card(
       clipBehavior: Clip.antiAlias,
-      shape: const RoundedRectangleBorder(
+      shape:  const RoundedRectangleBorder(
+        side: BorderSide(width: 0.5, color:Color(0xff121212)
+        ),
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25), topRight: Radius.circular(25))),
+              topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+      ),
       child: Container(
         width: !Responsive.isMobile(context)
             ? Constants.zognestOffersItemWidth
@@ -201,6 +204,7 @@ class OfferItem extends StatelessWidget {
               offer.highlight.toUpperCase(),
               style: theme.textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
+                fontFamily: 'SF Pro Rounded',
                 color: colored ? Colors.black : theme.primaryColor,
                 fontVariations: TextThemes.fontVariation(3),
               ),
@@ -216,7 +220,7 @@ class OfferItem extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Text(
                   offer.description,
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style:theme.textTheme.bodyLarge?.copyWith(
                     color: colored ? Colors.black : null,
                   ),
                 ),

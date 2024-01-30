@@ -22,9 +22,11 @@ abstract final class Assets {
   static const mail = '${Paths.svg}/mail.svg';
   static const drawer = '${Paths.svg}/drawer.svg';
 
+  static const zognestLogoSvg = '${Paths.svg}/logo.svg';
+
   // Images
   static const impactLinesPng = '${Paths.images}/impact_lines.png';
-  static const zognestLogo = '${Paths.images}/logo.png';
+  static const zognestLogoPng = '${Paths.images}/logo.png';
   static const mercuries = '${Paths.images}/mercuries.png';
   static const office = '${Paths.images}/office.png';
   static const arrowRight = '${Paths.images}/arrow_right.png';

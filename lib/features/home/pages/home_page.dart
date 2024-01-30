@@ -139,11 +139,11 @@ class Foreground extends StatelessWidget {
         BeyondSpace(onTabDown: onTabDown),
         const SizedBox(height: Constants.sectionSpacing),
         const ClientsMarquee(),
-        /*const SizedBox(height: Constants.sectionSpacing),*/
+        const SizedBox(height: Constants.sectionSpacing),
         const ZognestVideo(),
-       /* const SizedBox(height: Constants.sectionSpacing),*/
+        const SizedBox(height: Constants.sectionSpacing),
         const ImageText(image: Assets.office),
-        /*const SizedBox(height: Constants.sectionSpacing),*/
+        const SizedBox(height: Constants.sectionSpacing),
         Responsive.isDesktop(context)
             ? const ZognestOffers()
             : const ZognestOffersMobile(),

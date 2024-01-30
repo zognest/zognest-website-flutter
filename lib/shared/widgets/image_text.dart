@@ -24,14 +24,17 @@ class ImageText extends StatelessWidget {
             children: [
               const Divider(),
               Stack(
-                alignment: Alignment.center,
+                alignment: Alignment.topCenter,
                 children: [
                   if (hasGradient)
-                    const GradientContainer(
-                      color: Colors.deepPurple,
-                      height: Constants.imageTextHeight,
-                      alignment: Alignment(0.5, 0),
-                      radius: 0.8,
+                    const Align(
+                      alignment: Alignment.center,
+                      child: GradientContainer(
+                        color: Colors.deepPurple,
+                        height: Constants.imageTextHeight,
+                        alignment: Alignment(0.5, 0),
+                        radius: 0.8,
+                      ),
                     ),
                   FrostedContainer(
                     height: Constants.imageTextHeight,

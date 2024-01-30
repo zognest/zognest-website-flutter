@@ -135,7 +135,7 @@ class _BlogItemState extends State<BlogItem> {
               child: GreyscaleFilter(
                 isHovered: hovered,
                 child: Card(
-                    clipBehavior: Clip.antiAlias,
+                    clipBehavior: Clip.hardEdge,
                     child: NetworkFadingImage(
                         path: widget.blog.image, fit: BoxFit.cover)),
               ),

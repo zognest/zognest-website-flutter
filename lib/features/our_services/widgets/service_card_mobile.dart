@@ -134,12 +134,12 @@ class ServicesCartMobile extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const InputFormField(
+                       const InputFormField(
                         hint: Strings.yourName,
                         required: false,
                         keyboardType: TextInputType.name,
                       ),
-                      const Row(
+                       const Row(
                         children: [
                           Expanded(
                             child: InputFormField(
@@ -158,12 +158,12 @@ class ServicesCartMobile extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const InputFormField(
+                       const InputFormField(
                         hint: Strings.budget,
                         required: false,
                         keyboardType: TextInputType.text,
                       ),
-                      const InputFormField(
+                       const InputFormField(
                         hint: Strings.message,
                         required: true,
                         multiline: true,

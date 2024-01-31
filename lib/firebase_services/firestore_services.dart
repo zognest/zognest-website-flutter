@@ -144,4 +144,11 @@ class FirestoreServices {
 
     return technologies;
   }
+
+  static void sendMassages(){
+    CollectionReference massages=
+    FirebaseFirestore.instance.collection('massages');
+  }
 }
+
+

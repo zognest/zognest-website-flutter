@@ -213,6 +213,7 @@ class OfferItem extends StatelessWidget {
               offer.title.toUpperCase(),
               style: theme.textTheme.headlineMedium?.copyWith(
                 color: colored ? Colors.black : null,
+                fontFamily: 'SF Pro Rounded',
               ),
             ),
             const SizedBox(height: Spacing.s12),

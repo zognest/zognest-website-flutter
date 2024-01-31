@@ -162,7 +162,7 @@ class Foreground extends StatelessWidget {
         const SizedBox(height: Constants.sectionSpacing),
         const ZognestBlogs(),
         const SizedBox(height: Constants.sectionSpacing),
-        const ContactForm(),
+         ContactForm(),
         const SizedBox(height: Constants.sectionSpacing),
         Footer(onTabUp: onTabUp),
       ],

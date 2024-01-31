@@ -1,21 +1,24 @@
+
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 
 class InputFormField extends StatelessWidget {
-  const InputFormField({
+ const  InputFormField({
     super.key,
     required this.hint,
     this.required = true,
     this.multiline = false,
     this.keyboardType,
+    this.onChanged,
   });
 
   final String hint;
   final bool required;
   final bool multiline;
   final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,7 @@ class InputFormField extends StatelessWidget {
         backgroundColor: const Color(0xff121212).withOpacity(0.6),
         borderRadius: Spacing.s12,
         child: TextFormField(
+          onChanged:onChanged ,
           keyboardType: keyboardType,
           maxLines: multiline ? null : 1,
           minLines: multiline ? 5 : 1,
@@ -37,9 +41,9 @@ class InputFormField extends StatelessWidget {
             return null;
           },
           decoration: InputDecoration(
-            contentPadding:  EdgeInsets.symmetric(
-              horizontal:Spacing.m20,
-              vertical: Responsive.isDesktop(context)? 32:20,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: Spacing.m20,
+              vertical: Responsive.isDesktop(context) ? 32 : 20,
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Spacing.s12),

@@ -190,7 +190,7 @@ class _ProjectItemState extends State<ProjectItem> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.labelMedium
-                        ?.copyWith(color: theme.primaryColor),
+                        ?.copyWith(color: theme.primaryColor, fontFamily: 'SF Pro Rounded',),
                   ),
                   const SizedBox(height: Spacing.m16),
                   Expanded(

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
@@ -11,9 +12,14 @@ import 'package:zognest_website/shared/widgets/input_form_field.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 import '../../../config/theme/text_theme.dart';
+import '../../../firebase_services/firestore_services.dart';
 
 class ContactForm extends StatelessWidget {
-  const ContactForm({super.key});
+  ContactForm({super.key});
+
+  String? email, name, mobile, massage;
+  TextEditingController _controller=TextEditingController();
+  /*CollectionReference massages= FirebaseFirestore.instance.collection('massages');*/
 
   @override
   Widget build(BuildContext context) {
@@ -98,10 +104,29 @@ class ContactForm extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const InputFormField(hint: Strings.yourName),
-                                const InputFormField(hint: Strings.yourEmail),
-                                const InputFormField(hint: Strings.mobileNo),
-                                const InputFormField(
+                                InputFormField(
+                                    onChanged: (data) {
+                                      name = data;
+                                      _controller.clear();
+                                    },
+                                    hint: Strings.yourName),
+                                InputFormField(
+                                    onChanged: (data) {
+                                      email = data;
+                                      _controller.clear();
+                                    },
+                                    hint: Strings.yourEmail),
+                                InputFormField(
+                                    onChanged: (data) {
+                                      mobile = data;
+                                       _controller.clear();
+                                    },
+                                    hint: Strings.mobileNo),
+                                 InputFormField(
+                                  onChanged: (data) {
+                                    massage = data;
+                                    _controller.clear();
+                                  },
                                   hint: Strings.message,
                                   required: false,
                                   multiline: true,
@@ -119,7 +144,17 @@ class ContactForm extends StatelessWidget {
                                             theme.textTheme.bodyLarge?.copyWith(
                                           fontWeight: FontWeight.w600,
                                         ),
-                                        onTap: () {},
+                                        onTap: () {
+                                         /* FirestoreServices.sendMassages(
+                                              massages.add({
+                                                'massage':massage,
+                                                'name' :name,
+                                                'mobile':mobile,
+                                                'email':email
+                                              })
+
+                                          );*/
+                                        },
                                       ),
                                     ),
                                     const SizedBox(width: Spacing.s12),

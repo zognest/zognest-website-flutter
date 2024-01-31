@@ -11,14 +11,15 @@ class InputFormField extends StatelessWidget {
     this.required = true,
     this.multiline = false,
     this.keyboardType,
-    this.onChanged,
+    this.controller,
   });
 
   final String hint;
   final bool required;
   final bool multiline;
   final TextInputType? keyboardType;
-  final void Function(String)? onChanged;
+  final TextEditingController? controller;
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class InputFormField extends StatelessWidget {
         backgroundColor: const Color(0xff121212).withOpacity(0.6),
         borderRadius: Spacing.s12,
         child: TextFormField(
-          onChanged:onChanged ,
+          controller: controller,
           keyboardType: keyboardType,
           maxLines: multiline ? null : 1,
           minLines: multiline ? 5 : 1,

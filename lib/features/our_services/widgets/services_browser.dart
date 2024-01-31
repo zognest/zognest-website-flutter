@@ -1,11 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/our_services/models/purchasable_service.dart';
 import 'package:zognest_website/features/our_services/widgets/service_card_mobile.dart';
+import 'package:zognest_website/firebase_services/firestore_services.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
@@ -13,15 +17,13 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 import '../../../riverpod/controller.dart';
 import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/network_fading_image.dart';
- //todo ask him about this
+
 class ServicesBrowser extends ConsumerStatefulWidget {
   const ServicesBrowser({super.key});
 
   @override
   ConsumerState<ServicesBrowser> createState() => _ServicesBrowserState();
 }
-
-late  PurchasableService service;
 
 class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
   @override
@@ -35,13 +37,15 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
         return Column(
           children: [
             if (servicesCart.isNotEmpty) ...[
-              Responsive.isDesktop(context) ? const ServicesCart() :const ServicesCartMobile(),
+              Responsive.isDesktop(context)
+                  ?  ServicesCart()
+                  : const ServicesCartMobile(),
               const SizedBox(height: Constants.sectionSpacing),
             ],
             if (Responsive.isDesktop(context)) const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: Constants.horizontalPadding),
+                  horizontal: Constants.horizontalPadding),
               child: Wrap(
                 runSpacing: Constants.listCardSeparatorWidth,
                 spacing: Constants.listCardSeparatorWidth,
@@ -97,7 +101,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                     style: theme.textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w900,
                       color: theme.primaryColor,
-                        fontFamily: 'SF Pro Rounded',
+                      fontFamily: 'SF Pro Rounded',
                     ),
                   ),
                   const SizedBox(height: Spacing.s8),
@@ -107,8 +111,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall?.copyWith(
                         fontFamily: 'SF Pro Rounded',
-                        fontSize: Responsive.isDesktop(context) ? 20 : 16
-                    ),
+                        fontSize: Responsive.isDesktop(context) ? 20 : 16),
                   ),
                   const Spacer(),
                   PrimaryButton(
@@ -143,25 +146,32 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
   }
 }
 
-class ServicesCart extends StatelessWidget {
-  const ServicesCart({super.key});
-
+class ServicesCart extends HookConsumerWidget {
+   ServicesCart({super.key});
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,ref) {
     final theme = Theme.of(context);
     final width = MediaQuery.sizeOf(context).width;
+    final emailController = useTextEditingController();
+    final nameController = useTextEditingController();
+    final phoneController = useTextEditingController();
+    final budgetController = useTextEditingController();
+    final messageController = useTextEditingController();
+
     return Column(
       children: [
         const Divider(),
-        Consumer(
-          builder: (context, ref, _) {
-            final cartServices = ref.watch(appControllerProvider).cartServices;
-            return SizedBox(
-              height: 600,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.horizontalPadding,
-                ),
+        Consumer(builder: (context, ref, _) {
+          final cartServices = ref.watch(appControllerProvider).cartServices;
+          return SizedBox(
+            height: 600,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Constants.horizontalPadding,
+              ),
+              child: Form(
+                key: formKey,
                 child: Row(
                   children: [
                     Expanded(
@@ -194,9 +204,10 @@ class ServicesCart extends StatelessWidget {
                                         service.title,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
-                                        style: theme.textTheme.bodyLarge?.copyWith(
+                                        style:
+                                            theme.textTheme.bodyLarge?.copyWith(
                                           fontWeight: FontWeight.w600,
-                                            fontFamily: 'SF Pro Rounded',
+                                          fontFamily: 'SF Pro Rounded',
                                         ),
                                       ),
                                     ),
@@ -233,23 +244,26 @@ class ServicesCart extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                           const InputFormField(
+                          InputFormField(
+                            controller: nameController,
                             hint: Strings.yourName,
                             required: false,
                             keyboardType: TextInputType.name,
                           ),
-                           const Row(
+                          Row(
                             children: [
                               Expanded(
                                 child: InputFormField(
+                                  controller: emailController,
                                   hint: Strings.yourEmail,
                                   required: false,
                                   keyboardType: TextInputType.emailAddress,
                                 ),
                               ),
-                              SizedBox(width: 12),
+                              const SizedBox(width: 12),
                               Expanded(
                                 child: InputFormField(
+                                  controller: phoneController,
                                   hint: Strings.mobileNo,
                                   required: false,
                                   keyboardType: TextInputType.phone,
@@ -257,12 +271,14 @@ class ServicesCart extends StatelessWidget {
                               ),
                             ],
                           ),
-                           const InputFormField(
+                          InputFormField(
+                            controller: budgetController,
                             hint: Strings.budget,
                             required: false,
                             keyboardType: TextInputType.text,
                           ),
-                           const InputFormField(
+                          InputFormField(
+                            controller: messageController,
                             hint: Strings.message,
                             required: true,
                             multiline: true,
@@ -275,10 +291,34 @@ class ServicesCart extends StatelessWidget {
                                 child: PrimaryButton(
                                   title: Strings.sendMessage.toUpperCase(),
                                   height: 70,
-                                  textStyle: theme.textTheme.bodyLarge?.copyWith(
+                                  textStyle:
+                                      theme.textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
-                                  onTap: () {},
+                                  onTap: () async {
+                                      if (formKey.currentState!.validate()){
+                                        final services = ref
+                                            .read(appControllerProvider)
+                                            .cartServices
+                                            .map((service) => service.title)
+                                            .toList();
+                                        await FirestoreServices.sendMessages(
+                                          message: messageController.text,
+                                          budget: budgetController.text,
+                                          phone: phoneController.text,
+                                          name: nameController.text,
+                                          email: emailController.text,
+                                          services: services,
+                                        );
+                                        messageController.clear();
+                                        budgetController.clear();
+                                        phoneController.clear();
+                                        nameController.clear();
+                                        nameController.clear();
+                                        emailController.clear();
+                                      }
+                                      return 'some things went roung';
+                                    }
                                 ),
                               ),
                               const SizedBox(width: Spacing.s8),
@@ -286,10 +326,35 @@ class ServicesCart extends StatelessWidget {
                                 child: PrimaryButton(
                                   title: Strings.requestCall.toUpperCase(),
                                   height: 70,
-                                  textStyle: theme.textTheme.bodyLarge?.copyWith(
+                                  textStyle:
+                                      theme.textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
-                                  onTap: () {},
+                                  onTap: ()  async {
+                                    if (formKey.currentState!.validate()){
+                                      final services = ref
+                                          .read(appControllerProvider)
+                                          .cartServices
+                                          .map((service) => service.title)
+                                          .toList();
+                                      await FirestoreServices.sendMessages(
+                                        message: messageController.text,
+                                        budget: budgetController.text,
+                                        phone: phoneController.text,
+                                        name: nameController.text,
+                                        email: emailController.text,
+                                        services: services,
+                                        call: true
+                                      );
+                                      messageController.clear();
+                                      budgetController.clear();
+                                      phoneController.clear();
+                                      nameController.clear();
+                                      nameController.clear();
+                                      emailController.clear();
+                                    }
+                                    return 'some things went roung';
+                                  },
                                 ),
                               ),
                             ],
@@ -300,9 +365,9 @@ class ServicesCart extends StatelessWidget {
                   ],
                 ),
               ),
-            );
-          }
-        ),
+            ),
+          );
+        }),
         const Divider(),
       ],
     );

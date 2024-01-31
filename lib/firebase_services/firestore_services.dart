@@ -145,10 +145,26 @@ class FirestoreServices {
     return technologies;
   }
 
-  static void sendMassages(){
-    CollectionReference massages=
-    FirebaseFirestore.instance.collection('massages');
+  static Future<void> sendMessages({
+    required String message,
+    String? phone,
+    String? budget,
+    required String name,
+    required String email,
+    List<String>? services,
+    bool call = false,
+  }) async {
+    final map = {
+      'message': message,
+      'phone': phone ?? '-',
+      'name': name,
+      'email': email,
+      'budget': budget ?? '-',
+      'call': call,
+      'services': services,
+    };
+    await FirebaseFirestore.instance
+        .collection(FirebasePaths.messages.path)
+        .add(map);
   }
 }
-
-

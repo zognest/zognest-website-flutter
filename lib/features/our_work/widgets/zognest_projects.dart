@@ -122,105 +122,116 @@ class _ProjectItemState extends State<ProjectItem> {
       curve: Curves.fastOutSlowIn,
       width: Responsive.isDesktop(context)
           ? Constants.listCardWidth * (over ? 2 : 1)
-          : 296 * (over ? 2 : 1),
+          : 290 * (over ? 1.2 : 1),
       height: Constants.projectHeight,
-      child: InkWell(
-        onTap: () {},
-        onHover: (over) => setState(() => this.over = over),
-        child: Stack(
-          children: [
-            ShaderMask(
-              blendMode: BlendMode.srcATop,
-              shaderCallback: (bounds) {
-                return LinearGradient(
-                  colors: [
-                    Palette.transparent,
-                    theme.scaffoldBackgroundColor.withOpacity(0.8),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: over ? Alignment.bottomCenter : Alignment.center,
-                ).createShader(
-                  Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-                );
-              },
-              child: NetworkFadingImage(
-                path: widget.project.cover,
-                width: double.infinity,
-                height: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(Spacing.l32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Spacer(flex: 2),
-                  NetworkFadingImage(path: widget.project.icon),
-                  const SizedBox(height: Spacing.l32),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          widget.project.title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            fontFamily: 'SF Pro Rounded',
-                            fontSize: 32,
-                          ),
-                        ),
-                      ),
-                      if (over)
-                        PrimaryButton(
-                          title: Strings.visit.toUpperCase(),
-                          width: Constants.listCardWidth * 0.3,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Constants.listButtonHorizontalPadding,
-                            vertical: Constants.listButtonVerticalPadding,
-                          ),
-                          onTap: () {},
-                        ),
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(25),
+            topLeft: Radius.circular(25),
+          ),
+        ),
+        child: InkWell(
+          onTap: () {},
+          onHover: (over) => setState(() => this.over = over),
+          child: Stack(
+            children: [
+              ShaderMask(
+                // image
+                blendMode: BlendMode.srcATop,
+                shaderCallback: (bounds) {
+                  return LinearGradient(
+                    colors: [
+                      Palette.transparent,
+                      theme.scaffoldBackgroundColor.withOpacity(0.8),
                     ],
-                  ),
-                  const SizedBox(height: Spacing.s4),
-                  Text(
-                    widget.project.brief,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.labelMedium
-                        ?.copyWith(color: theme.primaryColor, fontFamily: 'SF Pro Rounded',),
-                  ),
-                  const SizedBox(height: Spacing.m16),
-                  Expanded(
-                    flex: over ? 5 : 1,
-                    child: Text(
-                      widget.project.description,
-                      maxLines: over ? null : 2,
-                      overflow: over ? null : TextOverflow.ellipsis,
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                          fontFamily: 'SF Pro Rounded',
-                          fontSize: Responsive.isDesktop(context) ? 20 : 16),
-                    ),
-                  ),
-                  if (!over) ...[
-                    const SizedBox(height: Spacing.l32),
-                    PrimaryButton(
-                      title: Strings.more.toUpperCase(),
-                      filled: false,
-                      width: Constants.listCardWidth * 0.3,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.listButtonHorizontalPadding,
-                        vertical: Constants.listButtonVerticalPadding,
-                      ),
-                      onTap: () {},
-                    ),
-                  ]
-                ],
+                    begin: Alignment.topCenter,
+                    end: over ? Alignment.bottomCenter : Alignment.center,
+                  ).createShader(
+                    Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                  );
+                },
+                child: NetworkFadingImage(
+                  path: widget.project.cover,
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(Spacing.l32),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    NetworkFadingImage(path: widget.project.icon),
+                    const SizedBox(height: Spacing.l32),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            widget.project.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.labelLarge?.copyWith(
+                              fontFamily: 'SF Pro Rounded',
+                              fontSize: 32,
+                            ),
+                          ),
+                        ),
+                        if (over)
+                          PrimaryButton(
+                            title: Strings.visit.toUpperCase(),
+                            width: Constants.listCardWidth * 0.3,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: Constants.listButtonHorizontalPadding,
+                              vertical: Constants.listButtonVerticalPadding,
+                            ),
+                            onTap: () {},
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: Spacing.s4),
+                    Text(
+                      widget.project.brief,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: theme.primaryColor,
+                        fontFamily: 'SF Pro Rounded',
+                      ),
+                    ),
+                    const SizedBox(height: Spacing.m16),
+                    Expanded(
+                      flex: over ? 5 : 1,
+                      child: Text(
+                        widget.project.description,
+                        maxLines: over ? null : 2,
+                        overflow: over ? null : TextOverflow.ellipsis,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                            fontFamily: 'SF Pro Rounded',
+                            fontSize: Responsive.isDesktop(context) ? 20 : 16),
+                      ),
+                    ),
+                    if (!over) ...[
+                      const SizedBox(height: Spacing.l32),
+                      PrimaryButton(
+                        title: Strings.more.toUpperCase(),
+                        filled: false,
+                        width: Constants.listCardWidth * 0.3,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Constants.listButtonHorizontalPadding,
+                          vertical: Constants.listButtonVerticalPadding,
+                        ),
+                        onTap: () {},
+                      ),
+                    ]
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

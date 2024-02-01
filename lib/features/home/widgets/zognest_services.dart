@@ -47,7 +47,7 @@ class _ZognestServicesState extends State<ZognestServices> {
             const Divider(),
             ScrollHeadline(
               headline: TextSpan(
-                text: 'services\n'.toUpperCase(),
+                text: 'services \n'.toUpperCase(),
                 style: theme.textTheme.displaySmall,
                 children: [
                   TextSpan(

@@ -91,7 +91,9 @@ class ContactForm extends  HookWidget {
                                     const SizedBox(height: Spacing.m20),
                                     Text(
                                       Strings.address,
-                                      style: theme.textTheme.bodyLarge,
+                                      style: theme.textTheme.bodyLarge!.copyWith(
+                                        fontSize: Responsive.isDesktop(context)?10:8,
+                                      ),
                                     ),
                                     const SizedBox(height: Spacing.m20),
                                     Text(

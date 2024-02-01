@@ -60,7 +60,7 @@ class _ZognestMocksState extends State<ZognestMocks>
               },
               child: AspectRatio(
                 aspectRatio:
-                    Responsive.isDesktop(context) ? 2100 / 960 : 600 / 400,
+                    Responsive.isDesktop(context) ? 2000 / 900 : 400 / 200,
                 child: SlideTransition(
                   position: _offsetAnimation,
                   child: Image.asset(

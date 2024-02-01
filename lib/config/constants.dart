@@ -98,8 +98,8 @@ class Constants {
   static const contactUsSectionHeight = 850.0;
   static const bgDecorationSpacing = 1000.0;
   static const beyondSpaceAppDuration = 5;
-  static const clientsMarqueeHeight = 72.0;
-  static const mobileClientsMarqueeHeight = 65.0;
+  static const clientsMarqueeHeight = 75.0;
+  static const mobileClientsMarqueeHeight = 75.0;
 
   // endregion
 

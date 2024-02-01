@@ -53,9 +53,9 @@ class _FooterState extends State<Footer> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const ZognestLogo(
+                       ZognestLogo(
                         iconOnly: true,
-                        size: 80,
+                        size: Responsive.isDesktop(context)?80:66,
                       ),
                       const SizedBox(height: Spacing.s12),
                       InkWell(

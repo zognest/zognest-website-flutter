@@ -240,7 +240,9 @@ class _ClientItemState extends State<ClientItem> {
                     child: SingleChildScrollView(
                       child: Text(
                         widget.clientFeedback.description,
-                        style: theme.textTheme.bodyLarge,
+                        style: theme.textTheme.bodyLarge!.copyWith(
+                          fontFamily: 'SF Pro Rounded',
+                        ),
                       ),
                     ),
                   ),

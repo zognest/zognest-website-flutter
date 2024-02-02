@@ -89,6 +89,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
       child: Row(
         children: [
           Expanded(
+
             child: Padding(
               padding: const EdgeInsets.all(Spacing.m20),
               child: Column(

@@ -42,101 +42,101 @@ class _ZognestServicesState extends State<ZognestServices> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-        return Column(
-          children: [
-            const Divider(),
-            ScrollHeadline(
-              headline: TextSpan(
-                text: 'services \n'.toUpperCase(),
-                style: theme.textTheme.displaySmall,
-                children: [
-                  TextSpan(
-                    text: Strings.we.toUpperCase(),
-                    style: theme.textTheme.displaySmall?.copyWith(
-                      foreground: TextThemes.foreground,
-                    ),
-                  ),
-                  TextSpan(text: Strings.offer.toUpperCase()),
-                ],
+    return Column(
+      children: [
+        const Divider(),
+        ScrollHeadline(
+          headline: TextSpan(
+            text: 'services \n'.toUpperCase(),
+            style: theme.textTheme.displaySmall
+                ?.copyWith(fontWeight: FontWeight.w700),
+            children: [
+              TextSpan(
+                text: Strings.we.toUpperCase(),
+                style: theme.textTheme.displaySmall?.copyWith(
+                  foreground: TextThemes.foreground,
+                ),
               ),
-              onTapScroll: Responsive.isDesktop(context)
-                  ? () {
-                      if (_controller.offset ==
-                          _controller.position.maxScrollExtent) {
-                        currentIndex = 0;
-                      }
-                      _controller.animateTo(
-                        Constants.servicesCardWidth * currentIndex,
-                        duration: const Duration(milliseconds: 1000),
-                        curve: Curves.ease,
-                      );
-                      currentIndex++;
-                    }
-                  : null,
-            ),
-            Consumer(
-              builder: (context, ref ,child) {
-                final services = ref.watch(appControllerProvider).services;
-                return services.when(data:(services) {
-                  return !Responsive.isMobile(context)
-                      ? SizedBox(
-                    height: Constants.servicesCardHeight,
-                    child: ListView.separated(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: Constants.horizontalPadding),
-                      scrollDirection: Axis.horizontal,
-                      controller: _controller,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          constraints: BoxConstraints.tight(
-                            const Size(
-                              Constants.servicesCardWidth,
-                              Constants.servicesCardHeight,
-                            ),
-                          ),
-                          child: FlippingWidget(
-                            front: FrontService(service: services[index]),
-                            back: BackService(service: services[index]),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context, index) =>
-                      const SizedBox(width: Spacing.l24),
-                      itemCount: services.length,
-                    ),
-                  )
-                      : Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.mobileHorizontalPadding,
-                    ),
-                    child: Column(
-                      children: services
-                          .map(
-                            (service) => Padding(
-                          padding:
-                          const EdgeInsets.only(bottom: Spacing.s12),
-                          child: SizedBox(
-                            height: Constants.servicesCardHeight,
-                            width: double.infinity,
-                            child: FlippingWidget(
-                              front: FrontService(service: service),
-                              back: BackService(service: service),
-                            ),
-                          ),
-                        ),
-                      )
-                          .toList(),
-                    ),
+              TextSpan(text: Strings.offer.toUpperCase()),
+            ],
+          ),
+          onTapScroll: Responsive.isDesktop(context)
+              ? () {
+                  if (_controller.offset ==
+                      _controller.position.maxScrollExtent) {
+                    currentIndex = 0;
+                  }
+                  _controller.animateTo(
+                    Constants.servicesCardWidth * currentIndex,
+                    duration: const Duration(milliseconds: 1000),
+                    curve: Curves.ease,
                   );
-                }, error:(_,__)=>const SizedBox.shrink(),
-                  loading: () =>const SizedBox.shrink(),
-                );
-
-              }
-            ),
-            const Divider(),
-          ],
-        );
+                  currentIndex++;
+                }
+              : null,
+        ),
+        Consumer(builder: (context, ref, child) {
+          final services = ref.watch(appControllerProvider).services;
+          return services.when(
+            data: (services) {
+              return !Responsive.isMobile(context)
+                  ? SizedBox(
+                      height: Constants.servicesCardHeight,
+                      child: ListView.separated(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: Constants.horizontalPadding),
+                        scrollDirection: Axis.horizontal,
+                        controller: _controller,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            constraints: BoxConstraints.tight(
+                              const Size(
+                                Constants.servicesCardWidth,
+                                Constants.servicesCardHeight,
+                              ),
+                            ),
+                            child: FlippingWidget(
+                              front: FrontService(service: services[index]),
+                              back: BackService(service: services[index]),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(width: Spacing.l24),
+                        itemCount: services.length,
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Constants.mobileHorizontalPadding,
+                      ),
+                      child: Column(
+                        children: services
+                            .map(
+                              (service) => Padding(
+                                padding:
+                                    const EdgeInsets.only(bottom: Spacing.s12),
+                                child: SizedBox(
+                                  height: Constants.servicesCardHeight,
+                                  width: double.infinity,
+                                  child: FlippingWidget(
+                                    front: FrontService(service: service),
+                                    back: BackService(service: service),
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    );
+            },
+            error: (_, __) => const SizedBox.shrink(),
+            loading: () => const SizedBox.shrink(),
+          );
+        }),
+        const Divider(),
+      ],
+    );
   }
 }
 
@@ -196,11 +196,11 @@ class FrontService extends StatelessWidget {
                             service.description,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 5,
-                            style:
-                                theme.textTheme.bodyLarge?.copyWith(
-                                    fontFamily: 'SF Pro Rounded',
-                                    fontSize:Responsive.isDesktop(context)? 20 : 16,
-                                    height: 1.3),
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                                fontFamily: 'SF Pro Rounded',
+                                fontSize:
+                                    Responsive.isDesktop(context) ? 20 : 16,
+                                height: 1.3),
                           ),
                         ),
                       ),
@@ -259,17 +259,16 @@ class BackService extends StatelessWidget {
                     children: [
                       Text(
                         service.highlight.toUpperCase(),
-                        style: theme.textTheme.headlineSmall
-                            ?.copyWith(
+                        style: theme.textTheme.headlineSmall?.copyWith(
                           color: theme.primaryColor,
-                          fontFamily: 'SF Pro Rounded',),
+                          fontFamily: 'SF Pro Rounded',
+                        ),
                       ),
                       Text(
                         service.title.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontFamily: 'SF Pro Rounded',
                         ),
-
                       ),
                       const SizedBox(height: Spacing.m20),
                       Expanded(

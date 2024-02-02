@@ -6,6 +6,7 @@ enum FirebasePaths {
   projects('projects/'),
   purchasableServices('purchasable_services/'),
   services('services/'),
+  messages('messages/'),
   staff('staff/'),
   technologies('technologies/'),
   videos('videos/'),

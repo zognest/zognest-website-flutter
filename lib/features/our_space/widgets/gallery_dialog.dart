@@ -24,11 +24,13 @@ class GalleryDialog extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(36),
         child: Stack(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.center,
           children: [
             SizedBox(
               width: double.infinity,
-              height: Responsive.isDesktop(context)? double.infinity :MediaQuery.sizeOf(context).height*0.70,
+              height: Responsive.isDesktop(context)
+                  ? double.infinity
+                  : MediaQuery.sizeOf(context).height * 0.70,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: CarouselSlider(
@@ -50,66 +52,68 @@ class GalleryDialog extends StatelessWidget {
                     ).toList()),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(40),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  if (Responsive.isDesktop(context))
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            DateFormat('MMMM').format(event.date).toUpperCase(),
-                            style: theme.textTheme.displaySmall,
-                          ),
-                          Text(
-                            '${event.date.year} ${event.title.toUpperCase()}',
-                            style: theme.textTheme.headlineSmall?.copyWith(
-                              color: theme.primaryColor,
-                              fontVariations: TextThemes.fontVariation(6),
+            Positioned(
+              bottom:104,
+              child: Padding(
+                padding: const EdgeInsets.only( right: 40, left:40),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    if (Responsive.isDesktop(context))
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              DateFormat('MMMM').format(event.date).toUpperCase(),
+                              style: theme.textTheme.displaySmall,
                             ),
-                          ),
-                        ],
+                            Text(
+                              '${event.date.year} ${event.title.toUpperCase()}',
+                              style: theme.textTheme.headlineSmall?.copyWith(
+                                color: theme.primaryColor,
+                                fontVariations: TextThemes.fontVariation(6),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () => _controller.previousPage(),
+                          child: Image.asset(Assets.shortArrowLeft),
+                        ),
+                        const SizedBox(width: 4),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              Strings.scroll.toUpperCase(),
+                              style: theme.textTheme.displaySmall?.copyWith(
+                                fontSize: Responsive.isDesktop(context) ? 48 : 32,
+                              ),
+                            ),
+                            Text(
+                              '${event.images.length} Images'.toUpperCase(),
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                color: theme.primaryColor,
+                                letterSpacing: 1.5,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 4),
+                        GestureDetector(
+                          onTap: () => _controller.nextPage(),
+                          child: Image.asset(Assets.arrowRight),
+                        ),
+                      ],
                     ),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => _controller.previousPage(),
-                        child: Image.asset(Assets.shortArrowLeft),
-                      ),
-                      const SizedBox(width: 4),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            Strings.scroll.toUpperCase(),
-                            style: theme.textTheme.displaySmall?.copyWith(
-                              fontSize: Responsive.isDesktop(context) ? 48 : 32,
-                            ),
-                          ),
-                          Text(
-                            '${event.images.length} Images'.toUpperCase(),
-                            style: theme.textTheme.labelMedium?.copyWith(
-                              color: theme.primaryColor,
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 4),
-                      GestureDetector(
-                        onTap: () => _controller.nextPage(),
-                        child: Image.asset(Assets.arrowRight),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

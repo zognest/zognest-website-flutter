@@ -47,7 +47,7 @@ class _ZognestServicesState extends State<ZognestServices> {
             const Divider(),
             ScrollHeadline(
               headline: TextSpan(
-                text: 'services\n'.toUpperCase(),
+                text: 'services \n'.toUpperCase(),
                 style: theme.textTheme.displaySmall,
                 children: [
                   TextSpan(
@@ -184,7 +184,9 @@ class FrontService extends StatelessWidget {
                       ),
                       Text(
                         service.title.toUpperCase(),
-                        style: theme.textTheme.headlineMedium,
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          fontFamily: 'SF Pro Rounded',
+                        ),
                       ),
                       Expanded(
                         child: Padding(
@@ -258,11 +260,16 @@ class BackService extends StatelessWidget {
                       Text(
                         service.highlight.toUpperCase(),
                         style: theme.textTheme.headlineSmall
-                            ?.copyWith(color: theme.primaryColor),
+                            ?.copyWith(
+                          color: theme.primaryColor,
+                          fontFamily: 'SF Pro Rounded',),
                       ),
                       Text(
                         service.title.toUpperCase(),
-                        style: theme.textTheme.headlineMedium,
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          fontFamily: 'SF Pro Rounded',
+                        ),
+
                       ),
                       const SizedBox(height: Spacing.m20),
                       Expanded(

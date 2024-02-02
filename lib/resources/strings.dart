@@ -23,7 +23,7 @@ abstract final class Strings {
   static const zognestDescription =
       'Zognest is a Technology-based startup company that helps your business to explore the Sky With UI/UX designing, Prototyping, Designing, and developing mobile applications, websites, web applications, Branding, brainstorming, and Digital solutions.';
   static const what = 'What ';
-  static const we = 'We';
+  static const we = 'We ';
   static const offer = 'Offer.';
   static const scroll = 'Scroll';
   static const toExploreMore = 'To explore more';

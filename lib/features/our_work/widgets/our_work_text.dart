@@ -25,6 +25,7 @@ class OurWorkText extends StatelessWidget {
             ],
           ),
         ),
+
         const Divider(),
       ],
     );

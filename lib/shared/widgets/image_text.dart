@@ -116,7 +116,7 @@ class ImageText extends StatelessWidget {
 }
 
 class ImageTextMobile extends StatelessWidget {
-  const ImageTextMobile({super.key, required this.image});
+  const   ImageTextMobile({super.key, required this.image});
 
   final String image;
 
@@ -126,9 +126,10 @@ class ImageTextMobile extends StatelessWidget {
     return Column(
       children: [
         AspectRatio(
-          aspectRatio: 1,
+          aspectRatio:1,
           child: Image.asset(
             image,
+            height: double.infinity,
             fit: BoxFit.cover,
           ),
         ),
@@ -163,10 +164,12 @@ class ImageTextMobile extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height:30),
               Text(
                 Strings.zognestDescription,
-                style: theme.textTheme.bodyLarge,
+                style: theme.textTheme.bodyLarge!.copyWith(
+                  fontFamily: 'SF Pro Rounded',
+                ),
               ),
             ],
           ),

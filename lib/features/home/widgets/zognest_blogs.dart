@@ -75,7 +75,9 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
           return blogs.when(
               data: (blogs) {
                 return SizedBox(
-                  height:Responsive.isDesktop(context)?Constants.listHeight:450,
+                  height: Responsive.isDesktop(context)
+                      ? Constants.listHeight
+                      : 450,
                   child: ListView.separated(
                     padding: const EdgeInsets.symmetric(
                         horizontal: Constants.horizontalPadding),
@@ -90,8 +92,8 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
                   ),
                 );
               },
-            error:(_,__)=>const SizedBox.shrink(),
-            loading: () =>const SizedBox.shrink());
+              error: (_, __) => const SizedBox.shrink(),
+              loading: () => const SizedBox.shrink());
         }),
         const Divider(),
       ],
@@ -118,7 +120,7 @@ class _BlogItemState extends State<BlogItem> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return FrostedContainer(
-      width: Responsive.isDesktop(context)?Constants.listCardWidth:300,
+      width: Responsive.isDesktop(context) ? Constants.listCardWidth : 300,
       borderRadius: 25,
       padding: const EdgeInsets.symmetric(
           horizontal: Spacing.l24, vertical: Spacing.l24),
@@ -148,14 +150,15 @@ class _BlogItemState extends State<BlogItem> {
                   Text(
                     widget.blog.title,
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.w700,
-                        fontFamily: 'SF Pro Rounded'
-                    ),
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'SF Pro Rounded'),
                   ),
                   Text(
                     DateFormat('MMMM dd, yyyy').format(widget.blog.date),
-                    style: theme.textTheme.labelMedium
-                        ?.copyWith(color: theme.primaryColor),
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: theme.primaryColor,
+                      fontFamily: 'SF Pro Rounded',
+                    ),
                   ),
                 ],
               ),

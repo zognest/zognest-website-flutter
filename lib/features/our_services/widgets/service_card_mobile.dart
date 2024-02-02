@@ -12,7 +12,6 @@ import '../../../shared/widgets/primary_button.dart';
 class ServicesCartMobile extends StatelessWidget {
   const ServicesCartMobile({super.key});
 
-  // todo ask him about this
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -49,7 +48,7 @@ class ServicesCartMobile extends StatelessWidget {
                                   border: Border.all(
                                       color: const Color(0xffAEB2BA)),
                                 ),
-                                padding: const EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(10),
                                 child: SingleChildScrollView(
                                   child: Wrap(
                                     runSpacing: Spacing.m20,
@@ -82,7 +81,8 @@ class ServicesCartMobile extends StatelessWidget {
                                                     style: theme
                                                         .textTheme.bodyLarge
                                                         ?.copyWith(
-                                                      fontFamily: 'SF Pro Rounded',
+                                                      fontFamily:
+                                                          'SF Pro Rounded',
                                                       fontWeight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -107,9 +107,8 @@ class ServicesCartMobile extends StatelessWidget {
                                                 ),
                                                 onPressed: () {
                                                   ref
-                                                      .read(
-                                                          appControllerProvider
-                                                              .notifier)
+                                                      .read(appControllerProvider
+                                                          .notifier)
                                                       .removeService(service);
                                                 },
                                               ),
@@ -123,7 +122,8 @@ class ServicesCartMobile extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ],),
+                        ],
+                      ),
                   );
                 }),
                 // between 1 and2

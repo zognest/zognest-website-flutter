@@ -184,8 +184,8 @@ class OfferItem extends StatelessWidget {
       shape:  const RoundedRectangleBorder(
         side: BorderSide(width: 0.5, color:Color(0xff121212)
         ),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+          borderRadius: BorderRadius.all(
+              Radius.circular(25)),
       ),
       child: Container(
         width: !Responsive.isMobile(context)
@@ -213,6 +213,7 @@ class OfferItem extends StatelessWidget {
               offer.title.toUpperCase(),
               style: theme.textTheme.headlineMedium?.copyWith(
                 color: colored ? Colors.black : null,
+                fontFamily: 'SF Pro Rounded',
               ),
             ),
             const SizedBox(height: Spacing.s12),
@@ -222,6 +223,7 @@ class OfferItem extends StatelessWidget {
                   offer.description,
                   style:theme.textTheme.bodyLarge?.copyWith(
                     color: colored ? Colors.black : null,
+                    fontFamily: 'SF Pro Rounded',
                   ),
                 ),
               ),

@@ -41,8 +41,10 @@ class ServicesCartMobile extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Expanded(
+                            flex:2,
                             child: SingleChildScrollView(
                               child: Container(
+                                height: 520,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(

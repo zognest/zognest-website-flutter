@@ -78,7 +78,7 @@ class Constants {
 
   /// region [ServicesBrowser]
   static const servicesBrowserItemHeight = 325.0;
-  static const mobileServicesBrowserItemHeight = 210.0;
+  static const mobileServicesBrowserItemHeight = 200.0;
   static const servicesBrowserItemWidth = 550.0;
 
   // endRegion

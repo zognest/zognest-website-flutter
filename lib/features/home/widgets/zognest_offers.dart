@@ -203,7 +203,7 @@ class OfferItem extends StatelessWidget {
             Text(
               offer.highlight.toUpperCase(),
               style: theme.textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
                 fontFamily: 'SF Pro Rounded',
                 color: colored ? Colors.black : theme.primaryColor,
                 fontVariations: TextThemes.fontVariation(3),
@@ -213,6 +213,7 @@ class OfferItem extends StatelessWidget {
               offer.title.toUpperCase(),
               style: theme.textTheme.headlineMedium?.copyWith(
                 color: colored ? Colors.black : null,
+                fontWeight: FontWeight.bold,
                 fontFamily: 'SF Pro Rounded',
               ),
             ),

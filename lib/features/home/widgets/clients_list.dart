@@ -122,14 +122,11 @@ class ItemServiceMarquee extends StatelessWidget {
           children: [
             // remove fitted box
             Card(
-
               shape: RoundedRectangleBorder(
-
                 borderRadius: BorderRadius.circular(120),
               ),
               clipBehavior: Clip.antiAlias,
-              child: Image.network(project.icon
-              ),
+              child: Image.network(project.icon),
             ),
             const SizedBox(width: 10),
             Text(project.title),

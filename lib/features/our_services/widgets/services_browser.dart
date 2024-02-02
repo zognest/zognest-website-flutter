@@ -1,9 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -305,6 +303,7 @@ class ServicesCart extends HookConsumerWidget {
                                             .toList();
                                         await FirestoreServices.sendMessages(
                                           message: messageController.text,
+                                          context: context,
                                           budget: budgetController.text,
                                           phone: phoneController.text,
                                           name: nameController.text,
@@ -339,14 +338,14 @@ class ServicesCart extends HookConsumerWidget {
                                           .map((service) => service.title)
                                           .toList();
                                       await FirestoreServices.sendMessages(
-                                        message: messageController.text,
-                                        budget: budgetController.text,
-                                        phone: phoneController.text,
-                                        name: nameController.text,
-                                        email: emailController.text,
-                                        services: services,
-                                        call: true
-                                      );
+                                          message: messageController.text,
+                                          budget: budgetController.text,
+                                          context: context,
+                                          phone: phoneController.text,
+                                          name: nameController.text,
+                                          email: emailController.text,
+                                          services: services,
+                                          call: true);
                                       messageController.clear();
                                       budgetController.clear();
                                       phoneController.clear();
@@ -354,7 +353,7 @@ class ServicesCart extends HookConsumerWidget {
                                       nameController.clear();
                                       emailController.clear();
                                     }
-                                    return 'some things went roung';
+                                    return 'Something went wrong!';
                                   },
                                 ),
                               ),

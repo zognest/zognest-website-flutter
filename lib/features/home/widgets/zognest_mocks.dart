@@ -58,9 +58,8 @@ class _ZognestMocksState extends State<ZognestMocks>
               onVisibilityChanged: (info) {
                 if (info.visibleFraction >= 0.8) _animationController.forward();
               },
-              child: AspectRatio(
-                aspectRatio:
-                    Responsive.isDesktop(context) ? 2000 / 900 : 400 / 200,
+              child: SizedBox(
+                height: Responsive.isDesktop(context) ? 800 : 280,
                 child: SlideTransition(
                   position: _offsetAnimation,
                   child: Image.asset(

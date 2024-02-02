@@ -179,13 +179,15 @@ class FrontService extends StatelessWidget {
                         service.highlight.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           color: theme.primaryColor,
-                          fontVariations: TextThemes.fontVariation(1),
+                          fontFamily: 'SF Pro Rounded',
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       Text(
                         service.title.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontFamily: 'SF Pro Rounded',
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       Expanded(
@@ -259,15 +261,17 @@ class BackService extends StatelessWidget {
                     children: [
                       Text(
                         service.highlight.toUpperCase(),
-                        style: theme.textTheme.headlineSmall?.copyWith(
+                        style: theme.textTheme.headlineMedium?.copyWith(
                           color: theme.primaryColor,
                           fontFamily: 'SF Pro Rounded',
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       Text(
                         service.title.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontFamily: 'SF Pro Rounded',
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(height: Spacing.m20),

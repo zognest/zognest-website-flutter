@@ -40,62 +40,63 @@ class _ZognestClientsState extends State<ZognestClients> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-        return Column(
-          children: [
-            const Divider(),
-            ScrollHeadline(
-              headline: TextSpan(
-                children: [
-                  TextSpan(
-                    text: '${Strings.happy}\n'.toUpperCase(),
-                    style: theme.textTheme.displaySmall
-                        ?.copyWith(foreground: TextThemes.foreground),
-                  ),
-                  TextSpan(
-                    text: Strings.clients.toUpperCase(),
-                    style: theme.textTheme.displaySmall,
-                  ),
-                ],
+    return Column(
+      children: [
+        const Divider(),
+        ScrollHeadline(
+          headline: TextSpan(
+            children: [
+              TextSpan(
+                text: '${Strings.happy}\n'.toUpperCase(),
+                style: theme.textTheme.displaySmall
+                    ?.copyWith(foreground: TextThemes.foreground),
               ),
-              onTapScroll: () {
-                if (_controller.offset ==
-                    _controller.position.maxScrollExtent) {
-                  currentIndex = 0;
-                }
-                _controller.animateTo(
-                  Constants.clientsItemWidth * currentIndex,
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.ease,
-                );
-                currentIndex++;
-              },
-            ),
-            Consumer(
-              builder: (context, ref , child) {
-                final clientFeedbacks = ref.watch(appControllerProvider).clientFeedbacks;
-                return clientFeedbacks.when(data: ( clientFeedbacks){
-                  return SizedBox(
-                    height: Constants.listHeight,
-                    child: ListView.separated(
-                      padding: const EdgeInsets.symmetric(
+              TextSpan(
+                text: Strings.clients.toUpperCase(),
+                style: theme.textTheme.displaySmall,
+              ),
+            ],
+          ),
+          onTapScroll: () {
+            if (_controller.offset == _controller.position.maxScrollExtent) {
+              currentIndex = 0;
+            }
+            _controller.animateTo(
+              Constants.clientsItemWidth * currentIndex,
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.ease,
+            );
+            currentIndex++;
+          },
+        ),
+        Consumer(builder: (context, ref, child) {
+          final clientFeedbacks =
+              ref.watch(appControllerProvider).clientFeedbacks;
+          return clientFeedbacks.when(
+            data: (clientFeedbacks) {
+              return SizedBox(
+                height: Constants.listHeight,
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(
                       horizontal: Constants.horizontalPadding),
-                      scrollDirection: Axis.horizontal,
-                      controller: _controller,
-                      itemBuilder: (context, index) {
-                        return ClientItem(clientFeedback: clientFeedbacks[index]);
-                      },
-                      separatorBuilder: (context, index) =>
+                  scrollDirection: Axis.horizontal,
+                  controller: _controller,
+                  itemBuilder: (context, index) {
+                    return ClientItem(clientFeedback: clientFeedbacks[index]);
+                  },
+                  separatorBuilder: (context, index) =>
                       const SizedBox(width: Constants.listCardSeparatorWidth),
-                      itemCount: clientFeedbacks.length,
-                    ),
-                  );
-                }, error:(_,__)=>const SizedBox.shrink(),
-                  loading: () =>const SizedBox.shrink(),);
-              }
-            ),
-            const Divider(),
-          ],
-        );
+                  itemCount: clientFeedbacks.length,
+                ),
+              );
+            },
+            error: (_, __) => const SizedBox.shrink(),
+            loading: () => const SizedBox.shrink(),
+          );
+        }),
+        const Divider(),
+      ],
+    );
   }
 }
 
@@ -216,6 +217,7 @@ class _ClientItemState extends State<ClientItem> {
                       const Spacer(),
                       CircleAvatar(
                         backgroundColor: Palette.white,
+                        radius: 20,
                         child: Icon(
                           Icons.play_arrow,
                           color: theme.primaryColor,
@@ -223,7 +225,7 @@ class _ClientItemState extends State<ClientItem> {
                       ),
                       const SizedBox(width: Spacing.s12),
                       PrimaryButton(
-                        height: 35 ,
+                        height: 40,
                         title: Strings.view.toUpperCase(),
                         filled: false,
                         padding: const EdgeInsets.symmetric(

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:motion_toast/motion_toast.dart';
 import 'package:zognest_website/features/home/models/blog.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
 import 'package:zognest_website/features/home/models/offer.dart';
@@ -153,6 +155,7 @@ class FirestoreServices {
     required String email,
     List<String>? services,
     bool call = false,
+    required BuildContext context,
   }) async {
     final map = {
       'message': message,
@@ -162,9 +165,17 @@ class FirestoreServices {
       'budget': budget ?? '-',
       'call': call,
       'services': services,
+      'timestamp': DateTime.now(),
     };
     await FirebaseFirestore.instance
         .collection(FirebasePaths.messages.path)
         .add(map);
+
+    if (context.mounted) {
+      MotionToast.success(
+        title: const Text("Success Motion Toast"),
+        description: const Text("Example of success motion toast"),
+      ).show(context);
+    }
   }
 }

@@ -123,7 +123,9 @@ class _BlogItemState extends State<BlogItem> {
       width: Responsive.isDesktop(context) ? Constants.listCardWidth : 300,
       borderRadius: 25,
       padding: const EdgeInsets.symmetric(
-          horizontal: Spacing.l24, vertical: Spacing.l24),
+        horizontal: Spacing.l24,
+        vertical: Spacing.l24,
+      ),
       child: InkWell(
         onTap: () {},
         onHover: (over) {
@@ -137,9 +139,13 @@ class _BlogItemState extends State<BlogItem> {
               child: GreyscaleFilter(
                 isHovered: hovered,
                 child: Card(
-                    clipBehavior: Clip.hardEdge,
-                    child: NetworkFadingImage(
-                        path: widget.blog.image, fit: BoxFit.cover)),
+                  clipBehavior: Clip.hardEdge,
+                  child: NetworkFadingImage(
+                    width: double.infinity,
+                    path: widget.blog.image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
             Expanded(

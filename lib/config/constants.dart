@@ -40,6 +40,7 @@ class Constants {
 
   /// region [ZognestVideo]
   static const videoAspectRatio = 16 / 9;
+  static const videoAspectRatioMobile = 22 / 16;
 
   // endregion
 
@@ -78,7 +79,7 @@ class Constants {
 
   /// region [ServicesBrowser]
   static const servicesBrowserItemHeight = 325.0;
-  static const mobileServicesBrowserItemHeight = 200.0;
+  static const mobileServicesBrowserItemHeight = 180.0;
   static const servicesBrowserItemWidth = 550.0;
 
   // endRegion

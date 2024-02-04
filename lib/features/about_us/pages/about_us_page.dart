@@ -66,7 +66,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 SizedBox(
                   height: Responsive.isDesktop(context)
                       ? Constants.sectionSpacing
-                      : Spacing.s0,
+                      : Spacing.s8,
                 ),
                 Footer(
                   onTabUp: () => _controller.animateTo(

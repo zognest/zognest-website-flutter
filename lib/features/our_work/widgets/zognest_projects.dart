@@ -114,6 +114,7 @@ class ProjectItem extends StatefulWidget {
 class _ProjectItemState extends State<ProjectItem> {
   bool over = false;
 
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -122,7 +123,7 @@ class _ProjectItemState extends State<ProjectItem> {
       curve: Curves.fastOutSlowIn,
       width: Responsive.isDesktop(context)
           ? Constants.listCardWidth * (over ? 2 : 1)
-          : 290 * (over ? 1.2 : 1),
+          : 290 * (over ? 2 : 1),
       height: Constants.projectHeight,
       child: Card(
         clipBehavior: Clip.antiAlias,

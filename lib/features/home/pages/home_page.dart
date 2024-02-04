@@ -16,6 +16,7 @@ import 'package:zognest_website/features/home/widgets/zognest_offers.dart';
 import 'package:zognest_website/features/home/widgets/zognest_services.dart';
 import 'package:zognest_website/features/home/widgets/zognest_video.dart';
 import 'package:zognest_website/resources/assets.dart';
+import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
@@ -133,7 +134,7 @@ class Foreground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return    Column(
       children: [
         const SizedBox(height: Constants.appBarHeight * 1.5),
         BeyondSpace(onTabDown: onTabDown),
@@ -155,7 +156,7 @@ class Foreground extends StatelessWidget {
         const Counters(),
         const SizedBox(height: Constants.sectionSpacing),
         const ZognestServices(),
-        const ZognestMocks(),
+         const ZognestMocks(),
         const ZognestClients(),
         const SizedBox(height: Constants.sectionSpacing),
         const MarqueeText(),

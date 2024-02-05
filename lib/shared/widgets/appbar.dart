@@ -18,6 +18,13 @@ import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
+import '../../features/home/widgets/contact_form.dart';
+import '../../features/home/widgets/contact_form.dart';
+import '../../features/home/widgets/contact_form.dart';
+import '../../features/our_space/widgets/gallery_dialog.dart';
+import '../../firebase_services/firestore_services.dart';
+import 'contact_form_appbar.dart';
+import 'input_form_field.dart';
 enum AppBarButtons {
   home(
     route: HomePage.route,
@@ -65,12 +72,14 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
     with SingleTickerProviderStateMixin {
   late final AnimationController _appBarAnimationController;
   late final Animation<Offset> _appBarOffsetAnimation;
-
+  late final ScrollController _controller;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String hoveredRoute = '/';
 
   @override
   void initState() {
     super.initState();
+    _controller = ScrollController();
     _appBarAnimationController = AnimationController(
       duration: const Duration(milliseconds: 400),
       vsync: this,
@@ -89,6 +98,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
 
   @override
   void dispose() {
+    _controller.dispose();
     _appBarAnimationController.dispose();
     super.dispose();
   }
@@ -110,6 +120,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
     final route = GoRouterState.of(context);
     return SlideTransition(
       position: _appBarOffsetAnimation,
@@ -172,7 +183,15 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                   ),
                   //button get in touch
                   PrimaryButton(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (context) => Material(
+                          child:ContactFormAppBar(key:formKey,)
+                          ),
+                      );
+                    },
                     title: Strings.getInTouch.toUpperCase(),
                     trailing:
                         CircleButton(child: SvgPicture.asset(Assets.mail)),
@@ -185,11 +204,10 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
 }
 
 class MobileAppBar extends StatelessWidget {
-  const MobileAppBar({super.key});
+   const MobileAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Row(
       children: [
         const ZognestLogo(),

@@ -28,7 +28,6 @@ class ContactForm extends HookWidget {
     final emailController = useTextEditingController();
     final nameController = useTextEditingController();
     final phoneController = useTextEditingController();
-    final budgetController = useTextEditingController();
     final messageController = useTextEditingController();
     return Column(
       children: [
@@ -156,7 +155,6 @@ class ContactForm extends HookWidget {
                                                 context: context,
                                               );
                                               messageController.clear();
-                                              budgetController.clear();
                                               phoneController.clear();
                                               nameController.clear();
                                               emailController.clear();
@@ -226,7 +224,6 @@ class ContactFormMobile extends HookWidget {
     final emailController = useTextEditingController();
     final nameController = useTextEditingController();
     final phoneController = useTextEditingController();
-    final budgetController = useTextEditingController();
     final messageController = useTextEditingController();
     final theme = Theme.of(context);
     return Column(
@@ -298,23 +295,27 @@ class ContactFormMobile extends HookWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const InputFormField(
+                 InputFormField(
+                  controller: nameController,
                   hint: Strings.yourName,
                   required: false,
                   keyboardType: TextInputType.name,
                 ),
-                const InputFormField(
+                 InputFormField(
+                   controller: emailController,
                   hint: Strings.yourEmail,
                   required: false,
                   keyboardType: TextInputType.emailAddress,
                 ),
-                const InputFormField(
+                 InputFormField(
+                   controller: phoneController,
                   hint: Strings.mobileNo,
                   required: false,
                   keyboardType: TextInputType.phone,
                 ),
-                const InputFormField(
+                 InputFormField(
                   hint: Strings.message,
+                  controller: messageController,
                   required: true,
                   multiline: true,
                   keyboardType: TextInputType.multiline,
@@ -339,10 +340,9 @@ class ContactFormMobile extends HookWidget {
                               email: emailController.text,
                             );
                             messageController.clear();
-                            budgetController.clear();
                             phoneController.clear();
                             nameController.clear();
-                            nameController.clear();
+                            emailController.clear();
                           }
                           return 'some things went roung';
                         },
@@ -369,10 +369,9 @@ class ContactFormMobile extends HookWidget {
                               call: true,
                             );
                             messageController.clear();
-                            budgetController.clear();
                             phoneController.clear();
                             nameController.clear();
-                            nameController.clear();
+                            emailController.clear();
                           }
                           return 'some things went roung';
                         },

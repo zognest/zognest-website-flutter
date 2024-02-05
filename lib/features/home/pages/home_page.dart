@@ -134,7 +134,7 @@ class Foreground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return    Column(
+    return  Column(
       children: [
         const SizedBox(height: Constants.appBarHeight * 1.5),
         BeyondSpace(onTabDown: onTabDown),

@@ -36,7 +36,7 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
           children: [
             if (servicesCart.isNotEmpty) ...[
               Responsive.isDesktop(context)
-                  ?  ServicesCart()
+                  ? ServicesCart()
                   : const ServicesCartMobile(),
               const SizedBox(height: Constants.sectionSpacing),
             ],
@@ -87,7 +87,6 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
       child: Row(
         children: [
           Expanded(
-
             child: Padding(
               padding: const EdgeInsets.all(Spacing.m20),
               child: Column(
@@ -146,18 +145,19 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
 }
 
 class ServicesCart extends HookConsumerWidget {
-   ServicesCart({super.key});
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  @override
-  Widget build(BuildContext context,ref) {
+    ServicesCart({super.key});
+   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+    @override
+  Widget build(BuildContext context, ref) {
     final theme = Theme.of(context);
-    final width = MediaQuery.sizeOf(context).width;
     final emailController = useTextEditingController();
     final nameController = useTextEditingController();
     final phoneController = useTextEditingController();
     final budgetController = useTextEditingController();
     final messageController = useTextEditingController();
 
+    final width = MediaQuery.sizeOf(context).width;
     return Column(
       children: [
         const Divider(),
@@ -169,77 +169,77 @@ class ServicesCart extends HookConsumerWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: Constants.horizontalPadding,
               ),
-              child: Form(
-                key: formKey,
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: const Color(0xffAEB2BA)),
-                        ),
-                        height: double.infinity,
-                        padding: const EdgeInsets.all(12),
-                        child: SingleChildScrollView(
-                          child: Wrap(
-                            runSpacing: Spacing.m20,
-                            spacing: Spacing.m20,
-                            children: cartServices.map((service) {
-                              return Container(
-                                width: width * 0.28,
-                                height: 140,
-                                color: Palette.cardBackgroundColor,
-                                child: Row(
-                                  children: [
-                                    Image.network(
-                                      service.image,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    const SizedBox(width: 20),
-                                    Expanded(
-                                      child: Text(
-                                        service.title,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style:
-                                            theme.textTheme.bodyLarge?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: 'SF Pro Rounded',
-                                        ),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: const Color(0xffAEB2BA)),
+                      ),
+                      height: double.infinity,
+                      padding: const EdgeInsets.all(12),
+                      child: SingleChildScrollView(
+                        child: Wrap(
+                          runSpacing: Spacing.m20,
+                          spacing: Spacing.m20,
+                          children: cartServices.map((service) {
+                            return Container(
+                              width: width * 0.28,
+                              height: 140,
+                              color: Palette.cardBackgroundColor,
+                              child: Row(
+                                children: [
+                                  Image.network(
+                                    service.image,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Expanded(
+                                    child: Text(
+                                      service.title,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style:
+                                          theme.textTheme.bodyLarge?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'SF Pro Rounded',
                                       ),
                                     ),
-                                    const SizedBox(width: 20),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Palette.transparent,
-                                        shape: const CircleBorder(
-                                          side: BorderSide(color: Palette.white),
-                                        ),
-                                        minimumSize: const Size.fromRadius(28),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Palette.transparent,
+                                      shape: const CircleBorder(
+                                        side: BorderSide(color: Palette.white),
                                       ),
-                                      child: const Icon(
-                                        Icons.close,
-                                        size: 14,
-                                      ),
-                                      onPressed: () {
-                                        ref
-                                            .read(appControllerProvider.notifier)
-                                            .removeService(service);
-                                      },
+                                      minimumSize: const Size.fromRadius(28),
                                     ),
-                                    const SizedBox(width: 20),
-                                  ],
-                                ),
-                              );
-                            }).toList(),
-                          ),
+                                    child: const Icon(
+                                      Icons.close,
+                                      size: 14,
+                                    ),
+                                    onPressed: () {
+                                      ref
+                                          .read(appControllerProvider.notifier)
+                                          .removeService(service);
+                                    },
+                                  ),
+                                  const SizedBox(width: 20),
+                                ],
+                              ),
+                            );
+                          }).toList(),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 50),
-                    Expanded(
+                  ),
+                  const SizedBox(width: 50),
+                  Expanded(
+                    child: Form(
+                      key: formKey,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -314,12 +314,10 @@ class ServicesCart extends HookConsumerWidget {
                                         budgetController.clear();
                                         phoneController.clear();
                                         nameController.clear();
-                                        nameController.clear();
                                         emailController.clear();
                                       }
                                       return 'some things went roung';
-                                    }
-                                ),
+                                    }),
                               ),
                               const SizedBox(width: Spacing.s8),
                               Expanded(
@@ -330,8 +328,8 @@ class ServicesCart extends HookConsumerWidget {
                                       theme.textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
-                                  onTap: ()  async {
-                                    if (formKey.currentState!.validate()){
+                                  onTap: () async {
+                                    if (formKey.currentState!.validate()) {
                                       final services = ref
                                           .read(appControllerProvider)
                                           .cartServices
@@ -350,10 +348,8 @@ class ServicesCart extends HookConsumerWidget {
                                       budgetController.clear();
                                       phoneController.clear();
                                       nameController.clear();
-                                      nameController.clear();
                                       emailController.clear();
                                     }
-                                    return 'Something went wrong!';
                                   },
                                 ),
                               ),
@@ -362,8 +358,8 @@ class ServicesCart extends HookConsumerWidget {
                         ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );

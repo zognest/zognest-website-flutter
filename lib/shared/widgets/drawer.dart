@@ -11,12 +11,14 @@ import 'package:zognest_website/shared/widgets/social_button.dart';
 import '../../resources/assets.dart';
 import '../../resources/strings.dart';
 import 'circle_button.dart';
+import 'contact_form_appbar.dart';
 
 class PrimaryDrawer extends StatelessWidget {
   const PrimaryDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final route = GoRouterState.of(context);
     final theme = Theme.of(context);
     return Align(
@@ -73,7 +75,15 @@ class PrimaryDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: Spacing.s12),
                 PrimaryButton(
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (context) => Material(
+                          child:ContactFormAppBar(key:formKey,)
+                      ),
+                    );
+                  },
                   height: 50,
                   width: 180,
                   title: Strings.getInTouch.toUpperCase(),

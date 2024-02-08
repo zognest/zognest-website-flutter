@@ -1,20 +1,28 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../config/theme/palette.dart';
+import '../../../firebase_services/firestore_services.dart';
 import '../../../resources/spacing.dart';
 import '../../../resources/strings.dart';
 import '../../../riverpod/controller.dart';
 import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/primary_button.dart';
 
-class ServicesCartMobile extends StatelessWidget {
+class ServicesCartMobile extends HookWidget {
   const ServicesCartMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final width = MediaQuery.sizeOf(context).width;
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final emailController = useTextEditingController();
+    final nameController = useTextEditingController();
+    final phoneController = useTextEditingController();
+    final budgetController = useTextEditingController();
+    final messageController = useTextEditingController();
 
     return Column(
       children: [
@@ -133,71 +141,113 @@ class ServicesCartMobile extends StatelessWidget {
                 // section 2
                 Expanded(
                   flex: 1,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const InputFormField(
-                        hint: Strings.yourName,
-                        required: false,
-                        keyboardType: TextInputType.name,
-                      ),
-                      const Row(
-                        children: [
-                          Expanded(
-                            child: InputFormField(
-                              hint: Strings.yourEmail,
-                              required: false,
-                              keyboardType: TextInputType.emailAddress,
-                            ),
-                          ),
-                          SizedBox(width: 12),
-                          Expanded(
-                            child: InputFormField(
-                              hint: Strings.mobileNo,
-                              required: false,
-                              keyboardType: TextInputType.phone,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const InputFormField(
-                        hint: Strings.budget,
-                        required: false,
-                        keyboardType: TextInputType.text,
-                      ),
-                      const InputFormField(
-                        hint: Strings.message,
-                        required: true,
-                        multiline: true,
-                        keyboardType: TextInputType.multiline,
-                      ),
-                      const SizedBox(height: 30),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: PrimaryButton(
-                              title: Strings.sendMessage.toUpperCase(),
-                              height: 45,
-                              textStyle: theme.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                         InputFormField(
+                        controller: nameController,
+                          hint: Strings.yourName,
+                          required: false,
+                          keyboardType: TextInputType.name,
+                        ),
+                         Row(
+                          children: [
+                            Expanded(
+                              child: InputFormField(
+                                controller: emailController,
+                                hint: Strings.yourEmail,
+                                required: false,
+                                keyboardType: TextInputType.emailAddress,
                               ),
-                              onTap: () {},
                             ),
-                          ),
-                          const SizedBox(width: Spacing.s8),
-                          Expanded(
-                            child: PrimaryButton(
-                              title: Strings.requestCall.toUpperCase(),
-                              height: 45,
-                              textStyle: theme.textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: InputFormField(
+                                controller: phoneController,
+                                hint: Strings.mobileNo,
+                                required: false,
+                                keyboardType: TextInputType.phone,
                               ),
-                              onTap: () {},
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                         InputFormField(
+                        controller: budgetController,
+                          hint: Strings.budget,
+                          required: false,
+                          keyboardType: TextInputType.text,
+                        ),
+                         InputFormField(
+                          hint: Strings.message,
+                          controller: messageController,
+                          required: true,
+                          multiline: true,
+                          keyboardType: TextInputType.multiline,
+                        ),
+                         const SizedBox(height: 30),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: PrimaryButton(
+                                title: Strings.sendMessage.toUpperCase(),
+                                height: 45,
+                                textStyle: theme.textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                onTap: ()  async {
+                                  if (formKey.currentState!.validate()){
+
+                                    await FirestoreServices.sendMessages(
+                                      message: messageController.text,
+                                      context: context,
+                                      budget: budgetController.text,
+                                      phone: phoneController.text,
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                    );
+                                    messageController.clear();
+                                    budgetController.clear();
+                                    phoneController.clear();
+                                    nameController.clear();
+                                    emailController.clear();
+                                  }
+                                  return 'some things went roung';
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: Spacing.s8),
+                            Expanded(
+                              child: PrimaryButton(
+                                title: Strings.requestCall.toUpperCase(),
+                                height: 45,
+                                textStyle: theme.textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                onTap: ()async {
+                                  if (formKey.currentState!.validate()) {
+                                    await FirestoreServices.sendMessages(
+                                        message: messageController.text,
+                                        budget: budgetController.text,
+                                        context: context,
+                                        phone: phoneController.text,
+                                        name: nameController.text,
+                                        email: emailController.text,
+                                        call: true);
+                                    messageController.clear();
+                                    budgetController.clear();
+                                    phoneController.clear();
+                                    nameController.clear();
+                                    emailController.clear();
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

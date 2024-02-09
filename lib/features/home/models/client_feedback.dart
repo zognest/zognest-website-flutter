@@ -6,26 +6,29 @@ import 'package:equatable/equatable.dart';
 class ClientFeedback extends Equatable {
   final String clientImage;
   final String name;
+
+  final String audioUrl;
   final String id;
   final List<String> backgroundImages;
   final String description;
 
-  const ClientFeedback({
-    required this.clientImage,
-    required this.name,
-    required this.id,
-    required this.backgroundImages,
-    required this.description,
-  });
+  const ClientFeedback(
+      {required this.clientImage,
+      required this.name,
+      required this.id,
+      required this.backgroundImages,
+      required this.description,
+      required this.audioUrl});
 
-  ClientFeedback copyWith({
-    String? clientImage,
-    String? name,
-    String? id,
-    List<String>? backgroundImages,
-    String? description,
-  }) {
+  ClientFeedback copyWith(
+      {String? clientImage,
+      String? name,
+      String? id,
+      List<String>? backgroundImages,
+      String? description,
+      String? audioUrl}) {
     return ClientFeedback(
+      audioUrl: audioUrl ?? this.audioUrl,
       clientImage: clientImage ?? this.clientImage,
       name: name ?? this.name,
       id: id ?? this.id,
@@ -41,11 +44,13 @@ class ClientFeedback extends Equatable {
       'id': id,
       'backgroundImages': backgroundImages,
       'description': description,
+      'audiourl': audioUrl,
     };
   }
 
   factory ClientFeedback.fromMap(Map<String, dynamic> map) {
     return ClientFeedback(
+      audioUrl: map['audio_url'],
       clientImage: map['client_image'],
       name: map['name'],
       id: map['id'],
@@ -61,7 +66,7 @@ class ClientFeedback extends Equatable {
 
   @override
   String toString() {
-    return 'ClientFeedback(clientImage: $clientImage, name: $name, id: $id, backgroundImages: $backgroundImages, description: $description)';
+    return 'ClientFeedback(clientImage: $clientImage, name: $name, id: $id, backgroundImages: $backgroundImages, description: $description, audioUrl:$audioUrl)';
   }
 
   @override
@@ -72,6 +77,7 @@ class ClientFeedback extends Equatable {
       id,
       backgroundImages,
       description,
+      audioUrl
     ];
   }
 }

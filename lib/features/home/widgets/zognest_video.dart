@@ -66,7 +66,9 @@ class _ZognestVideoState extends State<ZognestVideo> {
                         horizontal: Constants.horizontalPadding),
                     child: _controller.value.isInitialized
                         ? AspectRatio(
-                            aspectRatio:Responsive.isDesktop(context)? Constants.videoAspectRatio:Constants.videoAspectRatioMobile,
+                            aspectRatio: Responsive.isDesktop(context)
+                                ? Constants.videoAspectRatio
+                                : Constants.videoAspectRatioMobile,
                             child: Stack(
                               alignment: Alignment.bottomCenter,
                               children: [

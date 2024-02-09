@@ -113,17 +113,21 @@ class ProjectItem extends StatefulWidget {
 
 class _ProjectItemState extends State<ProjectItem> {
   bool over = false;
-
+  bool ontap = false;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final double widthMobile =
+        Responsive.isMobile(context) || Responsive.isTablet(context)
+            ? 290 * (ontap ? 1.5 : 1)
+            : Constants.listCardWidth * (over ? 2 : 1);
     return AnimatedContainer(
       duration: const Duration(milliseconds: 1000),
       curve: Curves.fastOutSlowIn,
       width: Responsive.isDesktop(context)
           ? Constants.listCardWidth * (over ? 2 : 1)
-          : 290 * (over ? 2 : 1),
+          : widthMobile,
       height: Constants.projectHeight,
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -219,13 +223,17 @@ class _ProjectItemState extends State<ProjectItem> {
                       const SizedBox(height: Spacing.l32),
                       PrimaryButton(
                         title: Strings.more.toUpperCase(),
-                        filled: false,
+                        filled: true,
                         width: Constants.listCardWidth * 0.3,
                         padding: const EdgeInsets.symmetric(
                           horizontal: Constants.listButtonHorizontalPadding,
                           vertical: Constants.listButtonVerticalPadding,
                         ),
-                        onTap: () {},
+                        onTap: () {
+                         setState(() {
+                           ontap=true;
+                         });
+                        },
                       ),
                     ]
                   ],

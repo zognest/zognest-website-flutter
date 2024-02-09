@@ -8,16 +8,16 @@ import '../../../resources/spacing.dart';
 import '../../../resources/strings.dart';
 import '../../../riverpod/controller.dart';
 import '../../../shared/widgets/input_form_field.dart';
+import '../../../shared/widgets/motion_toast.dart';
 import '../../../shared/widgets/primary_button.dart';
 
-class ServicesCartMobile extends HookWidget {
-  const ServicesCartMobile({super.key});
-
+class ServicesCartMobile extends HookWidget  {
+   ServicesCartMobile({super.key});
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final width = MediaQuery.sizeOf(context).width;
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
     final emailController = useTextEditingController();
     final nameController = useTextEditingController();
     final phoneController = useTextEditingController();
@@ -149,7 +149,7 @@ class ServicesCartMobile extends HookWidget {
                          InputFormField(
                         controller: nameController,
                           hint: Strings.yourName,
-                          required: false,
+                          required: true,
                           keyboardType: TextInputType.name,
                         ),
                          Row(
@@ -158,7 +158,7 @@ class ServicesCartMobile extends HookWidget {
                               child: InputFormField(
                                 controller: emailController,
                                 hint: Strings.yourEmail,
-                                required: false,
+                                required: true,
                                 keyboardType: TextInputType.emailAddress,
                               ),
                             ),
@@ -167,7 +167,7 @@ class ServicesCartMobile extends HookWidget {
                               child: InputFormField(
                                 controller: phoneController,
                                 hint: Strings.mobileNo,
-                                required: false,
+                                required: true,
                                 keyboardType: TextInputType.phone,
                               ),
                             ),
@@ -176,7 +176,7 @@ class ServicesCartMobile extends HookWidget {
                          InputFormField(
                         controller: budgetController,
                           hint: Strings.budget,
-                          required: false,
+                          required: true,
                           keyboardType: TextInputType.text,
                         ),
                          InputFormField(
@@ -198,7 +198,7 @@ class ServicesCartMobile extends HookWidget {
                                 ),
                                 onTap: ()  async {
                                   if (formKey.currentState!.validate()){
-
+                                    displaySuccess(context);
                                     await FirestoreServices.sendMessages(
                                       message: messageController.text,
                                       context: context,
@@ -227,6 +227,7 @@ class ServicesCartMobile extends HookWidget {
                                 ),
                                 onTap: ()async {
                                   if (formKey.currentState!.validate()) {
+                                    displaySuccess(context);
                                     await FirestoreServices.sendMessages(
                                         message: messageController.text,
                                         budget: budgetController.text,

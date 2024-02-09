@@ -10,6 +10,7 @@ import 'package:zognest_website/features/our_services/widgets/service_card_mobil
 import 'package:zognest_website/firebase_services/firestore_services.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
+import 'package:zognest_website/shared/widgets/motion_toast.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 import '../../../riverpod/controller.dart';
@@ -37,7 +38,7 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
             if (servicesCart.isNotEmpty) ...[
               Responsive.isDesktop(context)
                   ? ServicesCart()
-                  : const ServicesCartMobile(),
+                  :  ServicesCartMobile(),
               const SizedBox(height: Constants.sectionSpacing),
             ],
             if (Responsive.isDesktop(context)) const Divider(),
@@ -161,10 +162,10 @@ class ServicesCart extends HookConsumerWidget {
     return Column(
       children: [
         const Divider(),
-        Consumer(builder: (context, ref, _) {
+        Consumer(builder: (_context, ref, _) {
           final cartServices = ref.watch(appControllerProvider).cartServices;
           return SizedBox(
-            height: 600,
+            height: 650,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: Constants.horizontalPadding,
@@ -246,7 +247,7 @@ class ServicesCart extends HookConsumerWidget {
                           InputFormField(
                             controller: nameController,
                             hint: Strings.yourName,
-                            required: false,
+                            required: true,
                             keyboardType: TextInputType.name,
                           ),
                           Row(
@@ -255,7 +256,7 @@ class ServicesCart extends HookConsumerWidget {
                                 child: InputFormField(
                                   controller: emailController,
                                   hint: Strings.yourEmail,
-                                  required: false,
+                                  required: true,
                                   keyboardType: TextInputType.emailAddress,
                                 ),
                               ),
@@ -264,7 +265,7 @@ class ServicesCart extends HookConsumerWidget {
                                 child: InputFormField(
                                   controller: phoneController,
                                   hint: Strings.mobileNo,
-                                  required: false,
+                                  required: true,
                                   keyboardType: TextInputType.phone,
                                 ),
                               ),
@@ -273,7 +274,7 @@ class ServicesCart extends HookConsumerWidget {
                           InputFormField(
                             controller: budgetController,
                             hint: Strings.budget,
-                            required: false,
+                            required: true,
                             keyboardType: TextInputType.text,
                           ),
                           InputFormField(
@@ -296,6 +297,7 @@ class ServicesCart extends HookConsumerWidget {
                                   ),
                                   onTap: () async {
                                       if (formKey.currentState!.validate()){
+                                        displaySuccess(context);
                                         final services = ref
                                             .read(appControllerProvider)
                                             .cartServices
@@ -303,7 +305,7 @@ class ServicesCart extends HookConsumerWidget {
                                             .toList();
                                         await FirestoreServices.sendMessages(
                                           message: messageController.text,
-                                          context: context,
+                                          context: _context,
                                           budget: budgetController.text,
                                           phone: phoneController.text,
                                           name: nameController.text,
@@ -316,7 +318,6 @@ class ServicesCart extends HookConsumerWidget {
                                         nameController.clear();
                                         emailController.clear();
                                       }
-                                      return 'some things went roung';
                                     }),
                               ),
                               const SizedBox(width: Spacing.s8),
@@ -330,6 +331,7 @@ class ServicesCart extends HookConsumerWidget {
                                   ),
                                   onTap: () async {
                                     if (formKey.currentState!.validate()) {
+                                      displaySuccess(context);
                                       final services = ref
                                           .read(appControllerProvider)
                                           .cartServices
@@ -338,7 +340,7 @@ class ServicesCart extends HookConsumerWidget {
                                       await FirestoreServices.sendMessages(
                                           message: messageController.text,
                                           budget: budgetController.text,
-                                          context: context,
+                                          context: _context,
                                           phone: phoneController.text,
                                           name: nameController.text,
                                           email: emailController.text,
@@ -350,6 +352,7 @@ class ServicesCart extends HookConsumerWidget {
                                       nameController.clear();
                                       emailController.clear();
                                     }
+
                                   },
                                 ),
                               ),

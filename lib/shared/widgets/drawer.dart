@@ -38,6 +38,7 @@ class PrimaryDrawer extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                const SizedBox(height:Spacing.m20),
                 ...AppBarButtons.values.map(
                   (button) {
                     return InkWell(
@@ -73,7 +74,7 @@ class PrimaryDrawer extends StatelessWidget {
                         .toList(),
                   ),
                 ),
-                const SizedBox(height: Spacing.s12),
+                const SizedBox(height: Spacing.m20),
                 PrimaryButton(
                   onTap: () {
                     showDialog(
@@ -89,7 +90,7 @@ class PrimaryDrawer extends StatelessWidget {
                   title: Strings.getInTouch.toUpperCase(),
                   trailing: CircleButton(child: SvgPicture.asset(Assets.mail)),
                 ),
-                const SizedBox(height: Spacing.s12),
+                const SizedBox(height: Spacing.m20),
               ],
             ),
           ],

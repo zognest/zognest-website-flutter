@@ -32,7 +32,7 @@ class _ZognestMocksState extends State<ZognestMocks>
 
     _offsetAnimation = Tween<Offset>(
       begin: const Offset(-2, 0),
-      end: const Offset(-0.75, 0),
+      end: const Offset(-0.62, 0),
     ).animate(curvedAnimation);
   }
 

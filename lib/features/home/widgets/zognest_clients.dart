@@ -10,7 +10,7 @@ import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
-
+import 'package:just_audio/just_audio.dart';
 import '../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
@@ -105,16 +105,29 @@ class ClientItem extends StatefulWidget {
     super.key,
     required this.clientFeedback,
   });
-
   final ClientFeedback clientFeedback;
 
-  @override
+
+@override
   State<ClientItem> createState() => _ClientItemState();
 }
 
 class _ClientItemState extends State<ClientItem> {
   bool hovered = false;
+  bool isPlayed=false;
+   late   AudioPlayer player;
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     player =AudioPlayer();
+  }
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
 
+  }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -218,9 +231,14 @@ class _ClientItemState extends State<ClientItem> {
                       CircleAvatar(
                         backgroundColor: Palette.white,
                         radius: 20,
-                        child: Icon(
-                          Icons.play_arrow,
+                        child: IconButton(
+                          icon:isPlayed ? const Icon(Icons.play_arrow):const Icon(Icons.pause),
                           color: theme.primaryColor,
+                          onPressed: ()async {
+                            await player.setUrl(widget.clientFeedback.audioUrl);
+                           isPlayed ?player.play():player.pause();
+                            setState((){isPlayed=!isPlayed;});
+                          },
                         ),
                       ),
                       const SizedBox(width: Spacing.s12),

@@ -52,14 +52,14 @@ class _OurWorkPageState extends State<OurWorkPage> {
               children: [
                 SizedBox(
                   height: Constants.appBarHeight *
-                      (Responsive.isDesktop(context) ? 1.5 : 1),
+                      (Responsive.isDesktop(context) ? 1.5 : .8),
                 ),
                 const Align(
                     alignment:Alignment.topCenter ,
                     child: ZognestProjects()),
                 const SizedBox(height: Constants.sectionSpacing),
                 const OurWorkText(),
-                const SizedBox(height: 25,),
+                 SizedBox(height:Responsive.isDesktop(context)? 25:Constants.sectionSpacing,),
                 Footer(
                   onTabUp: () => _controller.animateTo(
                     _controller.position.minScrollExtent,

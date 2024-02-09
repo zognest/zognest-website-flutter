@@ -21,7 +21,7 @@ class OurWorkText extends StatelessWidget {
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
-              Image.asset(Assets.textGroup),
+              // venus_mercury
             ],
           ),
         ),

@@ -1,6 +1,9 @@
+// ignore_for_file: curly_braces_in_flow_control_structures
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:motion_toast/motion_toast.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -13,6 +16,7 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 import '../../../config/theme/text_theme.dart';
 import '../../../firebase_services/firestore_services.dart';
+import '../../../shared/widgets/motion_toast.dart';
 
 class ContactForm extends HookWidget {
   ContactForm({super.key});
@@ -20,9 +24,7 @@ class ContactForm extends HookWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
     final emailController = useTextEditingController();
@@ -32,8 +34,7 @@ class ContactForm extends HookWidget {
     return Column(
       children: [
         const Divider(),
-        Responsive.isDesktop(context)
-            ? SizedBox(
+        if (Responsive.isDesktop(context)) SizedBox(
                 height: Constants.contactUsSectionHeight,
                 child: Stack(
                   children: [
@@ -136,67 +137,66 @@ class ContactForm extends HookWidget {
                                     children: [
                                       Expanded(
                                         child: PrimaryButton(
-                                          title:
-                                              Strings.sendMessage.toUpperCase(),
-                                          height: 75,
-                                          textStyle: theme.textTheme.bodyLarge
-                                              ?.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                          onTap: () async {
-                                            if (formKey.currentState!
-                                                .validate()) {
-                                              await FirestoreServices
-                                                  .sendMessages(
-                                                message: messageController.text,
-                                                phone: phoneController.text,
-                                                name: nameController.text,
-                                                email: emailController.text,
-                                                context: context,
-                                              );
-                                              messageController.clear();
-                                              phoneController.clear();
-                                              nameController.clear();
-                                              emailController.clear();
-                                            }
-                                            // toast
-                                          },
-                                        ),
+                                            title: Strings.sendMessage
+                                                .toUpperCase(),
+                                            height: 75,
+                                            textStyle: theme.textTheme.bodyLarge
+                                                ?.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            onTap: () async {
+                                              if (formKey.currentState!
+                                                  .validate()) {
+                                                displaySuccess(context);
+                                                await FirestoreServices
+                                                    .sendMessages(
+                                                  message:
+                                                      messageController.text,
+                                                  phone: phoneController.text,
+                                                  name: nameController.text,
+                                                  email: emailController.text,
+                                                  context: context,
+                                                );
+                                                messageController.clear();
+                                                phoneController.clear();
+                                                nameController.clear();
+                                                emailController.clear();
+                                              }
+                                            }),
                                       ),
                                       const SizedBox(width: Spacing.s12),
                                       Expanded(
                                         child: PrimaryButton(
-                                          title:
-                                              Strings.requestCall.toUpperCase(),
-                                          backgroundColor: Palette.white,
-                                          height: 75,
-                                          textStyle: theme.textTheme.bodyLarge
-                                              ?.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                          ),
-                                          onTap: () async {
-                                            if (formKey.currentState!
-                                                .validate()) {
-                                              await FirestoreServices
-                                                  .sendMessages(
-                                                message: messageController.text,
-                                                phone: phoneController.text,
-                                                name: nameController.text,
-                                                email: emailController.text,
-                                                call: true,
-                                                context: context,
-                                              );
-                                              messageController.clear();
-                                              phoneController.clear();
-                                              nameController.clear();
-                                              nameController.clear();
-                                              emailController.clear();
-                                            }
-                                            return 'some things went roung';
-                                          },
-                                        ),
-                                      ),
+                                            title: Strings.requestCall
+                                                .toUpperCase(),
+                                            backgroundColor: Palette.white,
+                                            height: 75,
+                                            textStyle: theme.textTheme.bodyLarge
+                                                ?.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                               color: Colors.black,
+                                            ),
+                                            onTap: () async {
+                                              if (formKey.currentState!.validate()) {
+                                                displaySuccess(context);
+                                                await FirestoreServices
+                                                    .sendMessages(
+                                                  message:
+                                                      messageController.text,
+                                                  phone: phoneController.text,
+                                                  name: nameController.text,
+                                                  email: emailController.text,
+                                                  call: true,
+                                                  context: context,
+                                                );
+                                                messageController.clear();
+                                                phoneController.clear();
+                                                nameController.clear();
+                                                emailController.clear();
+                                              }
+                                            }),
+
+                                      )
                                     ],
                                   ),
                                 ],
@@ -208,8 +208,7 @@ class ContactForm extends HookWidget {
                     ),
                   ],
                 ),
-              )
-            : ContactFormMobile(),
+              ) else ContactFormMobile(),
         const Divider(),
       ],
     );
@@ -295,25 +294,25 @@ class ContactFormMobile extends HookWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 InputFormField(
+                InputFormField(
                   controller: nameController,
                   hint: Strings.yourName,
-                  required: false,
+                  required: true,
                   keyboardType: TextInputType.name,
                 ),
-                 InputFormField(
-                   controller: emailController,
+                InputFormField(
+                  controller: emailController,
                   hint: Strings.yourEmail,
-                  required: false,
+                  required: true,
                   keyboardType: TextInputType.emailAddress,
                 ),
-                 InputFormField(
-                   controller: phoneController,
+                InputFormField(
+                  controller: phoneController,
                   hint: Strings.mobileNo,
-                  required: false,
+                  required: true,
                   keyboardType: TextInputType.phone,
                 ),
-                 InputFormField(
+                InputFormField(
                   hint: Strings.message,
                   controller: messageController,
                   required: true,
@@ -332,6 +331,7 @@ class ContactFormMobile extends HookWidget {
                         ),
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
+                            displaySuccess(context);
                             await FirestoreServices.sendMessages(
                               message: messageController.text,
                               phone: phoneController.text,
@@ -344,7 +344,6 @@ class ContactFormMobile extends HookWidget {
                             nameController.clear();
                             emailController.clear();
                           }
-                          return 'some things went roung';
                         },
                       ),
                     ),
@@ -360,6 +359,7 @@ class ContactFormMobile extends HookWidget {
                         ),
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
+                            displaySuccess(context);
                             await FirestoreServices.sendMessages(
                               message: messageController.text,
                               phone: phoneController.text,
@@ -373,7 +373,6 @@ class ContactFormMobile extends HookWidget {
                             nameController.clear();
                             emailController.clear();
                           }
-                          return 'some things went roung';
                         },
                       ),
                     ),

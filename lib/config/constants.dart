@@ -40,7 +40,7 @@ class Constants {
 
   /// region [ZognestVideo]
   static const videoAspectRatio = 16 / 9;
-  static const videoAspectRatioMobile = 22 / 16;
+  static const videoAspectRatioMobile = 20/20;
 
   // endregion
 
@@ -96,7 +96,7 @@ class Constants {
   static const imageTextHeight = 700.0;
   static const zognestFooterSectionHeight = 800.0;
   static const optimismSectionHeight = 800.0;
-  static const contactUsSectionHeight = 850.0;
+  static const contactUsSectionHeight = 890.0;
   static const bgDecorationSpacing = 1000.0;
   static const beyondSpaceAppDuration = 5;
   static const clientsMarqueeHeight = 75.0;

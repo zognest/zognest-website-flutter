@@ -24,6 +24,7 @@ import '../../features/home/widgets/contact_form.dart';
 import '../../features/our_space/widgets/gallery_dialog.dart';
 import '../../firebase_services/firestore_services.dart';
 import 'contact_form_appbar.dart';
+import 'greyscale_filter.dart';
 import 'input_form_field.dart';
 enum AppBarButtons {
   home(
@@ -116,9 +117,10 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
       _appBarAnimationController.forward();
     }
   }
-
+  bool over = false;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,) {
+
     final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
     final route = GoRouterState.of(context);
@@ -184,7 +186,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                   //button get in touch
                   PrimaryButton(
                     onTap: () {
-                      showDialog(
+                    showDialog(
                         context: context,
                         barrierDismissible: true,
                         builder: (context) => Material(

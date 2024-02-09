@@ -32,7 +32,7 @@ class _ZognestMocksState extends State<ZognestMocks>
 
     _offsetAnimation = Tween<Offset>(
       begin: const Offset(-2, 0),
-      end: const Offset(-0.62, 0),
+      end: const Offset(-0.5, 0),
     ).animate(curvedAnimation);
   }
 
@@ -59,11 +59,16 @@ class _ZognestMocksState extends State<ZognestMocks>
                 if (info.visibleFraction >= 0.8) _animationController.forward();
               },
               child: SizedBox(
-                height: Responsive.isDesktop(context) ? 800 : 280,
+                height: Responsive.isDesktop(context)
+                    ? 800
+                    : Responsive.isTablet(context)
+                        ? 400
+                        : 280,
                 child: SlideTransition(
                   position: _offsetAnimation,
                   child: Image.asset(
                     Assets.screens,
+                    width: double.infinity,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -75,9 +80,13 @@ class _ZognestMocksState extends State<ZognestMocks>
         Stack(
           alignment: Alignment.centerRight,
           children: [
-            Image.asset(Assets.mercury,
-                width:
-                    size.width * (Responsive.isDesktop(context) ? 0.60 : 0.62)),
+            Image.asset(
+              Responsive.isDesktop(context)
+                  ? Assets.mercury
+                  : Assets.mercuryMobile,
+              width: size.width * 0.45,
+              alignment: Alignment.centerRight,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: Constants.horizontalPadding),

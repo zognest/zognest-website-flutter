@@ -107,27 +107,27 @@ class ClientItem extends StatefulWidget {
   });
   final ClientFeedback clientFeedback;
 
-
-@override
+  @override
   State<ClientItem> createState() => _ClientItemState();
 }
 
 class _ClientItemState extends State<ClientItem> {
   bool hovered = false;
-  bool isPlayed=false;
-   late   AudioPlayer player;
-   @override
+  bool isPlayed = true;
+  late AudioPlayer player;
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-     player =AudioPlayer();
+    player = AudioPlayer();
+    player.setUrl(widget.clientFeedback.audioUrl);
   }
+
   @override
   void dispose() {
     player.dispose();
     super.dispose();
-
   }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -232,12 +232,15 @@ class _ClientItemState extends State<ClientItem> {
                         backgroundColor: Palette.white,
                         radius: 20,
                         child: IconButton(
-                          icon:isPlayed ? const Icon(Icons.play_arrow):const Icon(Icons.pause),
+                          icon: isPlayed
+                              ? const Icon(Icons.play_arrow)
+                              : const Icon(Icons.pause),
                           color: theme.primaryColor,
-                          onPressed: ()async {
-                            await player.setUrl(widget.clientFeedback.audioUrl);
-                           isPlayed ?player.play():player.pause();
-                            setState((){isPlayed=!isPlayed;});
+                          onPressed: () {
+                            isPlayed ? player.pause() : player.play();
+                            setState(() {
+                              isPlayed = !isPlayed;
+                            });
                           },
                         ),
                       ),

@@ -18,9 +18,4 @@ class Responsive {
     return MediaQuery.sizeOf(context).width >= 1000;
   }
 
-  static String deviceType(BuildContext context) {
-    if (Responsive.isDesktop(context)) return 'Desktop';
-    if (Responsive.isTablet(context)) return 'Tablet';
-    return 'Mobile';
-  }
 }

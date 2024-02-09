@@ -75,13 +75,15 @@ class _ZognestMocksState extends State<ZognestMocks>
         Stack(
           alignment: Alignment.centerRight,
           children: [
-            Image.asset(Assets.mercury),
+            Image.asset(Assets.mercury,
+                width:
+                    size.width * (Responsive.isDesktop(context) ? 0.60 : 0.62)),
             Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: Constants.horizontalPadding),
+                  horizontal: Constants.horizontalPadding),
               child: SizedBox(
                 width:
-                    size.width * (Responsive.isDesktop(context) ? 0.45 : 0.7),
+                    size.width * (Responsive.isDesktop(context) ? 0.45 : 0.4),
                 child: FittedBox(
                   child: Text.rich(
                     textAlign: TextAlign.right,

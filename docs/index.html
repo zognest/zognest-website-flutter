@@ -15,7 +15,6 @@
       the `--base-href` argument provided to `flutter build`.
     -->
     <!--    <base href="/">-->
-
     <meta charset="UTF-8">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
     <meta content="A new Flutter project." name="description">
@@ -31,10 +30,14 @@
 
     <title>zognest_website</title>
     <link href="manifest.json" rel="manifest">
+    <script src="https://unpkg.com/canvaskit-wasm@0.39.1/bin/canvaskit.js"></script>
+    <link as="fetch" crossOrigin="anonymous" href="https://unpkg.com/canvaskit-wasm@0.39.1/bin/canvaskit.wasm"
+          rel="preload">
 
     <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = "4231386627";
+
 
 
     </script>
@@ -50,7 +53,9 @@
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
+          engineInitializer.initializeEngine({
+          renderer: "canvaskit"
+          }).then(function(appRunner) {
             appRunner.runApp();
           });
         }

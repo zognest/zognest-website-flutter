@@ -7,6 +7,7 @@ import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/about_us/pages/about_us_page.dart';
 import 'package:zognest_website/features/home/pages/home_page.dart';
+import 'package:zognest_website/features/home/widgets/contact_form.dart';
 import 'package:zognest_website/features/our_services/pages/our_services_page.dart';
 import 'package:zognest_website/features/our_space/pages/our_space_page.dart';
 import 'package:zognest_website/features/our_work/pages/our_work_page.dart';
@@ -18,14 +19,6 @@ import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';
 
-import '../../features/home/widgets/contact_form.dart';
-import '../../features/home/widgets/contact_form.dart';
-import '../../features/home/widgets/contact_form.dart';
-import '../../features/our_space/widgets/gallery_dialog.dart';
-import '../../firebase_services/firestore_services.dart';
-import 'contact_form_appbar.dart';
-import 'greyscale_filter.dart';
-import 'input_form_field.dart';
 enum AppBarButtons {
   home(
     route: HomePage.route,
@@ -117,10 +110,13 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
       _appBarAnimationController.forward();
     }
   }
-  bool over = false;
-  @override
-  Widget build(BuildContext context,) {
 
+  bool over = false;
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
     final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
     final route = GoRouterState.of(context);
@@ -186,12 +182,20 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                   //button get in touch
                   PrimaryButton(
                     onTap: () {
-                    showDialog(
+                      showDialog(
                         context: context,
                         barrierDismissible: true,
-                        builder: (context) => Material(
-                          child:ContactFormAppBar(key:formKey,)
+                        builder: (context) => Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Palette.cardBackgroundColor,
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Palette.dividerColor),
+                            ),
+                            child: SingleChildScrollView(child: ContactForm()),
                           ),
+                        ),
                       );
                     },
                     title: Strings.getInTouch.toUpperCase(),
@@ -206,7 +210,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
 }
 
 class MobileAppBar extends StatelessWidget {
-   const MobileAppBar({super.key});
+  const MobileAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -214,7 +218,6 @@ class MobileAppBar extends StatelessWidget {
       children: [
         const ZognestLogo(),
         const Spacer(),
-
         const Spacer(),
         InkWell(
           onTap: () {

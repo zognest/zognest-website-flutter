@@ -6,27 +6,28 @@ import 'package:equatable/equatable.dart';
 class ClientFeedback extends Equatable {
   final String clientImage;
   final String name;
-
   final String audioUrl;
   final String id;
   final List<String> backgroundImages;
   final String description;
 
-  const ClientFeedback(
-      {required this.clientImage,
-      required this.name,
-      required this.id,
-      required this.backgroundImages,
-      required this.description,
-      required this.audioUrl});
+  const ClientFeedback({
+    required this.clientImage,
+    required this.name,
+    required this.id,
+    required this.backgroundImages,
+    required this.description,
+    required this.audioUrl,
+  });
 
-  ClientFeedback copyWith(
-      {String? clientImage,
-      String? name,
-      String? id,
-      List<String>? backgroundImages,
-      String? description,
-      String? audioUrl}) {
+  ClientFeedback copyWith({
+    String? clientImage,
+    String? name,
+    String? id,
+    List<String>? backgroundImages,
+    String? description,
+    String? audioUrl,
+  }) {
     return ClientFeedback(
       audioUrl: audioUrl ?? this.audioUrl,
       clientImage: clientImage ?? this.clientImage,
@@ -44,7 +45,7 @@ class ClientFeedback extends Equatable {
       'id': id,
       'backgroundImages': backgroundImages,
       'description': description,
-      'audiourl': audioUrl,
+      'audioUrl': audioUrl,
     };
   }
 
@@ -71,13 +72,6 @@ class ClientFeedback extends Equatable {
 
   @override
   List<Object> get props {
-    return [
-      clientImage,
-      name,
-      id,
-      backgroundImages,
-      description,
-      audioUrl
-    ];
+    return [clientImage, name, id, backgroundImages, description, audioUrl];
   }
 }

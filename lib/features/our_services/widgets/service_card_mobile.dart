@@ -8,7 +8,6 @@ import '../../../resources/spacing.dart';
 import '../../../resources/strings.dart';
 import '../../../riverpod/controller.dart';
 import '../../../shared/widgets/input_form_field.dart';
-import '../../../shared/widgets/motion_toast.dart';
 import '../../../shared/widgets/primary_button.dart';
 
 class ServicesCartMobile extends HookWidget  {
@@ -198,7 +197,6 @@ class ServicesCartMobile extends HookWidget  {
                                 ),
                                 onTap: ()  async {
                                   if (formKey.currentState!.validate()){
-                                    displaySuccess(context);
                                     await FirestoreServices.sendMessages(
                                       message: messageController.text,
                                       context: context,
@@ -227,7 +225,6 @@ class ServicesCartMobile extends HookWidget  {
                                 ),
                                 onTap: ()async {
                                   if (formKey.currentState!.validate()) {
-                                    displaySuccess(context);
                                     await FirestoreServices.sendMessages(
                                         message: messageController.text,
                                         budget: budgetController.text,

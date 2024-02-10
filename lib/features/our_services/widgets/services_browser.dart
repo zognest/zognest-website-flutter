@@ -10,7 +10,6 @@ import 'package:zognest_website/features/our_services/widgets/service_card_mobil
 import 'package:zognest_website/firebase_services/firestore_services.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
-import 'package:zognest_website/shared/widgets/motion_toast.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 import '../../../riverpod/controller.dart';
@@ -297,7 +296,6 @@ class ServicesCart extends HookConsumerWidget {
                                   ),
                                   onTap: () async {
                                       if (formKey.currentState!.validate()){
-                                        displaySuccess(context);
                                         final services = ref
                                             .read(appControllerProvider)
                                             .cartServices
@@ -331,7 +329,6 @@ class ServicesCart extends HookConsumerWidget {
                                   ),
                                   onTap: () async {
                                     if (formKey.currentState!.validate()) {
-                                      displaySuccess(context);
                                       final services = ref
                                           .read(appControllerProvider)
                                           .cartServices

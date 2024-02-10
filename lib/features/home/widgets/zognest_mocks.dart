@@ -32,7 +32,7 @@ class _ZognestMocksState extends State<ZognestMocks>
 
     _offsetAnimation = Tween<Offset>(
       begin: const Offset(-2, 0),
-      end: const Offset(-0.5, 0),
+      end: const Offset(-0.45, 0),
     ).animate(curvedAnimation);
   }
 
@@ -50,27 +50,21 @@ class _ZognestMocksState extends State<ZognestMocks>
       alignment: Alignment.centerRight,
       children: [
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Divider(),
             VisibilityDetector(
               key: ValueKey(runtimeType.toString()),
               onVisibilityChanged: (info) {
-                if (info.visibleFraction >= 0.8) _animationController.forward();
+                if (info.visibleFraction >= 0.8) {
+                  _animationController.forward();
+                }
               },
-              child: SizedBox(
-                height: Responsive.isDesktop(context)
-                    ? 800
-                    : Responsive.isTablet(context)
-                        ? 400
-                        : 280,
-                child: SlideTransition(
-                  position: _offsetAnimation,
-                  child: Image.asset(
-                    Assets.screens,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+              child: SlideTransition(
+                position: _offsetAnimation,
+                child: Image.asset(
+                  Assets.screens,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -81,9 +75,7 @@ class _ZognestMocksState extends State<ZognestMocks>
           alignment: Alignment.centerRight,
           children: [
             Image.asset(
-              Responsive.isDesktop(context)
-                  ? Assets.mercury
-                  : Assets.mercuryMobile,
+              Assets.mercury,
               width: size.width * 0.45,
               alignment: Alignment.centerRight,
             ),

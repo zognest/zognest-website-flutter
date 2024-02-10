@@ -173,8 +173,14 @@ class FirestoreServices {
 
     if (context.mounted) {
       MotionToast.success(
-        title: const Text("Success Motion Toast"),
-        description: const Text("Example of success motion toast"),
+        title: const Text("Success!"),
+        description: const Text("Message was sent."),
+        dismissable: true,
+        animationDuration: const Duration(microseconds: 1000),
+        animationCurve: Curves.easeIn,
+        position: MotionToastPosition.bottom,
+        toastDuration: const Duration(seconds: 2),
+        animationType: AnimationType.fromBottom,
       ).show(context);
     }
   }

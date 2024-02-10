@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
+import 'package:zognest_website/features/home/widgets/beyond_space.dart';
+import 'package:zognest_website/features/home/widgets/clients_list.dart';
 import 'package:zognest_website/features/home/widgets/contact_form.dart';
+import 'package:zognest_website/features/home/widgets/counters.dart';
 import 'package:zognest_website/features/home/widgets/marquee_text.dart';
+import 'package:zognest_website/features/home/widgets/optimism_text.dart';
 import 'package:zognest_website/features/home/widgets/zognest_blogs.dart';
 import 'package:zognest_website/features/home/widgets/zognest_clients.dart';
 import 'package:zognest_website/features/home/widgets/zognest_mocks.dart';
+import 'package:zognest_website/features/home/widgets/zognest_offers.dart';
+import 'package:zognest_website/features/home/widgets/zognest_services.dart';
+import 'package:zognest_website/features/home/widgets/zognest_video.dart';
 import 'package:zognest_website/resources/assets.dart';
+import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
+import 'package:zognest_website/shared/widgets/image_text.dart';
 
 import '../../../shared/widgets/gradient_container.dart';
 
@@ -126,7 +136,7 @@ class Foreground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        /*const SizedBox(height: Constants.appBarHeight * 1.5),
+        const SizedBox(height: Constants.appBarHeight * 1.5),
         BeyondSpace(onTabDown: onTabDown),
         const SizedBox(height: Constants.sectionSpacing),
         const ClientsMarquee(),
@@ -145,7 +155,7 @@ class Foreground extends StatelessWidget {
         const SizedBox(height: Constants.sectionSpacing),
         const Counters(),
         const SizedBox(height: Constants.sectionSpacing),
-        const ZognestServices(),*/
+        const ZognestServices(),
         const ZognestMocks(),
         const ZognestClients(),
         const SizedBox(height: Constants.sectionSpacing),

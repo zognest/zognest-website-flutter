@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -100,36 +101,23 @@ class _ZognestClientsState extends State<ZognestClients> {
   }
 }
 
-class ClientItem extends StatefulWidget {
+class ClientItem extends HookWidget {
   const ClientItem({
     super.key,
     required this.clientFeedback,
   });
+
   final ClientFeedback clientFeedback;
 
   @override
-  State<ClientItem> createState() => _ClientItemState();
-}
-
-class _ClientItemState extends State<ClientItem> {
-  bool hovered = false;
-  bool isPlayed = true;
-  late AudioPlayer player;
-  @override
-  void initState() {
-    super.initState();
-    player = AudioPlayer();
-    player.setUrl(widget.clientFeedback.audioUrl);
-  }
-
-  @override
-  void dispose() {
-    player.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final isPlaying = useState(false);
+    final hovering = useState(false);
+    final audioPlayer = useState(AudioPlayer());
+    useEffect(() {
+      audioPlayer.value.setUrl(clientFeedback.audioUrl);
+      return audioPlayer.value.dispose;
+    }, []);
     final theme = Theme.of(context);
     return FrostedContainer(
       borderRadius: 20,
@@ -139,16 +127,14 @@ class _ClientItemState extends State<ClientItem> {
           horizontal: Spacing.l32, vertical: Spacing.l24),
       child: InkWell(
         onTap: () {},
-        onHover: (over) {
-          setState(() => hovered = !hovered);
-        },
+        onHover: (over) => hovering.value = over,
         overlayColor: MaterialStateProperty.all(Palette.transparent),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: GreyscaleFilter(
-                isHovered: hovered,
+                isHovered: hovering.value,
                 child: Stack(
                   children: [
                     Padding(
@@ -160,7 +146,7 @@ class _ClientItemState extends State<ClientItem> {
                             child: Card(
                               clipBehavior: Clip.hardEdge,
                               child: NetworkFadingImage(
-                                path: widget.clientFeedback.backgroundImages[0],
+                                path: clientFeedback.backgroundImages[0],
                                 height: double.infinity,
                                 fit: BoxFit.cover,
                               ),
@@ -172,7 +158,7 @@ class _ClientItemState extends State<ClientItem> {
                             child: Card(
                               clipBehavior: Clip.hardEdge,
                               child: NetworkFadingImage(
-                                path: widget.clientFeedback.backgroundImages[1],
+                                path: clientFeedback.backgroundImages[1],
                                 height: double.infinity,
                                 fit: BoxFit.cover,
                               ),
@@ -194,8 +180,7 @@ class _ClientItemState extends State<ClientItem> {
                             width: Spacing.s4,
                           ),
                           image: DecorationImage(
-                            image:
-                                NetworkImage(widget.clientFeedback.clientImage),
+                            image: NetworkImage(clientFeedback.clientImage),
                           ),
                         ),
                       ),
@@ -214,13 +199,13 @@ class _ClientItemState extends State<ClientItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.clientFeedback.name,
+                            clientFeedback.name,
                             style: theme.textTheme.bodyLarge?.copyWith(
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                           Text(
-                            widget.clientFeedback.id,
+                            clientFeedback.id,
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: theme.primaryColor,
                             ),
@@ -232,15 +217,17 @@ class _ClientItemState extends State<ClientItem> {
                         backgroundColor: Palette.white,
                         radius: 20,
                         child: IconButton(
-                          icon: isPlayed
-                              ? const Icon(Icons.play_arrow)
-                              : const Icon(Icons.pause),
+                          icon: Icon(
+                            isPlaying.value
+                                ? Icons.pause
+                                : Icons.play_arrow_rounded,
+                          ),
                           color: theme.primaryColor,
                           onPressed: () {
-                            isPlayed ? player.pause() : player.play();
-                            setState(() {
-                              isPlayed = !isPlayed;
-                            });
+                            isPlaying.value
+                                ? audioPlayer.value.pause()
+                                : audioPlayer.value.play();
+                            isPlaying.value = !isPlaying.value;
                           },
                         ),
                       ),
@@ -262,7 +249,7 @@ class _ClientItemState extends State<ClientItem> {
                     flex: 2,
                     child: SingleChildScrollView(
                       child: Text(
-                        widget.clientFeedback.description,
+                        clientFeedback.description,
                         style: theme.textTheme.bodyLarge!.copyWith(
                           fontFamily: 'SF Pro Rounded',
                         ),

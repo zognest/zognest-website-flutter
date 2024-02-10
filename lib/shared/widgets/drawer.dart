@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
+import 'package:zognest_website/features/home/widgets/contact_form.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
@@ -11,14 +12,12 @@ import 'package:zognest_website/shared/widgets/social_button.dart';
 import '../../resources/assets.dart';
 import '../../resources/strings.dart';
 import 'circle_button.dart';
-import 'contact_form_appbar.dart';
 
 class PrimaryDrawer extends StatelessWidget {
   const PrimaryDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final route = GoRouterState.of(context);
     final theme = Theme.of(context);
     return Align(
@@ -38,7 +37,7 @@ class PrimaryDrawer extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height:Spacing.m20),
+                const SizedBox(height: Spacing.m20),
                 ...AppBarButtons.values.map(
                   (button) {
                     return InkWell(
@@ -80,8 +79,16 @@ class PrimaryDrawer extends StatelessWidget {
                     showDialog(
                       context: context,
                       barrierDismissible: true,
-                      builder: (context) => Material(
-                          child:ContactFormAppBar(key:formKey,)
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Palette.cardBackgroundColor,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Palette.dividerColor),
+                          ),
+                          child: ContactForm(),
+                        ),
                       ),
                     );
                   },

@@ -1,0 +1,140 @@
+{
+  "assets/images/about_us_text.png": [
+    "assets/images/about_us_text.png"
+  ],
+  "assets/images/arrow_right.png": [
+    "assets/images/arrow_right.png"
+  ],
+  "assets/images/impact_lines.png": [
+    "assets/images/impact_lines.png"
+  ],
+  "assets/images/logo.png": [
+    "assets/images/logo.png"
+  ],
+  "assets/images/mercuries.png": [
+    "assets/images/mercuries.png"
+  ],
+  "assets/images/mercury.png": [
+    "assets/images/mercury.png"
+  ],
+  "assets/images/mercury_mobile.png": [
+    "assets/images/mercury_mobile.png"
+  ],
+  "assets/images/mobile_about_us_text.png": [
+    "assets/images/mobile_about_us_text.png"
+  ],
+  "assets/images/moon.png": [
+    "assets/images/moon.png"
+  ],
+  "assets/images/office.png": [
+    "assets/images/office.png"
+  ],
+  "assets/images/optimis.png": [
+    "assets/images/optimis.png"
+  ],
+  "assets/images/optimis_mobile.png": [
+    "assets/images/optimis_mobile.png"
+  ],
+  "assets/images/our_services_text.png": [
+    "assets/images/our_services_text.png"
+  ],
+  "assets/images/our_space_text.png": [
+    "assets/images/our_space_text.png"
+  ],
+  "assets/images/screens.png": [
+    "assets/images/screens.png"
+  ],
+  "assets/images/short_arrow_left.png": [
+    "assets/images/short_arrow_left.png"
+  ],
+  "assets/images/small_mercury.png": [
+    "assets/images/small_mercury.png"
+  ],
+  "assets/images/text_group.png": [
+    "assets/images/text_group.png"
+  ],
+  "assets/images/venus_mercury.png": [
+    "assets/images/venus_mercury.png"
+  ],
+  "assets/images/zognest_team.png": [
+    "assets/images/zognest_team.png"
+  ],
+  "assets/svg/arrow_down.svg": [
+    "assets/svg/arrow_down.svg"
+  ],
+  "assets/svg/arrow_up.svg": [
+    "assets/svg/arrow_up.svg"
+  ],
+  "assets/svg/discord.svg": [
+    "assets/svg/discord.svg"
+  ],
+  "assets/svg/drawer.svg": [
+    "assets/svg/drawer.svg"
+  ],
+  "assets/svg/dribble.svg": [
+    "assets/svg/dribble.svg"
+  ],
+  "assets/svg/facebook.svg": [
+    "assets/svg/facebook.svg"
+  ],
+  "assets/svg/figma.svg": [
+    "assets/svg/figma.svg"
+  ],
+  "assets/svg/grid_lines.svg": [
+    "assets/svg/grid_lines.svg"
+  ],
+  "assets/svg/hamburger.svg": [
+    "assets/svg/hamburger.svg"
+  ],
+  "assets/svg/impact_lines.svg": [
+    "assets/svg/impact_lines.svg"
+  ],
+  "assets/svg/instagram.svg": [
+    "assets/svg/instagram.svg"
+  ],
+  "assets/svg/linkedin.svg": [
+    "assets/svg/linkedin.svg"
+  ],
+  "assets/svg/logo.svg": [
+    "assets/svg/logo.svg"
+  ],
+  "assets/svg/mail.svg": [
+    "assets/svg/mail.svg"
+  ],
+  "assets/svg/pintrest.svg": [
+    "assets/svg/pintrest.svg"
+  ],
+  "assets/svg/whatsapp.svg": [
+    "assets/svg/whatsapp.svg"
+  ],
+  "assets/svg/youtube.svg": [
+    "assets/svg/youtube.svg"
+  ],
+  "fonts/Oswald/Oswald-Variable.ttf": [
+    "fonts/Oswald/Oswald-Variable.ttf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Black.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Black.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Bold.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Bold.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Light.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Light.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Medium.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Medium.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Regular.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Regular.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-SemiBold.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-SemiBold.otf"
+  ],
+  "fonts/SFProRounded/SF-Pro-Rounded-Thin.otf": [
+    "fonts/SFProRounded/SF-Pro-Rounded-Thin.otf"
+  ],
+  "packages/cupertino_icons/assets/CupertinoIcons.ttf": [
+    "packages/cupertino_icons/assets/CupertinoIcons.ttf"
+  ]
+}

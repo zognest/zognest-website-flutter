@@ -161,7 +161,7 @@ class ServicesCart extends HookConsumerWidget {
     return Column(
       children: [
         const Divider(),
-        Consumer(builder: (_context, ref, _) {
+        Consumer(builder: (context, ref, _) {
           final cartServices = ref.watch(appControllerProvider).cartServices;
           return SizedBox(
             height: 650,
@@ -303,7 +303,7 @@ class ServicesCart extends HookConsumerWidget {
                                             .toList();
                                         await FirestoreServices.sendMessages(
                                           message: messageController.text,
-                                          context: _context,
+                                          context: context,
                                           budget: budgetController.text,
                                           phone: phoneController.text,
                                           name: nameController.text,
@@ -337,7 +337,7 @@ class ServicesCart extends HookConsumerWidget {
                                       await FirestoreServices.sendMessages(
                                           message: messageController.text,
                                           budget: budgetController.text,
-                                          context: _context,
+                                          context: context,
                                           phone: phoneController.text,
                                           name: nameController.text,
                                           email: emailController.text,

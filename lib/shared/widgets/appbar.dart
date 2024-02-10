@@ -118,7 +118,6 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
     BuildContext context,
   ) {
     final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
     final route = GoRouterState.of(context);
     return SlideTransition(
       position: _appBarOffsetAnimation,

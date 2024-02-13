@@ -45,7 +45,7 @@ class _ZognestVideoState extends State<ZognestVideo> {
     final theme = Theme.of(context);
     return Column(
       children: [
-        const Divider(),
+
         Consumer(
           builder: (context, ref, child) {
             final url = ref.watch(appControllerProvider).videoUrl;
@@ -64,8 +64,8 @@ class _ZognestVideoState extends State<ZognestVideo> {
                     }
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.horizontalPaddingViduo),
+                    padding: EdgeInsets.symmetric(
+                        horizontal:Responsive.isDesktop(context)? Constants.horizontalPaddingViduo:2),
                     child: _controller.value.isInitialized
                         ? AspectRatio(
                             aspectRatio: Responsive.isDesktop(context)

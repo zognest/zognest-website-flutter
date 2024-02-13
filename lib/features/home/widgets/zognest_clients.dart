@@ -86,8 +86,8 @@ class _ZognestClientsState extends State<ZognestClients> {
                   itemBuilder: (context, index) {
                     return ClientItem(clientFeedback: clientFeedbacks[index]);
                   },
-                  separatorBuilder: (context, index) =>
-                       SizedBox(width: Responsive.isDesktop(context)
+                  separatorBuilder: (context, index) => SizedBox(
+                      width: Responsive.isDesktop(context)
                           ? Constants.listCardSeparatorWidth
                           : Constants.listCardSeparatorWidthMobile),
                   itemCount: clientFeedbacks.length,
@@ -237,12 +237,9 @@ class ClientItem extends HookWidget {
                       const SizedBox(width: Spacing.s12),
                       PrimaryButton(
                         height: 40,
+                        width: 70,
                         title: Strings.view.toUpperCase(),
                         filled: false,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: Spacing.m20,
-                          vertical: Spacing.m18,
-                        ),
                         onTap: () {},
                       ),
                     ],

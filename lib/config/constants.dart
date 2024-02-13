@@ -42,7 +42,7 @@ class Constants {
 
   /// region [ZognestVideo]
   static const videoAspectRatio = 16 / 9;
-  static const videoAspectRatioMobile = 20/20;
+  static const videoAspectRatioMobile = 18/12;
 
   // endregion
 

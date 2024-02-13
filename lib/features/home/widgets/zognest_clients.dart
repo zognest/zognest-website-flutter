@@ -12,6 +12,7 @@ import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import 'package:just_audio/just_audio.dart';
+import '../../../config/responsive.dart';
 import '../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
@@ -86,7 +87,9 @@ class _ZognestClientsState extends State<ZognestClients> {
                     return ClientItem(clientFeedback: clientFeedbacks[index]);
                   },
                   separatorBuilder: (context, index) =>
-                      const SizedBox(width: Constants.listCardSeparatorWidth),
+                       SizedBox(width: Responsive.isDesktop(context)
+                          ? Constants.listCardSeparatorWidth
+                          : Constants.listCardSeparatorWidthMobile),
                   itemCount: clientFeedbacks.length,
                 ),
               );

@@ -92,9 +92,7 @@ class ContactForm extends HookWidget {
                                       Strings.address,
                                       style:
                                           theme.textTheme.bodyLarge!.copyWith(
-                                        fontSize: Responsive.isDesktop(context)
-                                            ? 10
-                                            : 8,
+                                        fontSize: 20,
                                       ),
                                     ),
                                     const SizedBox(height: Spacing.m20),
@@ -277,7 +275,9 @@ class ContactFormMobile extends HookWidget {
               Text(
                 textAlign: TextAlign.center,
                 Strings.address,
-                style: theme.textTheme.bodySmall,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  fontSize: 20,
+                ),
               ),
               const SizedBox(height: Spacing.s4),
               Text(

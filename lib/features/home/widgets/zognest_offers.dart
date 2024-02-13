@@ -40,19 +40,22 @@ class _ZognestOffersState extends State<ZognestOffers> {
     final theme = Theme.of(context);
     return Column(
       children: [
-        const Divider(),
+
         ScrollHeadline(
           headline: TextSpan(
-            text: Strings.what.toUpperCase(),
+            text: "${Strings.what}\n".toUpperCase(),
             style: theme.textTheme.displaySmall,
             children: [
               TextSpan(
-                text: '${Strings.we}\n'.toUpperCase(),
+                text: Strings.we.toUpperCase(),
                 style: theme.textTheme.displaySmall?.copyWith(
                   foreground: TextThemes.foreground,
                 ),
               ),
-              TextSpan(text: Strings.offer.toUpperCase()),
+              TextSpan(
+                  text: Strings.offer.toUpperCase(),
+                  style: theme.textTheme.displaySmall?.copyWith(
+                  )),
             ],
           ),
           onTapScroll: () {
@@ -96,8 +99,10 @@ class _ZognestOffersState extends State<ZognestOffers> {
                       ),
                     );
                   },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: Spacing.l24),
+                  separatorBuilder: (context, index) => SizedBox(
+                      width: Responsive.isDesktop(context)
+                          ? Constants.listCardSeparatorWidth
+                          : Constants.listCardSeparatorWidthMobile),
                   itemCount: offers.length,
                 ),
               );
@@ -106,7 +111,7 @@ class _ZognestOffersState extends State<ZognestOffers> {
             loading: () => const SizedBox.shrink(),
           );
         }),
-         const Divider(height:.1),
+
       ],
     );
   }
@@ -123,11 +128,11 @@ class ZognestOffersMobile extends StatelessWidget {
         const Divider(),
         ScrollHeadline(
           headline: TextSpan(
-            text: Strings.what.toUpperCase(),
-            style: theme.textTheme.displaySmall,
+            text: '${Strings.what}\n'.toUpperCase(),
+            style: theme.textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w700),
             children: [
               TextSpan(
-                text: '${Strings.we}\n'.toUpperCase(),
+                text: Strings.we.toUpperCase(),
                 style: theme.textTheme.displaySmall?.copyWith(
                   foreground: TextThemes.foreground,
                 ),
@@ -179,13 +184,11 @@ class OfferItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return  Card(
+    return Card(
       clipBehavior: Clip.antiAlias,
-      shape:  const RoundedRectangleBorder(
-        side: BorderSide(width: 0.5, color:Color(0xff121212)
-        ),
-          borderRadius: BorderRadius.all(
-              Radius.circular(25)),
+      shape: const RoundedRectangleBorder(
+        side: BorderSide(width: 0.5, color: Color(0xff121212)),
+        borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
       child: Container(
         width: !Responsive.isMobile(context)
@@ -205,6 +208,7 @@ class OfferItem extends StatelessWidget {
               style: theme.textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.w600,
                 fontFamily: 'SF Pro Rounded',
+                fontSize: Responsive.isMobile(context)?28:38,
                 color: colored ? Colors.black : theme.primaryColor,
                 fontVariations: TextThemes.fontVariation(3),
               ),
@@ -214,6 +218,7 @@ class OfferItem extends StatelessWidget {
               style: theme.textTheme.headlineMedium?.copyWith(
                 color: colored ? Colors.black : null,
                 fontWeight: FontWeight.bold,
+                fontSize: Responsive.isMobile(context)?28:38,
                 fontFamily: 'SF Pro Rounded',
               ),
             ),
@@ -222,7 +227,7 @@ class OfferItem extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Text(
                   offer.description,
-                  style:theme.textTheme.bodyLarge?.copyWith(
+                  style: theme.textTheme.bodyLarge?.copyWith(
                     color: colored ? Colors.black : null,
                     fontFamily: 'SF Pro Rounded',
                   ),

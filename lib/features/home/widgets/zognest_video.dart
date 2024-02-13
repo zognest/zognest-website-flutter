@@ -8,7 +8,9 @@ import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 
 class ZognestVideo extends StatefulWidget {
-  const ZognestVideo({super.key});
+  const
+
+  ZognestVideo({super.key});
 
   @override
   State<ZognestVideo> createState() => _ZognestVideoState();
@@ -63,7 +65,7 @@ class _ZognestVideoState extends State<ZognestVideo> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.horizontalPadding),
+                        horizontal: Constants.horizontalPaddingViduo),
                     child: _controller.value.isInitialized
                         ? AspectRatio(
                             aspectRatio: Responsive.isDesktop(context)

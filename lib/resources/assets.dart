@@ -11,11 +11,10 @@ abstract final class Assets {
   static const upArrow = '${Paths.svg}/arrow_up.svg';
   static const gridLines = '${Paths.svg}/grid_lines.svg';
   static const instagram = '${Paths.svg}/instagram.svg';
-  static const discord = '${Paths.svg}/discord.svg';
+  static const medium = '${Paths.svg}/medium-icon.svg';
   static const facebook = '${Paths.svg}/facebook.svg';
   static const figma = '${Paths.svg}/figma.svg';
   static const youtube = '${Paths.svg}/youtube.svg';
-  static const pintrest = '${Paths.svg}/pintrest.svg';
   static const linkedin = '${Paths.svg}/linkedin.svg';
   static const dribble = '${Paths.svg}/dribble.svg';
   static const impactLines = '${Paths.svg}/impact_lines.svg';

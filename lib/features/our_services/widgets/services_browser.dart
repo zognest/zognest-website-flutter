@@ -78,6 +78,7 @@ class ServiceItem extends ConsumerStatefulWidget {
 }
 
 class _ServiceItemState extends ConsumerState<ServiceItem> {
+  late  bool added=true;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -113,7 +114,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                   ),
                   const Spacer(),
                   PrimaryButton(
-                    title: Strings.add,
+                    title:added? Strings.add: Strings.added,
                     textStyle: theme.textTheme.labelLarge,
                     width: Constants.servicesBrowserItemWidth * 0.2,
                     padding: const EdgeInsets.symmetric(
@@ -125,6 +126,9 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                       ref
                           .read(appControllerProvider.notifier)
                           .addService(widget.service);
+                      setState(() {
+                        added=!added;
+                      });
                     },
                   ),
                 ],

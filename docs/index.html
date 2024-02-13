@@ -14,7 +14,8 @@
       This is a placeholder for base href that will be replaced by the value of
       the `--base-href` argument provided to `flutter build`.
     -->
-    <!--    <base href="/">-->
+   <!-- <base href="/">-->
+
     <meta charset="UTF-8">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
     <meta content="A new Flutter project." name="description">
@@ -30,78 +31,16 @@
 
     <title>zognest_website</title>
     <link href="manifest.json" rel="manifest">
-    <!--<script src="https://unpkg.com/canvaskit-wasm@0.39.1/bin/canvaskit.js"></script>
-    <link as="fetch" crossOrigin="anonymous"
-          href="https://unpkg.com/canvaskit-wasm@0.39.1/bin/canvaskit.wasm"
-          rel="preload">-->
-    <script src="https://www.gstatic.com/flutter-canvaskit/f40e976bedff57e69e1b3d89a7c2a3c617a03dad/"></script>
-    <link as="fetch" crossOrigin="anonymous"
-          href="https://www.gstatic.com/flutter-canvaskit/f40e976bedff57e69e1b3d89a7c2a3c617a03dad/"
-          rel="preload">
 
     <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "4231386627";
-
-
-
-
+    const serviceWorkerVersion = "2509722714";
 
     </script>
     <!-- This script adds the flutter initialization JS code -->
     <script defer src="flutter.js"></script>
-    <style>
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
-
-    .loader {
-      border: 16px solid #f3f3f3;
-      border-radius: 50%;
-      border-top: 16px solid blue;
-      border-right: 16px solid green;
-      border-bottom: 16px solid red;
-      border-left: 16px solid pink;
-      width: 120px;
-      height: 120px;
-      -webkit-animation: spin 2s linear infinite;
-      animation: spin 2s linear infinite;
-    }
-
-    @-webkit-keyframes spin {
-      0% {
-        -webkit-transform: rotate(0deg);
-      }
-      100% {
-        -webkit-transform: rotate(360deg);
-      }
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-
-    </style>
 </head>
-
 <body>
-<div class="loading">
-    <div class="loader"></div>
-</div>
 <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
@@ -110,15 +49,12 @@
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine({
-          renderer: "canvaskit"
-          }).then(function(appRunner) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
             appRunner.runApp();
           });
         }
       });
     });
-
 
 </script>
 </body>

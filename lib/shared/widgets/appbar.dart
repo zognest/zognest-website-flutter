@@ -114,9 +114,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
   bool over = false;
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final route = GoRouterState.of(context);
     return SlideTransition(

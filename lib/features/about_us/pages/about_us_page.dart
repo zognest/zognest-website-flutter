@@ -63,11 +63,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   alignment: Alignment.bottomCenter,
                   fit: BoxFit.contain,
                 ),
-                SizedBox(
-                  height: Responsive.isDesktop(context)
-                      ? Constants.sectionSpacing
-                      : Spacing.s8,
-                ),
+                const SizedBox(height: Constants.sectionSpacing),
                 Footer(
                   onTabUp: () => _controller.animateTo(
                     _controller.position.minScrollExtent,

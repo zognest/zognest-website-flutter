@@ -102,7 +102,9 @@ class _ZognestServicesState extends State<ZognestServices> {
                           );
                         },
                         separatorBuilder: (context, index) =>
-                            const SizedBox(width: Spacing.l24),
+                             SizedBox(width: Responsive.isDesktop(context)
+                                ? Constants.listCardSeparatorWidth
+                                : Constants.listCardSeparatorWidthMobile),
                         itemCount: services.length,
                       ),
                     )
@@ -150,14 +152,17 @@ class FrontService extends StatelessWidget {
     final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      clipBehavior: Clip.hardEdge,
+      clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
-          NetworkFadingImage(
-            path: service.backgroundImage,
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
+          Opacity(
+            opacity: 0.3,
+            child: NetworkFadingImage(
+              path: service.backgroundImage,
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -179,6 +184,7 @@ class FrontService extends StatelessWidget {
                         service.highlight.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           color: theme.primaryColor,
+                          fontSize: Responsive.isMobile(context)?28:38,
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.w500,
                         ),
@@ -188,6 +194,7 @@ class FrontService extends StatelessWidget {
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.bold,
+                          fontSize: Responsive.isMobile(context)?28:38,
                         ),
                       ),
                       Expanded(
@@ -238,14 +245,17 @@ class BackService extends StatelessWidget {
     final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      clipBehavior: Clip.hardEdge,
+      clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
-          NetworkFadingImage(
-            path: service.backgroundImage,
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
+          Opacity(
+            opacity: 0.6,
+            child: NetworkFadingImage(
+              path: service.backgroundImage,
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -263,6 +273,7 @@ class BackService extends StatelessWidget {
                         service.highlight.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           color: theme.primaryColor,
+                          fontSize: Responsive.isMobile(context)?28:38,
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.w500,
                         ),
@@ -272,6 +283,7 @@ class BackService extends StatelessWidget {
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.bold,
+                          fontSize: Responsive.isMobile(context)?28:38,
                         ),
                       ),
                       const SizedBox(height: Spacing.m20),

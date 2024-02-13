@@ -11,7 +11,6 @@ import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
-
 import '../../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
@@ -86,8 +85,10 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
                     itemBuilder: (context, index) {
                       return BlogItem(blog: blogs[index]);
                     },
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(width: Constants.listCardSeparatorWidth),
+                    separatorBuilder: (context, index) => SizedBox(
+                        width: Responsive.isDesktop(context)
+                            ? Constants.listCardSeparatorWidth
+                            : Constants.listCardSeparatorWidthMobile),
                     itemCount: blogs.length,
                   ),
                 );

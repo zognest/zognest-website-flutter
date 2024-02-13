@@ -88,7 +88,9 @@ class _ZognestProjectsState extends State<ZognestProjects> {
                       return ProjectItem(project: project[index]);
                     },
                     separatorBuilder: (context, index) =>
-                        const SizedBox(width: Constants.listCardSeparatorWidth),
+                         SizedBox(width: Responsive.isDesktop(context)
+                            ? Constants.listCardSeparatorWidth
+                            : Constants.listCardSeparatorWidthMobile),
                     itemCount: project.length,
                   ),
                 );

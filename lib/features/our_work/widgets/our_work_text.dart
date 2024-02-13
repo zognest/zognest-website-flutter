@@ -12,9 +12,9 @@ class OurWorkText extends StatelessWidget {
         const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: Constants.horizontalPadding),
+            horizontal: 10),
           child: Stack(
-            alignment: Alignment.center,
+
             children: [
               Image.asset(
                 Assets.venusMercury,

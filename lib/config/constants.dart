@@ -8,11 +8,13 @@ class Constants {
   /// Horizontal padding of any main component or the children inside it
   static const mobileHorizontalPadding = Spacing.m20;
   static const horizontalPadding = 24.0;
+  static const horizontalPaddingViduo = 18.0;
 
   // region Horizontal Lists
   static const listHeight = 420.0;
   static const listCardWidth = 350.0;
   static const listCardSeparatorWidth = Spacing.m20;
+  static const listCardSeparatorWidthMobile = Spacing.s10;
 
   // endregion
 

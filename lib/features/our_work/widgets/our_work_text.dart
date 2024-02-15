@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/resources/assets.dart';
 
 class OurWorkText extends StatelessWidget {

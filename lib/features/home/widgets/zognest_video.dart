@@ -45,7 +45,6 @@ class _ZognestVideoState extends State<ZognestVideo> {
     final theme = Theme.of(context);
     return Column(
       children: [
-
         Consumer(
           builder: (context, ref, child) {
             final url = ref.watch(appControllerProvider).videoUrl;

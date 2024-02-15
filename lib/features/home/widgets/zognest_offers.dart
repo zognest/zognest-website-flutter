@@ -40,7 +40,6 @@ class _ZognestOffersState extends State<ZognestOffers> {
     final theme = Theme.of(context);
     return Column(
       children: [
-
         ScrollHeadline(
           headline: TextSpan(
             text: "${Strings.what}\n".toUpperCase(),
@@ -54,8 +53,7 @@ class _ZognestOffersState extends State<ZognestOffers> {
               ),
               TextSpan(
                   text: Strings.offer.toUpperCase(),
-                  style: theme.textTheme.displaySmall?.copyWith(
-                  )),
+                  style: theme.textTheme.displaySmall?.copyWith()),
             ],
           ),
           onTapScroll: () {
@@ -111,7 +109,6 @@ class _ZognestOffersState extends State<ZognestOffers> {
             loading: () => const SizedBox.shrink(),
           );
         }),
-
       ],
     );
   }
@@ -125,11 +122,12 @@ class ZognestOffersMobile extends StatelessWidget {
     final theme = Theme.of(context);
     return Column(
       children: [
-        const Divider(),
+        // const Divider(),
         ScrollHeadline(
           headline: TextSpan(
             text: '${Strings.what}\n'.toUpperCase(),
-            style: theme.textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w700),
+            style: theme.textTheme.displaySmall
+                ?.copyWith(fontWeight: FontWeight.w700),
             children: [
               TextSpan(
                 text: Strings.we.toUpperCase(),
@@ -142,10 +140,10 @@ class ZognestOffersMobile extends StatelessWidget {
           ),
           onTapScroll: null,
         ),
-        Consumer(
-            builder: (__, ref, _) {
+        Consumer(builder: (__, ref, _) {
           final offers = ref.watch(appControllerProvider).offers;
-          return offers.when(data: (offers) {
+          return offers.when(
+            data: (offers) {
               return ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 addAutomaticKeepAlives: false,
@@ -208,7 +206,7 @@ class OfferItem extends StatelessWidget {
               style: theme.textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.w600,
                 fontFamily: 'SF Pro Rounded',
-                fontSize: Responsive.isMobile(context)?28:38,
+                fontSize: Responsive.isMobile(context) ? 28 : 38,
                 color: colored ? Colors.black : theme.primaryColor,
                 fontVariations: TextThemes.fontVariation(3),
               ),
@@ -218,7 +216,7 @@ class OfferItem extends StatelessWidget {
               style: theme.textTheme.headlineMedium?.copyWith(
                 color: colored ? Colors.black : null,
                 fontWeight: FontWeight.bold,
-                fontSize: Responsive.isMobile(context)?28:38,
+                fontSize: Responsive.isMobile(context) ? 28 : 38,
                 fontFamily: 'SF Pro Rounded',
               ),
             ),

@@ -1,6 +1,5 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';

@@ -134,10 +134,7 @@ class _ProjectItemState extends State<ProjectItem> {
       child: Card(
         clipBehavior: Clip.antiAlias,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(25),
-            topLeft: Radius.circular(25),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(25)),
         ),
         child: InkWell(
           onTap: () {},
@@ -233,7 +230,7 @@ class _ProjectItemState extends State<ProjectItem> {
                         ),
                         onTap: () {
                          setState(() {
-                           ontap=true;
+                           ontap=!ontap;
                          });
                         },
                       ),

@@ -10,7 +10,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "376756a6d2ac1f2f9dad9532a9038597
 "assets/assets/images/arrow_right.png": "3a9fb519ad16f50d9e33db417dc94086",
 "assets/assets/images/impact_lines.png": "9ef8cf5421af5888230b3bd730ed32f0",
 "assets/assets/images/logo.png": "0482e4310f3697228e0586386fc14324",
-"assets/assets/images/mercuries.png": "f3188735fec96ab2b4687f93b6627a37",
+"assets/assets/images/mercuries.png": "935c626ee5665af6d8fd124ace3e8a65",
 "assets/assets/images/mercury.png": "a67e05e8bbef7e5302348bd48e739f88",
 "assets/assets/images/mercury_mobile.png": "22a4f3ef6c15ce8a2f3980e863b9445e",
 "assets/assets/images/mobile_about_us_text.png": "fdf2388ff63eda3efeec6d8c9b4f11bb",
@@ -70,9 +70,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "376756a6d2ac1f2f9dad9532a9038597
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "4ebaa151c8f45d778b06ab8b7fc6a707",
-"/": "4ebaa151c8f45d778b06ab8b7fc6a707",
-"main.dart.js": "64dba721680a95b30d0e7d9212fb08bc",
+"index.html": "95c0f37b1f4faea4222be87d73339181",
+"/": "95c0f37b1f4faea4222be87d73339181",
+"main.dart.js": "1109cbb5cb3cc8d0bdbb2fdbe8415f3c",
 "manifest.json": "3e56b70d98af4acf35448515d5aa6c39",
 "version.json": "c9a57fded59c1038f8ee06dc3f0160bc"};
 // The application shell files that are downloaded before a service worker can

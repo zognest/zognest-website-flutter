@@ -13,6 +13,7 @@ import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import '../../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
+import "dart:js" as js;
 
 class ZognestBlogs extends StatefulWidget {
   const ZognestBlogs({super.key});
@@ -128,12 +129,12 @@ class _BlogItemState extends State<BlogItem> {
         vertical: Spacing.l24,
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () => js.context.callMethod('open', [widget.blog.urlLink]),
         onHover: (over) {
           setState(() => hovered = !hovered);
         },
         overlayColor: MaterialStateProperty.all(Palette.transparent),
-        child: Column(
+        child: Column (
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(

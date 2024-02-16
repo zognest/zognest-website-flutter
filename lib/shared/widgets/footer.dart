@@ -134,7 +134,7 @@ class _FooterState extends State<Footer> {
                         textAlign: TextAlign.center,
                         style: theme.textTheme.labelMedium?.copyWith(
                           fontWeight: FontWeight.w500,
-                          fontSize: 14
+                          fontSize: Responsive.isDesktop(context)?16:10
                         ),
                       ),
                     ],

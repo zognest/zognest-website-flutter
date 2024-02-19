@@ -155,14 +155,14 @@ class Foreground extends StatelessWidget {
         const Counters(),
         const SizedBox(height: Constants.sectionSpacing),
         const ZognestServices(),
-       /* const ZognestMocks(),
-        const ZognestClients(),*/
+        const ZognestMocks(),
+        const ZognestClients(),
         const SizedBox(height: Constants.sectionSpacing),
         const MarqueeText(),
         const SizedBox(height: Constants.sectionSpacing),
         const ZognestBlogs(),
         const SizedBox(height: Constants.sectionSpacing),
-       /* ContactForm(),*/
+        ContactForm(),
         const SizedBox(height: Constants.sectionSpacing),
         Footer(onTabUp: onTabUp),
       ],

@@ -43,100 +43,98 @@ class ServicesCartMobile extends HookWidget {
                       ref.watch(appControllerProvider).cartServices;
                   return Expanded(
                     child: SingleChildScrollView(
-                      child: Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(color: const Color(0xffAEB2BA)),
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              child: SingleChildScrollView(
-                                child: Wrap(
-                                  runSpacing: Spacing.m20,
-                                  spacing: Spacing.m20,
-                                  // what is this ? what do it this ?
-                                  children: cartServices.map((service) {
-                                    return Card(
-                                      clipBehavior: Clip.antiAlias,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(25)),
-                                      ),
-                                      child: Container(
-                                        width: double.infinity,
-                                        color: Palette.cardBackgroundColor,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Image.network(
-                                                service.image,
-                                                height: 130,
-                                                width: 75,
-                                                fit: BoxFit.cover,
-                                              ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border:
+                                  Border.all(color: const Color(0xffAEB2BA)),
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            child: SingleChildScrollView(
+                              child: Wrap(
+                                runSpacing: Spacing.m20,
+                                spacing: Spacing.m20,
+                                // what is this ? what do it this ?
+                                children: cartServices.map((service) {
+                                  return Card(
+                                    clipBehavior: Clip.antiAlias,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(25)),
+                                    ),
+                                    child: Container(
+                                      width: double.infinity,
+                                      color: Palette.cardBackgroundColor,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Image.network(
+                                              service.image,
+                                              height: 130,
+                                              width: 75,
+                                              fit: BoxFit.cover,
                                             ),
-                                            Expanded(
-                                              flex: 2,
-                                              child: Row(
-                                                children: [
-                                                  const SizedBox(width: 10),
-                                                  AutoSizeText(
-                                                    service.title,
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: theme
-                                                        .textTheme.bodyLarge
-                                                        ?.copyWith(
-                                                      fontFamily:
-                                                          'SF Pro Rounded',
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Row(
+                                              children: [
+                                                const SizedBox(width: 10),
+                                                AutoSizeText(
+                                                  service.title,
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: theme
+                                                      .textTheme.bodyLarge
+                                                      ?.copyWith(
+                                                    fontFamily:
+                                                        'SF Pro Rounded',
+                                                    fontWeight:
+                                                        FontWeight.w600,
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
-                                            Expanded(
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Palette.transparent,
-                                                  shape: const CircleBorder(
-                                                    side: BorderSide(
-                                                        color: Palette.white),
-                                                  ),
-                                                  minimumSize:
-                                                      const Size.fromRadius(28),
+                                          ),
+                                          Expanded(
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    Palette.transparent,
+                                                shape: const CircleBorder(
+                                                  side: BorderSide(
+                                                      color: Palette.white),
                                                 ),
-                                                child: const Icon(
-                                                  Icons.close,
-                                                  size: 14,
-                                                ),
-                                                onPressed: () {
-                                                  ref
-                                                      .read(
-                                                          appControllerProvider
-                                                              .notifier)
-                                                      .removeService(service);
-                                                },
+                                                minimumSize:
+                                                    const Size.fromRadius(28),
                                               ),
-                                            )
-                                          ],
-                                        ),
+                                              child: const Icon(
+                                                Icons.close,
+                                                size: 14,
+                                              ),
+                                              onPressed: () {
+                                                ref
+                                                    .read(
+                                                        appControllerProvider
+                                                            .notifier)
+                                                    .removeService(service);
+                                              },
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    );
-                                  }).toList(),
-                                ),
+                                    ),
+                                  );
+                                }).toList(),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   );

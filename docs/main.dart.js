@@ -96772,7 +96772,7 @@ this.a6A()},
 F(a){var s,r,q,p=null,o=A.T(a),n=t.w,m=A.aj(a,B.p,n).w,l=A.fQ(A.o(this).a,p),k=this.e
 k===$&&A.b()
 s=t.p
-l=A.aH(A.a([B.H,new A.qQ(new A.aEA(this),A.Vy(A.iR("assets/images/screens_2.png",B.y,B.aA,p,p),k,p,!0),new A.cG(l,t.kK)),B.H],s),B.k,B.m,B.j)
+l=A.aH(A.a([B.H,new A.qQ(new A.aEA(this),A.Vy(A.iR("assets/images/screens.png",B.y,B.aA,p,p),k,p,!0),new A.cG(l,t.kK)),B.H],s),B.k,B.m,B.j)
 m=m.a.a
 k=A.iR("assets/images/mercury.png",B.eX,p,p,m*0.45)
 n=A.aj(a,B.p,n).w.a.a>=1000?0.45:0.4

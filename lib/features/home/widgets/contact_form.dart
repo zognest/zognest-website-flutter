@@ -228,8 +228,8 @@ class ContactFormMobile extends HookWidget {
     final phoneController = useTextEditingController();
     final messageController = useTextEditingController();
     final theme = Theme.of(context);
-    return Expanded(
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: Expanded(
         child: Column(
           children: [
             Container(

@@ -88,7 +88,7 @@ class PrimaryDrawer extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Palette.dividerColor),
                           ),
-                          child: ContactForm(),
+                          child: SingleChildScrollView(child: ContactForm()),
                         ),
                       ),
                     );

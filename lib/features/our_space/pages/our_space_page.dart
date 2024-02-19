@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/features/our_space/widgets/zognest_events.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
@@ -43,7 +44,7 @@ class _OurSpacePageState extends State<OurSpacePage> {
           ListView(
             controller: _controller,
             children: [
-              const SizedBox(height: Constants.appBarHeight * 1.5),
+               SizedBox(height: Responsive.isDesktop(context)? Constants.appBarHeight * 1.5:56),
               const ZognestEvents(),
               const SizedBox(height: Constants.sectionSpacing),
               Image.asset(Assets.ourSpaceText),

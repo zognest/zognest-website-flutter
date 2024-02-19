@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/assets.dart';
 
 class OurWorkText extends StatelessWidget {
@@ -13,10 +14,9 @@ class OurWorkText extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: 10),
           child: Stack(
-
             children: [
-              Image.asset(
-                Assets.venusMercury,
+              Image.asset(Responsive.isDesktop(context)?
+                Assets.venusMercury:Assets.ourProjectMobile,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
@@ -24,7 +24,6 @@ class OurWorkText extends StatelessWidget {
             ],
           ),
         ),
-
         const Divider(),
       ],
     );

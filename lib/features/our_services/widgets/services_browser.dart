@@ -168,7 +168,7 @@ class ServicesCart extends HookConsumerWidget {
         Consumer(builder: (context, ref, _) {
           final cartServices = ref.watch(appControllerProvider).cartServices;
           return SizedBox(
-            height: 650,
+            height: 750,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: Constants.horizontalPadding,

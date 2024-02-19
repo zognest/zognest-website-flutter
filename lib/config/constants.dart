@@ -98,7 +98,7 @@ class Constants {
   static const imageTextHeight = 700.0;
   static const zognestFooterSectionHeight = 800.0;
   static const optimismSectionHeight = 800.0;
-  static const contactUsSectionHeight = 890.0;
+  static const contactUsSectionHeight = 910.0;
   static const bgDecorationSpacing = 1000.0;
   static const beyondSpaceAppDuration = 5;
   static const clientsMarqueeHeight = 75.0;

@@ -84,10 +84,18 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                     controller: _controller,
                     itemBuilder: (context, index) {
                       return SizedBox(
-                        width: Responsive.isDesktop(context)?Constants.listCardWidth:300,
-                        child: FlippingWidget(
-                          front: FrontCard(staff: staff[index]),
-                          back: BackCard(staff: staff[index]),
+                        width: Responsive.isDesktop(context)
+                            ? Constants.listCardWidth
+                            : 300,
+                        child: Card(
+                          clipBehavior: Clip.antiAlias,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                          ),
+                          child: FlippingWidget(
+                            front: FrontCard(staff: staff[index]),
+                            back: BackCard(staff: staff[index]),
+                          ),
                         ),
                       );
                     },
@@ -122,12 +130,20 @@ class FrontCard extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Container(
-              color: staff.color,
-              width: double.infinity,
-              child: NetworkFadingImage(
-                path: staff.avatar,
-                fit: BoxFit.contain,
+            child: Card(
+              clipBehavior: Clip.antiAlias,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25)),
+              ),
+              child: Container(
+                color: staff.color,
+                width: double.infinity,
+                child: NetworkFadingImage(
+                  path: staff.avatar,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
@@ -147,17 +163,14 @@ class FrontCard extends StatelessWidget {
                         Text(
                           staff.name.toUpperCase(),
                           style: theme.textTheme.headlineLarge?.copyWith(
-                            fontSize: 32,
-                              fontFamily: 'SF Pro Rounded'
-                          ),
+                              fontSize: 32, fontFamily: 'SF Pro Rounded'),
                         ),
                         Text(
                           staff.position.toUpperCase(),
                           style: theme.textTheme.labelMedium?.copyWith(
-                            color: theme.primaryColor,
-                            fontWeight: FontWeight.w700,
-                              fontFamily: 'SF Pro Rounded'
-                          ),
+                              color: theme.primaryColor,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'SF Pro Rounded'),
                         ),
                         Expanded(
                           child: Padding(
@@ -238,24 +251,21 @@ class BackCard extends StatelessWidget {
                       Text(
                         staff.name.toUpperCase(),
                         style: theme.textTheme.headlineLarge?.copyWith(
-                          fontSize: 32,
-                            fontFamily: 'SF Pro Rounded'
-                        ),
+                            fontSize: 32, fontFamily: 'SF Pro Rounded'),
                       ),
                       Text(
                         staff.position.toUpperCase(),
                         style: theme.textTheme.labelMedium?.copyWith(
-                          color: theme.primaryColor,
-                          fontWeight: FontWeight.w700,
-                            fontFamily: 'SF Pro Rounded'
-                        ),
+                            color: theme.primaryColor,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'SF Pro Rounded'),
                       ),
                       Expanded(
                         child: SingleChildScrollView(
                           child: Text(
                             staff.description,
                             style: theme.textTheme.bodyLarge?.copyWith(
-                              fontFamily: 'SF Pro Rounded',
+                                fontFamily: 'SF Pro Rounded',
                                 fontSize:
                                     Responsive.isDesktop(context) ? 20 : 16),
                           ),

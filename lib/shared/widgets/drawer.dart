@@ -81,7 +81,7 @@ class PrimaryDrawer extends StatelessWidget {
                       context: context,
                       barrierDismissible: true,
                       builder: (context) => Padding(
-                        padding: const EdgeInsets.all(30.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Palette.cardBackgroundColor,

@@ -130,18 +130,16 @@ class _BlogItemState extends State<BlogItem> {
       ),
       child: InkWell(
         onTap: () => js.context.callMethod('open', [widget.blog.urlLink]),
-        onHover: (over) {
-          setState(() => hovered = !hovered);
-        },
+
         overlayColor: MaterialStateProperty.all(Palette.transparent),
         child: Column (
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: GreyscaleFilter(
-                isHovered: hovered,
+                isHovered: true,
                 child: Card(
-                  clipBehavior: Clip.hardEdge,
+                  clipBehavior: Clip.antiAlias,
                   child: NetworkFadingImage(
                     width: double.infinity,
                     path: widget.blog.image,

@@ -115,18 +115,21 @@ class ContactForm extends HookWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     InputFormField(
+                                      required: true,
                                         controller: nameController,
                                         hint: Strings.yourName),
                                     InputFormField(
+                                        required: true,
                                         controller: emailController,
                                         hint: Strings.yourEmail),
                                     InputFormField(
+                                        required: true,
                                         controller: phoneController,
                                         hint: Strings.mobileNo),
                                     InputFormField(
                                       controller: messageController,
                                       hint: Strings.message,
-                                      required: false,
+                                      required: true,
                                       multiline: true,
                                       keyboardType: TextInputType.multiline,
                                     ),
@@ -386,6 +389,7 @@ class ContactFormMobile extends HookWidget {
           ),
         ),
         const SizedBox(height: Spacing.m18),
+       
       ],
     );
   }

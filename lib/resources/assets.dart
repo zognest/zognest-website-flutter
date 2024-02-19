@@ -35,6 +35,7 @@ abstract final class Assets {
   static const smallMercury = '${Paths.images}/small_mercury.png';
   static const moon = '${Paths.images}/moon.png';
   static const venusMercury = '${Paths.images}/venus_mercury.png';
+  static const ourProjectMobile = '${Paths.images}/our_project_mobile.png';
   static const textGroup = '${Paths.images}/text_group.png';
   static const ourSpaceText = '${Paths.images}/our_space_text.png';
   static const shortArrowLeft = '${Paths.images}/short_arrow_left.png';

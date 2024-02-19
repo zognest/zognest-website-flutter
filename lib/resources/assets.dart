@@ -31,7 +31,8 @@ abstract final class Assets {
   static const arrowRight = '${Paths.images}/arrow_right.png';
   static const mercury = '${Paths.images}/mercury.png';
   static const mercuryMobile = '${Paths.images}/mercury_mobile.png';
-  static const screens = '${Paths.images}/screens.png';
+  static const screens = '${Paths.images}/screens_2.png';
+  static const screens_2 = '${Paths.images}/screens.png';
   static const smallMercury = '${Paths.images}/small_mercury.png';
   static const moon = '${Paths.images}/moon.png';
   static const venusMercury = '${Paths.images}/venus_mercury.png';
@@ -43,6 +44,7 @@ abstract final class Assets {
   static const aboutUsText = '${Paths.images}/about_us_text.png';
   static const mobileAboutUsText = '${Paths.images}/mobile_about_us_text.png';
   static const ourServicesText = '${Paths.images}/our_services_text.png';
+  static const ourServicesText_2 = '${Paths.images}/our_services_text_2.png';
   static const optimismTextMobile = '${Paths.images}/optimis_mobile.png';
   static const optimismTextWeb = '${Paths.images}/optimis.png';
 }

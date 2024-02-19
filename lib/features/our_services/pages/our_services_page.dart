@@ -51,7 +51,7 @@ class _OurServicesPageState extends State<OurServicesPage> {
                     const ServicesBrowser(),
                     const SizedBox(height: Constants.sectionSpacing),
                     const Divider(),
-                    Image.asset(Assets.ourServicesText),
+                    Image.asset(Assets.ourServicesText_2),
                     Footer(
                       onTabUp: () => _controller.animateTo(
                         _controller.position.minScrollExtent,

@@ -97098,7 +97098,7 @@ this.aq()},
 F(a){var s,r=null,q=this.d
 q===$&&A.b()
 s=t.p
-return A.uQ(new A.nR(q,r),r,A.hJ(A.d_(B.a8,A.a([A.hN("assets/svg/grid_lines.svg",B.af,r,r),A.aH(A.a([B.kr,B.Ta,B.aF,B.H,A.iR("assets/images/our_services_text.png",B.y,r,r,r),new A.ni(new A.azR(this),r)],s),B.k,B.m,B.j)],s),B.z,B.V),q,B.F,r,r,B.a3),B.ev,!0)}}
+return A.uQ(new A.nR(q,r),r,A.hJ(A.d_(B.a8,A.a([A.hN("assets/svg/grid_lines.svg",B.af,r,r),A.aH(A.a([B.kr,B.Ta,B.aF,B.H,A.iR("assets/images/our_services_text_2.png",B.y,r,r,r),new A.ni(new A.azR(this),r)],s),B.k,B.m,B.j)],s),B.z,B.V),q,B.F,r,r,B.a3),B.ev,!0)}}
 A.azR.prototype={
 $0(){var s,r=this.a.d
 r===$&&A.b()

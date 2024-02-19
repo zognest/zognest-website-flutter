@@ -63,7 +63,7 @@ class _ZognestMocksState extends State<ZognestMocks>
               child: SlideTransition(
                 position: _offsetAnimation,
                 child: Image.asset(
-                  Assets.screens_2,
+                  Assets.screens,
                   fit: BoxFit.cover,
                 ),
               ),

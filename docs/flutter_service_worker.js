@@ -3,9 +3,9 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "419678eee671aa69cf70f521fa9eba40",
-"assets/AssetManifest.bin.json": "1f1da44abab27b0c0a6d55fe74e80663",
-"assets/AssetManifest.json": "e182f2abc5616f3de92553f04b28d349",
+const RESOURCES = {"assets/AssetManifest.bin": "602874044ee2cf612f365b0205e735b8",
+"assets/AssetManifest.bin.json": "bc3be9691910ec1678d4c47e369fc4c2",
+"assets/AssetManifest.json": "804d51822215460e3caa4ea667f43b4a",
 "assets/assets/images/about_us_text.png": "d72282daa629bd1aea81d1838c4e7c79",
 "assets/assets/images/arrow_right.png": "3a9fb519ad16f50d9e33db417dc94086",
 "assets/assets/images/impact_lines.png": "9ef8cf5421af5888230b3bd730ed32f0",
@@ -20,8 +20,10 @@ const RESOURCES = {"assets/AssetManifest.bin": "419678eee671aa69cf70f521fa9eba40
 "assets/assets/images/optimis_mobile.png": "492424fabe4bdd478d45cc5606426281",
 "assets/assets/images/our_project_mobile.png": "7d70beb304c00815d834f179311c97ff",
 "assets/assets/images/our_services_text.png": "faca9d91d3f3e21c327ba9a5d0c88c99",
+"assets/assets/images/our_services_text_mobile.png": "016fb9e07d4da608af6cc52bc90ad9df",
 "assets/assets/images/our_space_text.png": "9d6f53c3012ff437ae8ee713a9239b51",
 "assets/assets/images/screens.png": "157ec6c6d3c3f12ab083ec34256bb50e",
+"assets/assets/images/screens_2.png": "61ed5a868c959f413e6d97e72c3ab14d",
 "assets/assets/images/short_arrow_left.png": "7f11ed180f9ef0d5c78a59dff6a897e0",
 "assets/assets/images/small_mercury.png": "059af3e800a4f26cb20008de5362dfaf",
 "assets/assets/images/text_group.png": "3278f031dcd8a4219c784c903545b14b",
@@ -71,9 +73,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "419678eee671aa69cf70f521fa9eba40
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "7b158b6996befc97ac4bf227ff92c8b1",
-"/": "7b158b6996befc97ac4bf227ff92c8b1",
-"main.dart.js": "f54ab8e61751dd343b2e477c16d9a3e8",
+"index.html": "a6c641381ffe073848cf8b9aa7619e60",
+"/": "a6c641381ffe073848cf8b9aa7619e60",
+"main.dart.js": "f483aa51a19b5fa02147a32c29f0b303",
 "manifest.json": "3e56b70d98af4acf35448515d5aa6c39",
 "version.json": "c9a57fded59c1038f8ee06dc3f0160bc"};
 // The application shell files that are downloaded before a service worker can

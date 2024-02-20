@@ -2,6 +2,7 @@
 import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -17,31 +18,25 @@ import 'package:zognest_website/shared/widgets/technology_container.dart';
 
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ZognestStaff extends StatefulWidget {
-  const ZognestStaff({super.key});
+class ZognestStaff extends HookConsumerWidget {
+   ZognestStaff({super.key});
 
-  @override
-  State<ZognestStaff> createState() => _ZognestServicesStaff();
-}
 
-class _ZognestServicesStaff extends State<ZognestStaff> {
-  late final ScrollController _controller;
+
+
+    final ScrollController _controller= ScrollController();
   int currentIndex = 1;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
 
-  @override
-  void dispose() {
+
+
+
+  void disposeHook() {
     _controller.dispose();
-    super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final theme = Theme.of(context);
     return Column(
       children: [

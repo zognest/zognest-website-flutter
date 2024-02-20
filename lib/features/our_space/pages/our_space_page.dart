@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -8,28 +9,20 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
-class OurSpacePage extends StatefulWidget {
-  const OurSpacePage({super.key});
+class OurSpacePage extends HookWidget {
+   OurSpacePage({super.key});
 
   static const route = '/our-space';
 
-  @override
-  State<OurSpacePage> createState() => _OurSpacePageState();
-}
 
-class _OurSpacePageState extends State<OurSpacePage> {
-  late final ScrollController _controller;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
+   final ScrollController _controller= ScrollController();
 
-  @override
-  void dispose() {
+
+
+
+  void disposeHook() {
     _controller.dispose();
-    super.dispose();
   }
 
   @override

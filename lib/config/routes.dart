@@ -17,12 +17,12 @@ abstract final class Routing {
       GoRoute(
         name: HomePage.route,
         path: HomePage.route,
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) =>  HomePage(),
       ),
       GoRoute(
         name: OurServicesPage.route,
         path: OurServicesPage.route,
-        builder: (_, __) => const OurServicesPage(),
+        builder: (_, __) =>  OurServicesPage(),
       ),
       GoRoute(
         name: OurWorkPage.route,
@@ -32,12 +32,12 @@ abstract final class Routing {
       GoRoute(
         name: OurSpacePage.route,
         path: OurSpacePage.route,
-        builder: (_, __) => const OurSpacePage(),
+        builder: (_, __) =>  OurSpacePage(),
       ),
       GoRoute(
         name: AboutUsPage.route,
         path: AboutUsPage.route,
-        builder: (_, __) => const AboutUsPage(),
+        builder: (_, __) =>  AboutUsPage(),
       ),
     ],
   );

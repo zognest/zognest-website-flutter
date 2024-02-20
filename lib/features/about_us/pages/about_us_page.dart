@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -9,28 +10,14 @@ import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 import 'package:zognest_website/shared/widgets/image_text.dart';
 
-class AboutUsPage extends StatefulWidget {
-  const AboutUsPage({super.key});
+class AboutUsPage extends HookWidget {
+   AboutUsPage({super.key});
 
   static const route = '/about-us';
+    late final ScrollController _controller= ScrollController();
 
-  @override
-  State<AboutUsPage> createState() => _AboutUsPageState();
-}
-
-class _AboutUsPageState extends State<AboutUsPage> {
-  late final ScrollController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
-
-  @override
-  void dispose() {
+  void disposeHook() {
     _controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -52,7 +39,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   hasGradient: true,
                 ),
                 const SizedBox(height: Constants.sectionSpacing),
-                const ZognestStaff(),
+                 ZognestStaff(),
                 const SizedBox(height: Constants.sectionSpacing),
                 Image.asset(
                   Responsive.isDesktop(context)
@@ -79,3 +66,4 @@ class _AboutUsPageState extends State<AboutUsPage> {
     );
   }
 }
+

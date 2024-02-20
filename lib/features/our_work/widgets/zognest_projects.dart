@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -13,27 +14,21 @@ import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ZognestProjects extends StatefulWidget {
-  const ZognestProjects({super.key});
+class ZognestProjects extends HookWidget {
+   ZognestProjects({super.key});
 
-  @override
-  State<ZognestProjects> createState() => _ZognestProjectsState();
-}
 
-class _ZognestProjectsState extends State<ZognestProjects> {
-  late final ScrollController _controller;
+
+
+   final ScrollController _controller = ScrollController();
   int currentIndex = 1;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
 
-  @override
-  void dispose() {
+
+
+  void disposeHook() {
     _controller.dispose();
-    super.dispose();
+
   }
 
   @override

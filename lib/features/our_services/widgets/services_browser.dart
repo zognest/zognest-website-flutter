@@ -18,16 +18,14 @@ import '../../../riverpod/controller.dart';
 import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ServicesBrowser extends ConsumerStatefulWidget {
+class ServicesBrowser extends HookConsumerWidget {
   const ServicesBrowser({super.key});
 
-  @override
-  ConsumerState<ServicesBrowser> createState() => _ServicesBrowserState();
-}
 
-class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
+
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final purchasableService =
         ref.watch(appControllerProvider).purchasableServices;
     final servicesCart = ref.watch(appControllerProvider).cartServices;

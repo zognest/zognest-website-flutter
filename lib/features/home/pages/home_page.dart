@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -23,30 +24,17 @@ import '../widgets/zognest_offers.dart';
 import '../widgets/zognest_services.dart';
 import '../widgets/zognest_video.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
+class HomePage extends HookWidget {
+    HomePage({super.key});
   static const route = '/home';
+   late  ScrollController _controller= ScrollController();
 
-  @override
-  State<HomePage> createState() => _HomePageState();
+ intHool(){
+   _controller = ScrollController();
+ }
+void dispose(){
+   _controller.dispose();
 }
-
-class _HomePageState extends State<HomePage> {
-  late final ScrollController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,12 +128,12 @@ class Foreground extends StatelessWidget {
         const SizedBox(height: Constants.sectionSpacing),
         const ClientsMarquee(),
         const SizedBox(height: Constants.sectionSpacing),
-        const ZognestVideo(),
+         ZognestVideo(),
         const SizedBox(height: Constants.sectionSpacing),
         const ImageText(image: Assets.office),
         const SizedBox(height: Constants.sectionSpacing),
         Responsive.isDesktop(context)
-            ? const ZognestOffers()
+            ?  const ZognestOffers()
             : const ZognestOffersMobile(),
         const SizedBox(height: Constants.sectionSpacing),
         const MarqueeText(),
@@ -154,13 +142,13 @@ class Foreground extends StatelessWidget {
         const SizedBox(height: Constants.sectionSpacing),
         const Counters(),
         const SizedBox(height: Constants.sectionSpacing),
-        const ZognestServices(),
+         ZognestServices(),
         const ZognestMocks(),
-        const ZognestClients(),
+         ZognestClients(),
         const SizedBox(height: Constants.sectionSpacing),
         const MarqueeText(),
         const SizedBox(height: Constants.sectionSpacing),
-        const ZognestBlogs(),
+         ZognestBlogs(),
         const SizedBox(height: Constants.sectionSpacing),
         ContactForm(),
         const SizedBox(height: Constants.sectionSpacing),

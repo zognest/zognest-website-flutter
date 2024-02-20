@@ -54,7 +54,7 @@ class _OurWorkPageState extends State<OurWorkPage> {
                   height: Constants.appBarHeight *
                       (Responsive.isDesktop(context) ? 1.5 : .8),
                 ),
-                const Align(
+                 Align(
                     alignment:Alignment.topCenter ,
                     child: ZognestProjects()),
                 const SizedBox(height: Constants.sectionSpacing),

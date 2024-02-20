@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -15,31 +17,21 @@ import '../../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 import "dart:js" as js;
 
-class ZognestBlogs extends StatefulWidget {
-  const ZognestBlogs({super.key});
+class ZognestBlogs extends HookConsumerWidget {
+   ZognestBlogs({super.key});
 
-  @override
-  State<ZognestBlogs> createState() => _ZognestBlogsState();
-}
 
-class _ZognestBlogsState extends State<ZognestBlogs> {
-  late final ScrollController _controller;
+
+   final ScrollController _controller= ScrollController();
   int currentIndex = 1;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
 
-  @override
-  void dispose() {
+  void disposeHook() {
     _controller.dispose();
-    super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final theme = Theme.of(context);
     return Column(
       children: [
@@ -103,19 +95,16 @@ class _ZognestBlogsState extends State<ZognestBlogs> {
   }
 }
 
-class BlogItem extends StatefulWidget {
-  const BlogItem({
+class BlogItem extends HookWidget {
+   BlogItem({
     super.key,
     required this.blog,
   });
 
   final Blog blog;
 
-  @override
-  State<BlogItem> createState() => _BlogItemState();
-}
 
-class _BlogItemState extends State<BlogItem> {
+
   bool hovered = false;
 
   @override
@@ -129,7 +118,7 @@ class _BlogItemState extends State<BlogItem> {
         vertical: Spacing.l24,
       ),
       child: InkWell(
-        onTap: () => js.context.callMethod('open', [widget.blog.urlLink]),
+        onTap: () => js.context.callMethod('open', [blog.urlLink]),
 
         overlayColor: MaterialStateProperty.all(Palette.transparent),
         child: Column (
@@ -142,7 +131,7 @@ class _BlogItemState extends State<BlogItem> {
                   clipBehavior: Clip.antiAlias,
                   child: NetworkFadingImage(
                     width: double.infinity,
-                    path: widget.blog.image,
+                    path: blog.image,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -154,13 +143,13 @@ class _BlogItemState extends State<BlogItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.blog.title,
+                    blog.title,
                     style: theme.textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w700,
                         fontFamily: 'SF Pro Rounded'),
                   ),
                   Text(
-                    DateFormat('MMMM dd, yyyy').format(widget.blog.date),
+                    DateFormat('MMMM dd, yyyy').format(blog.date),
                     style: theme.textTheme.labelMedium?.copyWith(
                       color: theme.primaryColor,
                       fontFamily: 'SF Pro Rounded',

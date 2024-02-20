@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
@@ -16,31 +17,21 @@ import '../../../config/responsive.dart';
 import '../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ZognestClients extends StatefulWidget {
-  const ZognestClients({super.key});
+class ZognestClients extends HookConsumerWidget {
+   ZognestClients({super.key});
 
-  @override
-  State<ZognestClients> createState() => _ZognestClientsState();
-}
 
-class _ZognestClientsState extends State<ZognestClients> {
-  late final ScrollController _controller;
+
+   final ScrollController _controller=ScrollController();
   int currentIndex = 1;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
-
-  @override
-  void dispose() {
+  void disposeHook() {
     _controller.dispose();
-    super.dispose();
+
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final theme = Theme.of(context);
     return Column(
       children: [

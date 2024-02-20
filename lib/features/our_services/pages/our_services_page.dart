@@ -7,6 +7,7 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
+import '../../../config/responsive.dart';
 import '../models/purchasable_service.dart';
 
 class OurServicesPage extends StatefulWidget {
@@ -45,22 +46,27 @@ class _OurServicesPageState extends State<OurServicesPage> {
         child: Stack(
           children: [
             SvgPicture.asset(Assets.gridLines),
-                 Column(
-                  children: [
-                    const SizedBox(height: Constants.appBarHeight * 1.5),
-                    const ServicesBrowser(),
-                    const SizedBox(height: Constants.sectionSpacing),
-                    const Divider(),
-                    Image.asset(Assets.ourServicesText),
-                    Footer(
-                      onTabUp: () => _controller.animateTo(
-                        _controller.position.minScrollExtent,
-                        duration: const Duration(
-                                milliseconds: Constants.scrollToDuration),
-                            curve: Curves.ease,
-                          ),
-                    ),
-                  ],
+            Column(
+              children: [
+                const SizedBox(height: Constants.appBarHeight * 1.5),
+                const ServicesBrowser(),
+                const SizedBox(height: Constants.sectionSpacing),
+                const Divider(),
+                Image.asset(
+                  Assets.ourServicesText,
+                  fit: Responsive.isDesktop(context)
+                      ? BoxFit.fill
+                      : BoxFit.cover,
+                ),
+                Footer(
+                  onTabUp: () => _controller.animateTo(
+                    _controller.position.minScrollExtent,
+                    duration: const Duration(
+                        milliseconds: Constants.scrollToDuration),
+                    curve: Curves.ease,
+                  ),
+                ),
+              ],
             ),
             // const CreateOrder(),
           ],

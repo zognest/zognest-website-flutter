@@ -37,7 +37,7 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
             if (servicesCart.isNotEmpty) ...[
               Responsive.isDesktop(context)
                   ? ServicesCart()
-                  :  ServicesCartMobile(),
+                  : ServicesCartMobile(),
               const SizedBox(height: Constants.sectionSpacing),
             ],
             if (Responsive.isDesktop(context)) const Divider(),
@@ -112,9 +112,9 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                         fontFamily: 'SF Pro Rounded',
                         fontSize: Responsive.isDesktop(context) ? 20 : 16),
                   ),
-                  const Spacer(),
+                  const Expanded(child: SizedBox()),
                   PrimaryButton(
-                    title:added? Strings.add: Strings.added,
+                    title: added ? Strings.add : Strings.added,
                     textStyle: theme.textTheme.labelLarge,
                     width: Constants.servicesBrowserItemWidth * 0.2,
                     padding: const EdgeInsets.symmetric(
@@ -149,10 +149,10 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
 }
 
 class ServicesCart extends HookConsumerWidget {
-    ServicesCart({super.key});
-   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  ServicesCart({super.key});
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-    @override
+  @override
   Widget build(BuildContext context, ref) {
     final theme = Theme.of(context);
     final emailController = useTextEditingController();
@@ -292,14 +292,14 @@ class ServicesCart extends HookConsumerWidget {
                             children: [
                               Expanded(
                                 child: PrimaryButton(
-                                  title: Strings.sendMessage.toUpperCase(),
-                                  height: 70,
-                                  textStyle:
-                                      theme.textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  onTap: () async {
-                                      if (formKey.currentState!.validate()){
+                                    title: Strings.sendMessage.toUpperCase(),
+                                    height: 70,
+                                    textStyle:
+                                        theme.textTheme.bodyLarge?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    onTap: () async {
+                                      if (formKey.currentState!.validate()) {
                                         final services = ref
                                             .read(appControllerProvider)
                                             .cartServices
@@ -353,7 +353,6 @@ class ServicesCart extends HookConsumerWidget {
                                       nameController.clear();
                                       emailController.clear();
                                     }
-
                                   },
                                 ),
                               ),

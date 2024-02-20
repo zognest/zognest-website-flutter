@@ -53,10 +53,9 @@ class _OurServicesPageState extends State<OurServicesPage> {
                 const SizedBox(height: Constants.sectionSpacing),
                 const Divider(),
                 Image.asset(
-                  Assets.ourServicesText,
-                  fit: Responsive.isDesktop(context)
-                      ? BoxFit.fill
-                      : BoxFit.cover,
+                  Responsive.isDesktop(context)
+                      ? Assets.ourServicesText
+                      : Assets.ourServicesText_2,
                 ),
                 Footer(
                   onTabUp: () => _controller.animateTo(

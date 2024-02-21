@@ -51,8 +51,7 @@ class _OurServicesPageState extends State<OurServicesPage> {
                 const SizedBox(height: Constants.appBarHeight * 1.5),
                 const ServicesBrowser(),
                 const SizedBox(height: Constants.sectionSpacing),
-                const Divider(),
-                Image.asset(Assets.ourServicesText),
+                Image.asset(Assets.ourServicesText_2),
                 const Divider(),
                 const SizedBox(height: Constants.sectionSpacing),
                 Footer(

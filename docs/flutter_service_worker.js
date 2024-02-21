@@ -20,7 +20,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "f1c11c5ee7d1a5c31f99be090efa3e83
 "assets/assets/images/optimis_mobile.png": "492424fabe4bdd478d45cc5606426281",
 "assets/assets/images/our_project_mobile.png": "7d70beb304c00815d834f179311c97ff",
 "assets/assets/images/our_services_text.png": "bf9c1ea1538b45e0d9392a8391d33c83",
-"assets/assets/images/our_services_text_mobile.png": "016fb9e07d4da608af6cc52bc90ad9df",
+"assets/assets/images/our_services_text_mobile.png": "64fe79688920d797ab7817fb76c4013d",
 "assets/assets/images/our_space_text.png": "9d6f53c3012ff437ae8ee713a9239b51",
 "assets/assets/images/screens.png": "157ec6c6d3c3f12ab083ec34256bb50e",
 "assets/assets/images/screens_2.png": "61ed5a868c959f413e6d97e72c3ab14d",
@@ -74,9 +74,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "f1c11c5ee7d1a5c31f99be090efa3e83
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "d15a400af48eed12f286f9d058f2fc14",
-"/": "d15a400af48eed12f286f9d058f2fc14",
-"main.dart.js": "3dcb772c7b95e09b995d3c0886bd04f3",
+"index.html": "b5fe9f98d59671b91fa6a9f6b1419098",
+"/": "b5fe9f98d59671b91fa6a9f6b1419098",
+"main.dart.js": "eb72d0791946fb007ec4d54ce9653ac7",
 "manifest.json": "3e56b70d98af4acf35448515d5aa6c39",
 "version.json": "c9a57fded59c1038f8ee06dc3f0160bc"};
 // The application shell files that are downloaded before a service worker can

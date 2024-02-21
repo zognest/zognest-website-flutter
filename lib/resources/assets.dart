@@ -11,7 +11,7 @@ abstract final class Assets {
   static const upArrow = '${Paths.svg}/arrow_up.svg';
   static const gridLines = '${Paths.svg}/grid_lines.svg';
   static const instagram = '${Paths.svg}/instagram.svg';
-  static const medium = '${Paths.svg}/medium-icon.svg';
+  static const medium = '${Paths.svg}/medium.svg';
   static const facebook = '${Paths.svg}/facebook.svg';
   static const figma = '${Paths.svg}/figma.svg';
   static const youtube = '${Paths.svg}/youtube.svg';

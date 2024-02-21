@@ -228,169 +228,170 @@ class ContactFormMobile extends HookWidget {
     final phoneController = useTextEditingController();
     final messageController = useTextEditingController();
     final theme = Theme.of(context);
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: RadialGradient(
-              center: Alignment.center,
-              radius: 0.8,
-              colors: [
-                theme.primaryColor.withOpacity(0.5),
-                theme.primaryColor.withOpacity(0),
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: RadialGradient(
+                center: Alignment.center,
+                radius: 0.8,
+                colors: [
+                  theme.primaryColor.withOpacity(0.5),
+                  theme.primaryColor.withOpacity(0),
+                ],
+              ),
+              image: const DecorationImage(
+                image: AssetImage(Assets.impactLinesPng),
+              ),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: Constants.mobileHorizontalPadding,
+              vertical: Constants.mobileVerticalPadding,
+            ),
+            child: Column(
+              children: [
+                Text.rich(
+                  textAlign: TextAlign.center,
+                  TextSpan(
+                    text: Strings.get.toUpperCase(),
+                    style: theme.textTheme.displaySmall,
+                    children: [
+                      TextSpan(
+                        text: '${Strings.inText.toUpperCase()}\n',
+                        style: theme.textTheme.displaySmall
+                            ?.copyWith(foreground: TextThemes.foreground),
+                      ),
+                      TextSpan(text: Strings.touch.toUpperCase()),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: Spacing.s12),
+                Text(
+                  Strings.contactDetails.toUpperCase(),
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    color: theme.primaryColor,
+                    fontVariations: TextThemes.fontVariation(7),
+                  ),
+                ),
+                const SizedBox(height: Spacing.s12),
+                Text(
+                  textAlign: TextAlign.center,
+                  Strings.address,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: Spacing.s4),
+                Text(
+                  Strings.contactInfo,
+                  style: theme.textTheme.labelMedium,
+                ),
               ],
             ),
-            image: const DecorationImage(
-              image: AssetImage(Assets.impactLinesPng),
-            ),
           ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: Constants.mobileHorizontalPadding,
-            vertical: Constants.mobileVerticalPadding,
-          ),
-          child: Column(
-            children: [
-              Text.rich(
-                textAlign: TextAlign.center,
-                TextSpan(
-                  text: Strings.get.toUpperCase(),
-                  style: theme.textTheme.displaySmall,
+const SizedBox(height: Spacing.s12),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: Constants.mobileHorizontalPadding),
+            child: Form(
+              key: formKey,
+              child: Material(
+                color: Palette.transparent,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextSpan(
-                      text: '${Strings.inText.toUpperCase()}\n',
-                      style: theme.textTheme.displaySmall
-                          ?.copyWith(foreground: TextThemes.foreground),
+                    InputFormField(
+                      controller: nameController,
+                      hint: Strings.yourName,
+                      required: true,
+                      keyboardType: TextInputType.name,
                     ),
-                    TextSpan(text: Strings.touch.toUpperCase()),
+                    InputFormField(
+                      controller: emailController,
+                      hint: Strings.yourEmail,
+                      required: true,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    InputFormField(
+                      controller: phoneController,
+                      hint: Strings.mobileNo,
+                      required: true,
+                      keyboardType: TextInputType.phone,
+                    ),
+                    InputFormField(
+                      hint: Strings.message,
+                      controller: messageController,
+                      required: true,
+                      multiline: true,
+                      keyboardType: TextInputType.multiline,
+                    ),
+                    const SizedBox(height: Spacing.m20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryButton(
+                            title: Strings.sendMessage.toUpperCase(),
+                            height: 40,
+                            textStyle: theme.textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                            onTap: () async {
+                              if (formKey.currentState!.validate()) {
+                                await FirestoreServices.sendMessages(
+                                  message: messageController.text,
+                                  phone: phoneController.text,
+                                  name: nameController.text,
+                                  context: context,
+                                  email: emailController.text,
+                                );
+                                messageController.clear();
+                                phoneController.clear();
+                                nameController.clear();
+                                emailController.clear();
+                              }
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: Spacing.s12),
+                        Expanded(
+                          child: PrimaryButton(
+                            title: Strings.requestCall.toUpperCase(),
+                            backgroundColor: Palette.white,
+                            height: 40,
+                            textStyle: theme.textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                            onTap: () async {
+                              if (formKey.currentState!.validate()) {
+                                await FirestoreServices.sendMessages(
+                                  message: messageController.text,
+                                  phone: phoneController.text,
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  context: context,
+                                  call: true,
+                                );
+                                messageController.clear();
+                                phoneController.clear();
+                                nameController.clear();
+                                emailController.clear();
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: Spacing.s12),
-              Text(
-                Strings.contactDetails.toUpperCase(),
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  color: theme.primaryColor,
-                  fontVariations: TextThemes.fontVariation(7),
-                ),
-              ),
-              const SizedBox(height: Spacing.s12),
-              Text(
-                textAlign: TextAlign.center,
-                Strings.address,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  fontSize: 20,
-                ),
-              ),
-              const SizedBox(height: Spacing.s4),
-              Text(
-                Strings.contactInfo,
-                style: theme.textTheme.labelMedium,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: Spacing.m16),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: Constants.mobileHorizontalPadding),
-          child: Form(
-            key: formKey,
-            child: Material(
-              color: Palette.transparent,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InputFormField(
-                    controller: nameController,
-                    hint: Strings.yourName,
-                    required: true,
-                    keyboardType: TextInputType.name,
-                  ),
-                  InputFormField(
-                    controller: emailController,
-                    hint: Strings.yourEmail,
-                    required: true,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  InputFormField(
-                    controller: phoneController,
-                    hint: Strings.mobileNo,
-                    required: true,
-                    keyboardType: TextInputType.phone,
-                  ),
-                  InputFormField(
-                    hint: Strings.message,
-                    controller: messageController,
-                    required: true,
-                    multiline: true,
-                    keyboardType: TextInputType.multiline,
-                  ),
-                  const SizedBox(height: Spacing.m20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: PrimaryButton(
-                          title: Strings.sendMessage.toUpperCase(),
-                          height: 40,
-                          textStyle: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
-                          onTap: () async {
-                            if (formKey.currentState!.validate()) {
-                              await FirestoreServices.sendMessages(
-                                message: messageController.text,
-                                phone: phoneController.text,
-                                name: nameController.text,
-                                context: context,
-                                email: emailController.text,
-                              );
-                              messageController.clear();
-                              phoneController.clear();
-                              nameController.clear();
-                              emailController.clear();
-                            }
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: Spacing.s12),
-                      Expanded(
-                        child: PrimaryButton(
-                          title: Strings.requestCall.toUpperCase(),
-                          backgroundColor: Palette.white,
-                          height: 40,
-                          textStyle: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                          onTap: () async {
-                            if (formKey.currentState!.validate()) {
-                              await FirestoreServices.sendMessages(
-                                message: messageController.text,
-                                phone: phoneController.text,
-                                name: nameController.text,
-                                email: emailController.text,
-                                context: context,
-                                call: true,
-                              );
-                              messageController.clear();
-                              phoneController.clear();
-                              nameController.clear();
-                              emailController.clear();
-                            }
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ),
           ),
-        ),
-        const SizedBox(height: Spacing.m18),
-
-      ],
+        ],
+      ),
     );
   }
 }

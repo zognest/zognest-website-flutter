@@ -54,6 +54,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 const SizedBox(height: Constants.sectionSpacing),
                 const ZognestStaff(),
                 const SizedBox(height: Constants.sectionSpacing),
+                const Divider(),
                 Image.asset(
                   Responsive.isDesktop(context)
                       ? Assets.aboutUsText

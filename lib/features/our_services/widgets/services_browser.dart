@@ -116,7 +116,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                   ),
                   const Expanded(child: SizedBox()),
                   PrimaryButton(
-                    title: added ? Strings.add : Strings.added,
+                    title:!cartServices.contains(widget.service) ? Strings.add : Strings.added,
                     textStyle: theme.textTheme.labelLarge,
                     width: Constants.servicesBrowserItemWidth * 0.2,
                     padding: const EdgeInsets.symmetric(
@@ -128,10 +128,6 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                       ref
                           .read(appControllerProvider.notifier)
                           .addService(widget.service);
-                      setState(() {
-                        added=!added;
-                      });
-
                     },
                   ),
                 ],

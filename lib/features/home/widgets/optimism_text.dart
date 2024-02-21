@@ -9,11 +9,11 @@ class OptimismText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Divider(),
+
         Responsive.isDesktop(context)
             ? Image.asset(Assets.optimismTextWeb, fit: BoxFit.cover)
             : Image.asset(Assets.optimismTextMobile, fit: BoxFit.cover),
-        const Divider(),
+
       ],
     );
   }

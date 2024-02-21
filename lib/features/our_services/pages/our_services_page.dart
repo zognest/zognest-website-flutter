@@ -47,16 +47,14 @@ class _OurServicesPageState extends State<OurServicesPage> {
           children: [
             SvgPicture.asset(Assets.gridLines),
             Column(
-              children: [
+              children: <Widget>[
                 const SizedBox(height: Constants.appBarHeight * 1.5),
                 const ServicesBrowser(),
                 const SizedBox(height: Constants.sectionSpacing),
                 const Divider(),
-                Image.asset(
-                  Responsive.isDesktop(context)
-                      ? Assets.ourServicesText
-                      : Assets.ourServicesText_2,
-                ),
+                Image.asset(Assets.ourServicesText),
+                const Divider(),
+                const SizedBox(height: Constants.sectionSpacing),
                 Footer(
                   onTabUp: () => _controller.animateTo(
                     _controller.position.minScrollExtent,

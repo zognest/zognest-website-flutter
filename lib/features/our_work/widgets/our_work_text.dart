@@ -18,13 +18,12 @@ class OurWorkText extends StatelessWidget {
               Image.asset(Responsive.isDesktop(context)?
                 Assets.venusMercury:Assets.ourProjectMobile,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
               // venus_mercury
             ],
           ),
         ),
-        const Divider(),
       ],
     );
   }

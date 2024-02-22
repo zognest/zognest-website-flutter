@@ -139,9 +139,9 @@ class Foreground extends StatelessWidget {
         BeyondSpace(onTabDown: onTabDown),
         const SizedBox(height: Constants.sectionSpacing),
         const ClientsMarquee(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(height:Responsive.isDesktop(context)? 60 :40),
         const ZognestVideo(),
-        const SizedBox(height: Constants.sectionSpacing),
+        SizedBox(height:Responsive.isDesktop(context)? 60 :40),
         const ImageText(image: Assets.office),
         const SizedBox(height: Constants.sectionSpacing),
         Responsive.isDesktop(context)

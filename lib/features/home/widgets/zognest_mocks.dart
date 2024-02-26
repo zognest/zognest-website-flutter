@@ -3,6 +3,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
+import 'package:zognest_website/features/home/widgets/zognest_animation.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/strings.dart';
 
@@ -52,6 +53,7 @@ class _ZognestMocksState extends State<ZognestMocks>
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(height: 50),
             const Divider(),
             VisibilityDetector(
               key: ValueKey(runtimeType.toString()),
@@ -69,15 +71,17 @@ class _ZognestMocksState extends State<ZognestMocks>
               ),
             ),
             const Divider(),
+            const SizedBox(height: 10),
           ],
         ),
         Stack(
           alignment: Alignment.centerRight,
           children: [
-            Image.asset(
-              Assets.mercury,
-              width: size.width * 0.45,
+            FloatingIcon(
+              isHorizontal: false,
+              assets: Assets.mercury,
               alignment: Alignment.centerRight,
+              width: size.width * 0.45,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(

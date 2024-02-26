@@ -19,6 +19,7 @@ import '../widgets/beyond_space.dart';
 import '../widgets/clients_list.dart';
 import '../widgets/counters.dart';
 import '../widgets/optimism_text.dart';
+import '../widgets/zognest_animation.dart';
 import '../widgets/zognest_offers.dart';
 import '../widgets/zognest_services.dart';
 import '../widgets/zognest_video.dart';
@@ -91,7 +92,7 @@ class Background extends StatelessWidget {
     return Stack(
       children: [
         SvgPicture.asset(Assets.gridLines),
-        Column(
+         Column(
           children: [
             const SizedBox(
               height: Constants.bgDecorationSpacing,
@@ -113,7 +114,11 @@ class Background extends StatelessWidget {
               ),
             ),
             const SizedBox(height: Constants.bgDecorationSpacing),
-            Image.asset(Assets.mercuries),
+              const FloatingIcon(
+                isHorizontal: true,
+              assets: Assets.mercuries,
+              alignment: Alignment.center,
+            ),
             const SizedBox(height: Constants.bgDecorationSpacing),
             SvgPicture.asset(Assets.gridLines),
             const SizedBox(height: Constants.bgDecorationSpacing),
@@ -139,9 +144,9 @@ class Foreground extends StatelessWidget {
         BeyondSpace(onTabDown: onTabDown),
         const SizedBox(height: Constants.sectionSpacing),
         const ClientsMarquee(),
-        SizedBox(height:Responsive.isDesktop(context)? 60 :40),
+        SizedBox(height: Responsive.isDesktop(context) ? 60 : 40),
         const ZognestVideo(),
-        SizedBox(height:Responsive.isDesktop(context)? 60 :40),
+        SizedBox(height: Responsive.isDesktop(context) ? 60 : 40),
         const ImageText(image: Assets.office),
         const SizedBox(height: Constants.sectionSpacing),
         Responsive.isDesktop(context)

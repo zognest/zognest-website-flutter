@@ -190,7 +190,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palette.dividerColor),
                             ),
-                            child: SingleChildScrollView(child: ContactForm()),
+                            child: ContactForm(),
                           ),
                         ),
                       );

@@ -100,8 +100,9 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                       );
                     },
                     separatorBuilder: (context, index) => SizedBox(
-                      width: Constants.listCardSeparatorWidth *
-                          (Responsive.isDesktop(context) ? 1 : 0.5),
+                      width:Responsive.isDesktop(context)
+                          ? 16
+                          : 6
                     ),
                     itemCount: staff.length,
                   ),

@@ -44,10 +44,15 @@ class _OurSpacePageState extends State<OurSpacePage> {
           ListView(
             controller: _controller,
             children: [
-               SizedBox(height: Responsive.isDesktop(context)? Constants.appBarHeight * 1.5:56),
+              SizedBox(
+                  height: Responsive.isDesktop(context)
+                      ? Constants.appBarHeight * 1.5
+                      : 25),
               const ZognestEvents(),
               const SizedBox(height: Constants.sectionSpacing),
-              Image.asset(Assets.ourSpaceText),
+              Image.asset(Responsive.isDesktop(context)
+                  ? Assets.ourSpaceText
+                  : Assets.ourSpaceMobile),
               const SizedBox(height: Constants.sectionSpacing),
               Footer(
                 onTabUp: () => _controller.animateTo(

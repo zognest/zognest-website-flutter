@@ -47,7 +47,7 @@ class _OurServicesPageState extends State<OurServicesPage> {
           children: [
             SvgPicture.asset(Assets.gridLines),
             Column(
-              children: <Widget>[
+              children:[
                 const SizedBox(height: Constants.appBarHeight * 1.5),
                 const ServicesBrowser(),
                 const SizedBox(height: Constants.sectionSpacing),

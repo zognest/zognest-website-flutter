@@ -80,68 +80,74 @@ class ServiceItem extends ConsumerStatefulWidget {
 }
 
 class _ServiceItemState extends ConsumerState<ServiceItem> {
-  late  bool added=true;
+  late bool added = true;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cartServices = ref.watch(appControllerProvider).cartServices;
-    return Container(
-      color: Palette.cardBackgroundColor,
-      child: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(Spacing.m20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AutoSizeText(
-                    widget.service.title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.w900,
-                      color: theme.primaryColor,
-                      fontFamily: 'SF Pro Rounded',
-                    ),
-                  ),
-                  const SizedBox(height: Spacing.s8),
-                  AutoSizeText(
-                    widget.service.description,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall?.copyWith(
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Container(
+        color: Palette.cardBackgroundColor,
+        child: Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(Spacing.m20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AutoSizeText(
+                      widget.service.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w900,
+                        color: theme.primaryColor,
                         fontFamily: 'SF Pro Rounded',
-                        fontSize: Responsive.isDesktop(context) ? 20 : 16),
-                  ),
-                  const Expanded(child: SizedBox()),
-                  PrimaryButton(
-                    title:!cartServices.contains(widget.service) ? Strings.add : Strings.added,
-                    textStyle: theme.textTheme.labelLarge,
-                    width: Constants.servicesBrowserItemWidth * 0.2,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: Constants.listButtonVerticalPadding,
-                      horizontal: Constants.listButtonHorizontalPadding,
+                      ),
                     ),
-                    enabled: !cartServices.contains(widget.service),
-                    onTap: () {
-                      ref
-                          .read(appControllerProvider.notifier)
-                          .addService(widget.service);
-                    },
-                  ),
-                ],
+                    const SizedBox(height: Spacing.s8),
+                    AutoSizeText(
+                      widget.service.description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                          fontFamily: 'SF Pro Rounded',
+                          fontSize: Responsive.isDesktop(context) ? 20 : 16),
+                    ),
+                    const Expanded(child: SizedBox()),
+                    PrimaryButton(
+                      title: !cartServices.contains(widget.service)
+                          ? Strings.add
+                          : Strings.added,
+                      textStyle: theme.textTheme.labelLarge,
+                      width: Constants.servicesBrowserItemWidth * 0.2,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: Constants.listButtonVerticalPadding,
+                        horizontal: Constants.listButtonHorizontalPadding,
+                      ),
+                      enabled: !cartServices.contains(widget.service),
+                      onTap: () {
+                        ref
+                            .read(appControllerProvider.notifier)
+                            .addService(widget.service);
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: NetworkFadingImage(
-              path: widget.service.image,
-              height: double.infinity,
-              fit: BoxFit.cover,
+            Expanded(
+              child: NetworkFadingImage(
+                path: widget.service.image,
+                height: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

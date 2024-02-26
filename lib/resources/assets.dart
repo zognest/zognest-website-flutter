@@ -39,6 +39,7 @@ abstract final class Assets {
   static const ourProjectMobile = '${Paths.images}/our_project_mobile.png';
   static const textGroup = '${Paths.images}/text_group.png';
   static const ourSpaceText = '${Paths.images}/our_space_text.png';
+  static const ourSpaceMobile = '${Paths.images}/our_space_mobile.png';
   static const shortArrowLeft = '${Paths.images}/short_arrow_left.png';
   static const zognestTeam = '${Paths.images}/zognest_team.png';
   static const aboutUsText = '${Paths.images}/about_us_text.png';

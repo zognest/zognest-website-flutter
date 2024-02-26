@@ -35,59 +35,65 @@ class _EventCardState extends State<EventCard> {
         },
         onHover: (over) => setState(() => this.over = over),
         overlayColor: MaterialStateProperty.all(Palette.transparent),
-        child: Column(
-          children: [
-            Expanded(
-              child: NetworkFadingImage(
-                path: widget.event.coverImage,
-                height: double.infinity,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-            ColoredBox(
-              color: theme.primaryColor,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Spacing.m16,
-                  vertical: Spacing.l24,
+        child: Card(
+          shape:  RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20)
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            children: [
+              Expanded(
+                child: NetworkFadingImage(
+                  path: widget.event.coverImage,
+                  height: double.infinity,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-                child: Row(
-                  children: [
-                    Text(
-                      '${widget.event.images.length}',
-                      style: theme.textTheme.headlineMedium
-                          ?.copyWith(fontSize: 72),
-                    ),
-                    const SizedBox(width: Spacing.m20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          DateFormat('MMMM').format(widget.event.date),
-                          style: theme.textTheme.headlineMedium
-                              ?.copyWith(fontSize: 24),
-                        ),
-                        Text(
-                          widget.event.title,
-                          style: theme.textTheme.labelMedium
-                              ?.copyWith(fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          '${widget.event.date.year}',
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
+              ),
+              ColoredBox(
+                color: theme.primaryColor,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Spacing.m16,
+                    vertical: Spacing.l24,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        '${widget.event.images.length}',
+                        style: theme.textTheme.headlineMedium
+                            ?.copyWith(fontSize: 72),
+                      ),
+                      const SizedBox(width: Spacing.m20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            DateFormat('MMMM').format(widget.event.date),
+                            style: theme.textTheme.headlineMedium
+                                ?.copyWith(fontSize: 24),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          Text(
+                            widget.event.title,
+                            style: theme.textTheme.labelMedium
+                                ?.copyWith(fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            '${widget.event.date.year}',
+                            style: theme.textTheme.labelMedium?.copyWith(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

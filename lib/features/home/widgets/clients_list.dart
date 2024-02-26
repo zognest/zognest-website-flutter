@@ -69,7 +69,7 @@ class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
                   final i = index % project.length;
                   return Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: Spacing.m20),
+                        const EdgeInsets.symmetric(horizontal: Spacing.m14),
                     child: InkWell(
                       onTap: () {},
                       onHover: (over) {
@@ -120,7 +120,6 @@ class ItemServiceMarquee extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // remove fitted box
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(120),

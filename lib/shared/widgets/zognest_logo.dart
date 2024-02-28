@@ -21,7 +21,7 @@ class ZognestLogo extends StatelessWidget {
       children: [
         Image.asset(
           Assets.zognestLogoPng,
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
           height: size ?? 50,
           width: size ?? 50,
         ),

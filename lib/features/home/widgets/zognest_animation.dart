@@ -30,13 +30,11 @@ class _FloatingIconState extends State<FloatingIcon>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 8),
     )..repeat(reverse: true);
     _offsetAnimation = Tween<Offset>(
-      begin:widget.isHorizontal ? const Offset(-0.1,0.0):const Offset(0.0, -0.1),
+      begin:widget.isHorizontal ? const Offset(-0.4,0.0):const Offset(0.0, -0.1),
       end: widget.isHorizontal ?const Offset(.1,0.0):const Offset(0.0, 0.1),
-      /*begin: const Offset(0.0, -0.1),
-      end: const Offset(0.0, 0.1),*/
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOutQuad,

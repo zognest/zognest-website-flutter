@@ -8,7 +8,7 @@ class Project extends Equatable {
   final String brief;
   final String description;
   final String cover;
-  final String splash;
+  final String? splash;
   final String icon;
 
   const Project({
@@ -55,8 +55,7 @@ class Project extends Equatable {
       brief: map['brief'],
       description: map['description'],
       cover: map['cover'],
-      splash: map['splash'] ??
-          'https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/placeholders%2Fplaceholder.png?alt=media&token=dba87b46-6597-458a-89d5-a8361ba9e87e',
+      splash: map['splash'],
       icon: map['icon'],
     );
   }
@@ -76,7 +75,7 @@ class Project extends Equatable {
       brief,
       description,
       cover,
-      splash,
+      splash ?? '',
       icon,
     ];
   }

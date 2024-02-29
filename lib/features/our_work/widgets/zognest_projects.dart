@@ -169,7 +169,7 @@ class _ProjectItemState extends State<ProjectItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    NetworkFadingImage(path: widget.project.icon),
+                    NetworkFadingImage(path: widget.project.icon, width: 60,height: 60,),
                     const SizedBox(height: Spacing.l32),
                     Row(
                       children: [

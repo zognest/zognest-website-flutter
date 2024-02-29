@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
+import 'package:zognest_website/features/our_work/models/project.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
@@ -104,22 +105,27 @@ class BeyondSpace extends StatelessWidget {
         : const BeyondSpaceMobile();
   }
 }
-// no update her
+
 class BeyondSpaceCarousel extends ConsumerWidget {
   const BeyondSpaceCarousel({super.key});
-
+/* projects.map((project) {
+            return NetworkFadingImage(
+              path:
+              project.splash,
+              fit: BoxFit.fill,
+            );
+          }).toList()*/
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final projects = ref.watch(appControllerProvider).projects;
     return projects.when(
       data: (projects) {
         return CarouselSlider(
-          items: projects.map((project) {
-            return NetworkFadingImage(
-              path:
-              project.splash,
-              fit: BoxFit.fill,
-            );
+          items: projects
+              .where((project) => project.splash != null)
+              .map((project) {
+            // return network fading image
+            return NetworkFadingImage(path: project.splash!);
           }).toList(),
           options: CarouselOptions(
             aspectRatio: 1.3,

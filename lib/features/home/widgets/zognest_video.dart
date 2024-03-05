@@ -106,8 +106,8 @@ class _ZognestVideoState extends State<ZognestVideo> {
                                           },
                                           icon: Icon(
                                             _controller.value.isPlaying
-                                                ? Icons.pause_rounded
-                                                : Icons.play_arrow_rounded,
+                                                ? Icons.play_arrow_rounded
+                                                : Icons.pause_rounded,
                                             color: theme.primaryColor,
                                             size: 34,
                                           ),

@@ -194,50 +194,58 @@ class ServicesCart extends HookConsumerWidget {
                           runSpacing: Spacing.m20,
                           spacing: Spacing.m20,
                           children: cartServices.map((service) {
-                            return Container(
-                              width: width * 0.28,
-                              height: 140,
-                              color: Palette.cardBackgroundColor,
-                              child: Row(
-                                children: [
-                                  Image.network(
-                                    service.image,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  const SizedBox(width: 20),
-                                  Expanded(
-                                    child: Text(
-                                      service.title,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style:
-                                          theme.textTheme.bodyLarge?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: 'SF Pro Rounded',
+                            return Card(
+                              clipBehavior: Clip.antiAlias,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              child: Container(
+                                width: width * 0.28,
+                                height: 140,
+                                color: Palette.cardBackgroundColor,
+                                child: Row(
+                                  children: [
+                                    Image.network(
+                                      service.image,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    const SizedBox(width: 20),
+                                    Expanded(
+                                      child: Text(
+                                        service.title,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style:
+                                            theme.textTheme.bodyLarge?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'SF Pro Rounded',
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Palette.transparent,
-                                      shape: const CircleBorder(
-                                        side: BorderSide(color: Palette.white),
+                                    const SizedBox(width: 20),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Palette.transparent,
+                                        shape: const CircleBorder(
+                                          side:
+                                              BorderSide(color: Palette.white),
+                                        ),
+                                        minimumSize: const Size.fromRadius(28),
                                       ),
-                                      minimumSize: const Size.fromRadius(28),
+                                      child: const Icon(
+                                        Icons.close,
+                                        size: 14,
+                                      ),
+                                      onPressed: () {
+                                        ref
+                                            .read(
+                                                appControllerProvider.notifier)
+                                            .removeService(service);
+                                      },
                                     ),
-                                    child: const Icon(
-                                      Icons.close,
-                                      size: 14,
-                                    ),
-                                    onPressed: () {
-                                      ref
-                                          .read(appControllerProvider.notifier)
-                                          .removeService(service);
-                                    },
-                                  ),
-                                  const SizedBox(width: 20),
-                                ],
+                                    const SizedBox(width: 20),
+                                  ],
+                                ),
                               ),
                             );
                           }).toList(),

@@ -36,7 +36,6 @@ class _OurWorkPageState extends State<OurWorkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       extendBodyBehindAppBar: true,
       appBar: PrimaryAppBar(scrollController: _controller),
       drawer: const PrimaryDrawer(),

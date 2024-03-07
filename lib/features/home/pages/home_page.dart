@@ -11,7 +11,6 @@ import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
-
 import '../../../config/responsive.dart';
 import '../../../shared/widgets/gradient_container.dart';
 import '../../../shared/widgets/image_text.dart';

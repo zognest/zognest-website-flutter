@@ -9,6 +9,7 @@ enum FirebasePaths {
   messages('messages/'),
   staff('staff/'),
   technologies('technologies/'),
+  staffList('staffList/'),
   videos('videos/'),
   storageBucket('gs://zognest-website.appspot.com/');
 

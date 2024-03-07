@@ -147,6 +147,22 @@ class FirestoreServices {
     return technologies;
   }
 
+
+  static Future<List<Technology>>getStafflistFromRefs(
+      List<dynamic> refs) async {
+    List<Technology> staffList = [];
+    for (final DocumentReference staffRef in refs) {
+      final staffListDoc = await staffRef.get();
+
+      if (staffListDoc.exists) {
+        staffList.add(
+          Technology.fromMap(staffListDoc.data() as Map<String, dynamic>),
+        );
+      }
+    }
+    return staffList;
+  }
+
   static Future<void> sendMessages({
     required String message,
     String? phone,

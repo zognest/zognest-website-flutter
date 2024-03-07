@@ -67,8 +67,7 @@ class Staff extends Equatable {
       color:Color(int.parse(map['color'],radix: 16)),
     );
   }
-/*Colors.primaries[Random().nextInt(Colors.primaries.length)]
-          .withOpacity(0.5),*/
+
   String toJson() => json.encode(toMap());
 
   factory Staff.fromJson(String source) =>

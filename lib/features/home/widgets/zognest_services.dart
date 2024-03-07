@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zognest_website/config/constants.dart';
@@ -13,11 +12,8 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
 
-import '../../../config/theme/palette.dart';
 import '../../../riverpod/controller.dart';
-import '../../../shared/widgets/greyscale_filter.dart';
 import '../../../shared/widgets/network_fading_image.dart';
-import '../../about_us/models/staff.dart';
 import '../../our_services/pages/our_services_page.dart';
 
 class ZognestServices extends StatefulWidget {
@@ -80,9 +76,7 @@ class _ZognestServicesState extends State<ZognestServices> {
               : null,
         ),
         Consumer(builder: (context, ref, child) {
-          bool ishover = false;
           final services = ref.watch(appControllerProvider).services;
-          final staff = ref.watch(appControllerProvider).staff;
           return services.when(
             data: (services) {
               return !Responsive.isMobile(context)
@@ -101,23 +95,14 @@ class _ZognestServicesState extends State<ZognestServices> {
                                 Constants.servicesCardHeight,
                               ),
                             ),
-                            child: InkWell(
-                              onTap: () {},
-                              onHover: (over) {},
-                              overlayColor: MaterialStateProperty.all(
-                                  Colors.transparent),
-                              child: FlippingWidget(
-                                front: GreyscaleFilter(
-                                    isHovered: ishover,
-                                    child: FrontService(
-                                        service: services[index])),
-                                back: BackService(service: services[index]),
-                              ),
+                            child: FlippingWidget(
+                              front: FrontService(service: services[index]),
+                              back: BackService(service: services[index]),
                             ),
                           );
                         },
-                        separatorBuilder: (context, index) => SizedBox(
-                            width: Responsive.isDesktop(context)
+                        separatorBuilder: (context, index) =>
+                             SizedBox(width: Responsive.isDesktop(context)
                                 ? Constants.listCardSeparatorWidth
                                 : Constants.listCardSeparatorWidthMobile),
                         itemCount: services.length,
@@ -136,20 +121,9 @@ class _ZognestServicesState extends State<ZognestServices> {
                                 child: SizedBox(
                                   height: Constants.servicesCardHeight,
                                   width: double.infinity,
-                                  child: InkWell(
-                                    onTap: () {},
-                                    onHover: (over) {
-                                      ishover = over;
-                                    },
-                                    overlayColor: MaterialStateProperty.all(
-                                        Colors.transparent),
-                                    child: FlippingWidget(
-                                      front: GreyscaleFilter(
-                                          isHovered: ishover,
-                                          child:
-                                              FrontService(service: service)),
-                                      back: BackService(service: service),
-                                    ),
+                                  child: FlippingWidget(
+                                    front: FrontService(service: service),
+                                    back: BackService(service: service),
                                   ),
                                 ),
                               ),
@@ -262,10 +236,9 @@ class FrontService extends StatelessWidget {
 }
 
 class BackService extends StatelessWidget {
-  const BackService({super.key, required this.service, this.staffList});
+  const BackService({super.key, required this.service});
 
   final Service service;
-  final List<Staff>? staffList;
 
   @override
   Widget build(BuildContext context) {
@@ -300,7 +273,7 @@ class BackService extends StatelessWidget {
                         service.highlight.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           color: theme.primaryColor,
-                          fontSize: Responsive.isMobile(context) ? 28 : 38,
+                          fontSize: Responsive.isMobile(context)?28:38,
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.w500,
                         ),
@@ -310,7 +283,7 @@ class BackService extends StatelessWidget {
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.bold,
-                          fontSize: Responsive.isMobile(context) ? 28 : 38,
+                          fontSize: Responsive.isMobile(context)?28:38,
                         ),
                       ),
                       const SizedBox(height: Spacing.m20),

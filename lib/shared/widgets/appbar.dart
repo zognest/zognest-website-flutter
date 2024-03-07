@@ -133,7 +133,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
             ? const MobileAppBar()
             : Row(
                 children: [
-                   const ZognestLogo(size: 60),
+                   const ZognestLogo(),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,

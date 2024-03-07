@@ -43,7 +43,6 @@ class _OurWorkPageState extends State<OurWorkPage> {
         controller: _controller,
         child: Stack(
           children: [
-            const MouseRegion(),
             Positioned(
               top: Constants.projectHeight,
               child: SvgPicture.asset(Assets.gridLines),

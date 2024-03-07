@@ -41,14 +41,6 @@ class MouseRegion extends HookWidget {
               ),
             ),
           ),
-          Positioned(
-            left: 10,
-            top: 10,
-            child: Text(
-              'Selected Position: (${positionController.selectedPosition.dx.toInt()}, ${positionController.selectedPosition.dy.toInt()})',
-              style: const TextStyle(color: Colors.black),
-            ),
-          ),
         ],
       ),
     );

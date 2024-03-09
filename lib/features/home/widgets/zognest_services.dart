@@ -10,10 +10,9 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/flipping_widget.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
-import 'package:zognest_website/shared/widgets/technology_container.dart';
-
 import '../../../riverpod/controller.dart';
 import '../../../shared/widgets/network_fading_image.dart';
+import '../../../shared/widgets/technology_container.dart';
 import '../../our_services/pages/our_services_page.dart';
 
 class ZognestServices extends StatefulWidget {
@@ -101,8 +100,8 @@ class _ZognestServicesState extends State<ZognestServices> {
                             ),
                           );
                         },
-                        separatorBuilder: (context, index) =>
-                             SizedBox(width: Responsive.isDesktop(context)
+                        separatorBuilder: (context, index) => SizedBox(
+                            width: Responsive.isDesktop(context)
                                 ? Constants.listCardSeparatorWidth
                                 : Constants.listCardSeparatorWidthMobile),
                         itemCount: services.length,
@@ -184,7 +183,7 @@ class FrontService extends StatelessWidget {
                         service.highlight.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           color: theme.primaryColor,
-                          fontSize: Responsive.isMobile(context)?28:38,
+                          fontSize: Responsive.isMobile(context) ? 28 : 38,
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.w500,
                         ),
@@ -194,7 +193,7 @@ class FrontService extends StatelessWidget {
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.bold,
-                          fontSize: Responsive.isMobile(context)?28:38,
+                          fontSize: Responsive.isMobile(context) ? 28 : 38,
                         ),
                       ),
                       Expanded(
@@ -273,7 +272,7 @@ class BackService extends StatelessWidget {
                         service.highlight.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           color: theme.primaryColor,
-                          fontSize: Responsive.isMobile(context)?28:38,
+                          fontSize: Responsive.isMobile(context) ? 28 : 38,
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.w500,
                         ),
@@ -283,7 +282,7 @@ class BackService extends StatelessWidget {
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.bold,
-                          fontSize: Responsive.isMobile(context)?28:38,
+                          fontSize: Responsive.isMobile(context) ? 28 : 38,
                         ),
                       ),
                       const SizedBox(height: Spacing.m20),
@@ -291,18 +290,41 @@ class BackService extends StatelessWidget {
                         child: SingleChildScrollView(
                           padding:
                               const EdgeInsets.symmetric(vertical: Spacing.s12),
-                          child: Wrap(
-                            runSpacing: Spacing.s8,
-                            spacing: Spacing.s8,
-                            children: service.technologies.map((tech) {
-                              return TechnologyContainer(
-                                image: tech.image,
-                                title: tech.name,
-                              );
-                            }).toList(),
-                          ),
+                          child: service.staffList
+                              ? Consumer(builder: (context, ref, tecnologies) {
+                                  final staff =
+                                      ref.watch(appControllerProvider).staff;
+                                  return staff.when(
+                                    data: (staff) {
+                                      return Wrap(
+                                        runSpacing: Spacing.s8,
+                                        spacing: Spacing.s8,
+                                        children: staff.map((tech) {
+                                          return TechnologyContainerServices(
+                                            image: tech.avatar,
+                                            title: tech.name,
+                                          );
+                                        }).toList(),
+                                      );
+                                    },
+                                    error: (_, __) => const SizedBox.shrink(),
+                                    loading: () => const SizedBox.shrink(),
+                                  );
+                                })
+                              : Wrap(
+                                  runSpacing: Spacing.s8,
+                                  spacing: Spacing.s8,
+                                  children: service.technologies.map(
+                                    (tech) {
+                                      return TechnologyContainer(
+                                        image: tech.image,
+                                        title: tech.name,
+                                      );
+                                    },
+                                  ).toList(),
+                                ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),

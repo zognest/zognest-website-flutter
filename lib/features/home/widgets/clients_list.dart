@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/riverpod/controller.dart';
-
 import '../../our_work/models/project.dart';
 
 class ClientsMarquee extends ConsumerStatefulWidget {
@@ -50,6 +50,7 @@ class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
 
   @override
   Widget build(BuildContext context) {
+
     final theme = Theme.of(context);
     final project = ref.watch(appControllerProvider).projects;
     return project.when(
@@ -83,7 +84,8 @@ class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
                       },
                       overlayColor:
                           MaterialStateProperty.all(Palette.transparent),
-                      child: ItemServiceMarquee(project: project[i]),
+                      child: ItemServiceMarquee(
+                          project: project[i]),
                     ),
                   );
                 },
@@ -99,38 +101,55 @@ class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
   }
 }
 
-class ItemServiceMarquee extends StatelessWidget {
+class ItemServiceMarquee extends StatefulWidget {
   const ItemServiceMarquee({super.key, required this.project});
 
   final Project project;
 
   @override
+  State<ItemServiceMarquee> createState() => _ItemServiceMarqueeState();
+}
+
+class _ItemServiceMarqueeState extends State<ItemServiceMarquee> {
+       bool isHovering=false ;
+
+   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const ShapeDecoration(
-        color: Palette.cardBackgroundColor,
-        shape: StadiumBorder(
-          side: BorderSide(color: Color(0xff3B3B3B)),
+    return InkWell(
+      onTap: (){},
+      onHover: (isHovering){
+        setState(() {
+         this.isHovering = isHovering;
+        });
+      },
+      child: Container(
+        decoration:  ShapeDecoration(
+          color:isHovering ?Colors.yellow : Palette.cardBackgroundColor,
+          shape: const StadiumBorder(
+            side: BorderSide(color: Color(0xff3B3B3B)),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(120),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(120),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Image.network(widget.project.icon),
               ),
-              clipBehavior: Clip.antiAlias,
-              child: Image.network(project.icon),
-            ),
-            const SizedBox(width: 10),
-            Text(project.title),
-            const SizedBox(width: 8),
-          ],
+              const SizedBox(width: 10),
+              Text(widget.project.title, style: TextStyle(
+                color: isHovering ?  Palette.black: Palette.white
+              ),),
+              const SizedBox(width: 8),
+            ],
+          ),
         ),
       ),
     );

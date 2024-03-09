@@ -1,7 +1,10 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -15,7 +18,11 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
 
+import '../../../firebase_services/firestore_services.dart';
+import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/network_fading_image.dart';
+import '../../our_services/widgets/service_card_mobile.dart';
+import '../../our_services/widgets/services_browser.dart';
 
 class ZognestStaff extends StatefulWidget {
   const ZognestStaff({super.key});
@@ -88,6 +95,7 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                             ? Constants.listCardWidth
                             : 300,
                         child: Card(
+                          color: Colors.transparent,
                           clipBehavior: Clip.antiAlias,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -139,11 +147,11 @@ class FrontCard extends StatelessWidget {
                     topRight: Radius.circular(25)),
               ),
               child: Container(
-                color: staff.color,
+                color:Colors.transparent,
                 width: double.infinity,
                 child: NetworkFadingImage(
                   path: staff.avatar,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -228,12 +236,12 @@ class BackCard extends StatelessWidget {
           Opacity(
             opacity: 0.3,
             child: ColoredBox(
-              color: staff.color,
+              color:Colors.transparent,
               child: NetworkFadingImage(
                 path: staff.avatar,
                 width: double.infinity,
                 height: double.infinity,
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
               ),
             ),
           ),

@@ -7,6 +7,8 @@ abstract final class Strings {
   static const ourServices = 'Our services';
   static const ourWork = 'Our work';
   static const ourSpace = 'Our space';
+  static const about = 'ABOUT ';
+  static const us = 'US. ';
   static const aboutUs = 'About us';
   static const getInTouch = 'Get in touch';
   static const beyond = 'Beyond';
@@ -20,8 +22,11 @@ abstract final class Strings {
   static const to = 'To ';
   static const empty = '';
   static const sky = 'Sky.';
+
+  static const zognestDescriptionAboutUS =
+      'At Zognest, we\'re not just a team of developers - we\'re a family united by our passion for technology and our drive to make a difference. Our journey began with a simple idea: to harness the power of innovation to solve real-world problems and improve lives.With over five years of experience under our wings, we\'ve honed our skills and built a reputation for excellence in the industry. But what truly sets us apart is our team - a diverse group of talented individuals who bring creativity, expertise, and a fresh perspective to every project we undertake.So whether you\'re a startup looking to disrupt the market or an established business seeking to stay ahead of the curve, we invite you to join us on this exciting journey. Together, let\'s spread our wings and soar to new heights with Zognest.';
   static const zognestDescription =
-      'Zognest is a Technology-based startup company that helps your business to explore the Sky With UI/UX designing, Prototyping, Designing, and developing mobile applications, websites, web applications, Branding, brainstorming, and Digital solutions.';
+      'Welcome to Zognest, where innovation takes flight! We\'re not your average startup - we\'re a flock of determined birds, soaring high in the sky of technology, driven by the passion to solve problems and create solutions that benefit humanity.';
   static const what = 'What ';
   static const we = 'We ';
   static const offer = 'Offer.';

@@ -19,8 +19,8 @@ class ZognestLogo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          Assets.zognestLogoPng,
+        SvgPicture.network(
+          Assets.zognestLogoSvg,
           fit: BoxFit.contain,
           height: size ?? 50,
           width: size ?? 50,

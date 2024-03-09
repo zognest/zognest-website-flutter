@@ -11,6 +11,8 @@ import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
+import 'package:zognest_website/shared/widgets/mouse_animation.dart';
+
 import '../../../config/responsive.dart';
 import '../../../shared/widgets/gradient_container.dart';
 import '../../../shared/widgets/image_text.dart';
@@ -49,34 +51,36 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: PrimaryAppBar(scrollController: _controller),
-      drawer: const PrimaryDrawer(),
-      body: SingleChildScrollView(
-        controller: _controller,
-        child: Stack(
-          children: [
-            const Background(),
-            Foreground(
-              onTabDown: () {
-                _controller.animateTo(
-                  _controller.position.maxScrollExtent,
-                  duration:
-                      const Duration(milliseconds: Constants.scrollToDuration),
-                  curve: Curves.ease,
-                );
-              },
-              onTabUp: () {
-                _controller.animateTo(
-                  _controller.position.minScrollExtent,
-                  duration:
-                      const Duration(milliseconds: Constants.scrollToDuration),
-                  curve: Curves.ease,
-                );
-              },
-            ),
-          ],
+    return AnimatedMouse(
+      scaffold: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: PrimaryAppBar(scrollController: _controller),
+        drawer: const PrimaryDrawer(),
+        body: SingleChildScrollView(
+          controller: _controller,
+          child: Stack(
+            children: [
+              const Background(),
+              Foreground(
+                onTabDown: () {
+                  _controller.animateTo(
+                    _controller.position.maxScrollExtent,
+                    duration: const Duration(
+                        milliseconds: Constants.scrollToDuration),
+                    curve: Curves.ease,
+                  );
+                },
+                onTabUp: () {
+                  _controller.animateTo(
+                    _controller.position.minScrollExtent,
+                    duration: const Duration(
+                        milliseconds: Constants.scrollToDuration),
+                    curve: Curves.ease,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

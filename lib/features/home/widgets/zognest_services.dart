@@ -8,8 +8,10 @@ import 'package:zognest_website/features/home/models/service.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/flipping_widget.dart';
+import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
+
 import '../../../riverpod/controller.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 import '../../../shared/widgets/technology_container.dart';
@@ -154,8 +156,9 @@ class FrontService extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
-          Opacity(
+          GreyscaleFilter(
             opacity: 0.3,
+            isHovered: false,
             child: NetworkFadingImage(
               path: service.backgroundImage,
               width: double.infinity,

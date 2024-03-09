@@ -1,44 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-class PositionController extends ChangeNotifier {
-  Offset _selectedPosition = Offset.zero;
 
-  Offset get selectedPosition => _selectedPosition;
+class AnimatedMouse extends HookWidget {
+  const AnimatedMouse({super.key, required this.scaffold});
 
-  void updateSelectedPosition(Offset position) {
-    _selectedPosition = position;
-    notifyListeners();
-  }
-}
-class MouseRegion extends HookWidget {
-  final PositionController positionController;
-
-  const MouseRegion({super.key, required this.positionController});
+  final Scaffold scaffold;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (TapDownDetails details) {
-        positionController.updateSelectedPosition(details.localPosition);
+    final position = useState(const Offset(0, 0));
+    return MouseRegion(
+      onHover: (pointer) {
+        position.value = pointer.position;
       },
       child: Stack(
         children: [
-          Positioned(
-            left: positionController.selectedPosition.dx - 25,
-            top: positionController.selectedPosition.dy - 25,
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blue.withOpacity(0.3),
-                    blurRadius: 10,
-                  ),
-                ],
-              ),
+          scaffold,
+          AnimatedPositioned(
+            // TODO: Play with durations
+            duration: const Duration(milliseconds: 500),
+            // TODO: Play with curves
+            // curve: ,
+            // TODO: Play with values
+            top: position.value.dy - 25,
+            left: position.value.dx - 25,
+            // TODO: Design widget
+            child: const CircleAvatar(
+              backgroundColor: Colors.blue,
+              radius: 16,
+            ),
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 1000),
+            // curve: ,
+            top: position.value.dy - 25,
+            left: position.value.dx - 25,
+            child: const CircleAvatar(
+              backgroundColor: Colors.red,
+              radius: 16,
             ),
           ),
         ],

@@ -7,15 +7,14 @@ class FloatingIcon extends StatefulWidget {
     this.width,
     required this.alignment,
     this.positionAnimation,
-    required this.isHorizontal
+    required this.isHorizontal,
   });
 
   final String assets;
   final double? width;
   final AlignmentGeometry alignment;
   final Animation<Offset>? positionAnimation;
-  final bool isHorizontal ;
-
+  final bool isHorizontal;
 
   @override
   State<FloatingIcon> createState() => _FloatingIconState();
@@ -30,17 +29,22 @@ class _FloatingIconState extends State<FloatingIcon>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 8),
+      duration: const Duration(seconds: 4),
     )..repeat(reverse: true);
     _offsetAnimation = Tween<Offset>(
-      begin:widget.isHorizontal ? const Offset(-0.4,0.0):const Offset(0.0, -0.1),
-      end: widget.isHorizontal ?const Offset(.1,0.0):const Offset(0.0, 0.1),
+      begin: widget.isHorizontal
+          ? const Offset(-0.4, 0.0)
+          : const Offset(0.0, -0.03),
+      end: widget.isHorizontal
+          ? const Offset(0.1, 0.0)
+          : const Offset(0.0, 0.03),
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOutQuad,
     ));
     super.initState();
   }
+
 // widget.isHorizontal ?0.0:-0.1
   @override
   void dispose() {

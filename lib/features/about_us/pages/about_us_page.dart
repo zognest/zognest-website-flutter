@@ -9,6 +9,8 @@ import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 import 'package:zognest_website/shared/widgets/image_text.dart';
 
+import '../../../resources/strings.dart';
+
 class AboutUsPage extends StatefulWidget {
   const AboutUsPage({super.key});
 
@@ -47,7 +49,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
             Column(
               children: [
                 const SizedBox(height: Constants.appBarHeight * 1.5),
-                const ImageText(
+                const ImageTextAboutUs(
                   image: Assets.zognestTeam,
                   hasGradient: true,
                 ),

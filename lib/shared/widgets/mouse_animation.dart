@@ -18,12 +18,12 @@ class AnimatedMouse extends HookWidget {
           scaffold,
           AnimatedPositioned(
             // TODO: Play with durations
-            duration: const Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 1500),
             // TODO: Play with curves
-            // curve: ,
+             curve: Curves.easeIn,
             // TODO: Play with values
-            top: position.value.dy - 25,
-            left: position.value.dx - 25,
+            top: position.value.dy - 15,
+            left: position.value.dx - 15,
             // TODO: Design widget
             child: const CircleAvatar(
               backgroundColor: Colors.blue,
@@ -31,13 +31,17 @@ class AnimatedMouse extends HookWidget {
             ),
           ),
           AnimatedPositioned(
-            duration: const Duration(milliseconds: 1000),
-            // curve: ,
-            top: position.value.dy - 25,
-            left: position.value.dx - 25,
-            child: const CircleAvatar(
-              backgroundColor: Colors.red,
-              radius: 16,
+            duration: const Duration(milliseconds: 3000),
+            curve: Curves.easeIn,
+            top: position.value.dy - 12,
+            left: position.value.dx - 12,
+            child:  Container(
+              height: 25,
+              width: 25,
+              decoration: const BoxDecoration(
+                  color: Colors.grey,
+                borderRadius: BorderRadius.all(Radius.circular(15))
+              ),
             ),
           ),
         ],

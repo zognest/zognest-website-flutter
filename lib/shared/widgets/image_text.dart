@@ -250,7 +250,7 @@ class ImageTextAboutUs extends StatelessWidget {
                                           ?.copyWith(
                                         color: Palette.primary,
                                         fontVariations:
-                                        TextThemes.fontVariation(3),
+                                        TextThemes.fontVariation(5),
                                       ),
                                     ),
 
@@ -314,7 +314,7 @@ class ImageTextMobileAboutUs extends StatelessWidget {
                       TextSpan(
                         text: Strings.us.toUpperCase(),
                         style: theme.textTheme.displaySmall?.copyWith(
-                          fontVariations: TextThemes.fontVariation(3),
+                          fontVariations: TextThemes.fontVariation(5),
                         ),
                       ),
                     ],

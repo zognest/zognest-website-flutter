@@ -8,6 +8,7 @@ import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
 import '../../../config/responsive.dart';
+import '../../../shared/widgets/mouse_animation.dart';
 import '../models/purchasable_service.dart';
 
 class OurServicesPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _OurServicesPageState extends State<OurServicesPage> {
     super.initState();
     _controller = ScrollController();
   }
-//
+
   @override
   void dispose() {
     _controller.dispose();
@@ -37,7 +38,8 @@ class _OurServicesPageState extends State<OurServicesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AnimatedMouse(
+        scaffold: Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PrimaryAppBar(scrollController: _controller),
       drawer: const PrimaryDrawer(),
@@ -68,6 +70,6 @@ class _OurServicesPageState extends State<OurServicesPage> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

@@ -124,7 +124,7 @@ class _ItemServiceMarqueeState extends State<ItemServiceMarquee> {
       },
       child: Container(
         decoration:  ShapeDecoration(
-          color:isHovering ?Colors.yellow : Palette.cardBackgroundColor,
+          color:isHovering ?Palette.primary : Palette.cardBackgroundColor,
           shape: const StadiumBorder(
             side: BorderSide(color: Color(0xff3B3B3B)),
           ),

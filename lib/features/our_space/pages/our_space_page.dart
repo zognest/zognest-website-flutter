@@ -8,6 +8,8 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
+import '../../../shared/widgets/mouse_animation.dart';
+
 class OurSpacePage extends StatefulWidget {
   const OurSpacePage({super.key});
 
@@ -34,7 +36,8 @@ class _OurSpacePageState extends State<OurSpacePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   return AnimatedMouse(
+        scaffold: Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PrimaryAppBar(scrollController: _controller),
       drawer: const PrimaryDrawer(),
@@ -66,6 +69,6 @@ class _OurSpacePageState extends State<OurSpacePage> {
           ),
         ],
       ),
-    );
+        ));
   }
 }

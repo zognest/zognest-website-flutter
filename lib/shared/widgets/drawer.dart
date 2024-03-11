@@ -8,7 +8,6 @@ import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/social_button.dart';
-
 import '../../resources/assets.dart';
 import '../../resources/strings.dart';
 import 'circle_button.dart';

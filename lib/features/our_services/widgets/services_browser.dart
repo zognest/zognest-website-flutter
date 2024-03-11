@@ -103,9 +103,10 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w800,
                         color: theme.primaryColor,
                         fontFamily: 'SF Pro Rounded',
+                        height: 1,
                       ),
                     ),
                     const SizedBox(height: Spacing.s8),
@@ -115,6 +116,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.bodySmall?.copyWith(
                           fontFamily: 'SF Pro Rounded',
+                          fontWeight: FontWeight.w500,
                           fontSize: Responsive.isDesktop(context) ? 20 : 16),
                     ),
                     const Expanded(child: SizedBox()),

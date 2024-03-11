@@ -1,8 +1,7 @@
 abstract final class Strings {
   static const routeNotFound = '404 Page doesn\'t exist';
-  static const zog = 'ZOG';
-  static const nest = 'NEST';
-  static const solutions = 'SOLUTIONS';
+
+  static const zognest = 'ZOGNEST';
   static const home = 'Home';
   static const ourServices = 'Our services';
   static const ourWork = 'Our work';
@@ -16,7 +15,7 @@ abstract final class Strings {
   static const budget = 'Budget';
   static const bookOurServices = 'Book our services';
   static const beyondSpaceBody =
-      'Freedom serves as the foundation on which we build excellent experiences.';
+      'Your Journey to Success Starts with Zognest ';
   static const helpingYourBusiness = 'Helping your business ';
   static const exploreThe = 'Explore the ';
   static const to = 'To ';
@@ -56,7 +55,7 @@ abstract final class Strings {
   static const our = 'our ';
   static const blogs = 'blogs.';
   static const zognestMail = 'info@zognest.com';
-  static const zognest = 'zognest';
+  static const textZognest = 'zognest';
   static const get = 'get ';
   static const inText = 'in';
   static const touch = 'touch';

@@ -23,4 +23,5 @@ abstract final class Spacing {
   // Extra Large
   static const double xl60 = 60;
   static const double xl72 = 72;
+  static const double xl82 = 84;
 }

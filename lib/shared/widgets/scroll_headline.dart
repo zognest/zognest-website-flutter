@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -21,10 +22,10 @@ class ScrollHeadline extends StatelessWidget {
     final theme = Theme.of(context);
     return Padding(
       padding: EdgeInsets.symmetric(
-     horizontal: Constants.horizontalPadding,
+        horizontal: Constants.horizontalPadding,
         vertical: Responsive.isDesktop(context) ? Spacing.l40 : Spacing.m16,
       ),
-      child: Row(
+      child:  Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [

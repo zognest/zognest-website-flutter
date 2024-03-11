@@ -108,13 +108,6 @@ class BeyondSpace extends StatelessWidget {
 
 class BeyondSpaceCarousel extends ConsumerWidget {
   const BeyondSpaceCarousel({super.key});
-/* projects.map((project) {
-            return NetworkFadingImage(
-              path:
-              project.splash,
-              fit: BoxFit.fill,
-            );
-          }).toList()*/
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final projects = ref.watch(appControllerProvider).projects;
@@ -124,7 +117,6 @@ class BeyondSpaceCarousel extends ConsumerWidget {
           items: projects
               .where((project) => project.splash != null)
               .map((project) {
-            // return network fading image
             return NetworkFadingImage(path: project.splash!);
           }).toList(),
           options: CarouselOptions(

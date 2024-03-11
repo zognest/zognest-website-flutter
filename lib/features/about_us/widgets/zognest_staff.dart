@@ -1,4 +1,3 @@
-// ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +94,7 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                             ? Constants.listCardWidth
                             : 300,
                         child: Card(
-                          color: Colors.transparent,
+                          color: Palette.transparent,
                           clipBehavior: Clip.antiAlias,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -135,7 +134,7 @@ class FrontCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      color: Palette.cardBackgroundColor,
+      color: Palette.transparent,
       child: Column(
         children: [
           Expanded(
@@ -230,7 +229,7 @@ class BackCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      color: Palette.cardBackgroundColor,
+      color: Palette.transparent,
       child: Stack(
         children: [
           Opacity(

@@ -39,48 +39,49 @@ class _AboutUsPageState extends State<AboutUsPage> {
   @override
   Widget build(BuildContext context) {
     return AnimatedMouse(
-        scaffold: Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: PrimaryAppBar(scrollController: _controller),
-      drawer: const PrimaryDrawer(),
-      body: SingleChildScrollView(
-        controller: _controller,
-        child: Stack(
-          children: [
-            SvgPicture.asset(Assets.gridLines),
-            Column(
-              children: [
-                const SizedBox(height: Constants.appBarHeight * 1.5),
-                const ImageTextAboutUs(
-                  image: Assets.zognestTeam,
-                  hasGradient: true,
-                ),
-                const SizedBox(height: Constants.sectionSpacing),
-                const ZognestStaff(),
-                const SizedBox(height: Constants.sectionSpacing),
-                const Divider(),
-                Image.asset(
-                  Responsive.isDesktop(context)
-                      ? Assets.aboutUsText
-                      : Assets.mobileAboutUsText,
-                  width: double.infinity,
-                  alignment: Alignment.bottomCenter,
-                  fit: BoxFit.contain,
-                ),
-                const SizedBox(height: Constants.sectionSpacing),
-                Footer(
-                  onTabUp: () => _controller.animateTo(
-                    _controller.position.minScrollExtent,
-                    duration: const Duration(
-                        milliseconds: Constants.scrollToDuration),
-                    curve: Curves.ease,
+      scaffold: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: PrimaryAppBar(scrollController: _controller),
+        drawer: const PrimaryDrawer(),
+        body: SingleChildScrollView(
+          controller: _controller,
+          child: Stack(
+            children: [
+              SvgPicture.asset(Assets.gridLines),
+              Column(
+                children: [
+                  const SizedBox(height: Constants.appBarHeight * 1.5),
+                  const ImageTextAboutUs(
+                    image: Assets.zognestTeam,
+                    hasGradient: true,
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const SizedBox(height: Constants.sectionSpacing),
+                  const ZognestStaff(),
+                  const SizedBox(height: Constants.sectionSpacing),
+                  const Divider(),
+                  Image.asset(
+                    Responsive.isDesktop(context)
+                        ? Assets.aboutUsText
+                        : Assets.mobileAboutUsText,
+                    width: double.infinity,
+                    alignment: Alignment.bottomCenter,
+                    fit: BoxFit.contain,
+                  ),
+                  const SizedBox(height: Constants.sectionSpacing),
+                  Footer(
+                    onTabUp: () => _controller.animateTo(
+                      _controller.position.minScrollExtent,
+                      duration: const Duration(
+                          milliseconds: Constants.scrollToDuration),
+                      curve: Curves.ease,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

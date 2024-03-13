@@ -234,6 +234,7 @@ class ImageTextAboutUs extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: Spacing.l32),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
                               child: AutoSizeText.rich(

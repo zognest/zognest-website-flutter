@@ -29,7 +29,7 @@ class Constants {
   static const mobileVerticalPadding = Spacing.m20;
 
   /// The total height of the [PrimaryAppBar]
-  static const appBarHeight = Spacing.xl72;
+  static const appBarHeight = Spacing.xl82;
 
   /// The spacing between each component
   static const sectionSpacing = 75.0;

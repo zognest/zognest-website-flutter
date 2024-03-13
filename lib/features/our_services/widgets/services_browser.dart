@@ -15,6 +15,8 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 import '../../../riverpod/controller.dart';
+import '../../../shared/widgets/frosted_container.dart';
+import '../../../shared/widgets/greyscale_filter.dart';
 import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
@@ -81,75 +83,93 @@ class ServiceItem extends ConsumerStatefulWidget {
 
 class _ServiceItemState extends ConsumerState<ServiceItem> {
   late bool added = true;
+
+  bool isHovering=false ;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cartServices = ref.watch(appControllerProvider).cartServices;
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Container(
-        color: Palette.cardBackgroundColor,
-        child: Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(Spacing.m20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AutoSizeText(
-                      widget.service.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w900,
-                        color: theme.primaryColor,
-                        fontFamily: 'SF Pro Rounded',
-                      ),
+    return InkWell(
+      onTap: (){},
+      onHover: (isHovering){
+        setState(() {
+          this.isHovering = isHovering;
+        });
+      },
+      child: Card(
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Container(
+            color: isHovering ?Palette.primary : Palette.cardBackgroundColor,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(Spacing.m20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AutoSizeText(
+                          widget.service.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color:isHovering?Palette.black: theme.primaryColor,
+                            fontFamily: 'SF Pro Rounded',
+                            height: 1,
+                          ),
+                        ),
+                        const SizedBox(height: Spacing.s8),
+                        AutoSizeText(
+                          widget.service.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color:isHovering?Palette.black:Palette.white ,
+                              fontFamily: 'SF Pro Rounded',
+                              fontWeight: FontWeight.w500,
+                              fontSize: Responsive.isDesktop(context) ? 20 : 16),
+                        ),
+                        const Expanded(child: SizedBox()),
+                        PrimaryButton(
+                          backgroundColor:isHovering? Palette.black: Palette.primary,
+                          title: !cartServices.contains(widget.service)
+                              ? Strings.add
+                              : Strings.added,
+                          textStyle: theme.textTheme.labelLarge,
+                          width: Constants.servicesBrowserItemWidth * 0.2,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: Constants.listButtonVerticalPadding,
+                            horizontal: Constants.listButtonHorizontalPadding,
+                          ),
+                          enabled: !cartServices.contains(widget.service),
+                          onTap: () {
+                            ref
+                                .read(appControllerProvider.notifier)
+                                .addService(widget.service);
+                          },
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: Spacing.s8),
-                    AutoSizeText(
-                      widget.service.description,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                          fontFamily: 'SF Pro Rounded',
-                          fontSize: Responsive.isDesktop(context) ? 20 : 16),
-                    ),
-                    const Expanded(child: SizedBox()),
-                    PrimaryButton(
-                      title: !cartServices.contains(widget.service)
-                          ? Strings.add
-                          : Strings.added,
-                      textStyle: theme.textTheme.labelLarge,
-                      width: Constants.servicesBrowserItemWidth * 0.2,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: Constants.listButtonVerticalPadding,
-                        horizontal: Constants.listButtonHorizontalPadding,
-                      ),
-                      enabled: !cartServices.contains(widget.service),
-                      onTap: () {
-                        ref
-                            .read(appControllerProvider.notifier)
-                            .addService(widget.service);
-                      },
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: GreyscaleFilter(
+                    isHovered:isHovering ,
+                    child: NetworkFadingImage(
+                      path: widget.service.image,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: NetworkFadingImage(
-                path: widget.service.image,
-                height: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -385,3 +405,13 @@ class ServicesCart extends HookConsumerWidget {
     );
   }
 }
+
+// branding https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/services%2FBranding.png?alt=media&token=1cf566c9-30b6-4ccd-aee1-d694bc1cf9bf
+// strage https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/services%2FStrategy%26brainstorming.png?alt=media&token=722b18cb-cb64-4535-9bf3-35bca528fa93
+//backend https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/services%2Fbackend.png?alt=media&token=4b2b54b2-4bd1-4856-a8aa-90f36ee21aa7
+//mobile app https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/services%2Fmobile_app.png?alt=media&token=4ce7f246-969f-41e5-b97a-3ed5caaf2109
+//our https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/services%2Four_dedicatedTeams.png?alt=media&token=863861e2-e4b8-49f9-b46e-01be3a874eaf
+//sass https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/services%2Fsaas.png.png?alt=media&token=dde89205-ef69-439a-accd-d24561b46390
+// social media https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/services%2Fsocial_media.png?alt=media&token=dd8d1d28-eb53-49b6-a763-1b27c4308d6a
+//ui https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/services%2Fui_ux.png?alt=media&token=d373fbcc-87e6-43b1-bd3d-87c7375941e6
+// web https://firebasestorage.googleapis.com/v0/b/zognest-website.appspot.com/o/services%2Fweb_pwa.png?alt=media&token=31331897-2eee-4ce1-a930-273d94c79729

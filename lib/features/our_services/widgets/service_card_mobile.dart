@@ -95,7 +95,7 @@ class ServicesCartMobile extends HookWidget {
                                                     fontFamily:
                                                         'SF Pro Rounded',
                                                     fontWeight:
-                                                        FontWeight.w600,
+                                                        FontWeight.w500,
                                                   ),
                                                 ),
                                               ],

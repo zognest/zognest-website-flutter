@@ -42,7 +42,7 @@ class _ZognestProjectsState extends State<ZognestProjects> {
     return Column(
       children: [
         if (Responsive.isDesktop(context)) const Divider(),
-        ScrollHeadline(
+       /* ScrollHeadline(
           headline: TextSpan(
             children: [
               TextSpan(
@@ -71,7 +71,7 @@ class _ZognestProjectsState extends State<ZognestProjects> {
             );
             currentIndex++;
           },
-        ),
+        ),*/
         Consumer(builder: (context, ref, _) {
           final project = ref.watch(appControllerProvider).projects;
           return project.when(

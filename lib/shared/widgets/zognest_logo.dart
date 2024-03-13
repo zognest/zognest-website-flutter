@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
@@ -43,24 +44,14 @@ class ZognestText extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: Strings.zog,
-                style: theme.textTheme.labelLarge
-                    ?.copyWith(color: theme.primaryColor),
-              ),
-              TextSpan(
-                text: Strings.nest,
-                style: theme.textTheme.labelLarge,
-              ),
-            ],
-          ),
-        ),
         Text(
-          Strings.solutions,
-          style: theme.textTheme.labelMedium?.copyWith(height: 1),
+          Strings.textZognest,
+          style: theme.textTheme.labelMedium?.copyWith(
+            fontWeight: FontWeight.w900,
+            fontSize: 44,
+            color: Palette.primary,
+            fontFamily: 'SF Pro Rounded',
+          ),
         ),
       ],
     );

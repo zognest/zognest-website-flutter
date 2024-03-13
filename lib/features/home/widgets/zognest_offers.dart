@@ -8,7 +8,6 @@ import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
-
 import '../../../../config/responsive.dart';
 
 class ZognestOffers extends StatefulWidget {
@@ -41,7 +40,7 @@ class _ZognestOffersState extends State<ZognestOffers> {
     return Column(
       children: [
         ScrollHeadline(
-          headline: TextSpan(
+          headline:TextSpan(
             text: "${Strings.what}\n".toUpperCase(),
             style: theme.textTheme.displaySmall,
             children: [

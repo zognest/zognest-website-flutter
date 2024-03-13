@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -15,7 +13,6 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 import '../../../riverpod/controller.dart';
-import '../../../shared/widgets/frosted_container.dart';
 import '../../../shared/widgets/greyscale_filter.dart';
 import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/network_fading_image.dart';
@@ -84,92 +81,99 @@ class ServiceItem extends ConsumerStatefulWidget {
 class _ServiceItemState extends ConsumerState<ServiceItem> {
   late bool added = true;
 
-  bool isHovering=false ;
+  bool isHovering = false;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cartServices = ref.watch(appControllerProvider).cartServices;
     return InkWell(
-      onTap: (){},
-      onHover: (isHovering){
+      onTap: () {},
+      onHover: (isHovering) {
         setState(() {
           this.isHovering = isHovering;
         });
       },
+      overlayColor: const MaterialStatePropertyAll(Palette.transparent),
       child: Card(
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Container(
-            color: isHovering ?Palette.primary : Palette.cardBackgroundColor,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(Spacing.m20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AutoSizeText(
-                          widget.service.title,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w800,
-                            color:isHovering?Palette.black: theme.primaryColor,
-                            fontFamily: 'SF Pro Rounded',
-                            height: 1,
-                          ),
+        clipBehavior: Clip.hardEdge,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Container(
+          color: isHovering ? Palette.primary : Palette.cardBackgroundColor,
+          child: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AutoSizeText(
+                        widget.service.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 24,
+                          color:
+                              isHovering ? Palette.black : theme.primaryColor,
+                          fontFamily: 'SF Pro Rounded',
+                          height: 1,
                         ),
-                        const SizedBox(height: Spacing.s8),
-                        AutoSizeText(
-                          widget.service.description,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color:isHovering?Palette.black:Palette.white ,
+                      ),
+                      const SizedBox(height: Spacing.s8),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Text(
+                            widget.service.description,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: isHovering ? Palette.black : Palette.white,
                               fontFamily: 'SF Pro Rounded',
                               fontWeight: FontWeight.w500,
-                              fontSize: Responsive.isDesktop(context) ? 20 : 16),
-                        ),
-                        const Expanded(child: SizedBox()),
-                        PrimaryButton(
-                          backgroundColor:isHovering? Palette.black: Palette.primary,
-                          title: !cartServices.contains(widget.service)
-                              ? Strings.add
-                              : Strings.added,
-                          textStyle: theme.textTheme.labelLarge,
-                          width: Constants.servicesBrowserItemWidth * 0.2,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: Constants.listButtonVerticalPadding,
-                            horizontal: Constants.listButtonHorizontalPadding,
+                              fontSize: 16,
+                            ),
                           ),
-                          enabled: !cartServices.contains(widget.service),
-                          onTap: () {
-                            ref
-                                .read(appControllerProvider.notifier)
-                                .addService(widget.service);
-                          },
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: Spacing.s8),
+                      PrimaryButton(
+                        backgroundColor:
+                            isHovering ? Palette.black : Palette.primary,
+                        title: !cartServices.contains(widget.service)
+                            ? Strings.add
+                            : Strings.added,
+                        textStyle: theme.textTheme.labelLarge,
+                        width: Constants.servicesBrowserItemWidth * 0.2,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: Constants.listButtonVerticalPadding,
+                          horizontal: Constants.listButtonHorizontalPadding,
+                        ),
+                        enabled: !cartServices.contains(widget.service),
+                        onTap: () {
+                          ref
+                              .read(appControllerProvider.notifier)
+                              .addService(widget.service);
+                        },
+                      ),
+                    ],
                   ),
                 ),
-                Expanded(
-                  child: GreyscaleFilter(
-                    isHovered:isHovering ,
-                    child: NetworkFadingImage(
-                      path: widget.service.image,
-                      height: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+              ),
+              Expanded(
+                child: GreyscaleFilter(
+                  isHovered: isHovering,
+                  child: NetworkFadingImage(
+                    path: widget.service.image,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
   }
 }
 
@@ -215,7 +219,7 @@ class ServicesCart extends HookConsumerWidget {
                           spacing: Spacing.m20,
                           children: cartServices.map((service) {
                             return Card(
-                              clipBehavior: Clip.antiAlias,
+                              clipBehavior: Clip.hardEdge,
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),

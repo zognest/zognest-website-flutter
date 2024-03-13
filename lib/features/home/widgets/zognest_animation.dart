@@ -45,7 +45,6 @@ class _FloatingIconState extends State<FloatingIcon>
     super.initState();
   }
 
-// widget.isHorizontal ?0.0:-0.1
   @override
   void dispose() {
     _animationController.dispose();

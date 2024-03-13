@@ -20,11 +20,11 @@ class ZognestLogo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.network(
+        SvgPicture.asset(
           Assets.zognestLogoSvg,
-          fit: BoxFit.contain,
-          height: size ?? 50,
-          width: size ?? 50,
+          fit: BoxFit.cover,
+          height: size,
+          width: size,
         ),
         if (!iconOnly) ...[
           const SizedBox(width: Spacing.s4),
@@ -41,19 +41,14 @@ class ZognestText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          Strings.textZognest,
-          style: theme.textTheme.labelMedium?.copyWith(
-            fontWeight: FontWeight.w900,
-            fontSize: 44,
-            color: Palette.primary,
-            fontFamily: 'SF Pro Rounded',
-          ),
-        ),
-      ],
+    return Text(
+      Strings.textZognest,
+      style: theme.textTheme.labelMedium?.copyWith(
+        fontWeight: FontWeight.w900,
+        fontSize: 44,
+        color: Palette.primary,
+        fontFamily: 'SF Pro Rounded',
+      ),
     );
   }
 }

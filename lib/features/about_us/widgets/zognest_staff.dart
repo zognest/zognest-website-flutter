@@ -1,27 +1,20 @@
 import 'dart:js' as js;
-import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
-import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/about_us/models/staff.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/flipping_widget.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
-import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
 
-import '../../../firebase_services/firestore_services.dart';
-import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/network_fading_image.dart';
-import '../../our_services/widgets/service_card_mobile.dart';
-import '../../our_services/widgets/services_browser.dart';
 
 class ZognestStaff extends StatefulWidget {
   const ZognestStaff({super.key});
@@ -95,7 +88,7 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                             : 300,
                         child: Card(
                           color: Palette.transparent,
-                          clipBehavior: Clip.antiAlias,
+                          clipBehavior: Clip.hardEdge,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(25)),
                           ),
@@ -139,14 +132,14 @@ class FrontCard extends StatelessWidget {
         children: [
           Expanded(
             child: Card(
-              clipBehavior: Clip.antiAlias,
+              clipBehavior: Clip.hardEdge,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25)),
               ),
               child: Container(
-                color:Colors.transparent,
+                color: Colors.transparent,
                 width: double.infinity,
                 child: NetworkFadingImage(
                   path: staff.avatar,

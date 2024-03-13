@@ -153,7 +153,7 @@ class FrontService extends StatelessWidget {
     final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: Clip.hardEdge,
       child: Stack(
         children: [
           GreyscaleFilter(
@@ -247,7 +247,7 @@ class BackService extends StatelessWidget {
     final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: Clip.hardEdge,
       child: Stack(
         children: [
           Opacity(
@@ -293,39 +293,18 @@ class BackService extends StatelessWidget {
                         child: SingleChildScrollView(
                           padding:
                               const EdgeInsets.symmetric(vertical: Spacing.s12),
-                          child: service.staffList
-                              ? Consumer(builder: (context, ref, tecnologies) {
-                                  final staff =
-                                      ref.watch(appControllerProvider).staff;
-                                  return staff.when(
-                                    data: (staff) {
-                                      return Wrap(
-                                        runSpacing: Spacing.s8,
-                                        spacing: Spacing.s8,
-                                        children: staff.map((tech) {
-                                          return TechnologyContainerServices(
-                                            image: tech.avatar,
-                                            title: tech.name,
-                                          );
-                                        }).toList(),
-                                      );
-                                    },
-                                    error: (_, __) => const SizedBox.shrink(),
-                                    loading: () => const SizedBox.shrink(),
-                                  );
-                                })
-                              : Wrap(
-                                  runSpacing: Spacing.s8,
-                                  spacing: Spacing.s8,
-                                  children: service.technologies.map(
-                                    (tech) {
-                                      return TechnologyContainer(
-                                        image: tech.image,
-                                        title: tech.name,
-                                      );
-                                    },
-                                  ).toList(),
-                                ),
+                          child: Wrap(
+                            runSpacing: Spacing.s8,
+                            spacing: Spacing.s8,
+                            children: service.technologies.map(
+                              (tech) {
+                                return TechnologyContainer(
+                                  image: tech.image,
+                                  title: tech.name,
+                                );
+                              },
+                            ).toList(),
+                          ),
                         ),
                       )
                     ],

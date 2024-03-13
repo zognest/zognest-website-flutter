@@ -36,10 +36,9 @@ class _EventCardState extends State<EventCard> {
         onHover: (over) => setState(() => this.over = over),
         overlayColor: MaterialStateProperty.all(Palette.transparent),
         child: Card(
-          shape:  RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20)
-          ),
-          clipBehavior: Clip.antiAlias,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
               Expanded(

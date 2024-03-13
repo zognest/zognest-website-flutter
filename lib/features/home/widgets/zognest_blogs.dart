@@ -1,3 +1,5 @@
+import "dart:js" as js;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -11,9 +13,9 @@ import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
+
 import '../../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
-import "dart:js" as js;
 
 class ZognestBlogs extends StatefulWidget {
   const ZognestBlogs({super.key});
@@ -139,7 +141,7 @@ class _BlogItemState extends State<BlogItem> {
               child: GreyscaleFilter(
                 isHovered: true,
                 child: Card(
-                  clipBehavior: Clip.antiAlias,
+                  clipBehavior: Clip.hardEdge,
                   child: NetworkFadingImage(
                     width: double.infinity,
                     path: widget.blog.image,

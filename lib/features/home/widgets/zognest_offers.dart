@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
@@ -8,64 +10,57 @@ import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
+
 import '../../../../config/responsive.dart';
 
-class ZognestOffers extends StatefulWidget {
+class ZognestOffers extends HookWidget {
   const ZognestOffers({super.key});
 
   @override
-  State<ZognestOffers> createState() => _ZognestOffersState();
-}
-
-class _ZognestOffersState extends State<ZognestOffers> {
-  late final ScrollController _controller;
-  int currentIndex = 1;
-  int hoveredIndex = -1;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final scrollController = useScrollController();
+    final currentIndex = useState(1);
+    final hoveredIndex = useState(-1);
+    final showAnimatedHeadline = useState(false);
     final theme = Theme.of(context);
     return Column(
       children: [
-        ScrollHeadline(
-          headline:TextSpan(
-            text: "${Strings.what}\n".toUpperCase(),
-            style: theme.textTheme.displaySmall,
-            children: [
-              TextSpan(
-                text: Strings.we.toUpperCase(),
-                style: theme.textTheme.displaySmall?.copyWith(
-                  foreground: TextThemes.foreground,
-                ),
-              ),
-              TextSpan(
-                  text: Strings.offer.toUpperCase(),
-                  style: theme.textTheme.displaySmall?.copyWith()),
-            ],
-          ),
-          onTapScroll: () {
-            if (_controller.offset == _controller.position.maxScrollExtent) {
-              currentIndex = 0;
-            }
-            _controller.animateTo(
-              Constants.zognestOffersItemWidth * currentIndex,
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.ease,
-            );
-            currentIndex++;
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
+            if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
           },
+          key: ValueKey(runtimeType.toString()),
+          child: ScrollHeadline(
+            headline: TextSpan(
+              text: "${Strings.what}\n".toUpperCase(),
+              style: theme.textTheme.displaySmall,
+              children: [
+                TextSpan(
+                  text: Strings.we.toUpperCase(),
+                  style: theme.textTheme.displaySmall?.copyWith(
+                    foreground: TextThemes.foreground,
+                  ),
+                ),
+                TextSpan(
+                    text: Strings.offer.toUpperCase(),
+                    style: theme.textTheme.displaySmall?.copyWith()),
+              ],
+            ),
+            showHeadline: showAnimatedHeadline.value,
+            onTapScroll: () {
+              if (scrollController.offset ==
+                  scrollController.position.maxScrollExtent) {
+                currentIndex.value = 0;
+              }
+              scrollController.animateTo(
+                Constants.zognestOffersItemWidth * currentIndex.value,
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.ease,
+              );
+              currentIndex.value++;
+            },
+          ),
         ),
         Consumer(builder: (context, ref, child) {
           final offers = ref.watch(appControllerProvider).offers;
@@ -77,22 +72,16 @@ class _ZognestOffersState extends State<ZognestOffers> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: Constants.horizontalPadding),
                   scrollDirection: Axis.horizontal,
-                  controller: _controller,
+                  controller: scrollController,
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {},
                       onHover: (over) {
-                        if (over) {
-                          hoveredIndex = index;
-                          setState(() {});
-                          return;
-                        }
-                        hoveredIndex = -1;
-                        setState(() {});
+                        hoveredIndex.value = over ? index : -1;
                       },
                       child: OfferItem(
                         offer: offers[index],
-                        colored: hoveredIndex == index,
+                        colored: hoveredIndex.value == index,
                       ),
                     );
                   },
@@ -121,7 +110,6 @@ class ZognestOffersMobile extends StatelessWidget {
     final theme = Theme.of(context);
     return Column(
       children: [
-        // const Divider(),
         ScrollHeadline(
           headline: TextSpan(
             text: '${Strings.what}\n'.toUpperCase(),
@@ -182,7 +170,7 @@ class OfferItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Card(
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: Clip.hardEdge,
       shape: const RoundedRectangleBorder(
         side: BorderSide(width: 0.5, color: Color(0xff121212)),
         borderRadius: BorderRadius.all(Radius.circular(25)),

@@ -6,7 +6,6 @@ import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/features/our_space/widgets/event_card.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/riverpod/controller.dart';
-//todo ask him if there update
 class ZognestEvents extends ConsumerStatefulWidget {
   const ZognestEvents({super.key});
 

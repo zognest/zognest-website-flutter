@@ -55,7 +55,7 @@ abstract final class Strings {
   static const our = 'our ';
   static const blogs = 'blogs.';
   static const zognestMail = 'info@zognest.com';
-  static const textZognest = 'zognest';
+  static const textZognest = 'ZOGNEST';
   static const get = 'get ';
   static const inText = 'in';
   static const touch = 'touch';

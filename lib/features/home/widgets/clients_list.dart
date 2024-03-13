@@ -1,56 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/riverpod/controller.dart';
+
 import '../../our_work/models/project.dart';
 
-class ClientsMarquee extends ConsumerStatefulWidget {
+class ClientsMarquee extends HookConsumerWidget {
   const ClientsMarquee({super.key});
 
   @override
-  ConsumerState<ClientsMarquee> createState() => _ClientsMarqueeState();
-}
-
-class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
-    with SingleTickerProviderStateMixin {
-  late final ScrollController _scrollController;
-  late final AnimationController _animationController;
-
-  double offset = 0.0;
-  int hoveredIndex = -1;
-
-  @override
-  initState() {
-    super.initState();
-    _scrollController = ScrollController();
-    _animationController = AnimationController(
-      vsync: this,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final hoveredIndex = useState(-1);
+    final offset = useState(0.0);
+    final scrollController = useScrollController();
+    final animationController = useAnimationController(
       duration: const Duration(milliseconds: 3000),
-    )..addListener(animationListener);
-    _animationController.forward();
-  }
+    );
+    useEffect(
+      () {
+        void animationListener() {
+          if (animationController.isCompleted) animationController.repeat();
+          offset.value += 1.0;
+          if (scrollController.hasClients) {
+            scrollController.jumpTo(offset.value);
+          }
+        }
 
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    _animationController.removeListener(animationListener);
-    _animationController.dispose();
-    super.dispose();
-  }
+        animationController.addListener(animationListener);
+        animationController.forward();
 
-  void animationListener() {
-    if (_animationController.isCompleted) _animationController.repeat();
-    offset += 1.0;
-    _scrollController.jumpTo(offset);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
+        return () => animationController.removeListener(animationListener);
+      },
+      [],
+    );
     final theme = Theme.of(context);
     final project = ref.watch(appControllerProvider).projects;
     return project.when(
@@ -63,7 +49,7 @@ class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
                   ? Constants.clientsMarqueeHeight
                   : Constants.mobileClientsMarqueeHeight,
               child: ListView.builder(
-                controller: _scrollController,
+                controller: scrollController,
                 padding: const EdgeInsets.symmetric(vertical: Spacing.s8),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
@@ -75,17 +61,19 @@ class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
                       onTap: () {},
                       onHover: (over) {
                         if (over) {
-                          setState(() => hoveredIndex = i);
-                          _animationController.stop(canceled: false);
+                          hoveredIndex.value = i;
+                          animationController.stop(canceled: false);
                           return;
                         }
-                        setState(() => hoveredIndex = -1);
-                        _animationController.repeat();
+                        hoveredIndex.value = -1;
+                        animationController.repeat();
                       },
                       overlayColor:
                           MaterialStateProperty.all(Palette.transparent),
                       child: ItemServiceMarquee(
-                          project: project[i]),
+                        project: project[i],
+                        isHovering: hoveredIndex.value == i,
+                      ),
                     ),
                   );
                 },
@@ -101,55 +89,47 @@ class _ClientsMarqueeState extends ConsumerState<ClientsMarquee>
   }
 }
 
-class ItemServiceMarquee extends StatefulWidget {
-  const ItemServiceMarquee({super.key, required this.project});
+class ItemServiceMarquee extends StatelessWidget {
+  const ItemServiceMarquee({
+    super.key,
+    required this.project,
+    required this.isHovering,
+  });
 
   final Project project;
+  final bool isHovering;
 
   @override
-  State<ItemServiceMarquee> createState() => _ItemServiceMarqueeState();
-}
-
-class _ItemServiceMarqueeState extends State<ItemServiceMarquee> {
-       bool isHovering=false ;
-
-   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){},
-      onHover: (isHovering){
-        setState(() {
-         this.isHovering = isHovering;
-        });
-      },
-      child: Container(
-        decoration:  ShapeDecoration(
-          color:isHovering ?Palette.primary : Palette.cardBackgroundColor,
-          shape: const StadiumBorder(
-            side: BorderSide(color: Color(0xff3B3B3B)),
-          ),
+    return Container(
+      decoration: ShapeDecoration(
+        color: isHovering ? Palette.primary : Palette.cardBackgroundColor,
+        shape: const StadiumBorder(
+          side: BorderSide(color: Color(0xff3B3B3B)),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(120),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: Image.network(widget.project.icon),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(120),
               ),
-              const SizedBox(width: 10),
-              Text(widget.project.title, style: TextStyle(
-                color: isHovering ?  Palette.black: Palette.white
-              ),),
-              const SizedBox(width: 8),
-            ],
-          ),
+              clipBehavior: Clip.hardEdge,
+              child: Image.network(project.icon),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              project.title,
+              style:
+                  TextStyle(color: isHovering ? Palette.black : Palette.white),
+            ),
+            const SizedBox(width: 8),
+          ],
         ),
       ),
     );

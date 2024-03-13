@@ -12,7 +12,6 @@ import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
-import 'package:zognest_website/shared/widgets/mouse_animation.dart';
 
 import '../../../config/responsive.dart';
 import '../../../shared/widgets/gradient_container.dart';
@@ -26,63 +25,49 @@ import '../widgets/zognest_offers.dart';
 import '../widgets/zognest_services.dart';
 import '../widgets/zognest_video.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends HookWidget {
   const HomePage({super.key});
 
   static const route = '/home';
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late final ScrollController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: PrimaryAppBar(scrollController: _controller),
-        drawer: const PrimaryDrawer(),
-        body: SingleChildScrollView(
-          controller: _controller,
-          child: Stack(
-            children: [
-              const Background(),
-              Foreground(
-                onTabDown: () {
-                  _controller.animateTo(
-                    _controller.position.maxScrollExtent,
+    final scrollController = useScrollController();
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: PrimaryAppBar(scrollController: scrollController),
+      drawer: const PrimaryDrawer(),
+      body: SingleChildScrollView(
+        controller: scrollController,
+        child: Stack(
+          children: [
+            const Background(),
+            Foreground(
+              onTabDown: () {
+                if (scrollController.hasClients) {
+                  scrollController.animateTo(
+                    scrollController.position.maxScrollExtent,
                     duration: const Duration(
                         milliseconds: Constants.scrollToDuration),
                     curve: Curves.ease,
                   );
-                },
-                onTabUp: () {
-                  _controller.animateTo(
-                    _controller.position.minScrollExtent,
+                }
+              },
+              onTabUp: () {
+                if (scrollController.hasClients) {
+                  scrollController.animateTo(
+                    scrollController.position.minScrollExtent,
                     duration: const Duration(
                         milliseconds: Constants.scrollToDuration),
                     curve: Curves.ease,
                   );
-                },
-              ),
-            ],
-          ),
+                }
+              },
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }
 
@@ -94,7 +79,7 @@ class Background extends StatelessWidget {
     return Stack(
       children: [
         SvgPicture.asset(Assets.gridLines),
-         Column(
+        Column(
           children: [
             const SizedBox(
               height: Constants.bgDecorationSpacing,
@@ -116,8 +101,8 @@ class Background extends StatelessWidget {
               ),
             ),
             const SizedBox(height: Constants.bgDecorationSpacing),
-              const FloatingIcon(
-                isHorizontal: true,
+            const FloatingIcon(
+              isHorizontal: false,
               assets: Assets.mercuries,
               alignment: Alignment.center,
             ),

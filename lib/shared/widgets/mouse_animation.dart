@@ -16,31 +16,32 @@ class AnimatedMouse extends HookWidget {
       child: Stack(
         children: [
           scaffold,
-          AnimatedPositioned(
-            // TODO: Play with durations
-            duration: const Duration(milliseconds: 1500),
-            // TODO: Play with curves
-             curve: Curves.easeIn,
-            // TODO: Play with values
-            top: position.value.dy - 15,
-            left: position.value.dx - 15,
-            // TODO: Design widget
-            child: const CircleAvatar(
-              backgroundColor: Colors.blue,
-              radius: 16,
+          AbsorbPointer(
+            absorbing: true,
+            child: AnimatedPositioned(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.ease,
+              top: position.value.dy - 15,
+              left: position.value.dx - 15,
+              child: const CircleAvatar(
+                backgroundColor: Colors.blue,
+                radius: 16,
+              ),
             ),
           ),
-          AnimatedPositioned(
-            duration: const Duration(milliseconds: 3000),
-            curve: Curves.easeIn,
-            top: position.value.dy - 12,
-            left: position.value.dx - 12,
-            child:  Container(
-              height: 25,
-              width: 25,
-              decoration: const BoxDecoration(
-                  color: Colors.grey,
-                borderRadius: BorderRadius.all(Radius.circular(15))
+          AbsorbPointer(
+            absorbing: true,
+            child: AnimatedPositioned(
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.ease,
+              top: position.value.dy - 15,
+              left: position.value.dx - 15,
+              child: Container(
+                height: 25,
+                width: 25,
+                decoration: const BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
               ),
             ),
           ),

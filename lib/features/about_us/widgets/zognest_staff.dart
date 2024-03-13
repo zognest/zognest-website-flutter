@@ -52,7 +52,7 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
     return Column(
       children: [
         const Divider(),
-        ScrollHeadline(
+       /* ScrollHeadline(
           headline: TextSpan(
             text: '',
             style: theme.textTheme.displaySmall,
@@ -76,7 +76,7 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
             );
             currentIndex++;
           },
-        ),
+        ),*/
         Consumer(builder: (__, ref, _) {
           final staff = ref.watch(appControllerProvider).staff;
           return staff.when(

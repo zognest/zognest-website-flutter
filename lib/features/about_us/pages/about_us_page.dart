@@ -38,8 +38,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedMouse(
-      scaffold: Scaffold(
+    return  Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PrimaryAppBar(scrollController: _controller),
         drawer: const PrimaryDrawer(),
@@ -81,7 +80,6 @@ class _AboutUsPageState extends State<AboutUsPage> {
             ],
           ),
         ),
-      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
@@ -16,60 +17,69 @@ import '../../../config/responsive.dart';
 import '../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ZognestClients extends StatefulWidget {
-  const ZognestClients({super.key});
+class ZognestClients extends HookWidget {
+   ZognestClients({super.key});
 
-  @override
-  State<ZognestClients> createState() => _ZognestClientsState();
-}
 
-class _ZognestClientsState extends State<ZognestClients> {
-  late final ScrollController _controller;
+
+
+  late final ScrollController controller;
   int currentIndex = 1;
 
-  @override
+
   void initState() {
-    super.initState();
-    _controller = ScrollController();
+    controller = ScrollController();
   }
 
-  @override
+
   void dispose() {
-    _controller.dispose();
-    super.dispose();
+    controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final controller = useScrollController();
+    final currentIndex = useState(1);
+    final hoveredIndex = useState(-1);
+    final showAnimatedHeadline = useState(false);
     return Column(
       children: [
         const Divider(),
-        ScrollHeadline(
-          headline: TextSpan(
-            children: [
-              TextSpan(
-                text: '${Strings.happy}\n'.toUpperCase(),
-                style: theme.textTheme.displaySmall
-                    ?.copyWith(foreground: TextThemes.foreground),
-              ),
-              TextSpan(
-                text: Strings.clients.toUpperCase(),
-                style: theme.textTheme.displaySmall,
-              ),
-            ],
-          ),
-          onTapScroll: () {
-            if (_controller.offset == _controller.position.maxScrollExtent) {
-              currentIndex = 0;
-            }
-            _controller.animateTo(
-              Constants.clientsItemWidth * currentIndex,
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.ease,
-            );
-            currentIndex++;
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
+            if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
           },
+          key: ValueKey(runtimeType.toString()),
+          child: ScrollHeadline(
+            headline: TextSpan(
+              children: [
+                TextSpan(
+                  text: '${Strings.happy}\n'.toUpperCase(),
+                  style: theme.textTheme.displaySmall
+                      ?.copyWith(foreground: TextThemes.foreground),
+                ),
+                TextSpan(
+                  text: Strings.clients.toUpperCase(),
+                  style: theme.textTheme.displaySmall,
+                ),
+              ],
+            ),
+            showHeadline: showAnimatedHeadline.value,
+            onTapScroll: () {
+              if (controller.offset ==
+                  controller.position.maxScrollExtent) {
+                currentIndex.value = 0;
+              }
+              controller.animateTo(
+                Constants.servicesCardWidth * currentIndex.value,
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.ease,
+              );
+              currentIndex.value++;
+            },
+          ),
         ),
         Consumer(builder: (context, ref, child) {
           final clientFeedbacks =
@@ -82,7 +92,7 @@ class _ZognestClientsState extends State<ZognestClients> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: Constants.horizontalPadding),
                   scrollDirection: Axis.horizontal,
-                  controller: _controller,
+                  controller: controller,
                   itemBuilder: (context, index) {
                     return ClientItem(clientFeedback: clientFeedbacks[index]);
                   },

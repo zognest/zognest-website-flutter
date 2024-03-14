@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
@@ -17,64 +19,65 @@ import '../../../shared/widgets/network_fading_image.dart';
 import '../../../shared/widgets/technology_container.dart';
 import '../../our_services/pages/our_services_page.dart';
 
-class ZognestServices extends StatefulWidget {
-  const ZognestServices({super.key});
+class ZognestServices extends HookWidget {
+    ZognestServices({super.key});
 
-  @override
-  State<ZognestServices> createState() => _ZognestServicesState();
-}
-
-class _ZognestServicesState extends State<ZognestServices> {
   late final ScrollController _controller;
-  int currentIndex = 1;
 
-  @override
+
   void initState() {
-    super.initState();
     _controller = ScrollController();
   }
 
-  @override
   void dispose() {
     _controller.dispose();
-    super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final controller = useScrollController();
+    final currentIndex = useState(1);
+    final showAnimatedHeadline = useState(false);
     return Column(
       children: [
         const Divider(),
-        ScrollHeadline(
-          headline: TextSpan(
-            text: 'services \n'.toUpperCase(),
-            style: theme.textTheme.displaySmall
-                ?.copyWith(fontWeight: FontWeight.w700),
-            children: [
-              TextSpan(
-                text: Strings.we.toUpperCase(),
-                style: theme.textTheme.displaySmall?.copyWith(
-                  foreground: TextThemes.foreground,
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
+            if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
+          },
+          key: ValueKey(runtimeType.toString()),
+          child: ScrollHeadline(
+            headline: TextSpan(
+              text: 'services \n'.toUpperCase(),
+              style: theme.textTheme.displaySmall
+                  ?.copyWith(fontWeight: FontWeight.w700),
+              children: [
+                TextSpan(
+                  text: Strings.we.toUpperCase(),
+                  style: theme.textTheme.displaySmall?.copyWith(
+                    foreground: TextThemes.foreground,
+                  ),
                 ),
-              ),
-              TextSpan(text: Strings.offer.toUpperCase()),
-            ],
+                TextSpan(text: Strings.offer.toUpperCase()),
+              ],
+            ),
+            showHeadline: showAnimatedHeadline.value,
+            onTapScroll: () {
+              if (controller.offset ==
+                  controller.position.maxScrollExtent) {
+                currentIndex.value = 0;
+              }
+              controller.animateTo(
+                Constants.servicesCardWidth * currentIndex.value,
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.ease,
+              );
+              currentIndex.value++;
+            },
           ),
-          onTapScroll: Responsive.isDesktop(context)
-              ? () {
-                  if (_controller.offset ==
-                      _controller.position.maxScrollExtent) {
-                    currentIndex = 0;
-                  }
-                  _controller.animateTo(
-                    Constants.servicesCardWidth * currentIndex,
-                    duration: const Duration(milliseconds: 1000),
-                    curve: Curves.ease,
-                  );
-                  currentIndex++;
-                }
-              : null,
         ),
         Consumer(builder: (context, ref, child) {
           final services = ref.watch(appControllerProvider).services;
@@ -87,9 +90,10 @@ class _ZognestServicesState extends State<ZognestServices> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: Constants.horizontalPadding),
                         scrollDirection: Axis.horizontal,
-                        controller: _controller,
+                        controller: controller,
                         itemBuilder: (context, index) {
                           return Container(
+
                             constraints: BoxConstraints.tight(
                               const Size(
                                 Constants.servicesCardWidth,
@@ -97,6 +101,7 @@ class _ZognestServicesState extends State<ZognestServices> {
                               ),
                             ),
                             child: FlippingWidget(
+
                               front: FrontService(service: services[index]),
                               back: BackService(service: services[index]),
                             ),

@@ -107,7 +107,7 @@ class ServicesCartMobile extends HookWidget {
                               );
                             },
                             separatorBuilder: (context, index) {
-                              return const SizedBox(height: 8);
+                              return const SizedBox(height: 2);
                             },
                             itemCount: cartServices.length,
                           ),

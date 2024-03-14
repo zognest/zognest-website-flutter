@@ -8,10 +8,12 @@ class TechnologyContainer extends StatelessWidget {
     super.key,
     required this.image,
     required this.title,
+    this.isPng=true,
   });
 
   final String image;
   final String title;
+ final bool isPng;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,10 @@ class TechnologyContainer extends StatelessWidget {
               border: Border.all(color: const Color(0xffF5F5F5)),
             ),
             padding: const EdgeInsets.all(Spacing.s4),
-            child: SvgPicture.network(
+            child:isPng ? SvgPicture.network(
+              image,
+              fit: BoxFit.contain,
+            ):Image.network(
               image,
               fit: BoxFit.contain,
             ),

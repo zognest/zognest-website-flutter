@@ -66,14 +66,12 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
     with SingleTickerProviderStateMixin {
   late final AnimationController _appBarAnimationController;
   late final Animation<Offset> _appBarOffsetAnimation;
-  late final ScrollController _controller;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String hoveredRoute = '/';
 
   @override
   void initState() {
     super.initState();
-    _controller = ScrollController();
     _appBarAnimationController = AnimationController(
       duration: const Duration(milliseconds: 400),
       vsync: this,
@@ -92,7 +90,6 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
 
   @override
   void dispose() {
-    _controller.dispose();
     _appBarAnimationController.dispose();
     super.dispose();
   }

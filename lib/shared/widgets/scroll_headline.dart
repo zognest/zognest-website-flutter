@@ -30,12 +30,10 @@ class ScrollHeadline extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
-            child: AnimatedOpacity(
-              opacity: showHeadline ? 1 : 0,
-              duration: const Duration(milliseconds: 1500),
-              child: Text.rich(headline),
-            ),
+          AnimatedOpacity(
+            opacity: showHeadline ? 1 : 0,
+            duration: const Duration(milliseconds: 1500),
+            child: Text.rich(headline),
           ),
           if (onTapScroll != null) ...[
             InkWell(

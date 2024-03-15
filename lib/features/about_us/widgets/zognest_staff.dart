@@ -45,31 +45,6 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
     return Column(
       children: [
         const Divider(),
-       /* ScrollHeadline(
-          headline: TextSpan(
-            text: '',
-            style: theme.textTheme.displaySmall,
-            children: [
-              TextSpan(
-                text: '${Strings.our.toUpperCase()}\n',
-                style: theme.textTheme.displaySmall
-                    ?.copyWith(foreground: TextThemes.foreground),
-              ),
-              TextSpan(text: Strings.birds.toUpperCase()),
-            ],
-          ),
-          onTapScroll: () {
-            if (_controller.offset == _controller.position.maxScrollExtent) {
-              currentIndex = 0;
-            }
-            _controller.animateTo(
-              Constants.servicesCardWidth * currentIndex,
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.ease,
-            );
-            currentIndex++;
-          },
-        ),*/
         Consumer(builder: (__, ref, _) {
           final staff = ref.watch(appControllerProvider).staff;
           return staff.when(

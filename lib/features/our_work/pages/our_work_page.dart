@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/features/our_work/widgets/our_work_text.dart';
@@ -9,40 +11,42 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
+import '../../../config/theme/text_theme.dart';
+import '../../../resources/strings.dart';
 import '../../../shared/widgets/mouse_animation.dart';
+import '../../../shared/widgets/scroll_headline.dart';
 
-class OurWorkPage extends StatefulWidget {
-  const OurWorkPage({super.key});
+class OurWorkPage extends HookWidget {
+   OurWorkPage({super.key});
 
   static const route = '/our-work';
 
-  @override
-  State<OurWorkPage> createState() => _OurWorkPageState();
-}
+    late final ScrollController controller;
 
-class _OurWorkPageState extends State<OurWorkPage> {
-  late final ScrollController _controller;
 
-  @override
   void initState() {
-    super.initState();
-    _controller = ScrollController();
+
+    controller = ScrollController();
   }
 
-  @override
+
   void dispose() {
-    _controller.dispose();
-    super.dispose();
+    controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = useScrollController();
+    final currentIndex = useState(1);
+    final hoveredIndex = useState(-1);
+    final showAnimatedHeadline = useState(false);
+    final theme = Theme.of(context);
     return  Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: PrimaryAppBar(scrollController: _controller),
+      appBar: PrimaryAppBar(scrollController: controller),
       drawer: const PrimaryDrawer(),
       body: SingleChildScrollView(
-        controller: _controller,
+        controller: controller,
         child: Stack(
           children: [
             Positioned(
@@ -53,8 +57,45 @@ class _OurWorkPageState extends State<OurWorkPage> {
               children: [
                 SizedBox(
                   height: Constants.appBarHeight *
-                      (Responsive.isDesktop(context) ? 1.5 : .8),
+                      (Responsive.isDesktop(context) ? 1.5 : 1.1),
                 ),
+                VisibilityDetector(
+                  onVisibilityChanged: (info) {
+                    if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
+                    if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
+                  },
+                  key: ValueKey(runtimeType.toString()),
+                  child: ScrollHeadline(
+                  headline: TextSpan(
+                    text: Strings.our.toUpperCase(),
+                    style: theme.textTheme.displaySmall,
+                    children: [
+                      TextSpan(
+                        text: Strings.best.toUpperCase(),
+                        style: theme.textTheme.displaySmall?.copyWith(
+                          foreground: TextThemes.foreground,
+                        ),
+                      ),
+                      TextSpan(
+                        text: Strings.projects.toUpperCase(),
+                        style: theme.textTheme.displaySmall
+                      ),
+                    ],
+                  ),
+                  showHeadline: showAnimatedHeadline.value,
+                  onTapScroll: () {
+                    if (controller.offset ==
+                        controller.position.maxScrollExtent) {
+                      currentIndex.value = 0;
+                    }
+                    controller.animateTo(
+                      Constants.zognestOffersItemWidth * currentIndex.value,
+                      duration: const Duration(milliseconds: 1000),
+                      curve: Curves.ease,
+                    );
+                    currentIndex.value++;
+                  },
+                ),),
                 const Align(
                     alignment:Alignment.topCenter ,
                     child: ZognestProjects()),
@@ -62,8 +103,8 @@ class _OurWorkPageState extends State<OurWorkPage> {
                 const OurWorkText(),
                  SizedBox(height:Responsive.isDesktop(context)? 25:Constants.sectionSpacing,),
                 Footer(
-                  onTabUp: () => _controller.animateTo(
-                    _controller.position.minScrollExtent,
+                  onTabUp: () => controller.animateTo(
+                    controller.position.minScrollExtent,
                     duration: const Duration(
                         milliseconds: Constants.scrollToDuration),
                     curve: Curves.ease,

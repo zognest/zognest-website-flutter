@@ -261,7 +261,9 @@ class ImageTextAboutUs extends StatelessWidget {
                             ),
                             Text(
                               Strings.zognestDescriptionAboutUS,
-                              style: theme.textTheme.bodyLarge,
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                fontFamily: 'SF Pro Rounded',
+                              ),
                             ),
                           ],
                         ),
@@ -276,7 +278,7 @@ class ImageTextAboutUs extends StatelessWidget {
         const Divider(),
       ],
     )
-        : ImageTextMobile(image: image);
+        : ImageTextMobileAboutUs(image: image);
   }
 }
 
@@ -325,7 +327,7 @@ class ImageTextMobileAboutUs extends StatelessWidget {
               const SizedBox(height: 30),
               Text(
                 Strings.zognestDescriptionAboutUS,
-                style: theme.textTheme.bodyLarge!.copyWith(
+                style: theme.textTheme.bodyLarge?.copyWith(
                   fontFamily: 'SF Pro Rounded',
                 ),
               ),

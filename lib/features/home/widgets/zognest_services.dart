@@ -53,7 +53,7 @@ class ZognestServices extends HookWidget {
             headline: TextSpan(
               text: 'services \n'.toUpperCase(),
               style: theme.textTheme.displaySmall
-                  ?.copyWith(fontWeight: FontWeight.w700),
+                  ?.copyWith(fontWeight:Responsive.isDesktop(context) ?FontWeight.w700:FontWeight.w400),
               children: [
                 TextSpan(
                   text: Strings.we.toUpperCase(),

@@ -91,9 +91,10 @@ class FirestoreServices {
   }
 
   static Future<List<Service>> getServices() async {
-    final servicesJson =
-        await firestore.collection(FirebasePaths.services.path).get();
-
+    final servicesJson = await firestore
+        .collection(FirebasePaths.services.path)
+        .orderBy('orderby', descending: false)
+        .get();
     final services = await Future.wait(
       servicesJson.docs.map(
         (serviceDoc) async {
@@ -147,8 +148,7 @@ class FirestoreServices {
     return technologies;
   }
 
-
-  static Future<List<Technology>>getStafflistFromRefs(
+  static Future<List<Technology>> getStafflistFromRefs(
       List<dynamic> refs) async {
     List<Technology> staffList = [];
     for (final DocumentReference staffRef in refs) {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -9,7 +11,9 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 
+import '../../../config/theme/text_theme.dart';
 import '../../../shared/widgets/network_fading_image.dart';
+import '../../../shared/widgets/scroll_headline.dart';
 
 class ZognestProjects extends StatefulWidget {
   const ZognestProjects({super.key});
@@ -36,40 +40,50 @@ class _ZognestProjectsState extends State<ZognestProjects> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = useScrollController();
+    final currentIndex = useState(1);
+    final showAnimatedHeadline = useState(false);
     final theme = Theme.of(context);
     return Column(
       children: [
         if (Responsive.isDesktop(context)) const Divider(),
-       /* ScrollHeadline(
-          headline: TextSpan(
-            children: [
-              TextSpan(
-                text: Strings.our.toUpperCase(),
-                style: theme.textTheme.displaySmall,
-              ),
-              TextSpan(
-                text: Strings.best.toUpperCase(),
-                style: theme.textTheme.displaySmall
-                    ?.copyWith(foreground: TextThemes.foreground),
-              ),
-              TextSpan(
-                text: Strings.projects.toUpperCase(),
-                style: theme.textTheme.displaySmall,
-              ),
-            ],
-          ),
-          onTapScroll: () {
-            if (_controller.offset == _controller.position.maxScrollExtent) {
-              currentIndex = 0;
-            }
-            _controller.animateTo(
-              Constants.servicesCardWidth * currentIndex,
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.ease,
-            );
-            currentIndex++;
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
+            if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
           },
-        ),*/
+          key: ValueKey(runtimeType.toString()),
+          child: ScrollHeadline(
+            headline: TextSpan(
+              text: Strings.our.toUpperCase(),
+              style: theme.textTheme.displaySmall,
+              children: [
+                TextSpan(
+                  text: Strings.best.toUpperCase(),
+                  style: theme.textTheme.displaySmall?.copyWith(
+                    foreground: TextThemes.foreground,
+                  ),
+                ),
+                TextSpan(
+                    text: Strings.projects.toUpperCase(),
+                    style: theme.textTheme.displaySmall
+                ),
+              ],
+            ),
+            showHeadline: showAnimatedHeadline.value,
+            onTapScroll: () {
+              if (controller.offset ==
+                  controller.position.maxScrollExtent) {
+                currentIndex.value = 0;
+              }
+              controller.animateTo(
+                Constants.zognestOffersItemWidth * currentIndex.value,
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.ease,
+              );
+              currentIndex.value++;
+            },
+          ),),
         Consumer(builder: (context, ref, _) {
           final project = ref.watch(appControllerProvider).projects;
           return project.when(

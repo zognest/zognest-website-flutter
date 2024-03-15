@@ -38,7 +38,7 @@ class Technology extends Equatable {
   }
 
   factory Technology.empty() =>
-      const Technology(name: 'Test', image: Assets.zognestLogoPng);
+      const Technology(name: 'Test', image: Assets.zognestLogoNew);
 
   String toJson() => json.encode(toMap());
 
@@ -86,7 +86,7 @@ class StaffList extends Equatable {
   }
 
   factory StaffList.empty() =>
-      const StaffList(name: 'Test', image: Assets.zognestLogoPng);
+      const StaffList(name: 'Test', image: Assets.zognestLogoNew);
 
   String toJson() => json.encode(toMap());
 

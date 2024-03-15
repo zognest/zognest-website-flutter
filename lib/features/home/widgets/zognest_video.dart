@@ -8,9 +8,7 @@ import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 
 class ZognestVideo extends StatefulWidget {
-  const
-
-  ZognestVideo({super.key});
+  const ZognestVideo({super.key});
 
   @override
   State<ZognestVideo> createState() => _ZognestVideoState();
@@ -64,87 +62,89 @@ class _ZognestVideoState extends State<ZognestVideo> {
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal:Responsive.isDesktop(context)? Constants.horizontalPaddingViduo:2),
+                        horizontal: Responsive.isDesktop(context)
+                            ? Constants.horizontalPaddingViduo
+                            : 2),
                     child: _controller.value.isInitialized
                         ? AspectRatio(
-                            aspectRatio: Responsive.isDesktop(context)
-                                ? Constants.videoAspectRatio
-                                : Constants.videoAspectRatioMobile,
-                            child: Stack(
-                              alignment: Alignment.bottomCenter,
-                              children: [
-                                VideoPlayer(_controller),
-                                SizedBox.expand(
-                                  child: GestureDetector(
-                                    onTap: () {
+                      aspectRatio: Responsive.isDesktop(context)
+                          ? Constants.videoAspectRatio
+                          : Constants.videoAspectRatioMobile,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          VideoPlayer(_controller),
+                          SizedBox.expand(
+                            child: GestureDetector(
+                              onTap: () {
+                                _controller.value.isPlaying
+                                    ? _controller.pause()
+                                    : _controller.play();
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              VideoProgressIndicator(
+                                _controller,
+                                colors: VideoProgressColors(
+                                  playedColor: theme.primaryColor,
+                                ),
+                                allowScrubbing: false,
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
                                       _controller.value.isPlaying
                                           ? _controller.pause()
                                           : _controller.play();
                                       setState(() {});
                                     },
+                                    icon: Icon(
+                                      _controller.value.isPlaying
+                                          ? Icons.play_arrow_rounded
+                                          : Icons.pause_rounded,
+                                      color: theme.primaryColor,
+                                      size: 34,
+                                    ),
                                   ),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    VideoProgressIndicator(
-                                      _controller,
-                                      colors: VideoProgressColors(
-                                        playedColor: theme.primaryColor,
-                                      ),
-                                      allowScrubbing: false,
+                                  const SizedBox(width: Spacing.s8),
+                                  IconButton(
+                                    onPressed: () {
+                                      _controller.value.volume == 0
+                                          ? _controller.setVolume(0)
+                                          : _controller.setVolume(1);
+                                      setState(() {});
+                                    },
+                                    icon: Icon(
+                                      _controller.value.volume == 0
+                                          ? Icons.volume_up_rounded
+                                          : Icons.volume_off_rounded ,
+                                      // color: theme.primaryColor,
+                                      size: 24,
                                     ),
-                                    Row(
-                                      children: [
-                                        IconButton(
-                                          onPressed: () {
-                                            _controller.value.isPlaying
-                                                ? _controller.pause()
-                                                : _controller.play();
-                                            setState(() {});
-                                          },
-                                          icon: Icon(
-                                            _controller.value.isPlaying
-                                                ? Icons.play_arrow_rounded
-                                                : Icons.pause_rounded,
-                                            color: theme.primaryColor,
-                                            size: 34,
-                                          ),
-                                        ),
-                                        const SizedBox(width: Spacing.s8),
-                                        IconButton(
-                                          onPressed: () {
-                                            _controller.value.volume == 0
-                                                ? _controller.setVolume(1)
-                                                : _controller.setVolume(0);
-                                            setState(() {});
-                                          },
-                                          icon: Icon(
-                                            _controller.value.volume == 0
-                                                ? Icons.volume_off_rounded
-                                                : Icons.volume_up_rounded,
-                                            // color: theme.primaryColor,
-                                            size: 24,
-                                          ),
-                                        ),
-                                        const SizedBox(width: Spacing.m16),
-                                        StreamBuilder(
-                                          stream: Stream.periodic(
-                                              const Duration(seconds: 1)),
-                                          builder: (_, __) {
-                                            return Text(
-                                              '${formatDuration(_controller.value.position)} / ${formatDuration(_controller.value.duration)}',
-                                            );
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
+                                  ),
+                                  const SizedBox(width: Spacing.m16),
+                                  StreamBuilder(
+                                    stream: Stream.periodic(
+                                        const Duration(seconds: 1)),
+                                    builder: (_, __) {
+                                      return Text(
+                                        '${formatDuration(_controller.value.position)} / ${formatDuration(_controller.value.duration)}',
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
                         : const SizedBox.shrink(),
                   ),
                 );

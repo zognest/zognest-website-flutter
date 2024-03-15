@@ -21,7 +21,7 @@ class ZognestLogo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          Assets.zognestLogoPng,
+          Assets.zognestLogoNew,
           fit: BoxFit.cover,
           height: size,
           width: size,

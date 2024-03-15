@@ -1,8 +1,10 @@
 import 'dart:js' as js;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -14,36 +16,58 @@ import 'package:zognest_website/shared/widgets/flipping_widget.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
 
+import '../../../config/theme/text_theme.dart';
 import '../../../shared/widgets/network_fading_image.dart';
+import '../../../shared/widgets/scroll_headline.dart';
 
-class ZognestStaff extends StatefulWidget {
-  const ZognestStaff({super.key});
-
-  @override
-  State<ZognestStaff> createState() => _ZognestServicesStaff();
-}
-
-class _ZognestServicesStaff extends State<ZognestStaff> {
-  late final ScrollController _controller;
+class ZognestStaff extends HookWidget {
+   ZognestStaff({super.key});
   int currentIndex = 1;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final controller = useScrollController();
+    final currentIndex = useState(1);
+    final showAnimatedHeadline = useState(false);
     final theme = Theme.of(context);
     return Column(
       children: [
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
+            if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
+          },
+          key: ValueKey(runtimeType.toString()),
+          child: ScrollHeadline(
+            headline: TextSpan(
+              text: '',
+              style: theme.textTheme.displaySmall?.copyWith(),
+              children: [
+                TextSpan(
+                  text: '${Strings.our.toUpperCase()}\n',
+                  style: theme.textTheme.displaySmall?.copyWith(
+                    foreground: TextThemes.foreground,
+                  ),
+                ),
+                TextSpan(
+                  text: Strings.birds.toUpperCase(),
+                  style: theme.textTheme.displaySmall?.copyWith(),
+                ),
+              ],
+            ),
+            showHeadline: showAnimatedHeadline.value,
+            onTapScroll: () {
+              if (controller.offset == controller.position.maxScrollExtent) {
+                currentIndex.value = 0;
+              }
+              controller.animateTo(
+                Constants.zognestOffersItemWidth * currentIndex.value,
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.ease,
+              );
+              currentIndex.value++;
+            },
+          ),
+        ),
         const Divider(),
         Consumer(builder: (__, ref, _) {
           final staff = ref.watch(appControllerProvider).staff;
@@ -55,7 +79,7 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: Constants.horizontalPadding),
                     scrollDirection: Axis.horizontal,
-                    controller: _controller,
+                    controller: controller,
                     itemBuilder: (context, index) {
                       return SizedBox(
                         width: Responsive.isDesktop(context)
@@ -74,11 +98,8 @@ class _ZognestServicesStaff extends State<ZognestStaff> {
                         ),
                       );
                     },
-                    separatorBuilder: (context, index) => SizedBox(
-                      width:Responsive.isDesktop(context)
-                          ? 16
-                          : 6
-                    ),
+                    separatorBuilder: (context, index) =>
+                        SizedBox(width: Responsive.isDesktop(context) ? 16 : 6),
                     itemCount: staff.length,
                   ),
                 );
@@ -203,7 +224,7 @@ class BackCard extends StatelessWidget {
           Opacity(
             opacity: 0.3,
             child: ColoredBox(
-              color:Colors.transparent,
+              color: Colors.transparent,
               child: NetworkFadingImage(
                 path: staff.avatar,
                 width: double.infinity,

@@ -17,27 +17,11 @@ import '../../../shared/widgets/mouse_animation.dart';
 import '../../../shared/widgets/scroll_headline.dart';
 
 class AboutUsPage extends HookWidget {
-   AboutUsPage({super.key});
+   const AboutUsPage({super.key});
   static const route = '/about-us';
-  late final ScrollController controller;
-
-  void initState() {
-
-    controller = ScrollController();
-  }
-
-  void dispose() {
-    controller.dispose();
-
-  }
-
   @override
   Widget build(BuildContext context) {
     final controller = useScrollController();
-    final currentIndex = useState(1);
-    final hoveredIndex = useState(-1);
-    final showAnimatedHeadline = useState(false);
-    final theme = Theme.of(context);
     return  Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PrimaryAppBar(scrollController: controller),
@@ -50,49 +34,14 @@ class AboutUsPage extends HookWidget {
               Column(
                 children: [
                   const SizedBox(height: Constants.appBarHeight * 1.5),
-                  const ImageTextAboutUs(
+                  const ImageText(
+                    title: true,
+                    isAboutus: true,
                     image: Assets.zognestTeam,
                     hasGradient: true,
                   ),
                   const SizedBox(height: Constants.sectionSpacing),
-                  VisibilityDetector(
-                    onVisibilityChanged: (info) {
-                      if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
-                      if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
-                    },
-                    key: ValueKey(runtimeType.toString()),
-                    child: ScrollHeadline(
-                      headline: TextSpan(
-                        text:'',
-                        style: theme.textTheme.displaySmall?.copyWith(),
-                        children: [
-                          TextSpan(
-                            text: '${Strings.our.toUpperCase()}\n',
-                            style: theme.textTheme.displaySmall?.copyWith(
-                              foreground: TextThemes.foreground,
-                            ),
-                          ),
-                          TextSpan(
-                            text: Strings.birds.toUpperCase(),
-                            style: theme.textTheme.displaySmall?.copyWith(),
-                          ),
-                        ],
-                      ),
-                      showHeadline: showAnimatedHeadline.value,
-                      onTapScroll: () {
-                        if (controller.offset ==
-                            controller.position.maxScrollExtent) {
-                          currentIndex.value = 0;
-                        }
-                        controller.animateTo(
-                          Constants.zognestOffersItemWidth * currentIndex.value,
-                          duration: const Duration(milliseconds: 1000),
-                          curve: Curves.ease,
-                        );
-                        currentIndex.value++;
-                      },
-                    ),),
-                  const ZognestStaff(),
+                   ZognestStaff(),
                   const SizedBox(height: Constants.sectionSpacing),
                   const Divider(),
                   Image.asset(

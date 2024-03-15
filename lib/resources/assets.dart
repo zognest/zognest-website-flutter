@@ -25,7 +25,6 @@ abstract final class Assets {
 
   // Images
   static const impactLinesPng = '${Paths.images}/impact_lines.png';
-  static const zognestLogoPng = '${Paths.images}/logo.png';
   static const zognestLogoNew = '${Paths.images}/logo_new.png';
   static const mercuries = '${Paths.images}/mercuries.png';
   static const office = '${Paths.images}/office.png';

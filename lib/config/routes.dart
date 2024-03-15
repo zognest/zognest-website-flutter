@@ -27,7 +27,7 @@ abstract final class Routing {
       GoRoute(
         name: OurWorkPage.route,
         path: OurWorkPage.route,
-        builder: (_, __) =>  OurWorkPage(),
+        builder: (_, __) =>  const OurWorkPage(),
       ),
       GoRoute(
         name: OurSpacePage.route,
@@ -37,7 +37,7 @@ abstract final class Routing {
       GoRoute(
         name: AboutUsPage.route,
         path: AboutUsPage.route,
-        builder: (_, __) =>  AboutUsPage(),
+        builder: (_, __) =>  const AboutUsPage(),
       ),
     ],
   );

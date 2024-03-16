@@ -18,6 +18,8 @@ class ZognestOffers extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<AnimatedListState> _listKey =
+        GlobalKey<AnimatedListState>();
     final scrollController = useScrollController();
     final currentIndex = useState(1);
     final hoveredIndex = useState(-1);
@@ -67,31 +69,42 @@ class ZognestOffers extends HookWidget {
           return offers.when(
             data: (offers) {
               return SizedBox(
-                height: Constants.zognestOffersListHeight,
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.horizontalPadding),
-                  scrollDirection: Axis.horizontal,
-                  controller: scrollController,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {},
-                      onHover: (over) {
-                        hoveredIndex.value = over ? index : -1;
-                      },
-                      child: OfferItem(
-                        offer: offers[index],
-                        colored: hoveredIndex.value == index,
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) => SizedBox(
-                      width: Responsive.isDesktop(context)
-                          ? Constants.listCardSeparatorWidth
-                          : Constants.listCardSeparatorWidthMobile),
-                  itemCount: offers.length,
-                ),
-              );
+                  height: Constants.zognestOffersListHeight,
+                  child: AnimatedList(
+                      key: _listKey,
+                      itemBuilder: (context, index, animation) {
+                        return SlideTransition(
+                          position: animation.drive(
+                            Tween<Offset>(
+                              begin: const Offset(1, 0), // Start off-screen
+                              end: const Offset(0, 0), // Slide into view
+                            ),
+                          ),
+                          child: ListView.separated(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: Constants.horizontalPadding),
+                            scrollDirection: Axis.horizontal,
+                            controller: scrollController,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {},
+                                onHover: (over) {
+                                  hoveredIndex.value = over ? index : -1;
+                                },
+                                      child: OfferItem(
+                                        offer: offers[index],
+                                        colored: hoveredIndex.value == index,
+                                      ),
+                                    );
+                                  },
+                            separatorBuilder: (context, index) => SizedBox(
+                                width: Responsive.isDesktop(context)
+                                    ? Constants.listCardSeparatorWidth
+                                    : Constants.listCardSeparatorWidthMobile),
+                            itemCount: offers.length,
+                          ),
+                        );
+                      }));
             },
             error: (_, __) => const SizedBox.shrink(),
             loading: () => const SizedBox.shrink(),
@@ -225,3 +238,39 @@ class OfferItem extends StatelessWidget {
     );
   }
 }
+// child: ListView.separated(
+//                   padding: const EdgeInsets.symmetric(
+//                       horizontal: Constants.horizontalPadding),
+//                   scrollDirection: Axis.horizontal,
+//                   controller: scrollController,
+//                   itemBuilder: (context, index) {
+//                     return InkWell(
+//                       onTap: () {},
+//                       onHover: (over) {
+//                         hoveredIndex.value = over ? index : -1;
+//                       },
+//                       child: AnimatedList(
+//                         key: _listKey,
+//                         itemBuilder: (context, index, animation) {
+//                           return SlideTransition(
+//                             position: animation.drive(
+//                               Tween<Offset>(
+//                                 begin: const Offset(0, 0), // Start off-screen
+//                                 end: const Offset(3, 0), // Slide into view
+//                               ),
+//                             ),
+//                             child: OfferItem(
+//                               offer: offers[index],
+//                               colored: hoveredIndex.value == index,
+//                             ),
+//                           );
+//                         },
+//                       ),
+//                     );
+//                   },
+//                   separatorBuilder: (context, index) => SizedBox(
+//                       width: Responsive.isDesktop(context)
+//                           ? Constants.listCardSeparatorWidth
+//                           : Constants.listCardSeparatorWidthMobile),
+//                   itemCount: offers.length,
+//                 ),

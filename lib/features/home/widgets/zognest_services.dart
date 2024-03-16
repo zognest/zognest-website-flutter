@@ -306,6 +306,7 @@ class BackService extends StatelessWidget {
                                 return TechnologyContainer(
                                   image: tech.image,
                                   title: tech.name,
+                                  isPng: tech.isPng,
                                 );
                               },
                             ).toList(),

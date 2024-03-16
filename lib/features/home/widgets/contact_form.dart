@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -15,6 +16,7 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 
 import '../../../config/theme/text_theme.dart';
 import '../../../firebase_services/firestore_services.dart';
+import '../pages/home_page.dart';
 
 class ContactForm extends HookWidget {
   ContactForm({super.key});
@@ -43,6 +45,15 @@ class ContactForm extends HookWidget {
                   colorStartingOpacity: 0.3,
                   radius: 1,
                 ),
+                Positioned(
+                    top: 0,
+                    right: 0,
+                    child:IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                      },
+                    )),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: SvgPicture.asset(Assets.impactLines),
@@ -249,6 +260,15 @@ class ContactFormMobile extends HookWidget {
             ),
             child: Column(
               children: [
+                Positioned(
+                    top: 0,
+                    right: 0,
+                    child:IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                      },
+                    )),
                 Text.rich(
                   textAlign: TextAlign.center,
                   TextSpan(

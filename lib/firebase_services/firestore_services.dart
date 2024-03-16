@@ -100,6 +100,7 @@ class FirestoreServices {
         (serviceDoc) async {
           final technologies = await getTechnologiesFromRefs(
             serviceDoc.data()['technologies'],
+            serviceDoc.data()['title'] == 'Team',
           );
 
           Service service = Service.fromMap(serviceDoc.data())
@@ -132,12 +133,13 @@ class FirestoreServices {
     return staff;
   }
 
-  static Future<List<Technology>> getTechnologiesFromRefs(
-      List<dynamic> refs) async {
+  static Future<List<Technology>> getTechnologiesFromRefs(List<dynamic> refs,
+      [bool show = false]) async {
     List<Technology> technologies = [];
+
     for (final DocumentReference technologyRef in refs) {
       final technologyDoc = await technologyRef.get();
-
+      if (show) print(technologyDoc.data());
       if (technologyDoc.exists) {
         technologies.add(
           Technology.fromMap(technologyDoc.data() as Map<String, dynamic>),
@@ -146,21 +148,6 @@ class FirestoreServices {
     }
 
     return technologies;
-  }
-
-  static Future<List<Technology>> getStafflistFromRefs(
-      List<dynamic> refs) async {
-    List<Technology> staffList = [];
-    for (final DocumentReference staffRef in refs) {
-      final staffListDoc = await staffRef.get();
-
-      if (staffListDoc.exists) {
-        staffList.add(
-          Technology.fromMap(staffListDoc.data() as Map<String, dynamic>),
-        );
-      }
-    }
-    return staffList;
   }
 
   static Future<void> sendMessages({

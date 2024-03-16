@@ -15,28 +15,8 @@ import '../../../config/theme/text_theme.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 import '../../../shared/widgets/scroll_headline.dart';
 
-class ZognestProjects extends StatefulWidget {
+class ZognestProjects extends HookWidget {
   const ZognestProjects({super.key});
-
-  @override
-  State<ZognestProjects> createState() => _ZognestProjectsState();
-}
-
-class _ZognestProjectsState extends State<ZognestProjects> {
-  late final ScrollController _controller;
-  int currentIndex = 1;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,12 +75,12 @@ class _ZognestProjectsState extends State<ZognestProjects> {
                       horizontal: Constants.horizontalPadding,
                     ),
                     scrollDirection: Axis.horizontal,
-                    controller: _controller,
+                    controller: controller,
                     itemBuilder: (context, index) {
                       return ProjectItem(project: project[index]);
                     },
-                    separatorBuilder: (context, index) =>
-                         SizedBox(width: Responsive.isDesktop(context)
+                    separatorBuilder: (context, index) => SizedBox(
+                        width: Responsive.isDesktop(context)
                             ? Constants.listCardSeparatorWidth
                             : Constants.listCardSeparatorWidthMobile),
                     itemCount: project.length,

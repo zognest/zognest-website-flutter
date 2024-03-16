@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/features/our_work/widgets/our_work_text.dart';
@@ -11,19 +10,14 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
-import '../../../config/theme/text_theme.dart';
-import '../../../resources/strings.dart';
-import '../../../shared/widgets/mouse_animation.dart';
-import '../../../shared/widgets/scroll_headline.dart';
-
 class OurWorkPage extends HookWidget {
-   const OurWorkPage({super.key});
+  const OurWorkPage({super.key});
 
   static const route = '/our-work';
   @override
   Widget build(BuildContext context) {
     final controller = useScrollController();
-    return  Scaffold(
+    return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PrimaryAppBar(scrollController: controller),
       drawer: const PrimaryDrawer(),
@@ -42,11 +36,16 @@ class OurWorkPage extends HookWidget {
                       (Responsive.isDesktop(context) ? 1.5 : 1.1),
                 ),
                 const Align(
-                    alignment:Alignment.topCenter ,
-                    child: ZognestProjects()),
+                  alignment: Alignment.topCenter,
+                  child: ZognestProjects(),
+                ),
                 const SizedBox(height: Constants.sectionSpacing),
                 const OurWorkText(),
-                 SizedBox(height:Responsive.isDesktop(context)? 25:Constants.sectionSpacing,),
+                SizedBox(
+                  height: Responsive.isDesktop(context)
+                      ? 25
+                      : Constants.sectionSpacing,
+                ),
                 Footer(
                   onTabUp: () => controller.animateTo(
                     controller.position.minScrollExtent,
@@ -60,6 +59,6 @@ class OurWorkPage extends HookWidget {
           ],
         ),
       ),
-        );
+    );
   }
 }

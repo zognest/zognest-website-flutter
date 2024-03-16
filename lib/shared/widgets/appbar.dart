@@ -130,7 +130,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
             ? const MobileAppBar()
             : Row(
                 children: [
-                   const ZognestLogo(),
+                  const ZognestLogo(),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -187,7 +187,11 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palette.dividerColor),
                             ),
-                            child: ContactForm(),
+                            child: SingleChildScrollView(
+                              child: ContactForm(
+                                isDialog: true,
+                              ),
+                            ),
                           ),
                         ),
                       );
@@ -210,8 +214,9 @@ class MobileAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const ZognestLogo(),
-        const Spacer(),
+        ZognestLogo(
+          size: Responsive.isMobile(context) ? 60 : 120,
+        ),
         const Spacer(),
         InkWell(
           onTap: () {

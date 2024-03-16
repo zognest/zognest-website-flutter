@@ -8,6 +8,7 @@ import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/social_button.dart';
+
 import '../../resources/assets.dart';
 import '../../resources/strings.dart';
 import 'circle_button.dart';
@@ -62,7 +63,7 @@ class PrimaryDrawer extends StatelessWidget {
                     );
                   },
                 ),
-                const SizedBox(height:Spacing.m20),
+                const SizedBox(height: Spacing.m20),
                 Padding(
                   padding: const EdgeInsets.all(Spacing.s4),
                   child: Wrap(
@@ -80,14 +81,16 @@ class PrimaryDrawer extends StatelessWidget {
                       context: context,
                       barrierDismissible: true,
                       builder: (context) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Palette.cardBackgroundColor,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Palette.dividerColor),
                           ),
-                          child: SingleChildScrollView(child: ContactForm()),
+                          child: SingleChildScrollView(
+                            child: ContactForm(isDialog: true),
+                          ),
                         ),
                       ),
                     );

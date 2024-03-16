@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
@@ -22,7 +21,7 @@ class ZognestLogo extends StatelessWidget {
       children: [
         Image.asset(
           Assets.zognestLogoNew,
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
           height: size,
           width: size,
         ),

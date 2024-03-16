@@ -1,3 +1,4 @@
+import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,17 +15,18 @@ import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import '../../../../config/responsive.dart';
 
 class ZognestOffers extends HookWidget {
-  const ZognestOffers({super.key});
+  ZognestOffers({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<AnimatedListState> _listKey =
-        GlobalKey<AnimatedListState>();
     final scrollController = useScrollController();
     final currentIndex = useState(1);
     final hoveredIndex = useState(-1);
     final showAnimatedHeadline = useState(false);
+    final animationController =
+        useAnimationController(duration: const Duration(seconds: 2));
     final theme = Theme.of(context);
+
     return Column(
       children: [
         VisibilityDetector(
@@ -64,81 +66,104 @@ class ZognestOffers extends HookWidget {
             },
           ),
         ),
-        Consumer(builder: (context, ref, child) {
-          final offers = ref.watch(appControllerProvider).offers;
-          return offers.when(
-            data: (offers) {
-              return SizedBox(
-                  height: Constants.zognestOffersListHeight,
-                  child: AnimatedList(
-                      key: _listKey,
-                      itemBuilder: (context, index, animation) {
-                        return SlideTransition(
-                          position: animation.drive(
-                            Tween<Offset>(
-                              begin: const Offset(1, 0), // Start off-screen
-                              end: const Offset(0, 0), // Slide into view
-                            ),
-                          ),
-                          child: ListView.separated(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: Constants.horizontalPadding),
-                            scrollDirection: Axis.horizontal,
-                            controller: scrollController,
-                            itemBuilder: (context, index) {
-                              return InkWell(
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction >= 0.8) animationController.forward();
+          },
+          key: ValueKey('${runtimeType.toString()} List'),
+          child: Consumer(
+            builder: (context, ref, child) {
+              final offers = ref.watch(appControllerProvider).offers;
+              return offers.when(
+                data: (offers) {
+                  return Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          animationController.repeat();
+                        },
+                        child: const Text('Repeat Animation'),
+                      ),
+                      SizedBox(
+                        height: Constants.zognestOffersListHeight,
+                        child: ListView.separated(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: Constants.horizontalPadding),
+                          scrollDirection: Axis.horizontal,
+                          controller: scrollController,
+                          itemBuilder: (context, index) {
+                            return AnimatedListItem(
+                              aniController: animationController,
+                              index: index,
+                              length: offers.length,
+                              animationType: AnimationType.slide,
+                              startX: 1,
+                              child: InkWell(
                                 onTap: () {},
                                 onHover: (over) {
                                   hoveredIndex.value = over ? index : -1;
                                 },
-                                      child: OfferItem(
-                                        offer: offers[index],
-                                        colored: hoveredIndex.value == index,
-                                      ),
-                                    );
-                                  },
-                            separatorBuilder: (context, index) => SizedBox(
-                                width: Responsive.isDesktop(context)
-                                    ? Constants.listCardSeparatorWidth
-                                    : Constants.listCardSeparatorWidthMobile),
-                            itemCount: offers.length,
-                          ),
-                        );
-                      }));
+                                child: OfferItem(
+                                  offer: offers[index],
+                                  colored: hoveredIndex.value == index,
+                                ),
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) => SizedBox(
+                              width: Responsive.isDesktop(context)
+                                  ? Constants.listCardSeparatorWidth
+                                  : Constants.listCardSeparatorWidthMobile),
+                          itemCount: offers.length,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+                error: (_, __) => const SizedBox.shrink(),
+                loading: () => const SizedBox.shrink(),
+              );
             },
-            error: (_, __) => const SizedBox.shrink(),
-            loading: () => const SizedBox.shrink(),
-          );
-        }),
+          ),
+        ),
       ],
     );
   }
 }
 
-class ZognestOffersMobile extends StatelessWidget {
+class ZognestOffersMobile extends HookWidget {
   const ZognestOffersMobile({super.key});
 
   @override
   Widget build(context) {
+    final showAnimatedHeadline = useState(false);
     final theme = Theme.of(context);
     return Column(
       children: [
-        ScrollHeadline(
-          headline: TextSpan(
-            text: '${Strings.what}\n'.toUpperCase(),
-            style: theme.textTheme.displaySmall
-                ?.copyWith(fontWeight: FontWeight.w700),
-            children: [
-              TextSpan(
-                text: Strings.we.toUpperCase(),
-                style: theme.textTheme.displaySmall?.copyWith(
-                  foreground: TextThemes.foreground,
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
+            if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
+          },
+          key: ValueKey(runtimeType.toString()),
+          child: ScrollHeadline(
+            headline: TextSpan(
+              text: '${Strings.what}\n'.toUpperCase(),
+              style: theme.textTheme.displaySmall
+                  ?.copyWith(fontWeight: FontWeight.w700),
+              children: [
+                TextSpan(
+                  text: Strings.we.toUpperCase(),
+                  style: theme.textTheme.displaySmall?.copyWith(
+                    foreground: TextThemes.foreground,
+                  ),
                 ),
-              ),
-              TextSpan(text: Strings.offer.toUpperCase()),
-            ],
+                TextSpan(text: Strings.offer.toUpperCase()),
+              ],
+            ),
+            showHeadline: showAnimatedHeadline.value,
+            onTapScroll: null,
           ),
-          onTapScroll: null,
         ),
         Consumer(builder: (__, ref, _) {
           final offers = ref.watch(appControllerProvider).offers;
@@ -155,7 +180,7 @@ class ZognestOffersMobile extends StatelessWidget {
                   return OfferItem(offer: offers[index]);
                 },
                 separatorBuilder: (_, __) =>
-                    const SizedBox(height: Spacing.s12),
+                const SizedBox(height: Spacing.s12),
                 itemCount: offers.length,
               );
             },
@@ -238,39 +263,3 @@ class OfferItem extends StatelessWidget {
     );
   }
 }
-// child: ListView.separated(
-//                   padding: const EdgeInsets.symmetric(
-//                       horizontal: Constants.horizontalPadding),
-//                   scrollDirection: Axis.horizontal,
-//                   controller: scrollController,
-//                   itemBuilder: (context, index) {
-//                     return InkWell(
-//                       onTap: () {},
-//                       onHover: (over) {
-//                         hoveredIndex.value = over ? index : -1;
-//                       },
-//                       child: AnimatedList(
-//                         key: _listKey,
-//                         itemBuilder: (context, index, animation) {
-//                           return SlideTransition(
-//                             position: animation.drive(
-//                               Tween<Offset>(
-//                                 begin: const Offset(0, 0), // Start off-screen
-//                                 end: const Offset(3, 0), // Slide into view
-//                               ),
-//                             ),
-//                             child: OfferItem(
-//                               offer: offers[index],
-//                               colored: hoveredIndex.value == index,
-//                             ),
-//                           );
-//                         },
-//                       ),
-//                     );
-//                   },
-//                   separatorBuilder: (context, index) => SizedBox(
-//                       width: Responsive.isDesktop(context)
-//                           ? Constants.listCardSeparatorWidth
-//                           : Constants.listCardSeparatorWidthMobile),
-//                   itemCount: offers.length,
-//                 ),

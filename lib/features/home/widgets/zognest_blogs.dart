@@ -1,6 +1,7 @@
 import 'dart:developer';
 import "dart:js" as js;
 
+import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,14 +28,6 @@ class ZognestBlogs extends HookWidget {
   int currentIndex = 1;
 
 
-  void initState() {
-    controller = ScrollController();
-  }
-
-
-  void dispose() {
-    controller.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +35,8 @@ class ZognestBlogs extends HookWidget {
     final controller = useScrollController();
     final currentIndex = useState(1);
     final showAnimatedHeadline = useState(false);
+    final animationController =
+    useAnimationController(duration: const Duration(seconds: 2));
     return Column(
       children: [
         const Divider(),
@@ -94,6 +89,14 @@ class ZognestBlogs extends HookWidget {
                     scrollDirection: Axis.horizontal,
                     controller: controller,
                     itemBuilder: (context, index) {
+                      /*
+                      * AnimatedListItem(
+                          aniController: animationController,
+                          index: index,
+                          length: blogs.length,
+                          animationType: AnimationType.slide,
+                          startX: 1,
+                              child: BlogItem(blog: blogs[index],),)*/
                       return BlogItem(blog: blogs[index]);
                     },
                     separatorBuilder: (context, index) => SizedBox(

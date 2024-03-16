@@ -1,3 +1,4 @@
+import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +21,7 @@ import '../../../shared/widgets/technology_container.dart';
 import '../../our_services/pages/our_services_page.dart';
 
 class ZognestServices extends HookWidget {
-  ZognestServices({super.key});
+   ZognestServices({super.key});
 
   late final ScrollController _controller;
 
@@ -34,6 +35,9 @@ class ZognestServices extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scrollController = useScrollController();
+    final animationController =
+    useAnimationController(duration: const Duration(seconds: 2));
     final theme = Theme.of(context);
     final controller = useScrollController();
     final currentIndex = useState(1);
@@ -162,7 +166,7 @@ class FrontService extends StatelessWidget {
       child: Stack(
         children: [
           GreyscaleFilter(
-            opacity: 0.3,
+            opacity: 0.1,
             isHovered: false,
             child: NetworkFadingImage(
               path: service.backgroundImage,
@@ -180,7 +184,7 @@ class FrontService extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Spacer(),
+               const SizedBox(height: 10,),
                 Expanded(
                   flex: 2,
                   child: Column(

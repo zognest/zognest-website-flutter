@@ -1,5 +1,6 @@
 import 'dart:js' as js;
 
+import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,6 +26,8 @@ class ZognestStaff extends HookWidget {
   int currentIndex = 1;
   @override
   Widget build(BuildContext context) {
+    final animationController =
+    useAnimationController(duration: const Duration(seconds: 2));
     final controller = useScrollController();
     final currentIndex = useState(1);
     final showAnimatedHeadline = useState(false);

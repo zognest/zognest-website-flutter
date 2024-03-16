@@ -215,7 +215,7 @@ class MobileAppBar extends StatelessWidget {
     return Row(
       children: [
         ZognestLogo(
-          size: Responsive.isMobile(context) ? 60 : 120,
+          size: Responsive.isMobile(context) ? 50 : 100,
         ),
         const Spacer(),
         InkWell(

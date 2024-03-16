@@ -1,3 +1,4 @@
+import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,10 +39,11 @@ class ZognestClients extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final animationController =
+    useAnimationController(duration: const Duration(seconds: 2));
     final theme = Theme.of(context);
     final controller = useScrollController();
     final currentIndex = useState(1);
-    final hoveredIndex = useState(-1);
     final showAnimatedHeadline = useState(false);
     return Column(
       children: [
@@ -94,7 +96,13 @@ class ZognestClients extends HookWidget {
                   scrollDirection: Axis.horizontal,
                   controller: controller,
                   itemBuilder: (context, index) {
-                    return ClientItem(clientFeedback: clientFeedbacks[index]);
+                    return AnimatedListItem(
+                        aniController: animationController,
+                        index: index,
+                        length: clientFeedbacks.length,
+                        animationType: AnimationType.slide,
+                        startX: 1,
+                        child:( ClientItem(clientFeedback: clientFeedbacks[index])));
                   },
                   separatorBuilder: (context, index) => SizedBox(
                       width: Responsive.isDesktop(context)

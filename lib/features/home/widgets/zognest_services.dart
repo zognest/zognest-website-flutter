@@ -20,10 +20,9 @@ import '../../../shared/widgets/technology_container.dart';
 import '../../our_services/pages/our_services_page.dart';
 
 class ZognestServices extends HookWidget {
-    ZognestServices({super.key});
+  ZognestServices({super.key});
 
   late final ScrollController _controller;
-
 
   void initState() {
     _controller = ScrollController();
@@ -32,7 +31,6 @@ class ZognestServices extends HookWidget {
   void dispose() {
     _controller.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +51,7 @@ class ZognestServices extends HookWidget {
             headline: TextSpan(
               text: 'services \n'.toUpperCase(),
               style: theme.textTheme.displaySmall
-                  ?.copyWith(fontWeight:FontWeight.w700),
+                  ?.copyWith(fontWeight: FontWeight.w700),
               children: [
                 TextSpan(
                   text: Strings.we.toUpperCase(),
@@ -65,83 +63,85 @@ class ZognestServices extends HookWidget {
               ],
             ),
             showHeadline: showAnimatedHeadline.value,
-            onTapScroll: () {
-              if (controller.offset ==
-                  controller.position.maxScrollExtent) {
-                currentIndex.value = 0;
-              }
-              controller.animateTo(
-                Constants.servicesCardWidth * currentIndex.value,
-                duration: const Duration(milliseconds: 1000),
-                curve: Curves.ease,
-              );
-              currentIndex.value++;
-            },
+            onTapScroll: Responsive.isMobile(context)
+                ? null
+                : () {
+                    if (controller.offset ==
+                        controller.position.maxScrollExtent) {
+                      currentIndex.value = 0;
+                    }
+                    controller.animateTo(
+                      Constants.servicesCardWidth * currentIndex.value,
+                      duration: const Duration(milliseconds: 1000),
+                      curve: Curves.ease,
+                    );
+                    currentIndex.value++;
+                  },
           ),
         ),
-        Consumer(builder: (context, ref, child) {
-          final services = ref.watch(appControllerProvider).services;
-          return services.when(
-            data: (services) {
-              return !Responsive.isMobile(context)
-                  ? SizedBox(
-                      height: Constants.servicesCardHeight,
-                      child: ListView.separated(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: Constants.horizontalPadding),
-                        scrollDirection: Axis.horizontal,
-                        controller: controller,
-                        itemBuilder: (context, index) {
-                          return Container(
-
-                            constraints: BoxConstraints.tight(
-                              const Size(
-                                Constants.servicesCardWidth,
-                                Constants.servicesCardHeight,
-                              ),
-                            ),
-                            child: FlippingWidget(
-
-                              front: FrontService(service: services[index]),
-                              back: BackService(service: services[index]),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) => SizedBox(
-                            width: Responsive.isDesktop(context)
-                                ? Constants.listCardSeparatorWidth
-                                : Constants.listCardSeparatorWidthMobile),
-                        itemCount: services.length,
-                      ),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.mobileHorizontalPadding,
-                      ),
-                      child: Column(
-                        children: services
-                            .map(
-                              (service) => Padding(
-                                padding:
-                                    const EdgeInsets.only(bottom: Spacing.s12),
-                                child: SizedBox(
-                                  height: Constants.servicesCardHeight,
-                                  width: double.infinity,
-                                  child: FlippingWidget(
-                                    front: FrontService(service: service),
-                                    back: BackService(service: service),
-                                  ),
+        Consumer(
+          builder: (context, ref, child) {
+            final services = ref.watch(appControllerProvider).services;
+            return services.when(
+              data: (services) {
+                return !Responsive.isMobile(context)
+                    ? SizedBox(
+                        height: Constants.servicesCardHeight,
+                        child: ListView.separated(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: Constants.horizontalPadding),
+                          scrollDirection: Axis.horizontal,
+                          controller: controller,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              constraints: BoxConstraints.tight(
+                                const Size(
+                                  Constants.servicesCardWidth,
+                                  Constants.servicesCardHeight,
                                 ),
                               ),
-                            )
-                            .toList(),
-                      ),
-                    );
-            },
-            error: (_, __) => const SizedBox.shrink(),
-            loading: () => const SizedBox.shrink(),
-          );
-        }),
+                              child: FlippingWidget(
+                                front: FrontService(service: services[index]),
+                                back: BackService(service: services[index]),
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) => SizedBox(
+                              width: Responsive.isDesktop(context)
+                                  ? Constants.listCardSeparatorWidth
+                                  : Constants.listCardSeparatorWidthMobile),
+                          itemCount: services.length,
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Constants.mobileHorizontalPadding,
+                        ),
+                        child: Column(
+                          children: services
+                              .map(
+                                (service) => Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: Spacing.s12),
+                                  child: SizedBox(
+                                    height: Constants.servicesCardHeight,
+                                    width: double.infinity,
+                                    child: FlippingWidget(
+                                      front: FrontService(service: service),
+                                      back: BackService(service: service),
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      );
+              },
+              error: (_, __) => const SizedBox.shrink(),
+              loading: () => const SizedBox.shrink(),
+            );
+          },
+        ),
         const Divider(),
       ],
     );
@@ -306,6 +306,7 @@ class BackService extends StatelessWidget {
                                 return TechnologyContainer(
                                   image: tech.image,
                                   title: tech.name,
+                                  isPng: tech.isPng,
                                 );
                               },
                             ).toList(),

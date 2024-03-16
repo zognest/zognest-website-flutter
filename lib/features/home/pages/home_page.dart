@@ -141,7 +141,7 @@ class Foreground extends StatelessWidget {
         ),
         const SizedBox(height: Constants.sectionSpacing),
         Responsive.isDesktop(context)
-            ? const ZognestOffers()
+            ? ZognestOffers()
             : const ZognestOffersMobile(),
         const SizedBox(height: Constants.sectionSpacing),
         const MarqueeText(),

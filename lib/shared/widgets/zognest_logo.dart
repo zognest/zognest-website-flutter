@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
@@ -42,7 +43,7 @@ class ZognestText extends StatelessWidget {
       Strings.textZognest,
       style: theme.textTheme.labelMedium?.copyWith(
         fontWeight: FontWeight.w900,
-        fontSize: 44,
+        fontSize:Responsive.isDesktop(context) ?44:30,
         color: Palette.primary,
         fontFamily: 'SF Pro Rounded',
       ),

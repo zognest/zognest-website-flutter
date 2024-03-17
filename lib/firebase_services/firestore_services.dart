@@ -98,9 +98,8 @@ class FirestoreServices {
     final services = await Future.wait(
       servicesJson.docs.map(
         (serviceDoc) async {
-          final technologies = await getTechnologiesFromRefs(
-            serviceDoc.data()['technologies'],
-          );
+          final technologies =
+              await getTechnologiesFromRefs(serviceDoc.data()['technologies']);
 
           Service service = Service.fromMap(serviceDoc.data())
               .copyWith(technologies: technologies);
@@ -135,9 +134,9 @@ class FirestoreServices {
   static Future<List<Technology>> getTechnologiesFromRefs(
       List<dynamic> refs) async {
     List<Technology> technologies = [];
+
     for (final DocumentReference technologyRef in refs) {
       final technologyDoc = await technologyRef.get();
-
       if (technologyDoc.exists) {
         technologies.add(
           Technology.fromMap(technologyDoc.data() as Map<String, dynamic>),
@@ -146,21 +145,6 @@ class FirestoreServices {
     }
 
     return technologies;
-  }
-
-  static Future<List<Technology>> getStafflistFromRefs(
-      List<dynamic> refs) async {
-    List<Technology> staffList = [];
-    for (final DocumentReference staffRef in refs) {
-      final staffListDoc = await staffRef.get();
-
-      if (staffListDoc.exists) {
-        staffList.add(
-          Technology.fromMap(staffListDoc.data() as Map<String, dynamic>),
-        );
-      }
-    }
-    return staffList;
   }
 
   static Future<void> sendMessages({

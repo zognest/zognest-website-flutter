@@ -1,6 +1,7 @@
 import 'dart:developer';
 import "dart:js" as js;
 
+import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,20 +22,10 @@ import '../../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
 class ZognestBlogs extends HookWidget {
-   ZognestBlogs({super.key});
+  ZognestBlogs({super.key});
 
   late final ScrollController controller;
   int currentIndex = 1;
-
-
-  void initState() {
-    controller = ScrollController();
-  }
-
-
-  void dispose() {
-    controller.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +33,8 @@ class ZognestBlogs extends HookWidget {
     final controller = useScrollController();
     final currentIndex = useState(1);
     final showAnimatedHeadline = useState(false);
+    final animationController =
+        useAnimationController(duration: const Duration(seconds: 2));
     return Column(
       children: [
         const Divider(),
@@ -50,7 +43,7 @@ class ZognestBlogs extends HookWidget {
             if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
             if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
           },
-          key:ValueKey(runtimeType.toString()),
+          key: ValueKey(runtimeType.toString()),
           child: ScrollHeadline(
             headline: TextSpan(
               children: [
@@ -67,8 +60,7 @@ class ZognestBlogs extends HookWidget {
             ),
             showHeadline: showAnimatedHeadline.value,
             onTapScroll: () {
-              if (controller.offset ==
-                  controller.position.maxScrollExtent) {
+              if (controller.offset == controller.position.maxScrollExtent) {
                 currentIndex.value = 0;
               }
               controller.animateTo(
@@ -80,33 +72,48 @@ class ZognestBlogs extends HookWidget {
             },
           ),
         ),
-        Consumer(builder: (context, ref, child) {
-          final blogs = ref.watch(appControllerProvider).blogs;
-          return blogs.when(
-              data: (blogs) {
-                return SizedBox(
-                  height: Responsive.isDesktop(context)
-                      ? Constants.listHeight
-                      : 450,
-                  child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.horizontalPadding),
-                    scrollDirection: Axis.horizontal,
-                    controller: controller,
-                    itemBuilder: (context, index) {
-                      return BlogItem(blog: blogs[index]);
-                    },
-                    separatorBuilder: (context, index) => SizedBox(
-                        width: Responsive.isDesktop(context)
-                            ? Constants.listCardSeparatorWidth
-                            : Constants.listCardSeparatorWidthMobile),
-                    itemCount: blogs.length,
-                  ),
-                );
-              },
-              error: (_, __) => const SizedBox.shrink(),
-              loading: () => const SizedBox.shrink());
-        }),
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction >= 0.8) animationController.forward();
+          },
+          key: ValueKey('${runtimeType.toString()} List'),
+          child: Consumer(builder: (context, ref, child) {
+            final blogs = ref.watch(appControllerProvider).blogs;
+            return blogs.when(
+                data: (blogs) {
+                  return SizedBox(
+                    height: Responsive.isDesktop(context)
+                        ? Constants.listHeight
+                        : 450,
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: Constants.horizontalPadding),
+                      scrollDirection: Axis.horizontal,
+                      controller: controller,
+                      itemBuilder: (context, index) {
+                        return AnimatedListItem(
+                          aniController: animationController,
+                          index: index,
+                          length: blogs.length,
+                          animationType: AnimationType.slide,
+                          startX: 1,
+                          child: BlogItem(
+                            blog: blogs[index],
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) => SizedBox(
+                          width: Responsive.isDesktop(context)
+                              ? Constants.listCardSeparatorWidth
+                              : Constants.listCardSeparatorWidthMobile),
+                      itemCount: blogs.length,
+                    ),
+                  );
+                },
+                error: (_, __) => const SizedBox.shrink(),
+                loading: () => const SizedBox.shrink());
+          }),
+        ),
         const Divider(),
       ],
     );
@@ -140,9 +147,8 @@ class _BlogItemState extends State<BlogItem> {
       ),
       child: InkWell(
         onTap: () => js.context.callMethod('open', [widget.blog.urlLink]),
-
         overlayColor: MaterialStateProperty.all(Palette.transparent),
-        child: Column (
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(

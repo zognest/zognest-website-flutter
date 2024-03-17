@@ -1,3 +1,4 @@
+import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +11,6 @@ import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
-
 import '../../../config/theme/text_theme.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 import '../../../shared/widgets/scroll_headline.dart';
@@ -18,8 +18,11 @@ import '../../../shared/widgets/scroll_headline.dart';
 class ZognestProjects extends HookWidget {
   const ZognestProjects({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+    final animationController =
+    useAnimationController(duration: const Duration(seconds: 1));
     final controller = useScrollController();
     final currentIndex = useState(1);
     final showAnimatedHeadline = useState(false);
@@ -46,14 +49,12 @@ class ZognestProjects extends HookWidget {
                 ),
                 TextSpan(
                     text: Strings.projects.toUpperCase(),
-                    style: theme.textTheme.displaySmall
-                ),
+                    style: theme.textTheme.displaySmall),
               ],
             ),
             showHeadline: showAnimatedHeadline.value,
             onTapScroll: () {
-              if (controller.offset ==
-                  controller.position.maxScrollExtent) {
+              if (controller.offset == controller.position.maxScrollExtent) {
                 currentIndex.value = 0;
               }
               controller.animateTo(
@@ -63,33 +64,47 @@ class ZognestProjects extends HookWidget {
               );
               currentIndex.value++;
             },
-          ),),
-        Consumer(builder: (context, ref, _) {
-          final project = ref.watch(appControllerProvider).projects;
-          return project.when(
-              data: (project) {
-                return SizedBox(
-                  height: Constants.listHeight,
-                  child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.horizontalPadding,
+          ),
+        ),
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction >= 0.8) animationController.forward();
+          },
+          key: ValueKey('${runtimeType.toString()} List'),
+          child: Consumer(builder: (context, ref, _) {
+            final project = ref.watch(appControllerProvider).projects;
+            return project.when(
+                data: (project) {
+                  return SizedBox(
+                    height: Constants.listHeight,
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Constants.horizontalPadding,
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      controller: controller,
+                      itemBuilder: (context, index) {
+                        return AnimatedListItem(
+                          index: index,
+                          aniController: animationController,
+                          length: project.length,
+                          startX: 1,
+                          animationType: AnimationType.slide,
+                          child: ProjectItem(project: project[index]));
+                         /*return ProjectItem(project: project[index]);*/
+                      },
+                      separatorBuilder: (context, index) => SizedBox(
+                          width: Responsive.isDesktop(context)
+                              ? Constants.listCardSeparatorWidth
+                              : Constants.listCardSeparatorWidthMobile),
+                      itemCount: project.length,
                     ),
-                    scrollDirection: Axis.horizontal,
-                    controller: controller,
-                    itemBuilder: (context, index) {
-                      return ProjectItem(project: project[index]);
-                    },
-                    separatorBuilder: (context, index) => SizedBox(
-                        width: Responsive.isDesktop(context)
-                            ? Constants.listCardSeparatorWidth
-                            : Constants.listCardSeparatorWidthMobile),
-                    itemCount: project.length,
-                  ),
-                );
-              },
-              error: (_, __) => const SizedBox.shrink(),
-              loading: () => const SizedBox.shrink());
-        }),
+                  );
+                },
+                error: (_, __) => const SizedBox.shrink(),
+                loading: () => const SizedBox.shrink());
+          }),
+        ),
         const Divider(),
       ],
     );
@@ -221,9 +236,9 @@ class _ProjectItemState extends State<ProjectItem> {
                           vertical: Constants.listButtonVerticalPadding,
                         ),
                         onTap: () {
-                         setState(() {
-                           ontap=!ontap;
-                         });
+                          setState(() {
+                            ontap = !ontap;
+                          });
                         },
                       ),
                     ]

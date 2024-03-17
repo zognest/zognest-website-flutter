@@ -1,3 +1,4 @@
+import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,20 +21,12 @@ import '../../../shared/widgets/technology_container.dart';
 import '../../our_services/pages/our_services_page.dart';
 
 class ZognestServices extends HookWidget {
-  ZognestServices({super.key});
-
-  late final ScrollController _controller;
-
-  void initState() {
-    _controller = ScrollController();
-  }
-
-  void dispose() {
-    _controller.dispose();
-  }
+  const ZognestServices({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final animationController =
+        useAnimationController(duration: const Duration(seconds: 1));
     final theme = Theme.of(context);
     final controller = useScrollController();
     final currentIndex = useState(1);
@@ -79,68 +72,83 @@ class ZognestServices extends HookWidget {
                   },
           ),
         ),
-        Consumer(
-          builder: (context, ref, child) {
-            final services = ref.watch(appControllerProvider).services;
-            return services.when(
-              data: (services) {
-                return !Responsive.isMobile(context)
-                    ? SizedBox(
-                        height: Constants.servicesCardHeight,
-                        child: ListView.separated(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: Constants.horizontalPadding),
-                          scrollDirection: Axis.horizontal,
-                          controller: controller,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              constraints: BoxConstraints.tight(
-                                const Size(
-                                  Constants.servicesCardWidth,
-                                  Constants.servicesCardHeight,
-                                ),
-                              ),
-                              child: FlippingWidget(
-                                front: FrontService(service: services[index]),
-                                back: BackService(service: services[index]),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) => SizedBox(
-                              width: Responsive.isDesktop(context)
-                                  ? Constants.listCardSeparatorWidth
-                                  : Constants.listCardSeparatorWidthMobile),
-                          itemCount: services.length,
-                        ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: Constants.mobileHorizontalPadding,
-                        ),
-                        child: Column(
-                          children: services
-                              .map(
-                                (service) => Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: Spacing.s12),
-                                  child: SizedBox(
-                                    height: Constants.servicesCardHeight,
-                                    width: double.infinity,
-                                    child: FlippingWidget(
-                                      front: FrontService(service: service),
-                                      back: BackService(service: service),
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction >= 0.8) animationController.forward();
+          },
+          key: ValueKey('${runtimeType.toString()} List'),
+          child: Consumer(
+            builder: (context, ref, child) {
+              final services = ref.watch(appControllerProvider).services;
+              return services.when(
+                data: (services) {
+                  return !Responsive.isMobile(context)
+                      ? SizedBox(
+                          height: Constants.servicesCardHeight,
+                          child: ListView.separated(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: Constants.horizontalPadding),
+                            scrollDirection: Axis.horizontal,
+                            controller: controller,
+                            itemBuilder: (context, index) {
+                              return AnimatedListItem(
+                                aniController: animationController,
+                                index: index,
+                                length: services.length,
+                                animationType: AnimationType.slide,
+                                startX: 1,
+                                child: Container(
+                                  constraints: BoxConstraints.tight(
+                                    const Size(
+                                      Constants.servicesCardWidth,
+                                      Constants.servicesCardHeight,
                                     ),
                                   ),
+                                  child: FlippingWidget(
+                                    front:
+                                        FrontService(service: services[index]),
+                                    back: BackService(service: services[index]),
+                                  ),
                                 ),
-                              )
-                              .toList(),
-                        ),
-                      );
-              },
-              error: (_, __) => const SizedBox.shrink(),
-              loading: () => const SizedBox.shrink(),
-            );
-          },
+                              );
+                            },
+                            separatorBuilder: (context, index) => SizedBox(
+                                width: Responsive.isDesktop(context)
+                                    ? Constants.listCardSeparatorWidth
+                                    : Constants.listCardSeparatorWidthMobile),
+                            itemCount: services.length,
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Constants.mobileHorizontalPadding,
+                          ),
+                          child: Column(
+                            children: services
+                                .map(
+                                  (service) => Padding(
+                                    padding: const EdgeInsets.only(
+                                      bottom: Spacing.s12,
+                                    ),
+                                    child: SizedBox(
+                                      height: Constants.servicesCardHeight,
+                                      width: double.infinity,
+                                      child: FlippingWidget(
+                                        front: FrontService(service: service),
+                                        back: BackService(service: service),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        );
+                },
+                error: (_, __) => const SizedBox.shrink(),
+                loading: () => const SizedBox.shrink(),
+              );
+            },
+          ),
         ),
         const Divider(),
       ],
@@ -162,7 +170,7 @@ class FrontService extends StatelessWidget {
       child: Stack(
         children: [
           GreyscaleFilter(
-            opacity: 0.3,
+            opacity: 0.1,
             isHovered: false,
             child: NetworkFadingImage(
               path: service.backgroundImage,
@@ -180,7 +188,9 @@ class FrontService extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Spacer(),
+                const SizedBox(
+                  height: 10,
+                ),
                 Expanded(
                   flex: 2,
                   child: Column(

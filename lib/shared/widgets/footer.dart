@@ -55,7 +55,7 @@ class _FooterState extends State<Footer> {
                     children: [
                       ZognestLogo(
                         iconOnly: true,
-                        size: Responsive.isDesktop(context) ? 120 : 60,
+                        size: Responsive.isDesktop(context) ? 100 : 50,
                       ),
                       const SizedBox(height: Spacing.s12),
                       InkWell(

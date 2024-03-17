@@ -83,39 +83,45 @@ class ZognestClients extends HookWidget {
             },
           ),
         ),
-        Consumer(builder: (context, ref, child) {
-          final clientFeedbacks =
-              ref.watch(appControllerProvider).clientFeedbacks;
-          return clientFeedbacks.when(
-            data: (clientFeedbacks) {
-              return SizedBox(
-                height: Constants.listHeight,
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.horizontalPadding),
-                  scrollDirection: Axis.horizontal,
-                  controller: controller,
-                  itemBuilder: (context, index) {
-                    return AnimatedListItem(
-                        aniController: animationController,
-                        index: index,
-                        length: clientFeedbacks.length,
-                        animationType: AnimationType.slide,
-                        startX: 1,
-                        child:( ClientItem(clientFeedback: clientFeedbacks[index])));
-                  },
-                  separatorBuilder: (context, index) => SizedBox(
-                      width: Responsive.isDesktop(context)
-                          ? Constants.listCardSeparatorWidth
-                          : Constants.listCardSeparatorWidthMobile),
-                  itemCount: clientFeedbacks.length,
-                ),
-              );
-            },
-            error: (_, __) => const SizedBox.shrink(),
-            loading: () => const SizedBox.shrink(),
-          );
-        }),
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction >= 0.8) animationController.forward();
+          },
+          key: ValueKey('${runtimeType.toString()} List'),
+          child: Consumer(builder: (context, ref, child) {
+            final clientFeedbacks =
+                ref.watch(appControllerProvider).clientFeedbacks;
+            return clientFeedbacks.when(
+              data: (clientFeedbacks) {
+                return SizedBox(
+                  height: Constants.listHeight,
+                  child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Constants.horizontalPadding),
+                    scrollDirection: Axis.horizontal,
+                    controller: controller,
+                    itemBuilder: (context, index) {
+                      return AnimatedListItem(
+                          aniController: animationController,
+                          index: index,
+                          length: clientFeedbacks.length,
+                          animationType: AnimationType.slide,
+                          startX: 1,
+                          child:( ClientItem(clientFeedback: clientFeedbacks[index])));
+                    },
+                    separatorBuilder: (context, index) => SizedBox(
+                        width: Responsive.isDesktop(context)
+                            ? Constants.listCardSeparatorWidth
+                            : Constants.listCardSeparatorWidthMobile),
+                    itemCount: clientFeedbacks.length,
+                  ),
+                );
+              },
+              error: (_, __) => const SizedBox.shrink(),
+              loading: () => const SizedBox.shrink(),
+            );
+          }),
+        ),
         const Divider(),
       ],
     );

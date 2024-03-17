@@ -72,45 +72,57 @@ class ZognestStaff extends HookWidget {
           ),
         ),
         const Divider(),
-        Consumer(builder: (__, ref, _) {
-          final staff = ref.watch(appControllerProvider).staff;
-          return staff.when(
-              data: (staff) {
-                return SizedBox(
-                  height: Constants.listHeight,
-                  child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: Constants.horizontalPadding),
-                    scrollDirection: Axis.horizontal,
-                    controller: controller,
-                    itemBuilder: (context, index) {
-                      return SizedBox(
-                        width: Responsive.isDesktop(context)
-                            ? Constants.listCardWidth
-                            : 300,
-                        child: Card(
-                          color: Palette.transparent,
-                          clipBehavior: Clip.hardEdge,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction >= 0.8) animationController.forward();
+          },
+          key: ValueKey('${runtimeType.toString()} List'),
+          child: Consumer(builder: (__, ref, _) {
+            final staff = ref.watch(appControllerProvider).staff;
+            return staff.when(
+                data: (staff) {
+                  return SizedBox(
+                    height: Constants.listHeight,
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: Constants.horizontalPadding),
+                      scrollDirection: Axis.horizontal,
+                      controller: controller,
+                      itemBuilder: (context, index) {
+                        return AnimatedListItem(
+                          index: index,
+                          length: staff.length,
+                          aniController: animationController,
+                          animationType: AnimationType.slide,
+                          child: SizedBox(
+                            width: Responsive.isDesktop(context)
+                                ? Constants.listCardWidth
+                                : 300,
+                            child: Card(
+                              color: Palette.transparent,
+                              clipBehavior: Clip.hardEdge,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(25)),
+                              ),
+                              child: FlippingWidget(
+                                front: FrontCard(staff: staff[index]),
+                                back: BackCard(staff: staff[index]),
+                              ),
+                            ),
                           ),
-                          child: FlippingWidget(
-                            front: FrontCard(staff: staff[index]),
-                            back: BackCard(staff: staff[index]),
-                          ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) =>
-                        SizedBox(width: Responsive.isDesktop(context) ? 16 : 6),
-                    itemCount: staff.length,
-                  ),
-                );
-              },
-              error: (_, __) => const Text('error'),
-              loading: () =>
-                  CircularProgressIndicator(color: theme.primaryColor));
-        }),
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
+                          SizedBox(width: Responsive.isDesktop(context) ? 16 : 6),
+                      itemCount: staff.length,
+                    ),
+                  );
+                },
+                error: (_, __) => const Text('error'),
+                loading: () =>
+                    CircularProgressIndicator(color: theme.primaryColor));
+          }),
+        ),
         const Divider(),
       ],
     );

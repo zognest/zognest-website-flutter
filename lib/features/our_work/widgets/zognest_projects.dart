@@ -22,7 +22,7 @@ class ZognestProjects extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final animationController =
-    useAnimationController(duration: const Duration(seconds: 2));
+    useAnimationController(duration: const Duration(seconds: 1));
     final controller = useScrollController();
     final currentIndex = useState(1);
     final showAnimatedHeadline = useState(false);
@@ -66,39 +66,45 @@ class ZognestProjects extends HookWidget {
             },
           ),
         ),
-        Consumer(builder: (context, ref, _) {
-          final project = ref.watch(appControllerProvider).projects;
-          return project.when(
-              data: (project) {
-                return SizedBox(
-                  height: Constants.listHeight,
-                  child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.horizontalPadding,
+        VisibilityDetector(
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction >= 0.8) animationController.forward();
+          },
+          key: ValueKey('${runtimeType.toString()} List'),
+          child: Consumer(builder: (context, ref, _) {
+            final project = ref.watch(appControllerProvider).projects;
+            return project.when(
+                data: (project) {
+                  return SizedBox(
+                    height: Constants.listHeight,
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Constants.horizontalPadding,
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      controller: controller,
+                      itemBuilder: (context, index) {
+                        return AnimatedListItem(
+                          index: index,
+                          aniController: animationController,
+                          length: project.length,
+                          startX: 1,
+                          animationType: AnimationType.slide,
+                          child: ProjectItem(project: project[index]));
+                         /*return ProjectItem(project: project[index]);*/
+                      },
+                      separatorBuilder: (context, index) => SizedBox(
+                          width: Responsive.isDesktop(context)
+                              ? Constants.listCardSeparatorWidth
+                              : Constants.listCardSeparatorWidthMobile),
+                      itemCount: project.length,
                     ),
-                    scrollDirection: Axis.horizontal,
-                    controller: controller,
-                    itemBuilder: (context, index) {
-                      return AnimatedListItem(
-                        index: index,
-                        aniController: animationController,
-                        length: project.length,
-                        startX: 1,
-                        animationType: AnimationType.slide,
-                        child: ProjectItem(project: project[index]));
-                       /*return ProjectItem(project: project[index]);*/
-                    },
-                    separatorBuilder: (context, index) => SizedBox(
-                        width: Responsive.isDesktop(context)
-                            ? Constants.listCardSeparatorWidth
-                            : Constants.listCardSeparatorWidthMobile),
-                    itemCount: project.length,
-                  ),
-                );
-              },
-              error: (_, __) => const SizedBox.shrink(),
-              loading: () => const SizedBox.shrink());
-        }),
+                  );
+                },
+                error: (_, __) => const SizedBox.shrink(),
+                loading: () => const SizedBox.shrink());
+          }),
+        ),
         const Divider(),
       ],
     );

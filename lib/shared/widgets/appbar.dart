@@ -9,7 +9,6 @@ import 'package:zognest_website/features/about_us/pages/about_us_page.dart';
 import 'package:zognest_website/features/home/pages/home_page.dart';
 import 'package:zognest_website/features/home/widgets/contact_form.dart';
 import 'package:zognest_website/features/our_services/pages/our_services_page.dart';
-import 'package:zognest_website/features/our_space/pages/our_space_page.dart';
 import 'package:zognest_website/features/our_work/pages/our_work_page.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
@@ -32,10 +31,10 @@ enum AppBarButtons {
     route: OurWorkPage.route,
     title: Strings.ourWork,
   ),
-  ourSpace(
+  /*ourSpace(
     route: OurSpacePage.route,
     title: Strings.ourSpace,
-  ),
+  ),*/
   aboutUs(
     route: AboutUsPage.route,
     title: Strings.aboutUs,
@@ -173,7 +172,6 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                       ).toList(),
                     ),
                   ),
-                  //button get in touch
                   PrimaryButton(
                     onTap: () {
                       showDialog(

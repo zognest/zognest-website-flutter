@@ -170,13 +170,21 @@ class FrontService extends StatelessWidget {
       child: Stack(
         children: [
           GreyscaleFilter(
-            opacity: 0.1,
             isHovered: false,
-            child: NetworkFadingImage(
-              path: service.backgroundImage,
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
+            child: Stack(
+              children: [
+                NetworkFadingImage(
+                  path: service.backgroundImage,
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color: const Color(0xff0A0A0A).withOpacity(0.8),
+                ),
+              ],
             ),
           ),
           Padding(
@@ -188,11 +196,8 @@ class FrontService extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 64),
                 Expanded(
-                  flex: 2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -201,8 +206,9 @@ class FrontService extends StatelessWidget {
                         service.highlight.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           color: theme.primaryColor,
-                          fontSize: Responsive.isMobile(context) ? 28 : 38,
+                          fontSize: Responsive.isMobile(context) ? 26 : 36,
                           fontFamily: 'SF Pro Rounded',
+                          letterSpacing: -1,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -211,7 +217,8 @@ class FrontService extends StatelessWidget {
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.bold,
-                          fontSize: Responsive.isMobile(context) ? 28 : 38,
+                          letterSpacing: -1,
+                          fontSize: Responsive.isMobile(context) ? 26 : 36,
                         ),
                       ),
                       Expanded(
@@ -219,9 +226,7 @@ class FrontService extends StatelessWidget {
                           padding:
                               const EdgeInsets.symmetric(vertical: Spacing.m20),
                           child: Text(
-                            service.description,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 5,
+                            service.description * 3,
                             style: theme.textTheme.bodyLarge?.copyWith(
                                 fontFamily: 'SF Pro Rounded',
                                 fontSize:
@@ -290,7 +295,8 @@ class BackService extends StatelessWidget {
                         service.highlight.toUpperCase(),
                         style: theme.textTheme.headlineMedium?.copyWith(
                           color: theme.primaryColor,
-                          fontSize: Responsive.isMobile(context) ? 28 : 38,
+                          letterSpacing: -1,
+                          fontSize: Responsive.isMobile(context) ? 26 : 36,
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.w500,
                         ),
@@ -300,7 +306,8 @@ class BackService extends StatelessWidget {
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontFamily: 'SF Pro Rounded',
                           fontWeight: FontWeight.bold,
-                          fontSize: Responsive.isMobile(context) ? 28 : 38,
+                          letterSpacing: -1,
+                          fontSize: Responsive.isMobile(context) ? 26 : 36,
                         ),
                       ),
                       const SizedBox(height: Spacing.m20),

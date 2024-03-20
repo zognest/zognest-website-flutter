@@ -14,6 +14,7 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 import '../../../config/theme/text_theme.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 import '../../../shared/widgets/scroll_headline.dart';
+import "dart:js" as js;
 
 class ZognestProjects extends HookWidget {
   const ZognestProjects({super.key});
@@ -25,17 +26,17 @@ class ZognestProjects extends HookWidget {
     useAnimationController(duration: const Duration(seconds: 1));
     final controller = useScrollController();
     final currentIndex = useState(1);
-    final showAnimatedHeadline = useState(false);
+    final showAnimatedHeadline = useState(true);
     final theme = Theme.of(context);
     return Column(
       children: [
         if (Responsive.isDesktop(context)) const Divider(),
-        VisibilityDetector(
-          onVisibilityChanged: (info) {
-            if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
-            if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
-          },
-          key: ValueKey(runtimeType.toString()),
+        AnimatedListItem(
+          length: 1,
+          key: ValueKey('${runtimeType.toString()} text'),
+          animationType: AnimationType.slide,
+          index:0,
+          aniController:animationController,
           child: ScrollHeadline(
             headline: TextSpan(
               text: Strings.our.toUpperCase(),
@@ -91,7 +92,6 @@ class ZognestProjects extends HookWidget {
                           startX: 1,
                           animationType: AnimationType.slide,
                           child: ProjectItem(project: project[index]));
-                         /*return ProjectItem(project: project[index]);*/
                       },
                       separatorBuilder: (context, index) => SizedBox(
                           width: Responsive.isDesktop(context)
@@ -191,16 +191,15 @@ class _ProjectItemState extends State<ProjectItem> {
                             ),
                           ),
                         ),
-                        if (over)
-                          PrimaryButton(
+                        if (over) widget.project.urlLink!=null?  PrimaryButton(
                             title: Strings.visit.toUpperCase(),
                             width: Constants.listCardWidth * 0.3,
                             padding: const EdgeInsets.symmetric(
                               horizontal: Constants.listButtonHorizontalPadding,
                               vertical: Constants.listButtonVerticalPadding,
                             ),
-                            onTap: () {},
-                          ),
+                              onTap: () => js.context.callMethod('open', [widget.project.urlLink]),
+                          ):const SizedBox.shrink(),
                       ],
                     ),
                     const SizedBox(height: Spacing.s4),

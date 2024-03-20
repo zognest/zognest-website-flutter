@@ -10,6 +10,7 @@ class Project extends Equatable {
   final String cover;
   final String? splash;
   final String icon;
+   final String? urlLink;
 
   const Project({
     required this.title,
@@ -18,6 +19,7 @@ class Project extends Equatable {
     required this.cover,
     required this.splash,
     required this.icon,
+     this.urlLink,
   });
 
   Project copyWith({
@@ -27,6 +29,7 @@ class Project extends Equatable {
     String? cover,
     String? splash,
     String? icon,
+    String? urlLink,
   }) {
     return Project(
       title: title ?? this.title,
@@ -35,6 +38,7 @@ class Project extends Equatable {
       cover: cover ?? this.cover,
       splash: splash ?? this.splash,
       icon: icon ?? this.icon,
+      urlLink: urlLink ?? this.urlLink,
     );
   }
 
@@ -46,6 +50,7 @@ class Project extends Equatable {
       'image': cover,
       'splash': splash,
       'icon': icon,
+      'urlLink':urlLink
     };
   }
 
@@ -57,6 +62,7 @@ class Project extends Equatable {
       cover: map['cover'],
       splash: map['splash'],
       icon: map['icon'],
+      urlLink: map['urlLink'],
     );
   }
 
@@ -77,6 +83,7 @@ class Project extends Equatable {
       cover,
       splash ?? '',
       icon,
+      urlLink ?? '',
     ];
   }
 }

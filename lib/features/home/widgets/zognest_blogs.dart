@@ -32,18 +32,18 @@ class ZognestBlogs extends HookWidget {
     final theme = Theme.of(context);
     final controller = useScrollController();
     final currentIndex = useState(1);
-    final showAnimatedHeadline = useState(false);
+    final showAnimatedHeadline = useState(true);
     final animationController =
-        useAnimationController(duration: const Duration(seconds: 2));
+        useAnimationController(duration: const Duration(seconds: 1));
     return Column(
       children: [
         const Divider(),
-        VisibilityDetector(
-          onVisibilityChanged: (info) {
-            if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
-            if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
-          },
-          key: ValueKey(runtimeType.toString()),
+        AnimatedListItem(
+          length: 1,
+          key: ValueKey('${runtimeType.toString()} text'),
+          animationType: AnimationType.slide,
+          index:0,
+          aniController:animationController,
           child: ScrollHeadline(
             headline: TextSpan(
               children: [

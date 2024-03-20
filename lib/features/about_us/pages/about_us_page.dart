@@ -1,11 +1,6 @@
-import 'dart:developer';
-import 'dart:js_interop';
-
-import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/features/about_us/widgets/zognest_staff.dart';
@@ -15,11 +10,7 @@ import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 import 'package:zognest_website/shared/widgets/image_text.dart';
 
-import '../../../config/theme/text_theme.dart';
-import '../../../resources/strings.dart';
-import '../../../shared/widgets/animation-image.dart';
-import '../../../shared/widgets/mouse_animation.dart';
-import '../../../shared/widgets/scroll_headline.dart';
+import '../../../shared/widgets/animation_image.dart';
 
 class AboutUsPage extends HookWidget {
   const AboutUsPage({super.key});

@@ -1,7 +1,9 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 
+import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/assets.dart';
@@ -28,26 +30,32 @@ enum SocialButtons {
   );
 }
 
-class SocialButton extends StatefulWidget {
+class SocialButton extends HookWidget {
   const SocialButton({super.key, required this.button});
 
   final SocialButtons button;
 
   @override
-  State<SocialButton> createState() => _SocialButtonState();
-}
-
-class _SocialButtonState extends State<SocialButton> {
-  bool hovering = false;
-
-  @override
   Widget build(BuildContext context) {
+    final hovering = useState(false);
+    final animationController =
+        useAnimationController(duration: const Duration(milliseconds: 500));
     final theme = Theme.of(context);
+    useEffect(() {
+      animationController.value = animationController.upperBound;
+      return null;
+    }, []);
     return InkWell(
       onTap: () {
-        js.context.callMethod('open', [widget.button.url]);
+        js.context.callMethod('open', [button.url]);
       },
-      onHover: (_) => setState(() => hovering = !hovering),
+      onHover: (_) async {
+        hovering.value = !hovering.value;
+        if (hovering.value) {
+          await animationController.forward(
+              from: animationController.lowerBound);
+        }
+      },
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       child: Container(
         height: Responsive.isDesktop(context) ? 100 : 38,
@@ -55,11 +63,19 @@ class _SocialButtonState extends State<SocialButton> {
         alignment: Alignment.center,
         padding: const EdgeInsets.all(Spacing.s12),
         decoration: BoxDecoration(
-          color: hovering ? theme.primaryColor : null,
+          color: hovering.value ? theme.primaryColor : null,
           borderRadius: BorderRadius.circular(Spacing.m16),
           border: Border.all(color: const Color(0xff43403A)),
         ),
-        child: SvgPicture.asset(widget.button.icon),
+        child: AnimatedListItem(
+          aniController: animationController,
+          length: 1,
+          index: 0,
+          animationType: AnimationType.slide,
+          startY: -10,
+          startX: 0,
+          child: SvgPicture.asset(button.icon),
+        ),
       ),
     );
   }

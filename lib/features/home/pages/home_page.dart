@@ -14,14 +14,13 @@ import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
 import '../../../config/responsive.dart';
-import '../../../shared/widgets/animation-image.dart';
+import '../../../shared/widgets/animation_image.dart';
 import '../../../shared/widgets/gradient_container.dart';
 import '../../../shared/widgets/image_text.dart';
 import '../widgets/beyond_space.dart';
 import '../widgets/clients_list.dart';
 import '../widgets/counters.dart';
 import '../widgets/optimism_text.dart';
-import '../widgets/zognest_animation.dart';
 import '../widgets/zognest_offers.dart';
 import '../widgets/zognest_services.dart';
 import '../widgets/zognest_video.dart';

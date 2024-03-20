@@ -3,13 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/features/our_services/widgets/services_browser.dart';
 import 'package:zognest_website/resources/assets.dart';
-import 'package:zognest_website/shared/widgets/animation-image.dart';
+import 'package:zognest_website/shared/widgets/animation_image.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
-import '../../../config/responsive.dart';
-import '../../../shared/widgets/mouse_animation.dart';
 import '../models/purchasable_service.dart';
 
 class OurServicesPage extends StatefulWidget {

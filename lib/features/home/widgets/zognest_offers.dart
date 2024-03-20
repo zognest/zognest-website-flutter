@@ -22,19 +22,19 @@ class ZognestOffers extends HookWidget {
     final scrollController = useScrollController();
     final currentIndex = useState(1);
     final hoveredIndex = useState(-1);
-    final showAnimatedHeadline = useState(false);
+    final showAnimatedHeadline = useState(true);
     final animationController =
-        useAnimationController(duration: const Duration(seconds: 2));
+        useAnimationController(duration: const Duration(seconds: 1));
     final theme = Theme.of(context);
 
     return Column(
       children: [
-        VisibilityDetector(
-          onVisibilityChanged: (info) {
-            if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
-            if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
-          },
-          key: ValueKey(runtimeType.toString()),
+        AnimatedListItem(
+          length: 1,
+          key: ValueKey('${runtimeType.toString()} text'),
+          animationType: AnimationType.slide,
+          index:0,
+          aniController:animationController,
           child: ScrollHeadline(
             headline: TextSpan(
               text: "${Strings.what}\n".toUpperCase(),
@@ -78,12 +78,6 @@ class ZognestOffers extends HookWidget {
                 data: (offers) {
                   return Column(
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          animationController.repeat();
-                        },
-                        child: const Text('Repeat Animation'),
-                      ),
                       SizedBox(
                         height: Constants.zognestOffersListHeight,
                         child: ListView.separated(

@@ -96,7 +96,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
       },
       overlayColor: const MaterialStatePropertyAll(Palette.transparent),
       child: Card(
-        clipBehavior: Clip.hardEdge,
+        clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Container(
           color: isHovering ? Palette.primary : Palette.cardBackgroundColor,
@@ -108,13 +108,16 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                   padding: const EdgeInsets.all(18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 45),
                       AutoSizeText(
                         widget.service.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w800,
+                          letterSpacing: -1,
+                          fontWeight: FontWeight.bold,
                           fontSize: 24,
                           color:
                           isHovering ? Palette.black : theme.primaryColor,
@@ -132,6 +135,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                               fontFamily: 'SF Pro Rounded',
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
+                              letterSpacing:-1,
                             ),
                           ),
                         ),

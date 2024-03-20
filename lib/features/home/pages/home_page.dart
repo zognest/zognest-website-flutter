@@ -14,6 +14,7 @@ import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
 import '../../../config/responsive.dart';
+import '../../../shared/widgets/animation-image.dart';
 import '../../../shared/widgets/gradient_container.dart';
 import '../../../shared/widgets/image_text.dart';
 import '../widgets/beyond_space.dart';
@@ -101,11 +102,7 @@ class Background extends StatelessWidget {
               ),
             ),
             const SizedBox(height: Constants.bgDecorationSpacing),
-            const FloatingIcon(
-              isHorizontal: false,
-              assets: Assets.mercuries,
-              alignment: Alignment.center,
-            ),
+            AnimatedImage(child: Image.asset(Assets.mercuries)),
             const SizedBox(height: Constants.bgDecorationSpacing),
             SvgPicture.asset(Assets.gridLines),
             const SizedBox(height: Constants.bgDecorationSpacing),
@@ -150,7 +147,7 @@ class Foreground extends StatelessWidget {
         const SizedBox(height: Constants.sectionSpacing),
         const Counters(),
         const SizedBox(height: Constants.sectionSpacing),
-        ZognestServices(),
+        const ZognestServices(),
         const SizedBox(height: Constants.sectionSpacing),
         const ZognestMocks(),
         const SizedBox(height: Constants.sectionSpacing),

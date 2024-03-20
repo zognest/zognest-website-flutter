@@ -40,20 +40,20 @@ class ZognestClients extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final animationController =
-    useAnimationController(duration: const Duration(seconds: 2));
+    useAnimationController(duration: const Duration(seconds: 1));
     final theme = Theme.of(context);
     final controller = useScrollController();
     final currentIndex = useState(1);
-    final showAnimatedHeadline = useState(false);
+    final showAnimatedHeadline = useState(true);
     return Column(
       children: [
         const Divider(),
-        VisibilityDetector(
-          onVisibilityChanged: (info) {
-            if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
-            if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
-          },
-          key: ValueKey(runtimeType.toString()),
+        AnimatedListItem(
+          length: 1,
+          key: ValueKey('${runtimeType.toString()} text'),
+          animationType: AnimationType.slide,
+          index:0,
+          aniController:animationController,
           child: ScrollHeadline(
             headline: TextSpan(
               children: [
@@ -151,7 +151,7 @@ class ClientItem extends HookWidget {
       width: Constants.listCardWidth,
       height: double.infinity,
       padding: const EdgeInsets.symmetric(
-          horizontal: Spacing.l32, vertical: Spacing.l24),
+          horizontal: Spacing.l24, vertical: Spacing.l24),
       child: InkWell(
         onTap: () {},
         onHover: (over) => hovering.value = over,

@@ -116,6 +116,9 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
     return SlideTransition(
       position: _appBarOffsetAnimation,
       child: FrostedContainer(
+
+
+
         width: double.infinity,
         height: Constants.appBarHeight,
         padding: const EdgeInsets.symmetric(

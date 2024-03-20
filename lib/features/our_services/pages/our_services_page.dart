@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/features/our_services/widgets/services_browser.dart';
 import 'package:zognest_website/resources/assets.dart';
+import 'package:zognest_website/shared/widgets/animation-image.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
@@ -52,7 +53,7 @@ class _OurServicesPageState extends State<OurServicesPage> {
                 const SizedBox(height: Constants.appBarHeight * 1.5),
                 const ServicesBrowser(),
                 const SizedBox(height: Constants.sectionSpacing),
-                Image.asset(Assets.ourServicesText_2),
+                AnimatedImage(child: Image.asset(Assets.ourServicesText_2)),
                 const Divider(),
                 const SizedBox(height: Constants.sectionSpacing),
                 Footer(

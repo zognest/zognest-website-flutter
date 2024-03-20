@@ -1,3 +1,7 @@
+import 'dart:developer';
+import 'dart:js_interop';
+
+import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,11 +17,12 @@ import 'package:zognest_website/shared/widgets/image_text.dart';
 
 import '../../../config/theme/text_theme.dart';
 import '../../../resources/strings.dart';
+import '../../../shared/widgets/animation-image.dart';
 import '../../../shared/widgets/mouse_animation.dart';
 import '../../../shared/widgets/scroll_headline.dart';
 
 class AboutUsPage extends HookWidget {
-   const AboutUsPage({super.key});
+  const AboutUsPage({super.key});
   static const route = '/about-us';
   @override
   Widget build(BuildContext context) {
@@ -44,13 +49,15 @@ class AboutUsPage extends HookWidget {
                    ZognestStaff(),
                   const SizedBox(height: Constants.sectionSpacing),
                   const Divider(),
-                  Image.asset(
-                    Responsive.isDesktop(context)
-                        ? Assets.aboutUsText
-                        : Assets.mobileAboutUsText,
-                    width: double.infinity,
-                    alignment: Alignment.bottomCenter,
-                    fit: BoxFit.contain,
+                  AnimatedImage(
+                    child: Image.asset(
+                      Responsive.isDesktop(context)
+                          ? Assets.aboutUsText
+                          : Assets.mobileAboutUsText,
+                      width: double.infinity,
+                      alignment: Alignment.bottomCenter,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                   const SizedBox(height: Constants.sectionSpacing),
                   Footer(

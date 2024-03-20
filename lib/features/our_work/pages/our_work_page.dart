@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/features/our_work/widgets/our_work_text.dart';
@@ -16,6 +17,7 @@ class OurWorkPage extends HookWidget {
   static const route = '/our-work';
   @override
   Widget build(BuildContext context) {
+    final showAnimatedHeadline = useState(false);
     final controller = useScrollController();
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -40,7 +42,13 @@ class OurWorkPage extends HookWidget {
                   child: ZognestProjects(),
                 ),
                 const SizedBox(height: Constants.sectionSpacing),
-                const OurWorkText(),
+                VisibilityDetector(
+                    onVisibilityChanged: (info){
+                      if (info.visibleFraction == 1) showAnimatedHeadline.value = true;
+                      if (info.visibleFraction <= 0.5) showAnimatedHeadline.value = false;
+                    },
+                    key: ValueKey(runtimeType.toString()),
+                    child: const OurWorkText()),
                 SizedBox(
                   height: Responsive.isDesktop(context)
                       ? 25

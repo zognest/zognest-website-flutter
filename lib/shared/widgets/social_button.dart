@@ -50,7 +50,6 @@ class _SocialButtonState extends State<SocialButton> {
       onHover: (_) => setState(() => hovering = !hovering),
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       child: Container(
-
         height: Responsive.isDesktop(context) ? 100 : 38,
         width: Responsive.isDesktop(context) ? 100 : 38,
         alignment: Alignment.center,

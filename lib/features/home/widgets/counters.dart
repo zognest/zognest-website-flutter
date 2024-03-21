@@ -87,8 +87,9 @@ class Counters extends HookWidget {
                   key: ValueKey(runtimeType.toString()),
                   onVisibilityChanged: (info) {
                     if (countersAnimationController.isCompleted) return;
-                    if (info.visibleFraction == 1)
+                    if (info.visibleFraction == 1) {
                       countersAnimationController.forward();
+                    }
                   },
                   child: Wrap(
                     direction: Axis.horizontal,
@@ -96,31 +97,51 @@ class Counters extends HookWidget {
                     runSpacing: 16,
                     spacing: 16,
                     children: [
-                      CounterItem(
-                        count: 09,
-                        title: Strings.appDevelopment,
-                        controller: countersAnimationController,
+                      AnimatedImage(
+                        index: 0,
+                        length: 5,
+                        child: CounterItem(
+                          count: 09,
+                          title: Strings.appDevelopment,
+                          controller: countersAnimationController,
+                        ),
                       ),
-                      CounterItem(
-                        count: 12,
-                        title: Strings.webDevelopment,
-                        controller: countersAnimationController,
+                      AnimatedImage(
+                        index: 1,
+                        length: 5,
+                        child: CounterItem(
+                          count: 12,
+                          title: Strings.webDevelopment,
+                          controller: countersAnimationController,
+                        ),
                       ),
-                      CounterItem(
-                        count: 17,
-                        title: Strings.uiUxForCompanies,
-                        controller: countersAnimationController,
+                      AnimatedImage(
+                        index: 2,
+                        length: 5,
+                        child: CounterItem(
+                          count: 17,
+                          title: Strings.uiUxForCompanies,
+                          controller: countersAnimationController,
+                        ),
                       ),
-                      CounterItem(
-                        count: 36,
-                        title: Strings.happyCustomer,
-                        controller: countersAnimationController,
+                      AnimatedImage(
+                        index: 3,
+                        length: 5,
+                        child: CounterItem(
+                          count: 36,
+                          title: Strings.happyCustomer,
+                          controller: countersAnimationController,
+                        ),
                       ),
-                      CounterItem(
-                        count: 36,
-                        title: Strings.projectsCompleted,
-                        hasPlus: false,
-                        controller: countersAnimationController,
+                      AnimatedImage(
+                        index: 4,
+                        length: 5,
+                        child: CounterItem(
+                          count: 36,
+                          title: Strings.projectsCompleted,
+                          hasPlus: false,
+                          controller: countersAnimationController,
+                        ),
                       ),
                     ],
                   ),

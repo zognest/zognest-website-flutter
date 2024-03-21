@@ -15,7 +15,7 @@ import 'package:zognest_website/shared/widgets/scroll_headline.dart';
 import '../../../../config/responsive.dart';
 
 class ZognestOffers extends HookWidget {
-  ZognestOffers({super.key});
+  const ZognestOffers({super.key});
 
   @override
   Widget build(BuildContext context) {

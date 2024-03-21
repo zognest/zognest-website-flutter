@@ -22,7 +22,7 @@ abstract final class Routing {
       GoRoute(
         name: OurServicesPage.route,
         path: OurServicesPage.route,
-        builder: (_, __) => const OurServicesPage(),
+        builder: (_, __) =>  const OurServicesPage(),
       ),
       GoRoute(
         name: OurWorkPage.route,

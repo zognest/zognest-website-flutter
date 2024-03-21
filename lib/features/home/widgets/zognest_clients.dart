@@ -20,25 +20,10 @@ import '../../../shared/widgets/network_fading_image.dart';
 
 class ZognestClients extends HookWidget {
    ZognestClients({super.key});
-
-
-
-
-  late final ScrollController controller;
-  int currentIndex = 1;
-
-
-  void initState() {
-    controller = ScrollController();
-  }
-
-
-  void dispose() {
-    controller.dispose();
-  }
-
+   late final ScrollController controller;
   @override
   Widget build(BuildContext context) {
+
     final animationController =
     useAnimationController(duration: const Duration(seconds: 1));
     final theme = Theme.of(context);

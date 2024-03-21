@@ -8,8 +8,6 @@ import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
 
-import '../../../shared/widgets/mouse_animation.dart';
-
 class OurSpacePage extends StatefulWidget {
   const OurSpacePage({super.key});
 

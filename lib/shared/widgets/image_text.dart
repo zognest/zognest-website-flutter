@@ -6,6 +6,7 @@ import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
+import 'package:zognest_website/shared/widgets/animation_image.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/gradient_container.dart';
 
@@ -66,87 +67,89 @@ class ImageText extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: Spacing.l32),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  title
-                                      ? Expanded(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                child: AutoSizeText.rich(
-                                                  stepGranularity: 1,
-                                                  maxLines: 5,
-                                                  TextSpan(
-                                                    text: Strings.about
-                                                        .toUpperCase(),
-                                                    style: theme
-                                                        .textTheme.displaySmall,
-                                                    children: [
-                                                      TextSpan(
-                                                        text: Strings.us
-                                                            .toUpperCase(),
-                                                        style: theme.textTheme
-                                                            .displaySmall
-                                                            ?.copyWith(
-                                                          color: Palette.primary,
-                                                          fontVariations:
-                                                              TextThemes
-                                                                  .fontVariation(
-                                                                      5),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                      )
-                                      : Expanded(
-                                          child: AutoSizeText.rich(
-                                            stepGranularity: 1,
-                                            maxLines: 5,
-                                            TextSpan(
-                                              text: Strings.helpingYourBusiness
-                                                  .toUpperCase(),
-                                              style:
-                                                  theme.textTheme.displaySmall,
+                              child: AnimatedImage(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    title
+                                        ? Expanded(
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
-                                                TextSpan(
-                                                  text:
-                                                      Strings.to.toUpperCase(),
-                                                  style: theme
-                                                      .textTheme.displaySmall
-                                                      ?.copyWith(
-                                                    fontVariations: TextThemes
-                                                        .fontVariation(3),
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                    text: Strings.exploreThe
-                                                        .toUpperCase()),
-                                                TextSpan(
-                                                  text:
-                                                      Strings.sky.toUpperCase(),
-                                                  style: theme
-                                                      .textTheme.displaySmall
-                                                      ?.copyWith(
-                                                    color: theme.primaryColor,
+                                                Expanded(
+                                                  child: AutoSizeText.rich(
+                                                    stepGranularity: 1,
+                                                    maxLines: 5,
+                                                    TextSpan(
+                                                      text: Strings.about
+                                                          .toUpperCase(),
+                                                      style: theme
+                                                          .textTheme.displaySmall,
+                                                      children: [
+                                                        TextSpan(
+                                                          text: Strings.us
+                                                              .toUpperCase(),
+                                                          style: theme.textTheme
+                                                              .displaySmall
+                                                              ?.copyWith(
+                                                            color: Palette.primary,
+                                                            fontVariations:
+                                                                TextThemes
+                                                                    .fontVariation(
+                                                                        5),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ],
                                             ),
+                                        )
+                                        : Expanded(
+                                            child: AutoSizeText.rich(
+                                              stepGranularity: 1,
+                                              maxLines: 5,
+                                              TextSpan(
+                                                text: Strings.helpingYourBusiness
+                                                    .toUpperCase(),
+                                                style:
+                                                    theme.textTheme.displaySmall,
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        Strings.to.toUpperCase(),
+                                                    style: theme
+                                                        .textTheme.displaySmall
+                                                        ?.copyWith(
+                                                      fontVariations: TextThemes
+                                                          .fontVariation(3),
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                      text: Strings.exploreThe
+                                                          .toUpperCase()),
+                                                  TextSpan(
+                                                    text:
+                                                        Strings.sky.toUpperCase(),
+                                                    style: theme
+                                                        .textTheme.displaySmall
+                                                        ?.copyWith(
+                                                      color: theme.primaryColor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                  Text(
-                                    isAboutus
-                                        ? Strings.zognestDescriptionAboutUS
-                                        : Strings.zognestDescription,
-                                    style: theme.textTheme.bodyLarge,
-                                  ),
-                                ],
+                                    Text(
+                                      isAboutus
+                                          ? Strings.zognestDescriptionAboutUS
+                                          : Strings.zognestDescription,
+                                      style: theme.textTheme.bodyLarge,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -194,60 +197,62 @@ class ImageTextMobile extends StatelessWidget {
             vertical: Spacing.m20,
             horizontal: Constants.mobileHorizontalPadding,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              title?
-              FittedBox(
-                child: Text.rich(
-                  TextSpan(
-                    text: '${Strings.about.toUpperCase()}\n',
-                    style: theme.textTheme.displaySmall,
-                    children: [
-                      TextSpan(
-                        text: Strings.us.toUpperCase(),
-                        style: theme.textTheme.displaySmall?.copyWith(
-                          fontVariations: TextThemes.fontVariation(5),
-                          color: Palette.primary
+          child: AnimatedImage(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                title?
+                FittedBox(
+                  child: Text.rich(
+                    TextSpan(
+                      text: '${Strings.about.toUpperCase()}\n',
+                      style: theme.textTheme.displaySmall,
+                      children: [
+                        TextSpan(
+                          text: Strings.us.toUpperCase(),
+                          style: theme.textTheme.displaySmall?.copyWith(
+                            fontVariations: TextThemes.fontVariation(5),
+                            color: Palette.primary
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  ),
+                ):
+                FittedBox(
+                  child: Text.rich(
+                    TextSpan(
+                      text: '${Strings.helpingYourBusiness.toUpperCase()}\n',
+                      style: theme.textTheme.displaySmall,
+                      children: [
+                        TextSpan(
+                          text: Strings.to.toUpperCase(),
+                          style: theme.textTheme.displaySmall?.copyWith(
+                            fontVariations: TextThemes.fontVariation(3),
+                          ),
+                        ),
+                        TextSpan(text: Strings.exploreThe.toUpperCase()),
+                        TextSpan(
+                          text: Strings.sky.toUpperCase(),
+                          style: theme.textTheme.displaySmall?.copyWith(
+                            color: theme.primaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ):
-              FittedBox(
-                child: Text.rich(
-                  TextSpan(
-                    text: '${Strings.helpingYourBusiness.toUpperCase()}\n',
-                    style: theme.textTheme.displaySmall,
-                    children: [
-                      TextSpan(
-                        text: Strings.to.toUpperCase(),
-                        style: theme.textTheme.displaySmall?.copyWith(
-                          fontVariations: TextThemes.fontVariation(3),
-                        ),
-                      ),
-                      TextSpan(text: Strings.exploreThe.toUpperCase()),
-                      TextSpan(
-                        text: Strings.sky.toUpperCase(),
-                        style: theme.textTheme.displaySmall?.copyWith(
-                          color: theme.primaryColor,
-                        ),
-                      ),
-                    ],
+                const SizedBox(height: 30),
+                Text(
+                  isAboutus
+                      ? Strings.zognestDescriptionAboutUS
+                      : Strings.zognestDescription,
+                  style: theme.textTheme.bodyLarge!.copyWith(
+                    fontFamily: 'SF Pro Rounded',
                   ),
                 ),
-              ),
-              const SizedBox(height: 30),
-              Text(
-                isAboutus
-                    ? Strings.zognestDescriptionAboutUS
-                    : Strings.zognestDescription,
-                style: theme.textTheme.bodyLarge!.copyWith(
-                  fontFamily: 'SF Pro Rounded',
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],

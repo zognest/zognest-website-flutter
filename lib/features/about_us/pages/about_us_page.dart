@@ -7,10 +7,9 @@ import 'package:zognest_website/features/about_us/widgets/zognest_staff.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
-import 'package:zognest_website/shared/widgets/footer.dart';
 import 'package:zognest_website/shared/widgets/image_text.dart';
-
 import '../../../shared/widgets/animation_image.dart';
+import '../../../shared/widgets/footer.dart';
 
 class AboutUsPage extends HookWidget {
   const AboutUsPage({super.key});
@@ -37,18 +36,16 @@ class AboutUsPage extends HookWidget {
                     hasGradient: true,
                   ),
                   const SizedBox(height: Constants.sectionSpacing),
-                   ZognestStaff(),
+                   const ZognestStaff(),
                   const SizedBox(height: Constants.sectionSpacing),
                   const Divider(),
-                  AnimatedImage(
-                    child: Image.asset(
-                      Responsive.isDesktop(context)
-                          ? Assets.aboutUsText
-                          : Assets.mobileAboutUsText,
-                      width: double.infinity,
-                      alignment: Alignment.bottomCenter,
-                      fit: BoxFit.contain,
-                    ),
+                  Image.asset(
+                    Responsive.isDesktop(context)
+                        ? Assets.aboutUsText
+                        : Assets.mobileAboutUsText,
+                    width: double.infinity,
+                    alignment: Alignment.bottomCenter,
+                    fit: BoxFit.contain,
                   ),
                   const SizedBox(height: Constants.sectionSpacing),
                   Footer(

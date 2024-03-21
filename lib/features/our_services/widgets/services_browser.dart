@@ -50,10 +50,6 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
                 spacing: Constants.listCardSeparatorWidth,
                 children: purchasableServices.map((service) {
                   return SizedBox(
-                    height: Responsive.isDesktop(context)
-                        ? Constants.servicesBrowserItemHeight
-                        : Constants.mobileServicesBrowserItemHeight,
-                    width: Constants.servicesBrowserItemWidth,
                     child: ServiceItem(service: service),
                   );
                 }).toList(),
@@ -99,8 +95,107 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Container(
+          constraints: BoxConstraints.tight(
+            const Size(
+              Constants.servicesCardWidth,
+              Constants.servicesCardHeight,
+            ),
+          ),
           color: isHovering ? Palette.primary : Palette.cardBackgroundColor,
-          child: Row(
+          child: Stack(
+            children: [
+              Stack(
+                children: [
+                  Opacity(
+                    opacity: 0.4,
+                    child: NetworkFadingImage(
+                      path: widget.service.image,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Spacing.l24,
+                  vertical: Spacing.l32,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 64),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.service.title.toUpperCase(),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.headlineMedium?.copyWith(
+                              fontFamily: 'SF Pro Rounded',
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: -1,
+                              fontSize: Responsive.isMobile(context) ? 26 : 36,
+                              color: isHovering
+                                  ? Palette.black
+                                  : theme.primaryColor,
+                              height: 1,
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: Spacing.m20),
+                              child: SingleChildScrollView(
+                                child: Text(
+                                  widget.service.description * 3,
+                                  style: theme.textTheme.bodyLarge?.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: isHovering
+                                          ? Palette.black
+                                          : Palette.white,
+                                      fontFamily: 'SF Pro Rounded',
+                                      fontSize: Responsive.isDesktop(context)
+                                          ? 20
+                                          : 16,
+                                      height: 1.3),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    PrimaryButton(
+                      backgroundColor:
+                          isHovering ? Palette.black : Palette.primary,
+                      title: !cartServices.contains(widget.service)
+                          ? Strings.add
+                          : Strings.added,
+                      textStyle: theme.textTheme.labelLarge,
+                      width: Constants.servicesBrowserItemWidth * 0.2,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: Constants.listButtonVerticalPadding,
+                        horizontal: Constants.listButtonHorizontalPadding,
+                      ),
+                      enabled: !cartServices.contains(widget.service),
+                      onTap: () {
+                        ref
+                            .read(appControllerProvider.notifier)
+                            .addService(widget.service);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          /* Row(
             children: [
               Expanded(
                 flex: Responsive.isDesktop(context) ? 1 : 2,
@@ -175,7 +270,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                 ),
               ),
             ],
-          ),
+          )*/
         ),
       ),
     );

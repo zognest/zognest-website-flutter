@@ -101,7 +101,7 @@ class Background extends StatelessWidget {
               ),
             ),
             const SizedBox(height: Constants.bgDecorationSpacing),
-            AnimatedImage(child: Image.asset(Assets.mercuries)),
+            Image.asset(Assets.mercuries),
             const SizedBox(height: Constants.bgDecorationSpacing),
             SvgPicture.asset(Assets.gridLines),
             const SizedBox(height: Constants.bgDecorationSpacing),
@@ -137,7 +137,7 @@ class Foreground extends StatelessWidget {
         ),
         const SizedBox(height: Constants.sectionSpacing),
         Responsive.isDesktop(context)
-            ? ZognestOffers()
+            ? const ZognestOffers()
             : const ZognestOffersMobile(),
         const SizedBox(height: Constants.sectionSpacing),
         const MarqueeText(),
@@ -154,7 +154,7 @@ class Foreground extends StatelessWidget {
         const SizedBox(height: Constants.sectionSpacing),
         const MarqueeText(),
         const SizedBox(height: Constants.sectionSpacing),
-        ZognestBlogs(),
+        const ZognestBlogs(),
         const SizedBox(height: Constants.sectionSpacing),
         ContactForm(),
         const SizedBox(height: Constants.sectionSpacing),

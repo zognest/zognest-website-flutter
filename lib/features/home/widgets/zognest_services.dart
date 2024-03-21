@@ -22,7 +22,6 @@ import '../../our_services/pages/our_services_page.dart';
 
 class ZognestServices extends HookWidget {
   const ZognestServices({super.key});
-
   @override
   Widget build(BuildContext context) {
     final animationController =

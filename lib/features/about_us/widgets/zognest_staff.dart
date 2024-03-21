@@ -1,5 +1,4 @@
 import 'dart:js' as js;
-
 import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -16,14 +15,13 @@ import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/flipping_widget.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
-
 import '../../../config/theme/text_theme.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 import '../../../shared/widgets/scroll_headline.dart';
 
 class ZognestStaff extends HookWidget {
-   ZognestStaff({super.key});
-  int currentIndex = 1;
+   const ZognestStaff({super.key});
+
   @override
   Widget build(BuildContext context) {
     final animationController =

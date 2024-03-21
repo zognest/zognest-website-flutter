@@ -3,11 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/features/our_services/widgets/services_browser.dart';
 import 'package:zognest_website/resources/assets.dart';
-import 'package:zognest_website/shared/widgets/animation_image.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
-
 import '../models/purchasable_service.dart';
 
 class OurServicesPage extends StatefulWidget {
@@ -22,6 +20,7 @@ class OurServicesPage extends StatefulWidget {
 class _OurServicesPageState extends State<OurServicesPage> {
   late final ScrollController _controller;
   late final PurchasableService purchasable;
+  final bool showAnimatedHeadline = false;
 
   @override
   void initState() {
@@ -47,11 +46,11 @@ class _OurServicesPageState extends State<OurServicesPage> {
           children: [
             SvgPicture.asset(Assets.gridLines),
             Column(
-              children:[
+              children: [
                 const SizedBox(height: Constants.appBarHeight * 1.5),
                 const ServicesBrowser(),
                 const SizedBox(height: Constants.sectionSpacing),
-                AnimatedImage(child: Image.asset(Assets.ourServicesText_2)),
+                Image.asset(Assets.ourServicesText_2),
                 const Divider(),
                 const SizedBox(height: Constants.sectionSpacing),
                 Footer(
@@ -64,10 +63,23 @@ class _OurServicesPageState extends State<OurServicesPage> {
                 ),
               ],
             ),
-            // const CreateOrder(),
           ],
         ),
       ),
     );
   }
 }
+/* VisibilityDetector(
+                    onVisibilityChanged: (info){
+                      if (info.visibleFraction == 1) {
+                        setState(() {
+                          showAnimatedHeadline!=showAnimatedHeadline;
+                        });
+                      }
+                      if (info.visibleFraction <= 0.5)  {
+                        setState(() {
+                          showAnimatedHeadline!=showAnimatedHeadline;
+                        });
+                      }
+                    },
+                    key: ValueKey(runtimeType.toString()),*/

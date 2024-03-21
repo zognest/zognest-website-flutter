@@ -1,4 +1,3 @@
-import 'package:animated_list_item/animated_list_item.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +13,8 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/circle_button.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
+import '../../../shared/widgets/animation_image.dart';
 import '../../../shared/widgets/network_fading_image.dart';
-import '../../../shared/widgets/scroll_headline.dart';
 
 class BeyondSpace extends HookWidget {
   const BeyondSpace({super.key, required this.onTabDown});
@@ -24,11 +23,6 @@ class BeyondSpace extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollController = useScrollController();
-    final currentIndex = useState(1);
-    final animationController =
-        useAnimationController(duration: const Duration(seconds: 1));
-    final showAnimatedHeadline = useState(true);
     final theme = Theme.of(context);
     return Responsive.isDesktop(context)
         ? Column(

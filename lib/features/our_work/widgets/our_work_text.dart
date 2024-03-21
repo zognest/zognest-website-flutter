@@ -16,12 +16,10 @@ class OurWorkText extends StatelessWidget {
             horizontal: 10),
           child: Stack(
             children: [
-              AnimatedImage(
-                child: Image.asset(Responsive.isDesktop(context)?
-                  Assets.venusMercury:Assets.ourProjectMobile,
-                  width: double.infinity,
-                  fit: BoxFit.fill,
-                ),
+              Image.asset(Responsive.isDesktop(context)?
+                Assets.venusMercury:Assets.ourProjectMobile,
+                width: double.infinity,
+                fit: BoxFit.fill,
               ),
               // venus_mercury
             ],

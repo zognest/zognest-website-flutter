@@ -1,6 +1,4 @@
-import 'dart:developer';
 import "dart:js" as js;
-
 import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -17,16 +15,11 @@ import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
-
 import '../../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
 class ZognestBlogs extends HookWidget {
-  ZognestBlogs({super.key});
-
-  late final ScrollController controller;
-  int currentIndex = 1;
-
+  const ZognestBlogs({super.key});
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

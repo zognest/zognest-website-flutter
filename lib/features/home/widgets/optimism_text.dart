@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/assets.dart';
 
+import '../../../shared/widgets/animation_image.dart';
+
 class OptimismText extends StatelessWidget {
   const OptimismText({super.key});
 
@@ -9,7 +11,6 @@ class OptimismText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-
         Responsive.isDesktop(context)
             ? Image.asset(Assets.optimismTextWeb, fit: BoxFit.cover)
             : Image.asset(Assets.optimismTextMobile, fit: BoxFit.cover),

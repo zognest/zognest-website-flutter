@@ -6,6 +6,7 @@ import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/footer.dart';
+
 import '../models/purchasable_service.dart';
 
 class OurServicesPage extends StatefulWidget {
@@ -50,7 +51,11 @@ class _OurServicesPageState extends State<OurServicesPage> {
                 const SizedBox(height: Constants.appBarHeight * 1.5),
                 const ServicesBrowser(),
                 const SizedBox(height: Constants.sectionSpacing),
-                Image.asset(Assets.ourServicesText_2),
+                Image.asset(
+                  Assets.ourServicesText_2,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
                 const Divider(),
                 const SizedBox(height: Constants.sectionSpacing),
                 Footer(

@@ -1,4 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:animated_list_item/animated_list_item.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,20 +18,24 @@ import '../../../shared/widgets/greyscale_filter.dart';
 import '../../../shared/widgets/input_form_field.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
-class ServicesBrowser extends ConsumerStatefulWidget {
+class ServicesBrowser extends HookConsumerWidget {
   const ServicesBrowser({super.key});
 
   @override
-  ConsumerState<ServicesBrowser> createState() => _ServicesBrowserState();
-}
-
-class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final purchasableService =
         ref.watch(appControllerProvider).purchasableServices;
     final servicesCart = ref.watch(appControllerProvider).cartServices;
+    final animationController =
+        useAnimationController(duration: const Duration(seconds: 2));
     final theme = Theme.of(context);
+    useEffect(
+      () {
+        animationController.forward();
+        return null;
+      },
+      [],
+    );
     return purchasableService.when(
       data: (purchasableServices) {
         return Column(
@@ -42,14 +47,20 @@ class _ServicesBrowserState extends ConsumerState<ServicesBrowser> {
               const SizedBox(height: Constants.sectionSpacing),
             ],
             if (Responsive.isDesktop(context)) const Divider(),
-            Wrap(
-              runSpacing: Constants.listCardSeparatorWidth,
-              spacing: Constants.listCardSeparatorWidth,
-              children: purchasableServices.map((service) {
-                return SizedBox(
-                  child: ServiceItem(service: service),
-                );
-              }).toList(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Wrap(
+                runSpacing: 10,
+                spacing: 10,
+                children: purchasableServices.mapIndexed((index, service) {
+                  return AnimatedListItem(
+                    aniController: animationController,
+                    length: purchasableServices.length,
+                    index: index,
+                    child: ServiceItem(service: service),
+                  );
+                }).toList(),
+              ),
             ),
             const Divider(),
           ],
@@ -80,7 +91,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
     final theme = Theme.of(context);
     final cartServices = ref.watch(appControllerProvider).cartServices;
     return GreyscaleFilter(
-      isHovered: true,
+      isHovered: isHovering,
       child: InkWell(
         onTap: () {},
         onHover: (isHovering) {
@@ -91,7 +102,8 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
         overlayColor: const MaterialStatePropertyAll(Palette.transparent),
         child: Card(
           clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Container(
             constraints: BoxConstraints.tight(
               const Size(
@@ -104,14 +116,18 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
               children: [
                 Stack(
                   children: [
-                    Opacity(
-                      opacity: 0.4,
-                      child: NetworkFadingImage(
-                        path: widget.service.image,
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                    NetworkFadingImage(
+                      path: widget.service.image,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                    Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      color: isHovering
+                          ? const Color(0xff0A0A0A).withOpacity(0.3)
+                          : const Color(0xff0A0A0A).withOpacity(0.7),
                     ),
                   ],
                 ),
@@ -138,10 +154,9 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                                 fontFamily: 'SF Pro Rounded',
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: -1,
-                                fontSize: Responsive.isMobile(context) ? 26 : 36,
-                                color: isHovering
-                                    ? Palette.white
-                                    : Palette.black,
+                                fontSize:
+                                    Responsive.isMobile(context) ? 26 : 36,
+                                color: Palette.white,
                                 height: 1,
                               ),
                             ),
@@ -154,9 +169,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                                     widget.service.description * 3,
                                     style: theme.textTheme.bodyLarge?.copyWith(
                                         fontWeight: FontWeight.w500,
-                                        color: isHovering
-                                            ? Palette.white
-                                            : Palette.black,
+                                        color: Palette.white,
                                         fontFamily: 'SF Pro Rounded',
                                         fontSize: Responsive.isDesktop(context)
                                             ? 20
@@ -170,8 +183,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                         ),
                       ),
                       PrimaryButton(
-                        backgroundColor:
-                            isHovering ? Palette.black : Palette.primary,
+                        backgroundColor: Palette.primary,
                         title: !cartServices.contains(widget.service)
                             ? Strings.add
                             : Strings.added,
@@ -278,6 +290,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
 
 class ServicesCart extends HookConsumerWidget {
   ServicesCart({super.key});
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -321,7 +334,7 @@ class ServicesCart extends HookConsumerWidget {
                               clipBehavior: Clip.hardEdge,
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
+                                  BorderRadius.all(Radius.circular(20))),
                               child: Container(
                                 width: width * 0.28,
                                 height: 140,
@@ -339,7 +352,7 @@ class ServicesCart extends HookConsumerWidget {
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style:
-                                            theme.textTheme.bodyLarge?.copyWith(
+                                        theme.textTheme.bodyLarge?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           fontFamily: 'SF Pro Rounded',
                                         ),
@@ -351,7 +364,7 @@ class ServicesCart extends HookConsumerWidget {
                                         backgroundColor: Palette.transparent,
                                         shape: const CircleBorder(
                                           side:
-                                              BorderSide(color: Palette.white),
+                                          BorderSide(color: Palette.white),
                                         ),
                                         minimumSize: const Size.fromRadius(28),
                                       ),
@@ -362,7 +375,7 @@ class ServicesCart extends HookConsumerWidget {
                                       onPressed: () {
                                         ref
                                             .read(
-                                                appControllerProvider.notifier)
+                                            appControllerProvider.notifier)
                                             .removeService(service);
                                       },
                                     ),
@@ -431,7 +444,7 @@ class ServicesCart extends HookConsumerWidget {
                                     title: Strings.sendMessage.toUpperCase(),
                                     height: 70,
                                     textStyle:
-                                        theme.textTheme.bodyLarge?.copyWith(
+                                    theme.textTheme.bodyLarge?.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
                                     onTap: () async {
@@ -464,7 +477,7 @@ class ServicesCart extends HookConsumerWidget {
                                   title: Strings.requestCall.toUpperCase(),
                                   height: 70,
                                   textStyle:
-                                      theme.textTheme.bodyLarge?.copyWith(
+                                  theme.textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
                                   onTap: () async {

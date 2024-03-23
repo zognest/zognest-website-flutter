@@ -1,4 +1,3 @@
-import 'dart:js' as js;
 import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -15,6 +14,7 @@ import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/flipping_widget.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
+
 import '../../../config/theme/text_theme.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 import '../../../shared/widgets/scroll_headline.dart';
@@ -194,6 +194,7 @@ class FrontCard extends StatelessWidget {
                               maxLines: 2,
                               style: theme.textTheme.bodyLarge?.copyWith(
                                 fontFamily: 'SF Pro Rounded',
+                                color: Palette.transparent,
                                 fontSize:
                                     Responsive.isDesktop(context) ? 20 : 16,
                               ),

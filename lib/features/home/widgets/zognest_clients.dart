@@ -156,7 +156,7 @@ class ClientItem extends HookWidget {
                           Expanded(
                             flex: 3,
                             child: Card(
-                              clipBehavior: Clip.hardEdge,
+                              clipBehavior: Clip.antiAlias,
                               child: NetworkFadingImage(
                                 path: clientFeedback.backgroundImages[0],
                                 height: double.infinity,
@@ -168,7 +168,7 @@ class ClientItem extends HookWidget {
                           Expanded(
                             flex: 2,
                             child: Card(
-                              clipBehavior: Clip.hardEdge,
+                              clipBehavior: Clip.antiAlias,
                               child: NetworkFadingImage(
                                 path: clientFeedback.backgroundImages[1],
                                 height: double.infinity,

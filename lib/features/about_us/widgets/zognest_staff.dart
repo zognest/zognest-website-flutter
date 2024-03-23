@@ -304,7 +304,7 @@ class BackCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                PrimaryButton(
+               /* PrimaryButton(
                   title: Strings.linkedIn.toUpperCase(),
                   width: Constants.listCardWidth * 0.3,
                   padding: const EdgeInsets.symmetric(
@@ -312,7 +312,7 @@ class BackCard extends StatelessWidget {
                     vertical: Constants.listButtonVerticalPadding,
                   ),
                   onTap: () => js.context.callMethod('open', [staff.url]),
-                ),
+                ),*/
               ],
             ),
           ),

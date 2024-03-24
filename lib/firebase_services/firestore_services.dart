@@ -81,6 +81,7 @@ class FirestoreServices {
   static Future<List<PurchasableService>> getPurchasableServices() async {
     final purchasableServicesJson = await firestore
         .collection(FirebasePaths.purchasableServices.path)
+        .orderBy('orderby', descending: false)
         .get();
 
     final purchasableServices = purchasableServicesJson.docs

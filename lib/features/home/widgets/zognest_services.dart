@@ -225,7 +225,7 @@ class FrontService extends StatelessWidget {
                           padding:
                               const EdgeInsets.symmetric(vertical: Spacing.m20),
                           child: Text(
-                            service.description * 3,
+                            service.description,
                             style: theme.textTheme.bodyLarge?.copyWith(
                                 fontFamily: 'SF Pro Rounded',
                                 fontSize:

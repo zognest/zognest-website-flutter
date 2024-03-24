@@ -16,6 +16,7 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
 
 import '../../../config/theme/text_theme.dart';
+import '../../../shared/widgets/greyscale_filter.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 import '../../../shared/widgets/scroll_headline.dart';
 
@@ -24,6 +25,7 @@ class ZognestStaff extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+     final isHovering = useState(false);
     final animationController =
     useAnimationController(duration: const Duration(seconds: 1));
     final controller = useScrollController();
@@ -99,7 +101,7 @@ class ZognestStaff extends HookWidget {
                                 : 300,
                             child: Card(
                               color: Palette.transparent,
-                              clipBehavior: Clip.hardEdge,
+                              clipBehavior: Clip.antiAlias,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(25)),
                               ),
@@ -237,7 +239,7 @@ class BackCard extends StatelessWidget {
       child: Stack(
         children: [
           Opacity(
-            opacity: 0.3,
+            opacity: 0.2,
             child: ColoredBox(
               color: Colors.transparent,
               child: NetworkFadingImage(

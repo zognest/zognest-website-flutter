@@ -156,7 +156,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                                 letterSpacing: -1,
                                 fontSize:
                                     Responsive.isMobile(context) ? 26 : 36,
-                                color: Palette.white,
+                                color:isHovering? Palette.primary : Palette.white,
                                 height: 1,
                               ),
                             ),
@@ -166,7 +166,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
                                     vertical: Spacing.m20),
                                 child: SingleChildScrollView(
                                   child: Text(
-                                    widget.service.description * 3,
+                                    widget.service.description ,
                                     style: theme.textTheme.bodyLarge?.copyWith(
                                         fontWeight: FontWeight.w500,
                                         color: Palette.white,

@@ -424,6 +424,7 @@ class ServicesCart extends HookConsumerWidget {
                             ],
                           ),
                           InputFormField(
+                            prefix: true,
                             controller: budgetController,
                             hint: Strings.budget,
                             required: true,

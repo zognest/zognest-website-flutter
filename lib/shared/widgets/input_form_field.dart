@@ -12,6 +12,7 @@ class InputFormField extends StatelessWidget {
     this.multiline = false,
     this.keyboardType,
     this.controller,
+   this.prefix= false,
   });
 
   final String hint;
@@ -19,7 +20,7 @@ class InputFormField extends StatelessWidget {
   final bool multiline;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
-
+  final bool prefix;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,7 @@ class InputFormField extends StatelessWidget {
             return null;
           },
           decoration: InputDecoration(
+            prefix:prefix ?const Text(r'$'):const Text(''),
             contentPadding: EdgeInsets.symmetric(
               horizontal: Spacing.m20,
               vertical: Responsive.isDesktop(context) ? 32 : 20,

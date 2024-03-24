@@ -113,23 +113,15 @@ class ZognestBlogs extends HookWidget {
   }
 }
 
-class BlogItem extends StatefulWidget {
+class BlogItem extends HookWidget {
   const BlogItem({
     super.key,
     required this.blog,
   });
-
   final Blog blog;
-
-  @override
-  State<BlogItem> createState() => _BlogItemState();
-}
-
-class _BlogItemState extends State<BlogItem> {
-  bool hovered = false;
-
   @override
   Widget build(BuildContext context) {
+    final  hovered = useState(false);
     final theme = Theme.of(context);
     return FrostedContainer(
       width: Responsive.isDesktop(context) ? Constants.listCardWidth : 300,
@@ -139,46 +131,51 @@ class _BlogItemState extends State<BlogItem> {
         vertical: Spacing.l24,
       ),
       child: InkWell(
-        onTap: () => js.context.callMethod('open', [widget.blog.urlLink]),
+        onHover: (over) =>hovered.value = over,
+        onTap: () => js.context.callMethod('open', [blog.urlLink]),
         overlayColor: MaterialStateProperty.all(Palette.transparent),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: GreyscaleFilter(
-                isHovered: true,
-                child: Card(
-                  clipBehavior: Clip.hardEdge,
-                  child: NetworkFadingImage(
-                    width: double.infinity,
-                    path: widget.blog.image,
-                    fit: BoxFit.cover,
+        child: GreyscaleFilter(
+          isHovered: hovered.value,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: GreyscaleFilter(
+                  isHovered: hovered.value,
+                  child: Card(
+                    clipBehavior: Clip.hardEdge,
+                    child: NetworkFadingImage(
+                      width: double.infinity,
+                      path:blog.image,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.blog.title,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'SF Pro Rounded'),
-                  ),
-                  Text(
-                    DateFormat('MMMM dd, yyyy').format(widget.blog.date),
-                    style: theme.textTheme.labelMedium?.copyWith(
-                      color: theme.primaryColor,
-                      fontFamily: 'SF Pro Rounded',
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                     blog.title,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color:hovered.value?Palette.white:theme.primaryColor,
+                          fontFamily: 'SF Pro Rounded'),
                     ),
-                  ),
-                ],
+                    Text(
+                      DateFormat('MMMM dd, yyyy').format(blog.date),
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: theme.primaryColor,
+                        fontFamily: 'SF Pro Rounded',
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

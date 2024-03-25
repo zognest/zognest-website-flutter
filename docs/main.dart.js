@@ -97460,7 +97460,7 @@ s.toString
 return r.dB(s,B.R,B.a8)},
 $S:0}
 A.Vu.prototype={
-F(a){var s=null,r=A.T(a),q=B.aR.$0(),p=B.aR.$0(),o=B.aR.$0(),n=B.aR.$0(),m=B.aR.$0(),l=A.bv(A.nh(new A.aqq(r)),1),k=A.fI(p,"Your Name",B.kY,!1,!1,!0),j=t.p,i=A.cf(A.a([A.bv(A.fI(q,"Your Email",B.kX,!1,!1,!0),1),B.eQ,A.bv(A.fI(o,"Mobile No.",B.kW,!1,!1,!0),1)],j),B.l,B.m,B.j,s),h=A.fI(n,"Budget",B.hL,!1,!0,!0),g=A.fI(m,"Message",B.d6,!0,!1,!0),f=r.p3.y,e=f==null,d=e?s:f.k8(B.J)
+F(a){var s=null,r=A.T(a),q=B.aR.$0(),p=B.aR.$0(),o=B.aR.$0(),n=B.aR.$0(),m=B.aR.$0(),l=A.bv(A.nh(new A.aqq(r)),1),k=A.fI(p,"Your Name",B.kY,!1,!1,!0),j=t.p,i=A.cf(A.a([A.bv(A.fI(q,"Your Email",B.kX,!1,!1,!0),1),B.eQ,A.bv(A.fI(o,"Mobile No.",B.kW,!1,!1,!0),1)],j),B.l,B.m,B.j,s),h=A.fI(n,"Please enter your budget in USD",B.hL,!1,!0,!0),g=A.fI(m,"Message",B.d6,!0,!1,!0),f=r.p3.y,e=f==null,d=e?s:f.k8(B.J)
 d=A.bv(A.f2(s,!0,!0,45,new A.aqr(this,m,a,n,o,p,q),s,d,"Send Message".toUpperCase(),s,s),1)
 f=e?s:f.k8(B.J)
 return A.bJ(A.aI(A.a([B.K,A.bv(new A.aP(B.b9,A.aI(A.a([l,B.zX,A.bv(A.ag0(A.hN(A.aI(A.a([k,i,h,g,B.Ub,A.cf(A.a([d,B.cv,A.bv(A.f2(s,!0,!0,45,new A.aqs(this,m,n,a,o,p,q),s,f,"Request a Call".toUpperCase(),s,s),1)],j),B.l,B.m,B.j,s)],j),B.l,B.m,B.j),s,B.F,s,s,B.a2),this.d),1)],j),B.l,B.m,B.j),s),1),B.K],j),B.l,B.m,B.j),840,s)}}
@@ -97560,21 +97560,21 @@ $S:103}
 A.GY.prototype={
 a2(){return new A.a3k(B.i)}}
 A.a3k.prototype={
-F(a){var s,r,q,p,o=this,n=null,m="SF Pro Rounded",l=A.T(a),k=o.go2(o).hf($.ev(),t._).z,j=o.x,i=A.hs(20),h=A.n7(B.zS),g=j?B.x:B.q,f=o.a.d,e=t.p
-f=A.cv(B.a1,A.a([new A.e8(f.c,B.ao,1/0,1/0,n),A.bL(n,n,B.n,j?A.a0(B.d.aW(76.5),10,10,10):A.a0(B.d.aW(178.5),10,10,10),n,n,n,1/0,n,n,n,n,1/0)],e),B.u,B.O)
-s=o.a.d
-r=l.p3
-q=r.e
-if(q==null)q=n
-else{p=A.ae(a,B.o,t.w).w.a.a<600?26:36
-q=q.ao1(o.x?B.cm:B.k,m,p,B.aU,1,-1)}q=A.b5(s.a.toUpperCase(),n,n,2,B.aF,n,n,n,q,n,n,n)
-s=o.a.d
-p=r.y
-if(p==null)p=n
-else p=p.ao0(B.k,m,A.ae(a,B.o,t.w).w.a.a>=1000?20:16,B.J,1.3)
-p=A.bv(A.aI(A.a([q,A.bv(new A.aP(B.nA,A.hN(A.b5(s.b,n,n,n,n,n,n,n,p,n,n,n),n,B.F,n,n,B.a2),n),1)],e),B.a9,B.m,B.j),1)
-s=!B.b.t(k,o.a.d)?"Add":"Added"
-return A.DO(A.fH(!1,n,!0,A.iJ(A.bL(n,A.cv(B.a1,A.a([f,new A.aP(B.iY,A.aI(A.a([B.zW,p,A.f2(B.cm,!B.b.t(k,o.a.d),!0,n,new A.aDn(o),B.dl,r.as,s,n,110)],e),B.a9,B.ap,B.j),n)],e),B.u,B.O),B.n,g,h,n,n,n,n,n,n,n,n),B.bj,n,new A.co(i,B.w)),n,!0,n,n,n,n,n,n,n,new A.aDo(o),n,new A.aDp(),B.jK,n,n,n),j)}}
+F(a){var s,r,q,p=this,o=null,n="SF Pro Rounded",m=A.T(a),l=p.go2(p).hf($.ev(),t._).z,k=A.hs(20),j=A.n7(B.zS),i=p.x,h=i?B.x:B.q,g=p.a.d,f=t.p
+i=A.DO(A.cv(B.a1,A.a([new A.e8(g.c,B.ao,1/0,1/0,o),A.bL(o,o,B.n,i?A.a0(B.d.aW(76.5),10,10,10):A.a0(B.d.aW(178.5),10,10,10),o,o,o,1/0,o,o,o,o,1/0)],f),B.u,B.O),i)
+g=p.a.d
+s=m.p3
+r=s.e
+if(r==null)r=o
+else r=r.ao1(B.cm,n,A.ae(a,B.o,t.w).w.a.a<600?26:36,B.aU,1,-1)
+r=A.b5(g.a.toUpperCase(),o,o,2,B.aF,o,o,o,r,o,o,o)
+g=p.a.d
+q=s.y
+if(q==null)q=o
+else q=q.ao0(B.k,n,A.ae(a,B.o,t.w).w.a.a>=1000?20:16,B.J,1.3)
+q=A.bv(A.aI(A.a([r,A.bv(new A.aP(B.nA,A.hN(A.b5(g.b,o,o,o,o,o,o,o,q,o,o,o),o,B.F,o,o,B.a2),o),1)],f),B.a9,B.m,B.j),1)
+g=!B.b.t(l,p.a.d)?"Add":"Added"
+return A.fH(!1,o,!0,A.iJ(A.bL(o,A.cv(B.a1,A.a([i,new A.aP(B.iY,A.aI(A.a([B.zW,q,A.f2(B.cm,!B.b.t(l,p.a.d),!0,o,new A.aDn(p),B.dl,s.as,g,o,110)],f),B.a9,B.ap,B.j),o)],f),B.u,B.O),B.n,h,j,o,o,o,o,o,o,o,o),B.bj,o,new A.co(k,B.w)),o,!0,o,o,o,o,o,o,o,new A.aDo(p),o,new A.aDp(),B.jK,o,o,o)}}
 A.aDp.prototype={
 $0(){},
 $S:0}
@@ -97607,7 +97607,7 @@ q=h.f
 p=t.p
 o=A.cf(A.a([A.bv(A.fI(r,"Your Email",B.kX,!1,!1,!0),1),B.eQ,A.bv(A.fI(q,"Mobile No.",B.kW,!1,!1,!0),1)],p),B.l,B.m,B.j,g)
 n=h.r
-m=A.fI(n,"Budget",B.hL,!1,!0,!0)
+m=A.fI(n,"Please enter your budget in USD",B.hL,!1,!0,!0)
 l=h.w
 k=A.fI(l,"Message",B.d6,!0,!1,!0)
 c=c.p3.y
@@ -98519,7 +98519,7 @@ return s}}
 A.RQ.prototype={
 F(a){var s,r,q,p=null,o=A.T(a),n=A.ic(this.c,B.v,B.ao,1/0,p),m=o.p3,l=m.c
 if(this.e){s=l==null?p:l.B_(B.cm,A.a([new A.eD("wght",500)],t.uf))
-l=A.xe(B.v,A.qR(A.aS(A.a([A.aS(p,p,s,"US. ".toUpperCase())],t.R),p,l,"ABOUT ".toUpperCase()+"\n"),p,p,p,p,p,p,p,p,p,p,p),B.n,B.bB)}else{s=l==null
+l=A.xe(B.v,A.qR(A.aS(A.a([A.aS(p,p,s,"US. ".toUpperCase())],t.R),p,l,"ABOUT ".toUpperCase()),p,p,p,p,p,p,p,p,p,p,p),B.n,B.bB)}else{s=l==null
 r=s?p:l.VO(A.a([new A.eD("wght",300)],t.uf))
 r=A.aS(p,p,r,"To ".toUpperCase())
 q=A.aS(p,p,p,"Explore the ".toUpperCase())

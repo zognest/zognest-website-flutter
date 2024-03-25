@@ -11,12 +11,13 @@ import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/gradient_container.dart';
 
 class ImageText extends StatelessWidget {
-  const ImageText(
-      {super.key,
-      this.hasGradient = false,
-      required this.image,
-      required this.isAboutus,
-      required this.title});
+  const ImageText({
+    super.key,
+    this.hasGradient = false,
+    required this.image,
+    required this.isAboutus,
+    required this.title,
+  });
 
   final bool hasGradient;
   final String image;
@@ -205,18 +206,17 @@ class ImageTextMobile extends StatelessWidget {
                 FittedBox(
                   child: Text.rich(
                     TextSpan(
-                      text: '${Strings.about.toUpperCase()}\n',
-                      style: theme.textTheme.displaySmall,
-                      children: [
-                        TextSpan(
-                          text: Strings.us.toUpperCase(),
-                          style: theme.textTheme.displaySmall?.copyWith(
-                            fontVariations: TextThemes.fontVariation(5),
-                            color: Palette.primary
+                      text: Strings.about.toUpperCase(),
+                            style: theme.textTheme.displaySmall,
+                            children: [
+                              TextSpan(
+                                text: Strings.us.toUpperCase(),
+                                style: theme.textTheme.displaySmall?.copyWith(
+                                    fontVariations: TextThemes.fontVariation(5),
+                                    color: Palette.primary),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
                   ),
                 ):
                 FittedBox(

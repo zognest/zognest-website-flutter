@@ -12,10 +12,9 @@ abstract final class Strings {
   static const getInTouch = 'Get in touch';
   static const beyond = 'Beyond';
   static const space = 'Space';
-  static const budget = 'Budget';
+  static const budget = 'Please enter your budget in USD';
   static const bookOurServices = 'Book our services';
-  static const beyondSpaceBody =
-      'Your Journey to Success Starts with Zognest ';
+  static const beyondSpaceBody = 'Your Journey to Success Starts with Zognest ';
   static const helpingYourBusiness = 'Helping your business ';
   static const exploreThe = 'Explore the ';
   static const to = 'To ';

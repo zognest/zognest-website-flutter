@@ -16,7 +16,6 @@ import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/technology_container.dart';
 
 import '../../../config/theme/text_theme.dart';
-import '../../../shared/widgets/greyscale_filter.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 import '../../../shared/widgets/scroll_headline.dart';
 
@@ -273,17 +272,6 @@ class BackCard extends StatelessWidget {
                             color: theme.primaryColor,
                             fontWeight: FontWeight.w700,
                             fontFamily: 'SF Pro Rounded'),
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Text(
-                            staff.description,
-                            style: theme.textTheme.bodyLarge?.copyWith(
-                                fontFamily: 'SF Pro Rounded',
-                                fontSize:
-                                    Responsive.isDesktop(context) ? 20 : 16),
-                          ),
-                        ),
                       ),
                       const SizedBox(height: Spacing.m20),
                       Expanded(

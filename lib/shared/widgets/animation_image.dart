@@ -9,10 +9,12 @@ class AnimatedImage extends HookWidget {
     required this.child,
     this.length = 1,
     this.index = 0,
+    this.animationType = AnimationType.fade,
   });
 
   final int length;
   final int index;
+  final AnimationType animationType ;
 
   final Widget child;
 
@@ -29,7 +31,7 @@ class AnimatedImage extends HookWidget {
         length: length,
         index: index,
         aniController: animationController,
-        animationType: AnimationType.fade,
+        animationType:animationType,
         child: child,
       ),
     );

@@ -8,7 +8,6 @@ import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/shared/widgets/appbar.dart';
 import 'package:zognest_website/shared/widgets/drawer.dart';
 import 'package:zognest_website/shared/widgets/image_text.dart';
-import '../../../shared/widgets/animation_image.dart';
 import '../../../shared/widgets/footer.dart';
 
 class AboutUsPage extends HookWidget {

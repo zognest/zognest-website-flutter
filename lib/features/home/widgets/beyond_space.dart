@@ -13,7 +13,6 @@ import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/circle_button.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
-import '../../../shared/widgets/animation_image.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
 class BeyondSpace extends HookWidget {

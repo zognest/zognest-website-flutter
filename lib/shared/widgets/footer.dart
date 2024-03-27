@@ -7,7 +7,6 @@ import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
-import 'package:zognest_website/shared/widgets/animation_image.dart';
 import 'package:zognest_website/shared/widgets/circle_button.dart';
 import 'package:zognest_website/shared/widgets/social_button.dart';
 import 'package:zognest_website/shared/widgets/zognest_logo.dart';

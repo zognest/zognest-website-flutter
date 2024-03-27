@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zognest_website/features/home/models/blog.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
+import 'package:zognest_website/features/home/models/counters.dart';
 import 'package:zognest_website/features/home/models/offer.dart';
 import 'package:zognest_website/features/home/models/service.dart';
 import 'package:zognest_website/features/our_services/models/purchasable_service.dart';
@@ -26,6 +27,7 @@ final appControllerProvider = StateNotifierProvider<AppController, AppState>(
         purchasableServices: AsyncData([]),
         services: AsyncData([]),
         staff: AsyncData([]),
+        counters: AsyncData([]),
         cartServices: [],
       ),
     );
@@ -48,6 +50,7 @@ class AppController extends StateNotifier<AppState> {
       getServices(),
       getPurchasableServices(),
       getStaff(),
+      getCounters()
     ]);
   }
 
@@ -176,5 +179,17 @@ class AppController extends StateNotifier<AppState> {
     state = state.copyWith(
       cartServices: state.cartServices..remove(service),
     );
+  }
+
+  Future<void> getCounters() async {
+    if (state.counters.asData?.value.isNotEmpty ?? false) return;
+
+   state=state.copyWith(counters: const AsyncLoading());
+
+    final List<Counter> counters = await FirestoreServices.getCounters();
+
+    state = state.copyWith(counters: AsyncData(counters));
+
+    Utils.log(message: 'Loaded counters => ${state.counters.value?.length}');
   }
 }

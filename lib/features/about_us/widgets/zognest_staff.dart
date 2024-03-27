@@ -24,7 +24,6 @@ class ZognestStaff extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-     final isHovering = useState(false);
     final animationController =
     useAnimationController(duration: const Duration(seconds: 1));
     final controller = useScrollController();

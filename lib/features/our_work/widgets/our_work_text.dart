@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/resources/assets.dart';
-import 'package:zognest_website/shared/widgets/animation_image.dart';
-
 class OurWorkText extends StatelessWidget {
   const OurWorkText({super.key});
 

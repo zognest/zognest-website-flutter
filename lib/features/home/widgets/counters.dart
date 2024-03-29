@@ -1,6 +1,9 @@
+import 'package:animated_list_item/animated_list_item.dart';
+import 'package:collection/collection.dart';
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/responsive.dart';
@@ -8,6 +11,7 @@ import 'package:zognest_website/config/theme/palette.dart';
 import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
+import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/animation_image.dart';
 
 class Counters extends HookWidget {
@@ -84,67 +88,38 @@ class Counters extends HookWidget {
                 padding: const EdgeInsets.symmetric(
                     horizontal: Constants.horizontalPadding),
                 child: VisibilityDetector(
-                  key: ValueKey(runtimeType.toString()),
+                  key: ValueKey('${runtimeType.toString()} List'),
                   onVisibilityChanged: (info) {
                     if (countersAnimationController.isCompleted) return;
                     if (info.visibleFraction == 1) {
                       countersAnimationController.forward();
                     }
                   },
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    alignment: WrapAlignment.center,
-                    runSpacing: 16,
-                    spacing: 16,
-                    children: [
-                      AnimatedImage(
-                        index: 0,
-                        length: 5,
-                        child: CounterItem(
-                          count: 09,
-                          title: Strings.appDevelopment,
-                          controller: countersAnimationController,
-                        ),
-                      ),
-                      AnimatedImage(
-                        index: 1,
-                        length: 5,
-                        child: CounterItem(
-                          count: 12,
-                          title: Strings.webDevelopment,
-                          controller: countersAnimationController,
-                        ),
-                      ),
-                      AnimatedImage(
-                        index: 2,
-                        length: 5,
-                        child: CounterItem(
-                          count: 17,
-                          title: Strings.uiUxForCompanies,
-                          controller: countersAnimationController,
-                        ),
-                      ),
-                      AnimatedImage(
-                        index: 3,
-                        length: 5,
-                        child: CounterItem(
-                          count: 36,
-                          title: Strings.happyCustomer,
-                          controller: countersAnimationController,
-                        ),
-                      ),
-                      AnimatedImage(
-                        index: 4,
-                        length: 5,
-                        child: CounterItem(
-                          count: 36,
-                          title: Strings.projectsCompleted,
-                          hasPlus: false,
-                          controller: countersAnimationController,
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: Consumer(
+                      builder: (context, ref, index) {
+                    final counter = ref.watch(appControllerProvider).counters;
+                    return counter.when(
+                        data: (counter) {
+                          return Wrap(
+                            direction: Axis.horizontal,
+                            alignment: WrapAlignment.center,
+                            runSpacing: 16,
+                            spacing: 16,
+                            children: counter.mapIndexed((index, item) {
+                              return AnimatedImage(
+                                  length: counter.length,
+                                  index: item.index,
+                                  child: CounterItem(
+                                    title: item.title,
+                                    count: item.count,
+                                    controller: countersAnimationController,
+                                  ));
+                            }).toList(),
+                          );
+                        },
+                        error: (_, __) => const SizedBox.shrink(),
+                        loading: () => const SizedBox.shrink());
+                  }),
                 ),
               ),
             ],
@@ -223,3 +198,75 @@ class CounterItem extends StatelessWidget {
     );
   }
 }
+/*  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Constants.horizontalPadding),
+                    child: VisibilityDetector(
+                      key: ValueKey(runtimeType.toString()),
+                      onVisibilityChanged: (info) {
+                        if (countersAnimationController.isCompleted) return;
+                        if (info.visibleFraction == 1) {
+                          countersAnimationController.forward();
+                        }
+                      },
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        alignment: WrapAlignment.center,
+                        runSpacing: 16,
+                        spacing: 16,
+                        children: [
+                          AnimatedImage(
+                            index: 0,
+                            length: 5,
+                            child: CounterItem(
+                              count: 09,
+                              title: Strings.appDevelopment,
+                              controller: countersAnimationController,
+                            ),
+                          ),
+                          AnimatedImage(
+                            index: 1,
+                            length: 5,
+                            child: CounterItem(
+                              count: 12,
+                              title: Strings.webDevelopment,
+                              controller: countersAnimationController,
+                            ),
+                          ),
+                          AnimatedImage(
+                            index: 2,
+                            length: 5,
+                            child: CounterItem(
+                              count: 17,
+                              title: Strings.uiUxForCompanies,
+                              controller: countersAnimationController,
+                            ),
+                          ),
+                          AnimatedImage(
+                            index: 3,
+                            length: 5,
+                            child: CounterItem(
+                              count: 36,
+                              title: Strings.happyCustomer,
+                              controller: countersAnimationController,
+                            ),
+                          ),
+                          AnimatedImage(
+                            index: 4,
+                            length: 5,
+                            child: CounterItem(
+                              count: 36,
+                              title: Strings.projectsCompleted,
+                              hasPlus: false,
+                              controller: countersAnimationController,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+              ),
+            ],
+          ),
+        ),*/

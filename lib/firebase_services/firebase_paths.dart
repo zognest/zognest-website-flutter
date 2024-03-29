@@ -11,6 +11,7 @@ enum FirebasePaths {
   technologies('technologies/'),
   staffList('staffList/'),
   videos('videos/'),
+  counters('counters/'),
   storageBucket('gs://zognest-website.appspot.com/');
 
   final String path;

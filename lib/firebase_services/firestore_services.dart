@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:zognest_website/features/home/models/blog.dart';
 import 'package:zognest_website/features/home/models/client_feedback.dart';
+import 'package:zognest_website/features/home/models/counters.dart';
 import 'package:zognest_website/features/home/models/offer.dart';
 import 'package:zognest_website/features/home/models/service.dart';
 import 'package:zognest_website/features/our_services/models/purchasable_service.dart';
@@ -131,6 +132,16 @@ class FirestoreServices {
 
     return staff;
   }
+  static Future<List<Counter>> getCounters() async {
+    final countersJson =
+    await firestore.collection(FirebasePaths.counters.path).get();
+
+    final counters = countersJson.docs
+        .map((countersDoc) =>Counter.fromMap(countersDoc.data()))
+        .toList();
+
+    return counters;
+  }
 
   static Future<List<Technology>> getTechnologiesFromRefs(
       List<dynamic> refs) async {
@@ -171,7 +182,6 @@ class FirestoreServices {
     await FirebaseFirestore.instance
         .collection(FirebasePaths.messages.path)
         .add(map);
-
     if (context.mounted) {
       MotionToast.success(
         title: const Text("Success!"),

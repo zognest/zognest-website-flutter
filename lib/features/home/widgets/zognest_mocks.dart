@@ -6,9 +6,6 @@ import 'package:zognest_website/config/theme/text_theme.dart';
 import 'package:zognest_website/features/home/widgets/zognest_animation.dart';
 import 'package:zognest_website/resources/assets.dart';
 import 'package:zognest_website/resources/strings.dart';
-
-import '../../../shared/widgets/animation_image.dart';
-
 class ZognestMocks extends StatefulWidget {
   const ZognestMocks({super.key});
 

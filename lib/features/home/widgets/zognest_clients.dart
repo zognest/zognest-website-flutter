@@ -2,6 +2,7 @@ import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:zognest_website/config/constants.dart';
 import 'package:zognest_website/config/theme/palette.dart';
@@ -13,19 +14,18 @@ import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
-import 'package:just_audio/just_audio.dart';
+
 import '../../../config/responsive.dart';
 import '../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
 class ZognestClients extends HookWidget {
-   ZognestClients({super.key});
-   late final ScrollController controller;
+  const ZognestClients({super.key});
+
   @override
   Widget build(BuildContext context) {
-
     final animationController =
-    useAnimationController(duration: const Duration(seconds: 1));
+        useAnimationController(duration: const Duration(seconds: 1));
     final theme = Theme.of(context);
     final controller = useScrollController();
     final currentIndex = useState(1);
@@ -37,8 +37,8 @@ class ZognestClients extends HookWidget {
           length: 1,
           key: ValueKey('${runtimeType.toString()} text'),
           animationType: AnimationType.slide,
-          index:0,
-          aniController:animationController,
+          index: 0,
+          aniController: animationController,
           child: ScrollHeadline(
             headline: TextSpan(
               children: [
@@ -55,8 +55,7 @@ class ZognestClients extends HookWidget {
             ),
             showHeadline: showAnimatedHeadline.value,
             onTapScroll: () {
-              if (controller.offset ==
-                  controller.position.maxScrollExtent) {
+              if (controller.offset == controller.position.maxScrollExtent) {
                 currentIndex.value = 0;
               }
               controller.animateTo(
@@ -92,7 +91,8 @@ class ZognestClients extends HookWidget {
                           length: clientFeedbacks.length,
                           animationType: AnimationType.slide,
                           startX: 1,
-                          child:( ClientItem(clientFeedback: clientFeedbacks[index])));
+                          child: (ClientItem(
+                              clientFeedback: clientFeedbacks[index])));
                     },
                     separatorBuilder: (context, index) => SizedBox(
                         width: Responsive.isDesktop(context)

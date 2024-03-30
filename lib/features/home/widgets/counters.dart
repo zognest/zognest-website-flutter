@@ -1,4 +1,3 @@
-import 'package:animated_list_item/animated_list_item.dart';
 import 'package:collection/collection.dart';
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +107,7 @@ class Counters extends HookWidget {
                             children: counter.mapIndexed((index, item) {
                               return AnimatedImage(
                                   length: counter.length,
-                                  index: item.index,
+                                  index: index,
                                   child: CounterItem(
                                     title: item.title,
                                     count: item.count,

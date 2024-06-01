@@ -1,15 +1,16 @@
 {
-    "cSpell.words": [
-        "ajmera",
-        "Aldus",
-        "brightmac",
-        "Chiro",
-        "countup",
-        "Letraset",
-        "mahalaxmi",
-        "sjrc",
-        "vais",
-        "zognest"
-    ],
-    "intellij-idea-keybindings.useCamelHumpsWords": true
+  "cSpell.words": [
+    "ajmera",
+    "Aldus",
+    "brightmac",
+    "Chiro",
+    "countup",
+    "Letraset",
+    "mahalaxmi",
+    "sjrc",
+    "vais",
+    "zognest"
+  ],
+  "intellij-idea-keybindings.useCamelHumpsWords": true,
+  "dart.flutterSdkPath": ".fvm/versions/3.19.5"
 }

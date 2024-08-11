@@ -1,0 +1,11 @@
+flutter_launcher_icons:
+  web:
+    generate: true
+    image_path: "assets/images/logo.jpg"
+    background_color: "#000000"
+  ios: false
+  android: false
+  windows:
+    generate: false
+  macos:
+    generate: false

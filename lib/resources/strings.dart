@@ -59,8 +59,7 @@ abstract final class Strings {
   static const inText = 'in';
   static const touch = 'touch';
   static const contactDetails = 'Contact Details';
-  static const address =
-      '401, SNS Arista, nr. Prime Shopper, Vesu, Surat,\nGujarat 395007';
+  static const address = '401, SNS Arista, nr. Prime Shopper, Vesu, Surat,\nGujarat 395007';
   static const contactInfo = '+91 94296 30883\ninfo@zognest.com';
   static const yourName = 'Your Name';
   static const yourEmail = 'Your Email';
@@ -68,7 +67,11 @@ abstract final class Strings {
   static const message = 'Message';
   static const sendMessage = 'Send Message';
   static const requestCall = 'Request a Call';
-  static const copyRights = ' © 2022-2023, Zognest Solutions Private Limited.';
+  static get copyRights {
+    final currentYear = DateTime.now().year;
+    return ' © 2022-$currentYear, Zognest Solutions Private Limited.';
+  }
+
   static const areYouWaitingFor = 'Are\nyou waiting\nfor, ';
   static const create = 'Create\n';
   static const orderNow = 'Order\nNow\nthe ';

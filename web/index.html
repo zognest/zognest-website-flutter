@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <!--
       If you are serving your web app in a path other than the root, change the
       href value below to reflect the base path you are serving from.
@@ -14,48 +14,49 @@
       This is a placeholder for base href that will be replaced by the value of
       the `--base-href` argument provided to `flutter build`.
     -->
-    <base href="$FLUTTER_BASE_HREF">
+    <base href="$FLUTTER_BASE_HREF" />
 
-    <meta charset="UTF-8">
-    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <meta content="A new Flutter project." name="description">
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta
+      content="Your Journey to Success Starts with Zognest."
+      name="description"
+    />
 
     <!-- iOS meta tags & icons -->
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta content="zognest_website" name="apple-mobile-web-app-title">
-    <link href="icons/Icon-192.png" rel="apple-touch-icon">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="Zognest" name="apple-mobile-web-app-title" />
+    <link href="icons/Icon-192.png" rel="apple-touch-icon" />
 
     <!-- Favicon -->
-    <link href="favicon.png" rel="icon" type="image/png"/>
+    <link href="favicon.png" rel="icon" type="image/png" />
 
     <title>zognest_website</title>
-    <link href="manifest.json" rel="manifest">
+    <link href="manifest.json" rel="manifest" />
 
     <script>
-    // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = null;
-
+      // The value below is injected by flutter build, do not touch.
+      const serviceWorkerVersion = null;
     </script>
     <!-- This script adds the flutter initialization JS code -->
     <script defer src="flutter.js"></script>
-</head>
-<body>
-<script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
+  </head>
+  <body>
+    <script>
+      window.addEventListener("load", function (ev) {
+        // Download main.dart.js
+        _flutter.loader.loadEntrypoint({
+          serviceWorker: {
+            serviceWorkerVersion: serviceWorkerVersion,
+          },
+          onEntrypointLoaded: function (engineInitializer) {
+            engineInitializer.initializeEngine().then(function (appRunner) {
+              appRunner.runApp();
+            });
+          },
+        });
       });
-    });
-
-</script>
-</body>
+    </script>
+  </body>
 </html>

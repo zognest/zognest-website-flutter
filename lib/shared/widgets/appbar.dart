@@ -61,8 +61,7 @@ class PrimaryAppBar extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(Constants.appBarHeight);
 }
 
-class _PrimaryAppBarState extends State<PrimaryAppBar>
-    with SingleTickerProviderStateMixin {
+class _PrimaryAppBarState extends State<PrimaryAppBar> with SingleTickerProviderStateMixin {
   late final AnimationController _appBarAnimationController;
   late final Animation<Offset> _appBarOffsetAnimation;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -95,14 +94,12 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
 
   void scrollListener() {
     if (widget.scrollController.offset <= Constants.appBarHeight ||
-        widget.scrollController.position.userScrollDirection ==
-            ScrollDirection.forward) {
+        widget.scrollController.position.userScrollDirection == ScrollDirection.forward) {
       _appBarAnimationController.reverse();
       return;
     }
 
-    if (widget.scrollController.position.userScrollDirection ==
-        ScrollDirection.reverse) {
+    if (widget.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
       _appBarAnimationController.forward();
     }
   }
@@ -116,9 +113,6 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
     return SlideTransition(
       position: _appBarOffsetAnimation,
       child: FrostedContainer(
-
-
-
         width: double.infinity,
         height: Constants.appBarHeight,
         padding: const EdgeInsets.symmetric(
@@ -132,15 +126,17 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
             ? const MobileAppBar()
             : Row(
                 children: [
-                  const ZognestLogo(),
+                  InkWell(
+                    onTap: () => context.go(AppBarButtons.home.route),
+                    child: const ZognestLogo(),
+                  ),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: AppBarButtons.values.map(
                         (button) {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: Spacing.m16),
+                            padding: const EdgeInsets.symmetric(horizontal: Spacing.m16),
                             child: InkWell(
                               onTap: () => context.go(button.route),
                               onHover: (hovered) {
@@ -152,8 +148,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                                 hoveredRoute = '/';
                                 setState(() {});
                               },
-                              overlayColor: MaterialStateProperty.all(
-                                  Palette.transparent),
+                              overlayColor: MaterialStateProperty.all(Palette.transparent),
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 2000),
                                 child: Text(
@@ -163,8 +158,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                                           ?.copyWith(color: theme.primaryColor)
                                       : theme.textTheme.labelMedium?.copyWith(
                                           color: hoveredRoute == button.route
-                                              ? theme.primaryColor
-                                                  .withOpacity(0.7)
+                                              ? theme.primaryColor.withOpacity(0.7)
                                               : null,
                                         ),
                                 ),
@@ -198,8 +192,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar>
                       );
                     },
                     title: Strings.getInTouch.toUpperCase(),
-                    trailing:
-                        CircleButton(child: SvgPicture.asset(Assets.mail)),
+                    trailing: CircleButton(child: SvgPicture.asset(Assets.mail)),
                   ),
                 ],
               ),
@@ -215,8 +208,11 @@ class MobileAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ZognestLogo(
-          size: Responsive.isMobile(context) ? 50 : 100,
+        InkWell(
+          onTap: () => context.go(AppBarButtons.home.route),
+          child: ZognestLogo(
+            size: Responsive.isMobile(context) ? 50 : 100,
+          ),
         ),
         const Spacer(),
         InkWell(

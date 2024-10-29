@@ -48,4 +48,5 @@ abstract final class Assets {
   static const ourServicesText_2 = '${Paths.images}/our_services_text_mobile.png';
   static const optimismTextMobile = '${Paths.images}/optimis_mobile.png';
   static const optimismTextWeb = '${Paths.images}/optimis.png';
+  static const zognestText = '${Paths.images}/zognest-text.png';
 }

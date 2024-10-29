@@ -1,12 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:zognest_website/config/responsive.dart';
 import 'package:zognest_website/config/theme/palette.dart';
 
 abstract final class TextThemes {
-  static List<FontVariation> fontVariation(int weight) =>
-      [FontVariation('wght', weight * 100)];
+  static List<FontVariation> fontVariation(int weight) => [FontVariation('wght', weight * 100)];
 
   /// Used to outline text
   static final foreground = Paint()

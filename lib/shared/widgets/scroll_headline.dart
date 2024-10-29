@@ -38,7 +38,7 @@ class ScrollHeadline extends StatelessWidget {
           if (onTapScroll != null) ...[
             InkWell(
               onTap: onTapScroll,
-              overlayColor: MaterialStateProperty.all(Palette.transparent),
+              overlayColor: WidgetStateProperty.all(Palette.transparent),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

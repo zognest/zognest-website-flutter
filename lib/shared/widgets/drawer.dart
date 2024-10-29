@@ -43,7 +43,7 @@ class PrimaryDrawer extends StatelessWidget {
                     return InkWell(
                       onTap: () => context.go(button.route),
                       overlayColor:
-                          MaterialStateProperty.all(Palette.transparent),
+                          WidgetStateProperty.all(Palette.transparent),
                       child: Container(
                         color: route.name == button.route
                             ? theme.primaryColor

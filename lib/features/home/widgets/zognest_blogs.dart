@@ -1,4 +1,5 @@
 import "dart:js" as js;
+
 import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -15,6 +16,7 @@ import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/frosted_container.dart';
 import 'package:zognest_website/shared/widgets/greyscale_filter.dart';
 import 'package:zognest_website/shared/widgets/scroll_headline.dart';
+
 import '../../../../resources/spacing.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 
@@ -26,8 +28,7 @@ class ZognestBlogs extends HookWidget {
     final controller = useScrollController();
     final currentIndex = useState(1);
     final showAnimatedHeadline = useState(true);
-    final animationController =
-        useAnimationController(duration: const Duration(seconds: 1));
+    final animationController = useAnimationController(duration: const Duration(seconds: 1));
     return Column(
       children: [
         const Divider(),
@@ -35,15 +36,14 @@ class ZognestBlogs extends HookWidget {
           length: 1,
           key: ValueKey('${runtimeType.toString()} text'),
           animationType: AnimationType.slide,
-          index:0,
-          aniController:animationController,
+          index: 0,
+          aniController: animationController,
           child: ScrollHeadline(
             headline: TextSpan(
               children: [
                 TextSpan(
                   text: '${Strings.our}\n'.toUpperCase(),
-                  style: theme.textTheme.displaySmall
-                      ?.copyWith(foreground: TextThemes.foreground),
+                  style: theme.textTheme.displaySmall?.copyWith(foreground: TextThemes.foreground),
                 ),
                 TextSpan(
                   text: Strings.blogs.toUpperCase(),
@@ -75,12 +75,9 @@ class ZognestBlogs extends HookWidget {
             return blogs.when(
                 data: (blogs) {
                   return SizedBox(
-                    height: Responsive.isDesktop(context)
-                        ? Constants.listHeight
-                        : 450,
+                    height: Responsive.isDesktop(context) ? Constants.listHeight : 450,
                     child: ListView.separated(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: Constants.horizontalPadding),
+                      padding: const EdgeInsets.symmetric(horizontal: Constants.horizontalPadding),
                       scrollDirection: Axis.horizontal,
                       controller: controller,
                       itemBuilder: (context, index) {
@@ -121,7 +118,7 @@ class BlogItem extends HookWidget {
   final Blog blog;
   @override
   Widget build(BuildContext context) {
-    final  hovered = useState(false);
+    final hovered = useState(false);
     final theme = Theme.of(context);
     return FrostedContainer(
       width: Responsive.isDesktop(context) ? Constants.listCardWidth : 300,
@@ -131,9 +128,9 @@ class BlogItem extends HookWidget {
         vertical: Spacing.l24,
       ),
       child: InkWell(
-        onHover: (over) =>hovered.value = over,
+        onHover: (over) => hovered.value = over,
         onTap: () => js.context.callMethod('open', [blog.urlLink]),
-        overlayColor: MaterialStateProperty.all(Palette.transparent),
+        overlayColor: WidgetStateProperty.all(Palette.transparent),
         child: GreyscaleFilter(
           isHovered: hovered.value,
           child: Column(
@@ -146,7 +143,7 @@ class BlogItem extends HookWidget {
                     clipBehavior: Clip.hardEdge,
                     child: NetworkFadingImage(
                       width: double.infinity,
-                      path:blog.image,
+                      path: blog.image,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -158,10 +155,10 @@ class BlogItem extends HookWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                     blog.title,
+                      blog.title,
                       style: theme.textTheme.bodyLarge?.copyWith(
                           fontWeight: FontWeight.w700,
-                          color:hovered.value?Palette.white:theme.primaryColor,
+                          color: hovered.value ? Palette.white : theme.primaryColor,
                           fontFamily: 'SF Pro Rounded'),
                     ),
                     Text(

@@ -38,14 +38,14 @@ class PrimaryButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: enabled ? onTap : null,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
+          backgroundColor: WidgetStateProperty.all(
             !enabled
                 ? Palette.transparent
                 : filled
                     ? backgroundColor ?? theme.primaryColor
                     : Palette.transparent,
           ),
-          side: MaterialStateProperty.all(
+          side: WidgetStateProperty.all(
             BorderSide(
               color: !enabled
                   ? Palette.white
@@ -54,7 +54,7 @@ class PrimaryButton extends StatelessWidget {
                       : Palette.white,
             ),
           ),
-          padding: MaterialStateProperty.all(
+          padding: WidgetStateProperty.all(
             padding ??
                 const EdgeInsets.symmetric(
                   horizontal: Spacing.s4,

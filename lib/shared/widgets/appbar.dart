@@ -148,7 +148,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar> with SingleTickerProvider
                                 hoveredRoute = '/';
                                 setState(() {});
                               },
-                              overlayColor: MaterialStateProperty.all(Palette.transparent),
+                              overlayColor: WidgetStateProperty.all(Palette.transparent),
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 2000),
                                 child: Text(

@@ -52,7 +52,7 @@ class _ZognestEventsState extends ConsumerState<ZognestEvents> {
                     indicatorSize: TabBarIndicatorSize.tab,
                     splashFactory: NoSplash.splashFactory,
                     overlayColor:
-                        MaterialStateProperty.all(Palette.transparent),
+                        WidgetStateProperty.all(Palette.transparent),
                     tabs: eventsYears.map((year) {
                       return Container(
                         padding: EdgeInsets.symmetric(

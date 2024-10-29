@@ -13,7 +13,7 @@ class GalleryDialog extends StatelessWidget {
   GalleryDialog({super.key, required this.event});
 
   final Event event;
-  final CarouselController _controller = CarouselController();
+  final CarouselSliderController _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +53,9 @@ class GalleryDialog extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom:104,
+              bottom: 104,
               child: Padding(
-                padding: const EdgeInsets.all( 25),
+                padding: const EdgeInsets.all(25),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.end,

@@ -64,7 +64,7 @@ class _FooterState extends State<Footer> {
                           setState(() => hovered = over);
                         },
                         overlayColor:
-                            const MaterialStatePropertyAll(Palette.transparent),
+                            const WidgetStatePropertyAll(Palette.transparent),
                         child: Text(
                           Strings.zognestMail,
                           style: theme.textTheme.headlineLarge?.copyWith(

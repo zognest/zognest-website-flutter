@@ -34,7 +34,7 @@ class _EventCardState extends State<EventCard> {
           );
         },
         onHover: (over) => setState(() => this.over = over),
-        overlayColor: MaterialStateProperty.all(Palette.transparent),
+        overlayColor: WidgetStateProperty.all(Palette.transparent),
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

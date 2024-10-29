@@ -19,7 +19,7 @@ class CircleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      overlayColor: MaterialStateProperty.all(Palette.transparent),
+      overlayColor: WidgetStateProperty.all(Palette.transparent),
       child: CircleAvatar(
         radius: radius,
         foregroundColor: color,

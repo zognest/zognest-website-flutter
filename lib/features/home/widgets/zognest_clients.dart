@@ -140,7 +140,7 @@ class ClientItem extends HookWidget {
       child: InkWell(
         onTap: () {},
         onHover: (over) => hovering.value = over,
-        overlayColor: MaterialStateProperty.all(Palette.transparent),
+        overlayColor: WidgetStateProperty.all(Palette.transparent),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

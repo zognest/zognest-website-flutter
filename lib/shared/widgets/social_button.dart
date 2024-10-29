@@ -56,7 +56,7 @@ class SocialButton extends HookWidget {
               from: animationController.lowerBound);
         }
       },
-      overlayColor: MaterialStateProperty.all(Colors.transparent),
+      overlayColor: WidgetStateProperty.all(Colors.transparent),
       child: Container(
         height: Responsive.isDesktop(context) ? 100 : 38,
         width: Responsive.isDesktop(context) ? 100 : 38,

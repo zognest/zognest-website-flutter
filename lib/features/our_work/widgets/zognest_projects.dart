@@ -1,3 +1,5 @@
+import "dart:js" as js;
+
 import 'package:animated_list_item/animated_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -11,19 +13,17 @@ import 'package:zognest_website/resources/spacing.dart';
 import 'package:zognest_website/resources/strings.dart';
 import 'package:zognest_website/riverpod/controller.dart';
 import 'package:zognest_website/shared/widgets/primary_button.dart';
+
 import '../../../config/theme/text_theme.dart';
 import '../../../shared/widgets/network_fading_image.dart';
 import '../../../shared/widgets/scroll_headline.dart';
-import "dart:js" as js;
 
 class ZognestProjects extends HookWidget {
   const ZognestProjects({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    final animationController =
-    useAnimationController(duration: const Duration(seconds: 1));
+    final animationController = useAnimationController(duration: const Duration(seconds: 1));
     final controller = useScrollController();
     final currentIndex = useState(1);
     final showAnimatedHeadline = useState(true);
@@ -35,8 +35,8 @@ class ZognestProjects extends HookWidget {
           length: 1,
           key: ValueKey('${runtimeType.toString()} text'),
           animationType: AnimationType.slide,
-          index:0,
-          aniController:animationController,
+          index: 0,
+          aniController: animationController,
           child: ScrollHeadline(
             headline: TextSpan(
               text: Strings.our.toUpperCase(),
@@ -48,9 +48,7 @@ class ZognestProjects extends HookWidget {
                     foreground: TextThemes.foreground,
                   ),
                 ),
-                TextSpan(
-                    text: Strings.projects.toUpperCase(),
-                    style: theme.textTheme.displaySmall),
+                TextSpan(text: Strings.projects.toUpperCase(), style: theme.textTheme.displaySmall),
               ],
             ),
             showHeadline: showAnimatedHeadline.value,
@@ -86,12 +84,12 @@ class ZognestProjects extends HookWidget {
                       controller: controller,
                       itemBuilder: (context, index) {
                         return AnimatedListItem(
-                          index: index,
-                          aniController: animationController,
-                          length: project.length,
-                          startX: 1,
-                          animationType: AnimationType.slide,
-                          child: ProjectItem(project: project[index]));
+                            index: index,
+                            aniController: animationController,
+                            length: project.length,
+                            startX: 1,
+                            animationType: AnimationType.slide,
+                            child: ProjectItem(project: project[index]));
                       },
                       separatorBuilder: (context, index) => SizedBox(
                           width: Responsive.isDesktop(context)
@@ -127,16 +125,13 @@ class _ProjectItemState extends State<ProjectItem> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final double widthMobile =
-        Responsive.isMobile(context) || Responsive.isTablet(context)
-            ? 290 * (ontap ? 1.5 : 1)
-            : Constants.listCardWidth * (over ? 2 : 1);
+    final double widthMobile = Responsive.isMobile(context) || Responsive.isTablet(context)
+        ? 290 * (ontap ? 1.5 : 1)
+        : Constants.listCardWidth * (over ? 2 : 1);
     return AnimatedContainer(
       duration: const Duration(milliseconds: 1000),
       curve: Curves.fastOutSlowIn,
-      width: Responsive.isDesktop(context)
-          ? Constants.listCardWidth * (over ? 2 : 1)
-          : widthMobile,
+      width: Responsive.isDesktop(context) ? Constants.listCardWidth * (over ? 2 : 1) : widthMobile,
       height: Constants.projectHeight,
       child: Card(
         clipBehavior: Clip.hardEdge,
@@ -176,7 +171,11 @@ class _ProjectItemState extends State<ProjectItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    NetworkFadingImage(path: widget.project.icon, width: 60,height: 60,),
+                    NetworkFadingImage(
+                      path: widget.project.icon,
+                      width: 60,
+                      height: 60,
+                    ),
                     const SizedBox(height: Spacing.l32),
                     Row(
                       children: [
@@ -191,15 +190,19 @@ class _ProjectItemState extends State<ProjectItem> {
                             ),
                           ),
                         ),
-                        if (over) widget.project.urlLink!=null?  PrimaryButton(
-                            title: Strings.visit.toUpperCase(),
-                            width: Constants.listCardWidth * 0.3,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: Constants.listButtonHorizontalPadding,
-                              vertical: Constants.listButtonVerticalPadding,
-                            ),
-                              onTap: () => js.context.callMethod('open', [widget.project.urlLink]),
-                          ):const SizedBox.shrink(),
+                        if (over)
+                          widget.project.urlLink != null
+                              ? PrimaryButton(
+                                  title: Strings.visit.toUpperCase(),
+                                  width: Constants.listCardWidth * 0.3,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: Constants.listButtonHorizontalPadding,
+                                    vertical: Constants.listButtonVerticalPadding,
+                                  ),
+                                  onTap: () =>
+                                      js.context.callMethod('open', [widget.project.urlLink]),
+                                )
+                              : const SizedBox.shrink(),
                       ],
                     ),
                     const SizedBox(height: Spacing.s4),

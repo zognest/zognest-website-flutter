@@ -12,5 +12,5 @@
     "zognest"
   ],
   "intellij-idea-keybindings.useCamelHumpsWords": true,
-  "dart.flutterSdkPath": ".fvm/versions/3.22.2"
+  "dart.flutterSdkPath": ".fvm/versions/3.24.4"
 }

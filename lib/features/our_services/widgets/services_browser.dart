@@ -97,7 +97,7 @@ class _ServiceItemState extends ConsumerState<ServiceItem> {
           this.isHovering = isHovering;
         });
       },
-      overlayColor: const MaterialStatePropertyAll(Palette.transparent),
+      overlayColor: const WidgetStatePropertyAll(Palette.transparent),
       child: Card(
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

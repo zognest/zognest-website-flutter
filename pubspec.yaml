@@ -31,7 +31,7 @@ dependencies:
   animated_list_item: ^1.0.0
   animated_text_kit: ^4.2.2
   auto_size_text: ^3.0.0
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   cloud_firestore: ^4.13.3
   collection: ^1.18.0
   countup:

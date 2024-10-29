@@ -29,7 +29,7 @@ class _FlippingWidgetState extends State<FlippingWidget>
     return InkWell(
       onTap: () => setState(() => _flip = !_flip),
       onHover: (_) => setState(() => _flip = !_flip),
-      overlayColor: MaterialStateProperty.all(Palette.transparent),
+      overlayColor: WidgetStateProperty.all(Palette.transparent),
       child: AnimatedSwitcher(
         switchInCurve: Curves.easeInBack,
         switchOutCurve: Curves.easeInBack.flipped,

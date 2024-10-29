@@ -69,7 +69,7 @@ class ClientsMarquee extends HookConsumerWidget {
                         animationController.repeat();
                       },
                       overlayColor:
-                          MaterialStateProperty.all(Palette.transparent),
+                          WidgetStateProperty.all(Palette.transparent),
                       child: ItemServiceMarquee(
                         project: project[i],
                         isHovering: hoveredIndex.value == i,
